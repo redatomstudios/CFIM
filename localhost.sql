@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2012 at 03:55 PM
+-- Generation Time: Dec 17, 2012 at 11:51 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -36,6 +36,21 @@ CREATE TABLE IF NOT EXISTS `attachments` (
   `accessible By` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `captcha`
+--
+
+CREATE TABLE IF NOT EXISTS `captcha` (
+  `captcha_id` bigint(13) unsigned NOT NULL AUTO_INCREMENT,
+  `captcha_time` int(10) unsigned NOT NULL,
+  `ip_address` varchar(16) NOT NULL DEFAULT '0',
+  `word` varchar(20) NOT NULL,
+  PRIMARY KEY (`captcha_id`),
+  KEY `word` (`word`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
