@@ -1,0 +1,45 @@
+Project
+
+- Proj ID
+- Name
+- Leader
+- Sector 
+- subSector
+- geoRegion
+- City
+- discussionDate
+- Status
+- projectMembers (CSV Member IDs)
+- documents <- document types and numbers?
+- dealSize
+- companyName
+- companyAddress
+- contactPerson
+- contactEmail
+- contactTel
+
+Members
+
+- Member ID 
+- memberName
+- Username
+- Password
+- Rank (0 - Supervisor, 1 - Administrator, 2 - Member, 3 - Finance)
+- TitleId
+- Status (0 - Suspended, 1 - Active)
+- Subordinates (CSV Member IDs)
+- officeEmail
+- otherEmail
+- contactTel1
+- contactTel2
+
+Attachments
+
+- Attachment ID
+- Attachment Filename
+
+JobTitle
+
+- Id
+- Name
+- Description?
