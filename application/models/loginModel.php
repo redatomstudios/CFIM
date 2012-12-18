@@ -32,6 +32,22 @@ class LoginModel extends CI_Model{
 			return FALSE;
 		return TRUE;
 	}
+
+	public function loginCheck($username, $passcode){
+		# code...
+
+		$this->db->select('id');
+		$query = $this->db->get_where('members', array('username' => $username, 'password' => sha1($passcode)));
+		if($query->num_rows() > 0){
+			$this->session->set_userdata(array(
+								'id' => $query->row()->id,
+								'username' => $username));
+			return TRUE;
+		}
+
+		return FALSE;
+
+	}
 }
 
 ?>

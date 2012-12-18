@@ -34,10 +34,15 @@ class Login extends CI_Controller {
 
 	public function doLogin(){
 		# code...
-		$word = $this->input->post('captcha');
+		$post = $this->input->post();
+		$word = $post['captcha'];
 		$ip = $this->input->ip_address();
 		if($this->loginModel->checkCaptcha($word, $ip))
-			echo "Captcha Working!!";
+			if($this->loginModel->loginCheck($post['username'], $post['password']))
+				redirect('home');
+			else
+				echo "Login Failure!!";
+
 		else
 			echo "Wrong captcha!!";
 	}
