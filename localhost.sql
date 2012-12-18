@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2012 at 11:51 PM
+-- Generation Time: Dec 18, 2012 at 04:20 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -19,7 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `cfim`
 --
-DROP DATABASE `cfim`;
 CREATE DATABASE `cfim` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `cfim`;
 
@@ -29,6 +28,7 @@ USE `cfim`;
 -- Table structure for table `attachments`
 --
 
+DROP TABLE IF EXISTS `attachments`;
 CREATE TABLE IF NOT EXISTS `attachments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS `attachments` (
 -- Table structure for table `captcha`
 --
 
+DROP TABLE IF EXISTS `captcha`;
 CREATE TABLE IF NOT EXISTS `captcha` (
   `captcha_id` bigint(13) unsigned NOT NULL AUTO_INCREMENT,
   `captcha_time` int(10) unsigned NOT NULL,
@@ -51,7 +52,14 @@ CREATE TABLE IF NOT EXISTS `captcha` (
   `word` varchar(20) NOT NULL,
   PRIMARY KEY (`captcha_id`),
   KEY `word` (`word`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+
+--
+-- Dumping data for table `captcha`
+--
+
+INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUES
+(11, 1355819777, '::1', 'EyOX0Hm8');
 
 -- --------------------------------------------------------
 
@@ -59,6 +67,7 @@ CREATE TABLE IF NOT EXISTS `captcha` (
 -- Table structure for table `jobtitle`
 --
 
+DROP TABLE IF EXISTS `jobtitle`;
 CREATE TABLE IF NOT EXISTS `jobtitle` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -71,6 +80,7 @@ CREATE TABLE IF NOT EXISTS `jobtitle` (
 -- Table structure for table `members`
 --
 
+DROP TABLE IF EXISTS `members`;
 CREATE TABLE IF NOT EXISTS `members` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `memberName` varchar(50) NOT NULL,
@@ -82,11 +92,18 @@ CREATE TABLE IF NOT EXISTS `members` (
   `subordinates` varchar(100) NOT NULL,
   `officeEmail` varchar(50) NOT NULL,
   `otherEmail` varchar(50) NOT NULL,
-  `contactTel1` int(10) NOT NULL,
-  `contactTel2` int(10) NOT NULL,
+  `contactTel1` varchar(12) NOT NULL,
+  `contactTel2` int(12) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `members`
+--
+
+INSERT INTO `members` (`id`, `memberName`, `username`, `password`, `rank`, `titleId`, `status`, `subordinates`, `officeEmail`, `otherEmail`, `contactTel1`, `contactTel2`) VALUES
+(1, 'Administrator', 'admin', '4fcab400858d58a02b48f097bfdbc411e838ee12', 1, 1, '1', '', 'admin@gmail.com', 'adminother@gmail.com', '2856547853', 2147483647);
 
 -- --------------------------------------------------------
 
@@ -94,6 +111,7 @@ CREATE TABLE IF NOT EXISTS `members` (
 -- Table structure for table `projects`
 --
 
+DROP TABLE IF EXISTS `projects`;
 CREATE TABLE IF NOT EXISTS `projects` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -103,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `projects` (
   `geoRegion` varchar(50) NOT NULL,
   `city` varchar(50) NOT NULL,
   `discussionDate` date NOT NULL,
-  `status` int(2) NOT NULL,
+  `status` enum('Preliminary','In-depth DD','On-Going','Invested','Pending','Rejected','Exited') NOT NULL DEFAULT 'Preliminary',
   `members` varchar(100) NOT NULL,
   `documents` varchar(100) NOT NULL,
   `dealSize` int(11) NOT NULL,
