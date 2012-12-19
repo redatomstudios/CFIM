@@ -23,7 +23,7 @@ class Home extends CI_Controller {
 		if(!($this->mylibrary->loginCheck()))
 			redirect('login');
 
-		echo "Home";
+		redirect('admin');
 	}
 }
 
