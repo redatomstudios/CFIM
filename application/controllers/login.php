@@ -10,15 +10,17 @@ class Login extends CI_Controller {
 	public function index(){
 
 		$this->load->helper('captcha');
+		$this->load->helper('string');
 		
 
 		$vals = array(
+				'word'		 => random_string('alpha', 6),
                 'img_path'	 => './captcha/',
                 'img_url'	 => base_url().'captcha/',
-                'font_path'  => base_url().'/system/fonts/krist.ttf',
+                'font_path'  => './system/fonts/krist.ttf',
                 'size'  => '20',
-                'img_width'	 => '200',
-                'img_height' => '30',
+                'img_width'	 => '300',
+                'img_height' => '80',
                 'border' => 1, 
                 'expiration' => 7200
                 );

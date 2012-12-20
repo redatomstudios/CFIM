@@ -148,7 +148,7 @@ if ( ! function_exists('create_captcha'))
 
 		$bg_color		= imagecolorallocate ($im, 255, 255, 255);
 		$border_color	= imagecolorallocate ($im, 153, 102, 102);
-		$text_color		= imagecolorallocate ($im, 204, 153, 153);
+		$text_color		= imagecolorallocate ($im, 153, 153, 153);
 		$grid_color		= imagecolorallocate($im, 255, 182, 182);
 		$shadow_color	= imagecolorallocate($im, 255, 240, 240);
 
@@ -166,7 +166,7 @@ if ( ! function_exists('create_captcha'))
 		$thetac		= 7;
 		$radius		= 16;
 		$circles	= 20;
-		$points		= 32;
+		$points		= 16;
 
 		for ($i = 0; $i < ($circles * $points) - 1; $i++)
 		{
@@ -196,7 +196,7 @@ if ( ! function_exists('create_captcha'))
 		}
 		else
 		{
-			$font_size	= 16;
+			$font_size	= 30;
 			$x = rand(0, $img_width/($length/1.5));
 			$y = $font_size+2;
 		}
@@ -207,12 +207,14 @@ if ( ! function_exists('create_captcha'))
 			{
 				$y = rand(0 , $img_height/2);
 				imagestring($im, $font_size, $x, $y, substr($word, $i, 1), $text_color);
+				//imagestring(image, font, x, y, string, color)
 				$x += ($font_size*2);
 			}
 			else
 			{
 				$y = rand($img_height/2, $img_height-3);
-				imagettftext($im, $font_size, $angle, $x, $y, $text_color, $font_path, substr($word, $i, 1));
+				imagettftext($im, $font_size, rand(0, 20), $x, $y, $text_color, $font_path, substr($word, $i, 1));
+				//imagettftext(image, size, angle, x, y, color, fontfile, text)
 				$x += $font_size;
 			}
 		}
