@@ -19,8 +19,8 @@ class Login extends CI_Controller {
                 'img_url'	 => base_url().'captcha/',
                 'font_path'  => './system/fonts/krist.ttf',
                 'size'  => '20',
-                'img_width'	 => '300',
-                'img_height' => '80',
+                'img_width'	 => '270',
+                'img_height' => '50',
                 'border' => 1, 
                 'expiration' => 7200
                 );

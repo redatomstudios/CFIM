@@ -10,7 +10,7 @@
 
 		body > div {
 			width: 300px;
-			height: 350px;
+			height: 220px;
 			text-align: center;
 			margin: auto;
 			position: absolute;
@@ -20,9 +20,12 @@
 			bottom: 0;
 		}
 
+		input {
+			outline: none;
+		}
+
 		input[type='text'], input[type='password'] {
-			height: 44px; 
-			width: 90%;
+			width: 80%;
 			line-height: 44px;
 			font-size: 16px;
 			background: #FFF;
@@ -34,10 +37,11 @@
 		}
 
 		input[type='submit'] {
-			width: 50%;
+			width: 40%;
+			float: right;
 			font-size: 1.2em;
-			line-height: 44px;
-			margin-top: 20px;
+			line-height: 40px;
+			margin-top: 6px;
 			color: white;
 			border: #169DD8 solid 1px!important;
 			cursor: pointer;
@@ -63,14 +67,19 @@
 	<script src="<?= base_url() ?>resources/js/jquery-1.8.2.min.js"></script>
 	<script>
 		jQuery(document).ready(function($){
-		$.each($('input[type="text"], input[type="password"]'), function(){
+		// $.each($('input[type="text"], input[type="password"]'), function(){
+		// 		if(this.attributes['data-hint']) {
+		// 			this.value = this.attributes['data-hint'].value;
+		// 			this.style.color = "rgba(0, 0, 0, 0.3)";
+		// 		}
+		// 	});
+
+			$('input[type="text"], input[type="password"]').each(function(){
 				if(this.attributes['data-hint']) {
 					this.value = this.attributes['data-hint'].value;
 					this.style.color = "rgba(0, 0, 0, 0.3)";
 				}
-			});
-
-			$('input[type="text"], input[type="password"]').focus(function(){
+			}).focus(function(){
 				if(this.attributes['data-hint']) {
 					if(this.value == this.attributes['data-hint'].value) {
 						this.value = "";
@@ -95,7 +104,7 @@ echo form_open('login/doLogin');
 echo form_input(array('name' => 'username', 'id' => 'username', 'data-hint' => 'Username'));
 echo form_input(array('name' => 'password', 'id' => 'password', 'type' => 'password', 'data-hint' => '********'));
 echo $cap;
-echo form_input(array('name' => 'captcha', 'id' => 'captcha', 'data-hint' => 'Enter CAPTCHA'));
+echo form_input(array('name' => 'captcha', 'id' => 'captcha', 'data-hint' => 'Enter CAPTCHA', 'style' => 'width: 45%; float: left;'));
 echo form_submit('Submit','Submit');
 form_close();
  ?>
