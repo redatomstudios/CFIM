@@ -1,0 +1,218 @@
+/* CSS Document */
+/* Created by redAtom Studios @ 2012 */
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,  figure, figcaption, footer, header, hgroup,  menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+	font-size: 90%;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* End Reset */
+
+a, a:visited, a:active {
+	text-decoration: none;
+	color: inherit;
+	font-weight: bold;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+p {
+	margin: 20px 0;
+}
+
+strong {
+	font-weight: bold;
+}
+
+h1 {
+	font-size: 2em;
+	margin: 20px 0;
+	font-weight: bold;
+}
+
+h2 {
+	font-size: 1.2em;
+	margin: 20px 0;
+	font-weight: bold;
+}
+
+h3 {
+	font-size: 1em;
+	margin: 10px 0;
+	font-weight: bold;
+}
+
+.centered {
+	text-align: center;
+}
+
+html {
+	background: url('../images/bgRepeat.jpg');
+}
+
+body {
+	font-family: Arial, Verdana, sans-serif;
+	background: url('../images/bgGradient.png') center top repeat-x;
+}
+
+div.wrapper, div.logoWrapper {
+	width: 978px;
+	padding: 0 15px;
+	margin: 0 auto;
+	background: #FFF;
+}
+
+div.logoWrapper {
+	background: none;
+	border: none;
+	box-shadow: none;
+	padding: 0;
+}
+
+div.clear {
+	clear: both;
+}
+
+img#logo {
+	clear: both;
+	top: 0;
+	margin-bottom: 20px;
+
+}
+
+div#slider {
+	height: 400px;
+	width: 100%;
+	overflow: hidden;
+	text-align: center;
+	padding: 15px 0;
+	position: relative;
+}
+
+div#slider img#slideControlRight, div#slider img#slideControlLeft {
+	position: absolute; 
+	top: 180px;
+	cursor: pointer;
+	z-index: 1;
+}
+
+div#slider img#slideControlRight {
+	right: 30px;
+}
+
+div#slider img#slideControlLeft {
+	left: 30px;
+}
+
+img.slideControl {
+	opacity: 0.6;
+}
+
+img.slideControl:hover {
+	opacity: 1;
+}
+
+div#slider ul {
+	position: absolute;
+	overflow: hidden;
+	height: 100%;
+}
+
+div#slider ul li {
+	float: left;
+	height: 400px;
+	width: 978px;
+}
+
+div#sidebar {
+	float: left;
+	width: 250px;
+	padding: 20px 10px 30px 0;
+	margin-left: -13px;
+}
+
+div#sidebar nav li {
+	line-height: 2em;
+	padding: 0 20px;
+	font-weight: bold;
+}
+
+div#sidebar nav li.current {
+	background: #000;
+	color: #FFF;
+}
+
+div#sidebar nav li:not(.current):hover {
+	background: #EEE;
+}
+
+div#sidebar a {
+	color: inherit;
+	display: block;
+}
+
+div#contentWrapper {
+	padding-top: 20px;
+	padding: 15px;
+}
+
+div#contentContainer {
+	margin-left: 255px;
+	line-height: 1.3em;
+	margin-bottom: 50px;
+	padding-top: 5px;
+}
+
+#address {
+	width: 350px;
+	float: right;
+	padding: 0px 20px 8px 5px;
+	text-align: right;
+	color: #999;
+	font-size: 0.8em;
+}
+
+#signature {
+	width: 300px;
+	float: left;
+	padding: 0px 5px 8px 20px;
+	font-size: 0.8em;
+	color: #999;
+}
+
+div#patterBottom {
+	padding: 50px 0;
+}
