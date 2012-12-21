@@ -16,10 +16,18 @@ class MembersModel extends CI_Model{
 		# code...
 		return $this->db->get_where('members', array('id' => $id))->row();
 	}
+
 	public function getSubordinates(){
 		# code...
 		$this->db->select('id, memberName');
 		$query = $this->db->get_where('members', "rank in (2,3)");
+		return $query->result_array();
+	}
+
+	public function getTeamMembers(){
+		# code...
+		$this->db->select('id, memberName');
+		$query = $this->db->get_where('members', "rank = 2");
 		return $query->result_array();
 	}
 
@@ -82,4 +90,6 @@ class MembersModel extends CI_Model{
 		$query = $this->db->get_where('members', "rank in (2,3)");
 		return $query->result_array();
 	}
+
+	
 }

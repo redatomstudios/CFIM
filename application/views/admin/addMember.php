@@ -1,4 +1,4 @@
-<?= form_open('admin/'.(isset($update)?'editMember':'addMember')) ?>
+<?= form_open('admin/'.(isset($id)?'editMember':'addMember')) ?>
 <?= form_hidden('id',(isset($id)?$id:'')) ?>
 </br><?= form_label('Name', 'name') ?>: <?= form_input(array('name' => 'name', 'id' => 'name', 'value' => (isset($name)?$name:''))) ?>
 </br><?= form_label('Username', 'username') ?>: <?= form_input(array('name' => 'username', 'id' => 'username', 'value' => (isset($username)?$username:''))) ?>
