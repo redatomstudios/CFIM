@@ -4,6 +4,7 @@ CFIM
 - Integrate Views
 - Add confirmation before submission <- Generalize with JS?
 - Validation
+- Add ComboBoxes
 
 Backend Changes
 ===============
