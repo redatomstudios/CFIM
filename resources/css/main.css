@@ -56,8 +56,6 @@ body {
 	margin: 0 auto;
 	background: #FFF;
 	box-shadow: 3px 0 10px #DDD, -3px 0 10px #DDD, 0 3px 10px #FFF;
-	padding-bottom: 20px;
-	margin-bottom: -5px;
 	/*box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);*/
 }
 
@@ -103,6 +101,7 @@ li a:hover, li a:visited, li a:active {
 
 .bodyContent {
 	padding: 20px;
+	padding-bottom: 100px;
 }
 
 .gridTwo {
