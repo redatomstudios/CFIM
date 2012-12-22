@@ -1,5 +1,8 @@
 CFIM
 ====
 
-x CAPTCHA size made bigger
-- INtegrating views now :o
+- Integrate Views
+- Add confirmation before submission <- Generalize with JS?
+- Validation
+- Subordinate and Project Member selection live update
+- Sub-Region live update
