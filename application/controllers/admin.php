@@ -2,20 +2,20 @@
 
 class Admin extends CI_Controller {
 
-	public function __construct(){
+	public function __construct() {
 		parent::__construct();
 		$this->load->model('adminModel');
 		$this->load->model('membersModel');
 	}
 
-	public function index(){
+	public function index() {
 		$data['currentPage'] = 'home';
 		$this->load->view('admin/header', $data);
 		$this->load->view('admin/dashboard');
 		$this->load->view('admin/footer');
 	}
 
-	public function addMember(){
+	public function addMember() { 
 		# code...
 		if($post = $this->input->post()){
 			if($this->membersModel->insertMember($this->input->post()))
@@ -53,7 +53,7 @@ class Admin extends CI_Controller {
 		}
 	}
 
-	public function editMember(){
+	public function editMember() { 
 		if(!$this->input->post()){
 
 			$res = $this->membersModel->getMemberUsernames();
@@ -84,7 +84,7 @@ class Admin extends CI_Controller {
 		}
 	}
 
-	private function getMemberFormData(){
+	private function getMemberFormData() {
 		# code...
 		$this->load->model('titlesModel');
 
@@ -121,7 +121,7 @@ class Admin extends CI_Controller {
 		return $data;
 	}
 
-	public function addProject(){
+	public function addProject() { 
 		# code...
 		$this->load->model('projectsModel');
 
@@ -139,7 +139,14 @@ class Admin extends CI_Controller {
 		}
 	}
 
-	private function getProjectFormData(){
+	public function editProject() {
+		$data['currentPage'] = 'modProject';
+		$this->load->view('admin/header', $data);
+		$this->load->view('admin/listProjects');
+		$this->load->view('admin/footer');
+	}
+
+	private function getProjectFormData() {
 		$this->load->model('sectorsModel');
 		$this->load->model('provincesModel');
 		$this->load->model('citiesModel');
