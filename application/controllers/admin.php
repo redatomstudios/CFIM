@@ -45,7 +45,7 @@ class Admin extends CI_Controller {
 			$data['titles'] = $titles;
 			$data['currentPage'] = 'newMember';
 			$this->load->view('admin/header', $data);
-			$this->load->view('admin/addMember', $data);
+			$this->load->view('admin/newMember', $data);
 			$this->load->view('admin/footer');
 		}
 	}
