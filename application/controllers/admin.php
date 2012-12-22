@@ -9,12 +9,10 @@ class Admin extends CI_Controller {
 	}
 
 	public function index(){
-
-		echo anchor('admin/addMember', 'Add a new member');
-		echo "<br>";
-		echo anchor('admin/editMember', 'Edit member');
-		echo "<br>";
-		echo anchor('admin/addProject', 'Add Project');
+		$data['currentPage'] = 'home';
+		$this->load->view('admin/header', $data);
+		$this->load->view('admin/dashboard');
+		$this->load->view('admin/footer');
 	}
 
 	public function addMember(){
@@ -45,8 +43,10 @@ class Admin extends CI_Controller {
 				'3' => 'Finance');
 			$data['subordinates'] = $subordinates;
 			$data['titles'] = $titles;
-			$this->load->view('admin/addMember',$data);
-				
+			$data['currentPage'] = 'newMember';
+			$this->load->view('admin/header', $data);
+			$this->load->view('admin/addMember', $data);
+			$this->load->view('admin/footer');
 		}
 	}
 
@@ -119,7 +119,10 @@ class Admin extends CI_Controller {
 
 		if(!$this->input->post()){
 			$data = $this->getProjectFormData();
-			$this->load->view('admin/addProject', $data);
+			$data['currentPage'] = 'newProject';
+			$this->load->view('admin/header', $data);
+			$this->load->view('admin/newProject', $data);
+			$this->load->view('admin/footer');
 		}
 		else{
 			echo "<pre>";
