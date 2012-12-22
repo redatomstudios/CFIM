@@ -41,6 +41,9 @@ class Admin extends CI_Controller {
 				'1' => 'Administrator',
 				'2' => 'Member',
 				'3' => 'Finance');
+			$data['status'] = array(
+				'0' => 'Active',
+				'1' => 'Suspended');
 			$data['subordinates'] = $subordinates;
 			$data['titles'] = $titles;
 			$data['currentPage'] = 'newMember';
@@ -58,14 +61,19 @@ class Admin extends CI_Controller {
 				$usernames[$row['id']] = $row['username'];
 			}
 			$data['usernames'] = $usernames;
-
+			$data['currentPage'] = 'modMember';
+			$this->load->view('admin/header', $data);
 			$this->load->view('admin/chooseMember', $data);
+			$this->load->view('admin/footer');
 		}
 		elseif($this->input->post('username')){
 			
 			if(!$this->input->post('id')){				
 				$data = $this->getMemberFormData();
-				$this->load->view('admin/addMember', $data);
+				$data['currentPage'] = 'modMember';
+				$this->load->view('admin/header', $data);
+				$this->load->view('admin/newMember', $data);
+				$this->load->view('admin/footer');
 			}
 			else{
 				if($this->membersModel->updateMember($this->input->post()))

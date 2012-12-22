@@ -17,7 +17,7 @@
 		<?= form_label('Title', 'title') ?><?= form_dropdown('title', $titles, (isset($title)?$title:'1')) ?>
 	</div>
 	<div class="gridTwo spaceTop spaceBottom">
-		<?= form_label('Status', 'status') ?><?= form_dropdown('status', array('Active', 'Suspended'), (isset($status)?$status:'0')) ?>
+		<?= form_label('Status', 'status') ?><?= form_dropdown('status', $status, (isset($currentStatus)?$currentStatus:'0')) ?>
 	</div>
 	<div class="clear"></div>
 	<div class="gridOne spaceTop spaceBottom">
