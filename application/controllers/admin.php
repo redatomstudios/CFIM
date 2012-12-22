@@ -48,7 +48,7 @@ class Admin extends CI_Controller {
 			$data['titles'] = $titles;
 			$data['currentPage'] = 'newMember';
 			$this->load->view('admin/header', $data);
-			$this->load->view('admin/newMember', $data);
+			$this->load->view('admin/members/newMember', $data);
 			$this->load->view('admin/footer');
 		}
 	}
@@ -63,7 +63,7 @@ class Admin extends CI_Controller {
 			$data['usernames'] = $usernames;
 			$data['currentPage'] = 'modMember';
 			$this->load->view('admin/header', $data);
-			$this->load->view('admin/chooseMember', $data);
+			$this->load->view('admin/members/chooseMember', $data);
 			$this->load->view('admin/footer');
 		}
 		elseif($this->input->post('username')){
@@ -72,7 +72,7 @@ class Admin extends CI_Controller {
 				$data = $this->getMemberFormData();
 				$data['currentPage'] = 'modMember';
 				$this->load->view('admin/header', $data);
-				$this->load->view('admin/newMember', $data);
+				$this->load->view('admin/members/newMember', $data);
 				$this->load->view('admin/footer');
 			}
 			else{
@@ -129,7 +129,7 @@ class Admin extends CI_Controller {
 			$data = $this->getProjectFormData();
 			$data['currentPage'] = 'newProject';
 			$this->load->view('admin/header', $data);
-			$this->load->view('admin/newProject', $data);
+			$this->load->view('admin/projects/newProject', $data);
 			$this->load->view('admin/footer');
 		}
 		else{
@@ -139,10 +139,10 @@ class Admin extends CI_Controller {
 		}
 	}
 
-	public function editProject() {
+	public function editProject() { // Temporary, to test project search, list and editing.
 		$data['currentPage'] = 'modProject';
 		$this->load->view('admin/header', $data);
-		$this->load->view('admin/listProjects');
+		$this->load->view('admin/projects/searchProjects');
 		$this->load->view('admin/footer');
 	}
 
