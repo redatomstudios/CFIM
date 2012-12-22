@@ -9,4 +9,6 @@ jQuery(document).ready(function() {
 	});
 
 	$('.datePicker').datepicker({minDate: 0, numberOfMonths: 3});
+
+	$('.bodyContent').append('<div class="clear"></div>');
 });
