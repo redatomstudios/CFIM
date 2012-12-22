@@ -95,7 +95,7 @@ li a:hover, li a:visited, li a:active {
 	padding: 20px;
 	min-height: 100%;
 	background: #FFF;
-	box-shadow: 0 5px 10px #FFF, 3px 0 10px #DDD, -3px 0 10px #DDD;
+	box-shadow: 0 10px 0 #FFF, 3px 0 10px #DDD, -3px 0 10px #DDD;
 }
 
 .gridTwo {

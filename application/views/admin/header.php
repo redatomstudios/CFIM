@@ -35,3 +35,4 @@
 			<div class="clear"></div>
 		</nav>
 	</header>
+	<div class="bodyContent">
