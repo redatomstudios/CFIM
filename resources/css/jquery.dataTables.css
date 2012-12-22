@@ -9,12 +9,13 @@ table.dataTable {
 }
 
 table.dataTable thead th {
-	padding: 3px 18px 3px 10px;
+	padding: 5px 18px 5px 10px;
 	border-bottom: 1px solid black;
 	font-weight: bold;
 	cursor: pointer;
 	*cursor: hand;
-	line-height: 2em;
+	line-height: 1.3em;
+	vertical-align: middle;
 }
 
 table.dataTable tfoot th {
@@ -22,6 +23,7 @@ table.dataTable tfoot th {
 	border-top: 1px solid black;
 	font-weight: bold;
 	line-height: 2em;
+	vertical-align: middle;
 }
 
 table.dataTable td {
