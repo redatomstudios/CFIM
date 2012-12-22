@@ -1,7 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Random Header</title>
+	<?php 
+		$pageTitle = array(
+			'home' => 'Home',
+			'newProject' => 'Add New Project',
+			'modProject' => 'Modify Existing Project',
+			'newMember' => 'Add New Member',
+			'modMember' => 'Modify Existing Member',
+			'stats' => 'Statistics'
+		);
+	?>
+	<title><?= $pageTitle[$currentPage] ?> :: Project Management System</title>
 	<link rel="stylesheet" href="<?= base_url() ?>resources/css/ui-lightness/jquery-ui-1.9.2.custom.min.css?<?= hash_file('crc32', 'resources/css/ui-lightness/jquery-ui-1.9.2.custom.min.css') ?>" />
 	<link rel="stylesheet" href="<?= base_url() ?>resources/css/jquery.dataTables.css?<?= hash_file('crc32', 'resources/css/jquery.dataTables.css') ?>" />
 	<link rel="stylesheet" href="<?= base_url() ?>resources/css/main.css?<?= hash_file('crc32', 'resources/css/main.css') ?>" />
