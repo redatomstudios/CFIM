@@ -2,13 +2,13 @@
 <html>
 <head>
 	<title>Random Header</title>
-	<link rel="stylesheet" href="<?= base_url() ?>resources/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" />
-	<link rel="stylesheet" href="<?= base_url() ?>resources/css/jquery.dataTables.css" />
-	<link rel="stylesheet" href="<?= base_url() ?>resources/css/main.css" />
-	<script src="<?= base_url() ?>resources/js/jquery-1.8.2.min.js"></script>
-	<script src="<?= base_url() ?>resources/js/jquery-ui-1.9.2.custom.min.js"></script>
-	<script src="<?= base_url() ?>resources/js/jquery.dataTables.min.js"></script>
-	<script src="<?= base_url() ?>resources/js/h2o.js"></script>
+	<link rel="stylesheet" href="<?= base_url() ?>resources/css/ui-lightness/jquery-ui-1.9.2.custom.min.css?<?= hash_file('crc32', 'resources/css/ui-lightness/jquery-ui-1.9.2.custom.min.css') ?>" />
+	<link rel="stylesheet" href="<?= base_url() ?>resources/css/jquery.dataTables.css?<?= hash_file('crc32', 'resources/css/jquery.dataTables.css') ?>" />
+	<link rel="stylesheet" href="<?= base_url() ?>resources/css/main.css?<?= hash_file('crc32', 'resources/css/main.css') ?>" />
+	<script src="<?= base_url() ?>resources/js/jquery-1.8.2.min.js?<?= hash_file('crc32', 'resources/js/jquery-1.8.2.min.js') ?>"></script>
+	<script src="<?= base_url() ?>resources/js/jquery-ui-1.9.2.custom.min.js?<?= hash_file('crc32', 'resources/js/jquery-ui-1.9.2.custom.min.js') ?>"></script>
+	<script src="<?= base_url() ?>resources/js/jquery.dataTables.min.js?<?= hash_file('crc32', 'resources/js/jquery.dataTables.min.js') ?>"></script>
+	<script src="<?= base_url() ?>resources/js/h2o.js?<?= hash_file('crc32', 'resources/js/h2o.js') ?>"></script>
 </head>
 <body>
 	<header>

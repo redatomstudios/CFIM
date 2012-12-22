@@ -45,15 +45,23 @@ strong {
 }
 /* End Reset */
 
+html {
+	background: url('../graphics/bgGradient.png') center top repeat-x;
+	height: 100%;
+}
+
 body {
 	width: 978px;
+	min-height: 100%;
 	margin: 0 auto;
+	background: #FFF;
+	box-shadow: 3px 0 10px #DDD, -3px 0 10px #DDD, 0 3px 10px #FFF;
+	padding-bottom: 20px;
+	margin-bottom: -5px;
 	/*box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);*/
 }
 
 header nav {
-	/*background: #000;
-	color: #FFF;*/
 	padding: 0 20px;
 }
 
@@ -64,19 +72,23 @@ nav li {
 	padding: 0 1em;
 	float: left;
 	font-weight: bold;
-	background: #DDD;
 	color: #000;
 }
 
 nav li.currentPage {
 	height: 2.3em;
-	background: #000;
+	background: #2BF;
 	color: #FFF;
+	box-shadow: 0 3px 5px #CCC;
+	border: solid thin white;
+	border-top: none;
 }
 
 nav li:not(.currentPage):hover {
-	background: #AAA;
+	background: #2AF;
+	color: #FFF;
 	height: 2.2em;
+	cursor: pointer;
 }
 
 li a {
@@ -90,17 +102,17 @@ li a:hover, li a:visited, li a:active {
 }
 
 .bodyContent {
-	padding-top: 20px;
+	padding: 20px;
 }
 
 .gridTwo {
-	width: 450px;
+	width: 410px;
 	margin: 0 19px;
 	float: left;
 }
 
 .gridOne {
-	width: 940px;
+	width: 900px;
 	margin: 0 19px;
 }
 
@@ -117,19 +129,73 @@ li a:hover, li a:visited, li a:active {
 }
 
 label {
-	min-width: 170px;
+	min-width: 150px;
+	padding-right: 20px;
 	display: block;
 	float: left;
 	line-height: 2em;
 	font-weight: bold;
+	text-align: right;
 }
 
 input, select {
 	width: 200px;
+	padding: 0;
+}
+
+select[multiple="multiple"] {
+	height: auto;
 }
 
 input[type="button"], input[type="submit"], button {
-	height: 2em;
 	width: auto;
+	height: auto;
 	padding: 0 20px;
+	font-size: 1.2em;
+	line-height: 30px;
+	margin-top: 6px;
+	color: white;
+	border: #169DD8 solid 1px!important;
+	cursor: pointer;
+	border-radius: 5px;
+	text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
+	background: #14D3F0;
+	background: -moz-linear-gradient(top,#14D3F0 0,#0AB1E0 51%,#09A5DB 52%,#0084C9 100%);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#14D3F0),color-stop(51%,#0AB1E0),color-stop(52%,#09A5DB),color-stop(100%,#0084C9));
+	background: -webkit-linear-gradient(top,#14D3F0 0,#0AB1E0 51%,#09A5DB 52%,#0084C9 100%);
+	background: -o-linear-gradient(top,#14D3F0 0,#0AB1E0 51%,#09A5DB 52%,#0084C9 100%);
+	background: -ms-linear-gradient(top,#14D3F0 0,#0AB1E0 51%,#09A5DB 52%,#0084C9 100%);
+	background: linear-gradient(top,#14D3F0 0,#0AB1E0 51%,#09A5DB 52%,#0084C9 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#14d3f0',endColorstr='#0084c9',GradientType=0);
+	font-weight: bold;
+}
+
+input[type="button"]:hover, input[type="submit"]:hover, button:hover {
+	background: #1A99DC;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5adbf7',endColorstr='#1a99dc');
+	background: -webkit-gradient(linear,left top,left bottom,from(#5ADBF7),to(#1A99DC));
+	background: -moz-linear-gradient(top,#5ADBF7,#1A99DC);
+}
+
+input[name="cancel"], button[name="cancel"] {
+	background-color: #FAA732;
+	background-image: -moz-linear-gradient(top, #FBB450, #F89406);
+	background-image: -ms-linear-gradient(top, #FBB450, #F89406);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FBB450), to(#F89406));
+	background-image: -webkit-linear-gradient(top, #FBB450, #F89406);
+	background-image: -o-linear-gradient(top, #FBB450, #F89406);
+	background-image: linear-gradient(top, #FBB450, #F89406);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fbb450', endColorstr='#f89406', GradientType=0);
+	border: solid thin #F89406;
+	filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}
+
+input[name="cancel"]:hover, button[name="cancel"]:hover {
+	background-color: #f89406;
+	background-image: none;
+}
+
+input[name="cancel"]:active, button[name="cancel"]:hover {
+	background-color: #c67605 \9;
 }
