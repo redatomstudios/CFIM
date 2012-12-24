@@ -20,14 +20,14 @@ class MembersModel extends CI_Model{
 	public function getSubordinates(){
 		# code...
 		$this->db->select('id, memberName');
-		$query = $this->db->get_where('members', "rank in (2,3)");
+		$query = $this->db->get_where('members', "rank in (3,4)");
 		return $query->result_array();
 	}
 
 	public function getTeamMembers(){
 		# code...
 		$this->db->select('id, memberName');
-		$query = $this->db->get_where('members', "rank = 2");
+		$query = $this->db->get_where('members', "rank = 3");
 		return $query->result_array();
 	}
 

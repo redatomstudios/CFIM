@@ -41,7 +41,7 @@ class Login extends CI_Controller {
 		$ip = $this->input->ip_address();
 		if($this->loginModel->checkCaptcha($word, $ip))
 			if($this->loginModel->loginCheck($post['username'], $post['password']))
-				redirect('home');
+				redirect('/home/index');
 			else
 				echo "Login Failure!!";
 

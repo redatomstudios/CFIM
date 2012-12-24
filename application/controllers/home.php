@@ -17,37 +17,26 @@ class Home extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
-	{
-		if($this->session->userdata(rank) == 0)
+	public function index(){
+
+		// echo "Rank: ".$this->session->userdata('rank') ;
+		if($this->session->userdata('rank') == 1)
 			redirect('/supervisor');
-		elseif($this->session->userdata(rank) == 1)
+		elseif($this->session->userdata('rank') == 2)
 			redirect('/admin');
-		elseif($this->session->userdata(rank) == 2)
+		elseif($this->session->userdata('rank') == 3)
 			redirect('/member');
-		elseif($this->session->userdata(rank) == 3)
+		elseif($this->session->userdata('rank') == 4)
 			redirect('/finance');
-
-
-		$this->load->library('mylibrary');
-		$login = $this->mylibrary->loginCheck();
-
-		if($login == FALSE)
+		else
 			redirect('login');
-		elseif($login == 0)
-			redirect('supervisor');
-		elseif($login == 1)
-			redirect('admin');
-		elseif($login == 2)
-			redirect('member');
-		elseif($login == 3)
-			redirect('finance');
+
 	}
 
 	public function logout(){
 		# code...
 		$this->session->sess_destroy();
-		redirect('login');
+		redirect('/login');
 	}
 }
 

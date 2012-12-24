@@ -12,6 +12,7 @@ class ProjectsModel extends CI_Model{
 		$subordinates = '';
 		foreach ($data['projectMembers'] as $value) {
 			# code...
+			
 			$subordinates .= $value.',';
 		}
 		if($subordinates != NULL)
@@ -33,7 +34,23 @@ class ProjectsModel extends CI_Model{
 			'contactPerson' => $data['contactPerson'],
 			'contactEmail' => $data['contactEmail'],
 			'contactTel' => $data['contactTel']);
+
 		$this->db->insert('projects', $v);
+		$id = $this->db->insert_id();
+
+		//Updating project fields in team members
+		foreach ($data['projectMembers'] as $value) {
+			# code...
+			$this->db->where('id', $value);
+			$this->db->set('projects', 'concat(projects, ",'.$id.'")', FALSE);
+			$this->db->update('members');
+		}
+
+		//Updating project field in team leader
+		$this->db->where('id', $data['leader']);
+		$this->db->set('projects', 'concat(projects, ",'.$id.'")', FALSE);
+		$this->db->update('members');
+
 	}
 
 	public function getProjectNames(){

@@ -7,7 +7,7 @@ class Admin extends CI_Controller {
 		
 		parent::__construct();
 
-		if($this->session->userdata('rank') != 1)
+		if($this->session->userdata('rank') != 2)
 			redirect('/home');
 		
 
@@ -135,6 +135,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function addProject() { 
+		$this->load->model('projectsModel');
 
 		if(!$this->input->post()){
 			$data = $this->getProjectFormData();
@@ -145,6 +146,7 @@ class Admin extends CI_Controller {
 		}
 		else{
 			$this->projectsModel->insertProject($this->input->post());
+			redirect('/admin');
 		}
 	}
 
