@@ -10,7 +10,7 @@ class CitiesModel extends CI_Model{
 
 	public function getCities(){
 		# code...
-		$this->db->select('name');
+		$this->db->select('id, name');
 		return $this->db->get('cities')->result_array();
 	}
 

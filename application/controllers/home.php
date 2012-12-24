@@ -19,11 +19,35 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->library('mylibrary');
-		if(!($this->mylibrary->loginCheck()))
-			redirect('login');
+		if($this->session->userdata(rank) == 0)
+			redirect('/supervisor');
+		elseif($this->session->userdata(rank) == 1)
+			redirect('/admin');
+		elseif($this->session->userdata(rank) == 2)
+			redirect('/member');
+		elseif($this->session->userdata(rank) == 3)
+			redirect('/finance');
 
-		redirect('admin');
+
+		$this->load->library('mylibrary');
+		$login = $this->mylibrary->loginCheck();
+
+		if($login == FALSE)
+			redirect('login');
+		elseif($login == 0)
+			redirect('supervisor');
+		elseif($login == 1)
+			redirect('admin');
+		elseif($login == 2)
+			redirect('member');
+		elseif($login == 3)
+			redirect('finance');
+	}
+
+	public function logout(){
+		# code...
+		$this->session->sess_destroy();
+		redirect('login');
 	}
 }
 

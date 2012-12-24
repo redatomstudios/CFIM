@@ -30,7 +30,7 @@
 				<li<?= $currentPage == 'newMember' 	? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>admin/addMember">Add New Member</a></li>
 				<li<?= $currentPage == 'modMember' 	? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>admin/editMember">Modify Current Member</a></li>
 				<li<?= $currentPage == 'stats' 		? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>">Statistics</a></li>
-				<li><a href="">Logout</a></li>
+				<li><a href="<?= base_url() ?>home/logout">Logout</a></li>
 			</ul>
 			<div class="clear"></div>
 		</nav>

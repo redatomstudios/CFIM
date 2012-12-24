@@ -10,7 +10,7 @@ class ProvincesModel extends CI_Model{
 
 	public function getProvinces(){
 		# code...
-		$this->db->select('name');
+		$this->db->select('id, name');
 		return $this->db->get('provinces')->result_array();
 	}
 }

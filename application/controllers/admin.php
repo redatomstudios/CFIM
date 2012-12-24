@@ -3,12 +3,22 @@
 class Admin extends CI_Controller {
 
 	public function __construct() {
+
+		
 		parent::__construct();
+
+		if($this->session->userdata('rank') != 1)
+			redirect('/home');
+		
+
 		$this->load->model('adminModel');
 		$this->load->model('membersModel');
 	}
 
 	public function index() {
+
+
+
 		$data['currentPage'] = 'home';
 		$this->load->view('admin/header', $data);
 		$this->load->view('admin/dashboard');
@@ -125,8 +135,6 @@ class Admin extends CI_Controller {
 	}
 
 	public function addProject() { 
-		# code...
-		$this->load->model('projectsModel');
 
 		if(!$this->input->post()){
 			$data = $this->getProjectFormData();
@@ -136,24 +144,58 @@ class Admin extends CI_Controller {
 			$this->load->view('admin/footer');
 		}
 		else{
-			echo "<pre>";
-			print_r($this->input->post());
 			$this->projectsModel->insertProject($this->input->post());
 		}
 	}
 
 	public function editProject() { // Temporary, to test project search, list and editing.
-		$data['currentPage'] = 'modProject';
-		$this->load->view('admin/header', $data);
-		$this->load->view('admin/projects/searchProjects');
-		$this->load->view('admin/footer');
+		$this->load->model('projectsModel');
+		if(!$this->input->post()){
+			
+			$data = $this->getProjectFormData();
+			$data['projects'] = $this->projectsModel->getProjectNames();
+			$data['leaders'] = $this->projectsModel->getLeaders();
+			$data1['currentPage'] = 'modProject';
+
+			$data['sectors'][0] = 'ANY';
+			$data['subsectors'][0] = 'ANY';
+			$data['provinces'][0] = 'ANY';
+			$data['cities'][0] = 'ANY';
+			$data['status'][0] = 'ANY';
+			$data['projectMembers'][0] = 'ANY';
+			$data['leaders'][0] = 'ANY';
+			$data['projects'][0] = 'ANY';
+
+
+			ksort($data['sectors']);
+			ksort($data['subsectors']);
+			ksort($data['provinces']);
+			ksort($data['cities']);
+			ksort($data['status']);
+			ksort($data['projectMembers']);
+			ksort($data['leaders']);
+			ksort($data['projects']);
+
+			$this->load->view('admin/header', $data1);
+			$this->load->view('admin/projects/searchProject', $data);
+			$this->load->view('admin/footer');
+		}
+		elseif(!$this->input->post('id')){
+			$projects = $this->projectsModel->searchProjects($this->input->post());
+
+			echo "<pre>";
+			print_r($projects);
+
+		}
 	}
 
 	private function getProjectFormData() {
+
 		$this->load->model('sectorsModel');
 		$this->load->model('provincesModel');
 		$this->load->model('citiesModel');
 		$this->load->model('membersModel');
+
 		$sectors = $this->sectorsModel->getSectors();
 		foreach ($sectors as $sector) {
 			$sec[$sector['id']] = $sector['name'];
@@ -170,18 +212,18 @@ class Admin extends CI_Controller {
 		$sec = array();
 		$subsectors = $this->provincesModel->getProvinces();
 		foreach ($subsectors as $subs) {
-			$sec[] = $subs['name'];
+			$sec[$subs['id']] = $subs['name'];
 		}
 		$data['provinces'] = $sec;
 
 		$sec = array();
 		$subsectors = $this->citiesModel->getCities();
 		foreach ($subsectors as $subs) {
-			$sec[] = $subs['name'];
+			$sec[$subs['id']] = $subs['name'];
 		}
 		$data['cities'] = $sec;
 
-		$data['status'] = array(1 => 'Preliminary', 'In-depth DD', 'Invested', 'Pending', 'Rejected', 'Exited');
+		$data['status'] = array('Preliminary' => 'Preliminary', 'In-depth DD' => 'In-depth DD', 'Invested' => 'Invested', 'Pending' => 'Pending', 'Rejected' => 'Rejected', 'Exited' => 'Exited');
 
 		$res = $this->membersModel->getTeamMembers();
 		foreach ($res as $value) {
