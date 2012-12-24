@@ -88,10 +88,11 @@ class Admin extends CI_Controller {
 		# code...
 		$this->load->model('titlesModel');
 
+		$id = $this->input->post('username');
 		$member = $this->membersModel->getMember($this->input->post('username'));
-		
 		$res = $this->membersModel->getSubordinates();
 		foreach ($res as $value) {
+			if($value['id'] != $id)
 			$subordinates[$value['id']] = $value['memberName'];
 		}
 		$res = $this->titlesModel->getTitles();
@@ -111,7 +112,9 @@ class Admin extends CI_Controller {
 		$data['username'] = $member->username;
 		$data['rank'] = $member->rank;
 		$data['title'] = $member->titleId;
-		$data['status'] = $member->status;
+		$data['status'] = array( 1 => 'Active',
+								 2 => 'Exausted');
+		$data['currentStatus'] = $member->status;
 		$data['selectedSubordinates'] = explode(',', $member->subordinates);
 		$data['officeEmail'] = $member->officeEmail;
 		$data['otherEmail'] = $member->otherEmail;
@@ -153,14 +156,14 @@ class Admin extends CI_Controller {
 		$this->load->model('membersModel');
 		$sectors = $this->sectorsModel->getSectors();
 		foreach ($sectors as $sector) {
-			$sec[] = $sector['name'];
+			$sec[$sector['id']] = $sector['name'];
 		}
 		$data['sectors'] = $sec;
 		
 		$sec = array();
 		$subsectors = $this->sectorsModel->getSubsectors(0);
 		foreach ($subsectors as $subs) {
-			$sec[] = $subs['name'];
+			$sec[$subs['id']] = $subs['name'].':'.$subs['subsectorOf'];
 		}
 		$data['subsectors'] = $sec;
 

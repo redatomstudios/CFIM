@@ -10,14 +10,14 @@ class SectorsModel extends CI_Model{
 	
 	public function getSectors(){
 		# code...
-		$this->db->select('name');
+		$this->db->select('id, name');
 		$query = $this->db->get_where('sectors',array('subsectorOf' => 0));
 		return $query->result_array();
 	}
 
 	public function getSubsectors($sector){
 
-		$this->db->select('name');
+		$this->db->select('id, name, subsectorOf');
 		if($sector == 0)
 			$query = $this->db->get_where('sectors','subsectorOf != 0');
 		else
