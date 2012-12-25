@@ -145,9 +145,23 @@ class Admin extends CI_Controller {
 			$this->load->view('admin/footer');
 		}
 		else{
-			$this->projectsModel->insertProject($this->input->post());
+			$pid = $this->projectsModel->insertProject($this->input->post());
+			$this->do_upload($this->input->post('file'), $pid);
 			redirect('/admin');
 		}
+	}
+
+	private function do_upload($file, $pid){
+
+		if(!is_dir($_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/uploads/' . $pid))
+			mkdir($_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/uploads/' . $pid);
+
+		
+		$config['upload_path'] = $_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/uploads/' . $pid;
+		// $config['allowed_types'] = 'gif|jpg|png';
+		
+
+		$this->load->library('upload', $config);
 	}
 
 	public function editProject() { // Temporary, to test project search, list and editing.
@@ -187,6 +201,9 @@ class Admin extends CI_Controller {
 
 			echo "<pre>";
 			print_r($projects);
+
+		}
+		else{
 
 		}
 	}

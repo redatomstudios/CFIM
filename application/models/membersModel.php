@@ -93,7 +93,15 @@ class MembersModel extends CI_Model{
 
 	public function getProjects($memberId){
 		# code...
-		
+		$this->db->select('projects');
+		$ret = $this->db->get_where('members', array('id' => $memberId))->row()->projects;
+		$ret = trim($ret, ',');
+		echo $ret . "<br>";
+
+		$this->db->flush_cache();
+		$projects = $this->db->get_where('projects', 'id IN ('. $ret .')')->result_array();
+		var_dump($this->db->last_query());
+		print_r($projects);
 
 	}
 

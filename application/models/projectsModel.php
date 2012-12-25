@@ -10,13 +10,11 @@ class ProjectsModel extends CI_Model{
 	public function insertProject($data){
 		# code...
 		$subordinates = '';
-		foreach ($data['projectMembers'] as $value) {
-			# code...
-			
-			$subordinates .= $value.',';
+		foreach($data['projectMembers'] as $value) {
+			$subordinates .= $value . ',';
 		}
 		if($subordinates != NULL)
-			$subordinates = substr($subordinates, 0, strlen($subordinates)-1);
+			$subordinates = trim($subordinates, ',');
 
 		$v = array(
 			'name' => $data['name'],
@@ -36,6 +34,7 @@ class ProjectsModel extends CI_Model{
 			'contactTel' => $data['contactTel']);
 
 		$this->db->insert('projects', $v);
+		echo $this->db->last_query();
 		$id = $this->db->insert_id();
 
 		//Updating project fields in team members
@@ -44,6 +43,7 @@ class ProjectsModel extends CI_Model{
 			$this->db->where('id', $value);
 			$this->db->set('projects', 'concat(projects, ",'.$id.'")', FALSE);
 			$this->db->update('members');
+			echo "<br>".$this->db->last_query();
 		}
 
 		//Updating project field in team leader
@@ -51,7 +51,11 @@ class ProjectsModel extends CI_Model{
 		$this->db->set('projects', 'concat(projects, ",'.$id.'")', FALSE);
 		$this->db->update('members');
 
+		// echo "<br>".$this->db->last_query();
+		return $id;
 	}
+
+
 
 	public function getProjectNames(){
 		# code...
@@ -65,11 +69,11 @@ class ProjectsModel extends CI_Model{
 	}
 
 	public function getLeaders(){
-		# code...
+
+		$names = '';
 		$this->db->select('leaderId');
 		$ids = $this->db->get('projects')->result();
 		foreach ($ids as $rows) {
-			# code...
 			$id = $rows->leaderId;
 			$this->db->select('memberName');
 			$name = $this->db->get_where('members', array('id' => $id))->row()->memberName;
@@ -112,4 +116,6 @@ class ProjectsModel extends CI_Model{
 		// print_r($where);
 		return $this->db->get_where('projects', $where)->result_array();
 	}
+
+
 }
