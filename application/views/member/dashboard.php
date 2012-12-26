@@ -1,0 +1,1 @@
+<?= anchor('/home/logout', 'Logout') ?>

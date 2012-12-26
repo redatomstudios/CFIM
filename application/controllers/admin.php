@@ -145,23 +145,81 @@ class Admin extends CI_Controller {
 			$this->load->view('admin/footer');
 		}
 		else{
+
+			echo "<pre>";
 			$pid = $this->projectsModel->insertProject($this->input->post());
-			$this->do_upload($this->input->post('file'), $pid);
-			redirect('/admin');
+			// $this->do_upload($this->input->post('file'), $pid);
+
+			/*if(!is_dir($_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/uploads/' . $pid))
+				mkdir($_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/uploads/' . $pid);
+
+		
+			$config['upload_path'] = $_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/uploads/' . $pid;
+			$config['allowed_types'] = '*';
+			$this->load->library('upload', $config);
+			$this->upload->do_upload('file');
+			echo $this->upload->display_errors();
+			$data = $this->upload->data();
+			print_r($data);*/
+
+			if(!$uploads = $this->uploader($pid))
+				echo "Upload Error";
+			else{
+				$this->load->model('documentsModel');
+
+				$ids = $this->documentsModel->insertDocument($pid, $uploads);
+				$ids = implode(',', $ids);
+
+				$this->projectsModel->updateDocuments($pid, $ids);
+			}
+				// redirect('/admin');
+
 		}
 	}
 
-	private function do_upload($file, $pid){
-
+	
+	private function uploader( $pid ){
 		if(!is_dir($_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/uploads/' . $pid))
-			mkdir($_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/uploads/' . $pid);
+				mkdir($_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/uploads/' . $pid);
 
-		
-		$config['upload_path'] = $_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/uploads/' . $pid;
-		// $config['allowed_types'] = 'gif|jpg|png';
-		
+		$this->load->library('upload');  // NOTE: always load the library outside the loop
+		$this->total_count_of_files = count($_FILES['file']['name']);
+		$data = array();
+		 /*Because here we are adding the "$_FILES['userfile']['name']" which increases the count, and for next loop it raises an exception, And also If we have different types of fileuploads */
+		for($i=0; $i<$this->total_count_of_files; $i++)
+		{
 
-		$this->load->library('upload', $config);
+			$_FILES['filename']['name']    = $_FILES['file']['name'][$i];
+			$_FILES['filename']['type']    = $_FILES['file']['type'][$i];
+			$_FILES['filename']['tmp_name'] = $_FILES['file']['tmp_name'][$i];
+			$_FILES['filename']['error']       = $_FILES['file']['error'][$i];
+			$_FILES['filename']['size']    = $_FILES['file']['size'][$i];
+
+			$config['file_name']     = $_FILES['filename']['name'];
+			$config['upload_path'] = $_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/uploads/' . $pid;
+			$config['allowed_types'] = '*';
+			$config['max_size']      = '0';
+			$config['overwrite']     = FALSE;
+
+			$this->upload->initialize($config);
+
+			$error = 0;
+			if($this->upload->do_upload('filename')){
+				$uploadData = $this->upload->data();
+				$arr = array(
+					'filename' => $uploadData['file_name'],
+					'size' => $uploadData['file_size']
+					);
+				$data[] = $arr;
+				$error += 0;
+			}else{
+				$error += 1;
+				echo $this->upload->display_errors();
+			}
+		}
+
+		if($error > 0){ return FALSE; }else{ return $data; }
+
 	}
 
 	public function editProject() { // Temporary, to test project search, list and editing.

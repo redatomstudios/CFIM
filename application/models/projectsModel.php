@@ -34,7 +34,7 @@ class ProjectsModel extends CI_Model{
 			'contactTel' => $data['contactTel']);
 
 		$this->db->insert('projects', $v);
-		echo $this->db->last_query();
+		// echo $this->db->last_query();
 		$id = $this->db->insert_id();
 
 		//Updating project fields in team members
@@ -43,7 +43,7 @@ class ProjectsModel extends CI_Model{
 			$this->db->where('id', $value);
 			$this->db->set('projects', 'concat(projects, ",'.$id.'")', FALSE);
 			$this->db->update('members');
-			echo "<br>".$this->db->last_query();
+			// echo "<br>".$this->db->last_query();
 		}
 
 		//Updating project field in team leader
@@ -55,7 +55,12 @@ class ProjectsModel extends CI_Model{
 		return $id;
 	}
 
-
+	public function updateDocuments($pid, $ids){
+		# code...
+		$this->db->where('id', $pid);
+		$this->db->set('documents', 'concat(documents, ",'.$ids.'")', FALSE);
+		$this->db->update('projects');
+	}
 
 	public function getProjectNames(){
 		# code...
