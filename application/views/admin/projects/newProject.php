@@ -68,7 +68,7 @@
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Attachments', 'file') ?>
-	<?= form_upload(array('name' => 'file', 'id' => 'file')) ?>
+	<?= form_upload(array('name' => 'file', 'id' => 'file', 'multiple' => 'multiple')) ?>
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_submit('submit','Submit') ?>

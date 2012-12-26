@@ -4,17 +4,15 @@
 	<?php 
 		$pageTitle = array(
 			'home' => 'Home',
-			'newProject' => 'Add New Project',
-			'modProject' => 'Modify Existing Project',
-			'newMember' => 'Add New Member',
-			'modMember' => 'Modify Existing Member',
-			'stats' => 'Statistics'
+			'myProjects' => 'My Projects',
+			'investedProjects' => 'My Invested Projects',
+			'changePassword' => 'Change Password',
 		);
 	?>
 	<title><?= $pageTitle[$currentPage] ?> :: Project Management System</title>
 	<link rel="stylesheet" href="<?= base_url() ?>resources/css/ui-lightness/jquery-ui-1.9.2.custom.min.css?<?= hash_file('crc32', 'resources/css/ui-lightness/jquery-ui-1.9.2.custom.min.css') ?>" />
 	<link rel="stylesheet" href="<?= base_url() ?>resources/css/jquery.dataTables.css?<?= hash_file('crc32', 'resources/css/jquery.dataTables.css') ?>" />
-	<link rel="stylesheet" href="<?= base_url() ?>resources/css/admin.css?<?= hash_file('crc32', 'resources/css/admin.css') ?>" />
+	<link rel="stylesheet" href="<?= base_url() ?>resources/css/main.css?<?= hash_file('crc32', 'resources/css/main.css') ?>" />
 	<script src="<?= base_url() ?>resources/js/jquery-1.8.2.min.js?<?= hash_file('crc32', 'resources/js/jquery-1.8.2.min.js') ?>"></script>
 	<script src="<?= base_url() ?>resources/js/jquery-ui-1.9.2.custom.min.js?<?= hash_file('crc32', 'resources/js/jquery-ui-1.9.2.custom.min.js') ?>"></script>
 	<script src="<?= base_url() ?>resources/js/jquery.dataTables.min.js?<?= hash_file('crc32', 'resources/js/jquery.dataTables.min.js') ?>"></script>
@@ -22,14 +20,14 @@
 </head>
 <body>
 	<header>
+		<div id="username">Username: <?php echo "Mary" // Echo username here ?></div> <div id="dateTime"><span id="dateDisplay">12/12/2012</span> <span id="timeDisplay">12:12 AM</span></div>
+		<div class="clear"></div>
 		<nav>
 			<ul>
-				<li<?= $currentPage == 'home' 		? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>admin">Home</a></li>
-				<li<?= $currentPage == 'newProject' ? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>admin/addProject">Add New Project</li>
-				<li<?= $currentPage == 'modProject' ? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>admin/editProject">Modify Existing Project</a></li>
-				<li<?= $currentPage == 'newMember' 	? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>admin/addMember">Add New Member</a></li>
-				<li<?= $currentPage == 'modMember' 	? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>admin/editMember">Modify Current Member</a></li>
-				<li<?= $currentPage == 'stats' 		? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>">Statistics</a></li>
+				<li<?= $currentPage == 'home' 		? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>member">Home</a></li>
+				<li<?= $currentPage == 'myProjects' ? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>member/myProjects">My Projects</li>
+				<li<?= $currentPage == 'investedProjects' ? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>member/investedProjects">My Invested Projects</a></li>
+				<li<?= $currentPage == 'changePassword' 	? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>member/changePassword">Change Password></li>
 				<li><a href="<?= base_url() ?>home/logout">Logout</a></li>
 			</ul>
 			<div class="clear"></div>
