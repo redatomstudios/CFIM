@@ -24,7 +24,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php $temp = 51; do { ?>
+			<?php $temp = 5; do { ?>
 			<tr>
 				<td>Project Name</td>
 				<td>Project Leader</td>
@@ -33,6 +33,25 @@
 				<td>Geo Region</td>
 				<td><?= $temp ?></td>
 			</tr>
+			<tr>
+				<td></td>
+				<td colspan="3">Comment Body</td>
+				<td>Member Name</td>
+				<td>Time Stamp</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td colspan="3">Comment Body</td>
+				<td>Member Name</td>
+				<td>Time Stamp</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td colspan="3">Comment Body</td>
+				<td>Member Name</td>
+				<td>Time Stamp</td>
+			</tr>
+			
 			<?php $temp--; } while($temp) ?>
 	</table>
 </div>

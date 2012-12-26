@@ -1,0 +1,210 @@
+/* CSS Document */
+/* Created by redAtom Studios @ 2012 */
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,  figure, figcaption, footer, header, hgroup,  menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+	font-size: 90%;
+	font-family: Arial, Verdana, sans-serif;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.clear {
+	clear: both;
+}
+strong {
+	font-weight: bold;
+}
+/* End Reset */
+
+html {
+	background: url('../graphics/bgGradient.png') center top repeat-x;
+	height: 100%;
+}
+
+body {
+	width: 978px;
+	margin: 0 auto;
+	padding-top: 50px;
+}
+
+div#username {
+	float: left;
+}
+
+div#dateTime {
+	float: right;
+}
+
+div#username, div#dateTime {
+	line-height: 2em;
+	height: 2em;
+	text-align: center;
+	padding: 0 1em;
+	font-weight: bold;
+	color: #000;
+}
+
+header nav {
+	padding: 0 20px;
+}
+
+nav li {
+	line-height: 2em;
+	height: 2em;
+	text-align: center;
+	padding: 0 1em;
+	float: left;
+	font-weight: bold;
+	color: #000;
+}
+
+nav li.currentPage {
+	background: #FFF;
+	border: solid thin white;
+	border-top: none;
+}
+
+nav li:not(.currentPage):hover {
+	background: #9DF;
+	cursor: pointer;
+}
+
+li a {
+	text-decoration: none;
+	display: block;
+	color: inherit;
+}
+
+li a:hover, li a:visited, li a:active {
+	text-decoration: none;
+}
+
+.bodyContent {
+	padding: 20px;
+	min-height: 100%;
+	background: #FFF;
+	box-shadow: 0 10px 0 #FFF, 3px 0 10px #DDD, -3px 0 10px #DDD;
+}
+
+.gridTwo {
+	width: 410px;
+	margin: 0 19px;
+	float: left;
+}
+
+.gridOne {
+	width: 900px;
+	margin: 0 19px;
+}
+
+.spaceTop {
+	margin-top: 19px;
+}
+
+.rightAlign {
+	text-align: right;
+}
+
+.spaceBottom {
+	margin-bottom: 19px;
+}
+
+label {
+	min-width: 150px;
+	padding-right: 20px;
+	display: block;
+	float: left;
+	line-height: 2em;
+	font-weight: bold;
+}
+
+input, select {
+	width: 200px;
+	padding: 0;
+}
+
+select[multiple="multiple"] {
+	height: auto;
+}
+
+input[type="button"], input[type="submit"], button {
+	width: auto;
+	height: auto;
+	padding: 0 20px;
+	font-size: 1.2em;
+	line-height: 30px;
+	margin-top: 6px;
+	color: white;
+	border: #169DD8 solid 1px!important;
+	cursor: pointer;
+	border-radius: 5px;
+	text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
+	background: #14D3F0;
+	background: -moz-linear-gradient(top,#14D3F0 0,#0AB1E0 51%,#09A5DB 52%,#0084C9 100%);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#14D3F0),color-stop(51%,#0AB1E0),color-stop(52%,#09A5DB),color-stop(100%,#0084C9));
+	background: -webkit-linear-gradient(top,#14D3F0 0,#0AB1E0 51%,#09A5DB 52%,#0084C9 100%);
+	background: -o-linear-gradient(top,#14D3F0 0,#0AB1E0 51%,#09A5DB 52%,#0084C9 100%);
+	background: -ms-linear-gradient(top,#14D3F0 0,#0AB1E0 51%,#09A5DB 52%,#0084C9 100%);
+	background: linear-gradient(top,#14D3F0 0,#0AB1E0 51%,#09A5DB 52%,#0084C9 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#14d3f0',endColorstr='#0084c9',GradientType=0);
+	font-weight: bold;
+}
+
+input[type="button"]:hover, input[type="submit"]:hover, button:hover {
+	background: #1A99DC;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5adbf7',endColorstr='#1a99dc');
+	background: -webkit-gradient(linear,left top,left bottom,from(#5ADBF7),to(#1A99DC));
+	background: -moz-linear-gradient(top,#5ADBF7,#1A99DC);
+}
+
+input[name="cancel"], button[name="cancel"] {
+	background-color: #FAA732;
+	background-image: -moz-linear-gradient(top, #FBB450, #F89406);
+	background-image: -ms-linear-gradient(top, #FBB450, #F89406);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FBB450), to(#F89406));
+	background-image: -webkit-linear-gradient(top, #FBB450, #F89406);
+	background-image: -o-linear-gradient(top, #FBB450, #F89406);
+	background-image: linear-gradient(top, #FBB450, #F89406);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fbb450', endColorstr='#f89406', GradientType=0);
+	border: solid thin #F89406;
+	filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}
+
+input[name="cancel"]:hover, button[name="cancel"]:hover {
+	background-color: #f89406;
+	background-image: none;
+}
+
+input[name="cancel"]:active, button[name="cancel"]:hover {
+	background-color: #c67605 \9;
+}
