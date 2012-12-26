@@ -14,21 +14,21 @@
 		<th><?= form_label('Status', 'status') ?></th>
 	</tr>
 	<tr>
-		<th>
+		<td>
 			<?= form_input(array('name' => 'discussionDate', 'id' => 'discussionDate', 'class' => 'datePicker', 'value' => 'ALL')) ?>
-		</th>
-		<th>
+		</td>
+		<td>
 			<?= form_dropdown('sector', $sectors, '0') ?>
-		</th>
-		<th>
+		</td>
+		<td>
 			<?= form_dropdown('subSector', $subsectors, '0') ?>
-		</th>
-		<th>
+		</td>
+		<td>
 			<?= form_dropdown('province', $provinces, '0') ?>
-		</th>
-		<th>
+		</td>
+		<td>
 			<?= form_dropdown('status', $status, '0') ?>
-		</th>
+		</td>
 	</tr>
 	<tr>
 		<td colspan="5"><input type="submit" value="Display" /></td>
@@ -44,8 +44,8 @@
 				<th>Sub-Sector</th>
 				<th>Geo Region</th>
 				<th>Deal Size</th>
-				<th>Discussion<br />Date</th>
-				<th>Expenses<br />Status</th>
+				<td>Discussion<br />Date</td>
+				<td>Expenses<br />Status</td>
 			</tr>
 		</thead>
 		<tbody>
