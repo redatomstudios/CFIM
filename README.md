@@ -26,4 +26,3 @@ Required Changes
 ================
 
 - In Add New Project section, solve the sub-sector and project members thingie
-- 

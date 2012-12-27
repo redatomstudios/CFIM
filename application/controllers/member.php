@@ -134,8 +134,19 @@ class Member extends CI_Controller{
 		}
 
 		if($this->membersModel->checkVisibility($this->session->userdata('id'), $id)){
-			// echo 'Visible<pre>';
+			$this->load->model('sectorsModel');
+			$this->load->model('provincesModel');
+			$this->load->model('citiesModel');
+			$this->load->model('membersModel');
+
+
 			$data = $this->projectsModel->getProject($id);
+
+			$data['leader'] = $this->membersModel->getName($data['leaderId']);
+			$data['sector'] = $this->sectorsModel->getName($data['sectorId']);
+			$data['subsector'] = $this->sectorsModel->getName($data['subSectorId']);
+			$data['georegion'] = $this->provincesModel->getName($data['geoRegion']);
+
 			$d1['currentPage'] = 'myProjects';
 			$this->load->view('member/header',$d1);
 			$this->load->view('member/viewProject', $data);
@@ -157,4 +168,11 @@ class Member extends CI_Controller{
 		$this->load->view('member/viewInvestedProject');
 		$this->load->view('member/footer');
 	}
+
+	public function changePassword($memberId, $old, $new){
+    	# code...
+    	
+    }
+
+
 }

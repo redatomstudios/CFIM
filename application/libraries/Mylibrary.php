@@ -9,4 +9,8 @@ class Mylibrary {
    		return TRUE;
 
     }
+
+    public function changePassword($memberId, $old, $new){
+    	# code...
+    }
 }

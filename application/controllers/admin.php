@@ -242,6 +242,8 @@ class Admin extends CI_Controller {
 		}
 		elseif(!$this->input->post('id')){
 			$projects = $this->projectsModel->searchProjects($this->input->post());
+			echo "<pre>";
+			print_r($projects);
 		}
 		else{
 			

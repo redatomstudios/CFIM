@@ -20,16 +20,16 @@
 			<?= $name ?>
 		</td>
 		<td>
-			<?=  "Sector"; ?>
+			<?=  $sector ?>
 		</td>
 		<td>
-			<?=  "Sub-Sector" ?>
+			<?=  $subsector ?>
 		</td>
 		<td>
-			<?=  "Geo Region" ?>
+			<?=  $georegion ?>
 		</td>
 		<td>
-			<?=  "Deal Size" ?>
+			<?=  $dealSize ?>
 		</td>
 		<td>
 			<?=  "<input type='button' value='Attachments' />" ?>
