@@ -13,4 +13,12 @@ class ProvincesModel extends CI_Model{
 		$this->db->select('id, name');
 		return $this->db->get('provinces')->result_array();
 	}
+
+	public function getName($id){
+		# code...
+		$this->db->select('name');
+		$ret = $this->db->get_where('provinces', array('id' => $id));
+		return $ret->row()->name;
+	}
+
 }

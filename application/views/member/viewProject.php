@@ -17,22 +17,22 @@
 	</tr>
 	<tr>
 		<td>
-			<?= echo "Project Leader"; ?>
+			<?= $name ?>
 		</td>
 		<td>
-			<?= echo "Sector"; ?>
+			<?=  "Sector"; ?>
 		</td>
 		<td>
-			<?= echo "Sub-Sector" ?>
+			<?=  "Sub-Sector" ?>
 		</td>
 		<td>
-			<?= echo "Geo Region" ?>
+			<?=  "Geo Region" ?>
 		</td>
 		<td>
-			<?= echo "Deal Size" ?>
+			<?=  "Deal Size" ?>
 		</td>
 		<td>
-			<?= echo "<input type='button' value='Attachments' />" ?>
+			<?=  "<input type='button' value='Attachments' />" ?>
 		</td>
 		<?php // Echo this only if the person viewing is not a member of the project
 		echo '<td>Status</td>';

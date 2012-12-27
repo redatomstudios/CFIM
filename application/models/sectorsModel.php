@@ -8,6 +8,13 @@ class SectorsModel extends CI_Model{
 		$this->db->flush_cache();
 	}
 	
+	public function getName($id){
+		# code...
+		$this->db->select('name');
+		$ret = $this->db->get_where('sectors', array('id' => $id));
+		return $ret->row()->name;
+	}
+	
 	public function getSectors(){
 		# code...
 		$this->db->select('id, name');

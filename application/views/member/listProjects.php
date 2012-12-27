@@ -49,16 +49,18 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php $temp = 5; do { ?>
+			<?php foreach ($memberProjects as $project) {
+				# code...
+			}{ ?>
 			<tr>
-				<td>Project Name</td>
-				<td>Project Leader</td>
-				<td>Sector</td>
-				<td>Sub-Sector</td>
-				<td>Geo Region</td>
-				<td><?= $temp ?></td>
-				<th>Discussion Date</th>
-				<th>Expenses Status</th>
+				<td><?= anchor('/member/viewProject/'.$project['id'], $project['projectName']) ?></td>
+				<td><?= $project['projectLeader'] ?></td>
+				<td><?= $project['sector'] ?></td>
+				<td><?= $project['subSector'] ?></td>
+				<td><?= $project['geoRegion'] ?></td>
+				<td><?= $project['dealSize'] ?></td>
+				<th><?= $project['date'] ?></th>
+				<th><?= $project['status'] ?></th>
 			</tr>
 			<tr>
 				<td></td>
@@ -79,7 +81,7 @@
 				<td>Time Stamp</td>
 			</tr>
 			
-			<?php $temp--; } while($temp) ?>
+			<?php  } ?>
 	</table>
 </div>
 <div class="clear"></div>

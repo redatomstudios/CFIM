@@ -7,6 +7,10 @@ class ProjectsModel extends CI_Model{
 		parent::__construct();
 	}
 
+	public function getProject($id){
+		$res = $this->db->get_where('projects', array('id' => $id));
+		return $res->row_array();
+	}
 	public function insertProject($data){
 		# code...
 		$subordinates = '';
@@ -121,6 +125,5 @@ class ProjectsModel extends CI_Model{
 		// print_r($where);
 		return $this->db->get_where('projects', $where)->result_array();
 	}
-
 
 }

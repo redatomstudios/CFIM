@@ -96,14 +96,29 @@ class MembersModel extends CI_Model{
 		$this->db->select('projects');
 		$ret = $this->db->get_where('members', array('id' => $memberId))->row()->projects;
 		$ret = trim($ret, ',');
-		echo $ret . "<br>";
-
+		// echo $ret . "<br>";
+		if($ret == NULL)
+			return false;
 		$this->db->flush_cache();
-		$projects = $this->db->get_where('projects', 'id IN ('. $ret .')')->result_array();
-		var_dump($this->db->last_query());
-		print_r($projects);
+		$projects = $this->db->get_where('projects', 'id IN ('. $ret .')');
+		return $projects->result_array();
 
 	}
 
+	public function getName($id){
+		# code...
+		$this->db->select('memberName');
+		$res = $this->db->get_where('members', array('id' => $id));
+		return $res->row()->memberName;
+	}
+
 	
+	public function checkVisibility($memberId, $projectId){
+		# code...
+		$this->db->select('projects');
+		$res = $this->db->get_where('members', array('id' => $memberId));
+		$projects = explode(',', $res->row()->projects);
+		return in_array($projectId, $projects);
+	}
+		
 }

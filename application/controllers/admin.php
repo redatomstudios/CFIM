@@ -148,20 +148,7 @@ class Admin extends CI_Controller {
 
 			echo "<pre>";
 			$pid = $this->projectsModel->insertProject($this->input->post());
-			// $this->do_upload($this->input->post('file'), $pid);
-
-			/*if(!is_dir($_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/uploads/' . $pid))
-				mkdir($_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/uploads/' . $pid);
-
-		
-			$config['upload_path'] = $_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/uploads/' . $pid;
-			$config['allowed_types'] = '*';
-			$this->load->library('upload', $config);
-			$this->upload->do_upload('file');
-			echo $this->upload->display_errors();
-			$data = $this->upload->data();
-			print_r($data);*/
-
+			
 			if(!$uploads = $this->uploader($pid))
 				echo "Upload Error";
 			else{
@@ -172,7 +159,7 @@ class Admin extends CI_Controller {
 
 				$this->projectsModel->updateDocuments($pid, $ids);
 			}
-				// redirect('/admin');
+				redirect('/admin');
 
 		}
 	}
@@ -186,8 +173,7 @@ class Admin extends CI_Controller {
 		$this->total_count_of_files = count($_FILES['file']['name']);
 		$data = array();
 		 /*Because here we are adding the "$_FILES['userfile']['name']" which increases the count, and for next loop it raises an exception, And also If we have different types of fileuploads */
-		for($i=0; $i<$this->total_count_of_files; $i++)
-		{
+		for($i=0; $i<$this->total_count_of_files; $i++){
 
 			$_FILES['filename']['name']    = $_FILES['file']['name'][$i];
 			$_FILES['filename']['type']    = $_FILES['file']['type'][$i];
@@ -256,13 +242,9 @@ class Admin extends CI_Controller {
 		}
 		elseif(!$this->input->post('id')){
 			$projects = $this->projectsModel->searchProjects($this->input->post());
-
-			echo "<pre>";
-			print_r($projects);
-
 		}
 		else{
-
+			
 		}
 	}
 
