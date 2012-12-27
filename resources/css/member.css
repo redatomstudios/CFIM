@@ -208,3 +208,12 @@ input[name="cancel"]:hover, button[name="cancel"]:hover {
 input[name="cancel"]:active, button[name="cancel"]:hover {
 	background-color: #c67605 \9;
 }
+
+div#popupSlider {
+	height: 90%;
+	width: 90%;
+	background: #FFF;
+	position: absolute;
+	top: 5%;
+	left: 5%;
+}

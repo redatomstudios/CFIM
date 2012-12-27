@@ -50,9 +50,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach ($memberProjects as $project) {
-				# code...
-			}{ ?>
+			<?php foreach ($memberProjects as $project) { ?>
 			<tr>
 				<td><?= anchor('/member/viewProject/'.$project['id'], $project['projectName']) ?></td>
 				<td><?= $project['projectLeader'] ?></td>

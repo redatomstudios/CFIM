@@ -11,4 +11,7 @@ jQuery(document).ready(function() {
 	$('.datePicker').datepicker({minDate: 0, numberOfMonths: 3});
 
 	$('.bodyContent').append('<div class="clear"></div>');
+
+	// Initialize the confirmation and popup windows
+	$('body').append('<div id="popupSlider"></div>');
 });

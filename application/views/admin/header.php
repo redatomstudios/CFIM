@@ -19,7 +19,7 @@
 	<script src="<?= base_url() ?>resources/js/jquery-1.8.2.min.js?<?= hash_file('crc32', 'resources/js/jquery-1.8.2.min.js') ?>"></script>
 	<script src="<?= base_url() ?>resources/js/jquery-ui-1.9.2.custom.min.js?<?= hash_file('crc32', 'resources/js/jquery-ui-1.9.2.custom.min.js') ?>"></script>
 	<script src="<?= base_url() ?>resources/js/jquery.dataTables.min.js?<?= hash_file('crc32', 'resources/js/jquery.dataTables.min.js') ?>"></script>
-	<script src="<?= base_url() ?>resources/js/formalize.js?<?= hash_file('crc32', 'resources/js/formalize.js') ?>"></script>
+	<script src="<?= base_url() ?>resources/js/jquery.formalize.min.js?<?= hash_file('crc32', 'resources/js/formalize.js') ?>"></script>
 	<script src="<?= base_url() ?>resources/js/h2o.js?<?= hash_file('crc32', 'resources/js/h2o.js') ?>"></script>
 </head>
 <body>
