@@ -16,22 +16,22 @@
 	</tr>
 	<tr>
 		<td>
-			<?= echo "Project Leader"; ?>
+			<?=  "Project Leader"; ?>
 		</td>
 		<td>
-			<?= echo "Sector"; ?>
+			<?=  "Sector"; ?>
 		</td>
 		<td>
-			<?= echo "Sub-Sector" ?>
+			<?=  "Sub-Sector" ?>
 		</td>
 		<td>
-			<?= echo "Geo Region" ?>
+			<?=  "Geo Region" ?>
 		</td>
 		<td>
-			<?= echo "Deal Size" ?>
+			<?=  "Deal Size" ?>
 		</td>
 		<td>
-			<?= echo "<input type='button' value='Attachments' />" ?>
+			<?=  "<input type='button' value='Attachments' />" ?>
 		</td>
 	</tr>
 </table>

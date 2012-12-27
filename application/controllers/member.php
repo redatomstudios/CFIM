@@ -12,13 +12,13 @@ class Member extends CI_Controller{
 		$this->load->model('projectsModel');
 	}
 
-	public function index(){
+	public function home(){
 		echo "Member's home page!!<br> <pre>".$this->session->userdata('id');
 		$this->membersModel->getProjects($this->session->userdata('id'));
 		$this->load->view('member/dashboard');
 	}
 
-	public function listProjects(){
+	public function index(){
 		# code...
 		$data = $this->getProjectFormData();
 		$data['projects'] = $this->projectsModel->getProjectNames();
@@ -128,11 +128,13 @@ class Member extends CI_Controller{
 
 	public function viewProject($id = 0){
 		# code...
-		if($id == 0)
+		if($id == 0){
 			echo "No Project Specified";
+			return;
+		}
 
 		if($this->membersModel->checkVisibility($this->session->userdata('id'), $id)){
-			echo 'Visible<pre>';
+			// echo 'Visible<pre>';
 			$data = $this->projectsModel->getProject($id);
 			$d1['currentPage'] = 'myProjects';
 			$this->load->view('member/header',$d1);
@@ -141,5 +143,18 @@ class Member extends CI_Controller{
 		}	
 		else
 			echo 'Project Details Not Accessible by you!!';
+	}
+
+	public function viewInvested($id = 0){
+		if($id == 0){
+			echo "No Project Specified";
+			return;
+		}
+
+		$d1['currentPage'] = 'myProjects';
+
+		$this->load->view('member/header',$d1);
+		$this->load->view('member/viewInvestedProject');
+		$this->load->view('member/footer');
 	}
 }
