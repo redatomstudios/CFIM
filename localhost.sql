@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 24, 2012 at 06:45 PM
+-- Generation Time: Dec 27, 2012 at 09:31 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -51,42 +51,21 @@ CREATE TABLE IF NOT EXISTS `captcha` (
   `word` varchar(20) NOT NULL,
   PRIMARY KEY (`captcha_id`),
   KEY `word` (`word`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `captcha`
 --
 
 INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUES
-(1, 1356281423, '::1', 'WASJES'),
-(2, 1356318786, '::1', 'iQeKGV'),
-(3, 1356348566, '::1', 'iEIQwM'),
-(4, 1356350996, '::1', 'jHDrdk'),
-(5, 1356351332, '::1', 'YKajNM'),
-(6, 1356351372, '::1', 'ilWPDI'),
-(7, 1356351553, '::1', 'vXxsTX'),
-(8, 1356351619, '::1', 'ZFaOSW'),
-(9, 1356351620, '::1', 'fSKTWl'),
-(10, 1356351794, '::1', 'CaxfHn'),
-(11, 1356351901, '::1', 'laiKip'),
-(12, 1356351942, '::1', 'uOFHma'),
-(13, 1356354711, '::1', 'oefQbg'),
-(14, 1356354878, '::1', 'TVLONe'),
-(15, 1356356154, '::1', 'HHIVyD'),
-(16, 1356359643, '::1', 'hWtIIo'),
-(17, 1356361309, '::1', 'ubCJcq'),
-(18, 1356361322, '::1', 'ovMlLO'),
-(19, 1356361381, '::1', 'fCHkge'),
-(20, 1356361396, '::1', 'ldAdRI'),
-(21, 1356361730, '::1', 'ajbOhI'),
-(22, 1356361912, '::1', 'gvyeSe'),
-(23, 1356361959, '::1', 'ymeqUU'),
-(24, 1356361982, '::1', 'vduWQQ'),
-(25, 1356362003, '::1', 'jErQKI'),
-(26, 1356362141, '::1', 'jVvlBi'),
-(27, 1356362174, '::1', 'MGGtkv'),
-(28, 1356362194, '::1', 'NiBTzZ'),
-(29, 1356362465, '::1', 'hfijmJ');
+(1, 1356464829, '::1', 'UvAOgi'),
+(2, 1356504329, '117.196.137.37', 'fzckOY'),
+(3, 1356504458, '::1', 'uzWzjf'),
+(4, 1356529180, '::1', 'zbpPdG'),
+(5, 1356577637, '::1', 'jMTSxr'),
+(6, 1356577652, '::1', 'sGvEQq'),
+(7, 1356578947, '::1', 'TotuaH'),
+(8, 1356591456, '::1', 'cqasDB');
 
 -- --------------------------------------------------------
 
@@ -152,6 +131,21 @@ INSERT INTO `cities` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `documents`
+--
+
+CREATE TABLE IF NOT EXISTS `documents` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `filename` varchar(50) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `projectId` int(11) NOT NULL,
+  `size` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `jobtitles`
 --
 
@@ -201,8 +195,8 @@ CREATE TABLE IF NOT EXISTS `members` (
 
 INSERT INTO `members` (`id`, `memberName`, `username`, `password`, `rank`, `titleId`, `status`, `subordinates`, `officeEmail`, `otherEmail`, `contactTel1`, `contactTel2`, `projects`) VALUES
 (1, 'Administrator', 'admin', '4fcab400858d58a02b48f097bfdbc411e838ee12', 2, 1, 'Active', '', 'admin@gmail.com', 'adminother@gmail.com', '2856547853', 2147483647, NULL),
-(2, 'Dummy Member 1', 'dm1', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 3, '2', '', 'dm1@gmail.com', 'dm1other@gmail.com', '2856547853', 2147483647, '1'),
-(3, 'Dummy Member 2', 'dm2', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 4, 'Active', '', 'dm2@gmail.com', 'dm2other@gmail.com', '12345', 2147483647, '1,6'),
+(2, 'Dummy Member 1', 'dm1', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 3, '2', '', 'dm1@gmail.com', 'dm1other@gmail.com', '2856547853', 2147483647, ',45'),
+(3, 'Dummy Member 2', 'dm2', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 4, 'Active', '', 'dm2@gmail.com', 'dm2other@gmail.com', '12345', 2147483647, ',45'),
 (8, 'Amala George', 'ammu', '4fcab400858d58a02b48f097bfdbc411e838ee12', 2, 4, 'Active', '2,3', 'albinin0002@gmail.com', 'albinin0002@gmail.com', '9620732469', 2147483647, NULL);
 
 -- --------------------------------------------------------
@@ -219,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `projects` (
   `subSectorId` int(11) NOT NULL,
   `geoRegion` int(2) NOT NULL,
   `city` int(2) NOT NULL,
-  `discussionDate` date NOT NULL,
+  `discussionDate` varchar(12) NOT NULL,
   `status` enum('Preliminary','In-depth DD','On-Going','Invested','Pending','Rejected','Exited') NOT NULL DEFAULT 'Preliminary',
   `members` varchar(100) NOT NULL,
   `documents` varchar(100) NOT NULL,
@@ -230,15 +224,14 @@ CREATE TABLE IF NOT EXISTS `projects` (
   `contactEmail` varchar(100) NOT NULL,
   `contactTel` int(12) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
 
 --
 -- Dumping data for table `projects`
 --
 
 INSERT INTO `projects` (`id`, `name`, `leaderId`, `sectorId`, `subSectorId`, `geoRegion`, `city`, `discussionDate`, `status`, `members`, `documents`, `dealSize`, `companyName`, `companyAddress`, `contactPerson`, `contactEmail`, `contactTel`) VALUES
-(1, 'Dummy Project', 3, 2, 4, 5, 6, '2012-11-19', 'Preliminary', '2', '', 15, 'HCL', 'Add', 'Albin', 'asdasd', 0),
-(2, 'Dummy Project 2', 2, 2, 4, 1, 1, '0000-00-00', 'Preliminary', '3', '', 4, 'red', 'asdas', 'adasd', 'asdasd@adsad.com', 2147483647);
+(45, 'Dummy Project', 2, 2, 4, 1, 1, '2012-12-27', 'Preliminary', '3', '', 12, 'red', 'asdas', 'adasd', '', 0);
 
 -- --------------------------------------------------------
 
