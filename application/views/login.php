@@ -27,11 +27,12 @@
 		input[type='text'], input[type='password'] {
 			width: 80%;
 			line-height: 44px;
+			height: 44px;
 			font-size: 16px;
 			background: #FFF;
-			border: solid thin #FFF;
+			border: solid thin #999;
 			border-radius: 5px;
-			box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+			/*box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);*/
 			margin: 5px 0;
 			padding: 0 5%;
 		}
@@ -64,47 +65,49 @@
 			background: -moz-linear-gradient(top,#5ADBF7,#1A99DC);
 		}
 	</style>
+	<link href="<?= base_url() ?>resources/css/formalize.css" />
 	<script src="<?= base_url() ?>resources/js/jquery-1.8.2.min.js"></script>
+	<script src="<?= base_url() ?>resources/js/formalize.js"></script>
 	<script>
-		jQuery(document).ready(function($){
-		// $.each($('input[type="text"], input[type="password"]'), function(){
-		// 		if(this.attributes['data-hint']) {
-		// 			this.value = this.attributes['data-hint'].value;
+		// jQuery(document).ready(function($){
+		// // $.each($('input[type="text"], input[type="password"]'), function(){
+		// // 		if(this.attributes['data-hint']) {
+		// // 			this.value = this.attributes['data-hint'].value;
+		// // 			this.style.color = "rgba(0, 0, 0, 0.3)";
+		// // 		}
+		// // 	});
+
+		// 	$('input[type="text"], input[type="password"]').each(function(){
+		// 		if($(this).attr('data-hint')) {
+		// 			$(this).val($(this).attr('data-hint'));
 		// 			this.style.color = "rgba(0, 0, 0, 0.3)";
 		// 		}
+		// 	}).focus(function(){
+		// 		if(this.attributes['data-hint']) {
+		// 			if(this.value == this.attributes['data-hint'].value) {
+		// 				this.value = "";
+		// 				this.style.color = "#000";
+		// 			}
+		// 		}
+		// 	}).blur(function(){
+		// 		if(this.value == '') {
+		// 			if(this.attributes['data-hint']) {
+		// 				this.value = this.attributes['data-hint'].value;
+		// 				this.style.color = "rgba(0, 0, 0, 0.3)";
+		// 			}
+		// 		}
 		// 	});
-
-			$('input[type="text"], input[type="password"]').each(function(){
-				if(this.attributes['data-hint']) {
-					this.value = this.attributes['data-hint'].value;
-					this.style.color = "rgba(0, 0, 0, 0.3)";
-				}
-			}).focus(function(){
-				if(this.attributes['data-hint']) {
-					if(this.value == this.attributes['data-hint'].value) {
-						this.value = "";
-						this.style.color = "#000";
-					}
-				}
-			}).blur(function(){
-				if(this.value == '') {
-					if(this.attributes['data-hint']) {
-						this.value = this.attributes['data-hint'].value;
-						this.style.color = "rgba(0, 0, 0, 0.3)";
-					}
-				}
-			});
-		});
+		// });
 	</script>
 </head>
 <body>
 <div>
 <?php
 echo form_open('login/doLogin');
-echo form_input(array('name' => 'username', 'id' => 'username', 'data-hint' => 'Username'));
-echo form_input(array('name' => 'password', 'id' => 'password', 'type' => 'password', 'data-hint' => '********'));
+echo form_input(array('name' => 'username', 'id' => 'username', 'placeholder' => 'Username'));
+echo form_input(array('name' => 'password', 'id' => 'password', 'type' => 'password', 'placeholder' => '*****'));
 echo $cap;
-echo form_input(array('name' => 'captcha', 'id' => 'captcha', 'data-hint' => 'Enter CAPTCHA', 'style' => 'width: 45%; float: left;'));
+echo form_input(array('name' => 'captcha', 'id' => 'captcha', 'placeholder' => 'Enter CAPTCHA', 'style' => 'width: 45%; float: left;'));
 echo form_submit('Submit','Submit');
 form_close();
  ?>
