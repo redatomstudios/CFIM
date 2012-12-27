@@ -44,31 +44,30 @@ class Member extends CI_Controller{
 		ksort($data['leaders']);
 		ksort($data['projects']);
 
-		$data['memberProjects'] = $this->membersModel->getProjects($this->session->userdata('id'));
-		
+		if($data['memberProjects'] = $this->membersModel->getProjects($this->session->userdata('id'))){
 
-		$this->load->model('sectorsModel');
-		$this->load->model('provincesModel');
-		$ps = array();
-		foreach ($data['memberProjects'] as $project) {
-			# code...
-			$leaderName = $this->membersModel->getName($project['leaderId']);
-			$sector = $this->sectorsModel->getName($project['sectorId']);
-			$subsector = $this->sectorsModel->getName($project['subSectorId']);
-			$geoRegion = $this->provincesModel->getName($project['geoRegion']);
-			$p['id'] = $project['id'];
-			$p['projectName'] = $project['name'];
-			$p['projectLeader'] = $leaderName;
-			$p['sector'] = $sector;
-			$p['subSector'] = $subsector;
-			$p['geoRegion'] = $geoRegion;
-			$p['dealSize'] = $project['dealSize'];
-			$p['date'] = $project['discussionDate'];
-			$p['status'] = $project['status'];
-			$ps[] = $p;
+			$this->load->model('sectorsModel');
+			$this->load->model('provincesModel');
+			$ps = array();
+			foreach ($data['memberProjects'] as $project) {
+				# code...
+				$leaderName = $this->membersModel->getName($project['leaderId']);
+				$sector = $this->sectorsModel->getName($project['sectorId']);
+				$subsector = $this->sectorsModel->getName($project['subSectorId']);
+				$geoRegion = $this->provincesModel->getName($project['geoRegion']);
+				$p['id'] = $project['id'];
+				$p['projectName'] = $project['name'];
+				$p['projectLeader'] = $leaderName;
+				$p['sector'] = $sector;
+				$p['subSector'] = $subsector;
+				$p['geoRegion'] = $geoRegion;
+				$p['dealSize'] = $project['dealSize'];
+				$p['date'] = $project['discussionDate'];
+				$p['status'] = $project['status'];
+				$ps[] = $p;
+			}
+			$data['memberProjects'] = $ps;
 		}
-		$data['memberProjects'] = $ps;
-
 		$d1['currentPage'] = 'myProjects';
 		$this->load->view('member/header', $d1);
 		$this->load->view('member/listProjects', $data);
