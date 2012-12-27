@@ -34,7 +34,7 @@
 		<td colspan="5"><input type="submit" value="Display" /></td>
 	</tr>
 </table>
-<?php if(isset($memberProjects)) { ?>
+<?php if($memberProjects != FALSE) { ?>
 <div class="gridOne">
 	<table class="data">
 		<thead>
