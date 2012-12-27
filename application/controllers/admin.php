@@ -47,10 +47,10 @@ class Admin extends CI_Controller {
 				$titles[$value['id']] = $value['name'];
 			}
 			$data['ranks'] = array(
-				'0' => 'Supervisor',
-				'1' => 'Administrator',
-				'2' => 'Member',
-				'3' => 'Finance');
+				'1' => 'Supervisor',
+				'2' => 'Administrator',
+				'3' => 'Member',
+				'4' => 'Finance');
 			$data['status'] = array(
 				'0' => 'Active',
 				'1' => 'Suspended');
@@ -112,10 +112,10 @@ class Admin extends CI_Controller {
 
 		$data['id'] = $member->id;
 		$data['ranks'] = array(
-			'0' => 'Supervisor',
-			'1' => 'Administrator',
-			'2' => 'Member',
-			'3' => 'Finance');
+			'1' => 'Supervisor',
+			'2' => 'Administrator',
+			'3' => 'Member',
+			'4' => 'Finance');
 		$data['subordinates'] = $subordinates;
 		$data['titles'] = $titles;
 		$data['name'] = $member->memberName;
