@@ -94,7 +94,7 @@ class MembersModel extends CI_Model{
 	public function getProjects($memberId){
 		# code...
 		$this->db->select('projects');
-		$ret = $this->db->get_where('members', array('id' => $memberId))
+		$ret = $this->db->get_where('members', array('id' => $memberId));
 		if($ret->num_rows() > 0){
 			$ret = $ret->row()->projects;
 			$ret = trim($ret, ',');
