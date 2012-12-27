@@ -34,6 +34,7 @@
 		<td colspan="5"><input type="submit" value="Display" /></td>
 	</tr>
 </table>
+<?php if(isset($memberProjects)) { ?>
 <div class="gridOne">
 	<table class="data">
 		<thead>
@@ -84,4 +85,5 @@
 			<?php  } ?>
 	</table>
 </div>
+<?php } ?>
 <div class="clear"></div>

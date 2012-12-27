@@ -3,21 +3,16 @@
 class Admin extends CI_Controller {
 
 	public function __construct() {
-
-		
 		parent::__construct();
 
 		if($this->session->userdata('rank') != 2)
 			redirect('/home');
 		
-
 		$this->load->model('adminModel');
 		$this->load->model('membersModel');
 	}
 
 	public function index() {
-
-
 
 		$data['currentPage'] = 'home';
 		$this->load->view('admin/header', $data);
