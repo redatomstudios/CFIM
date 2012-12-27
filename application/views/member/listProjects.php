@@ -1,10 +1,14 @@
 <div class="gridOne spaceTop">
 	<strong>Display Criteria:</strong>
 </div>
+<?php if(isset($dates)) { ?>
 <div class="gridOne spaceTop">
+
 	<label for="discussionDate">Discussion Date: </label>
-	<input type="text" name="discussionDate" id="discussionDate" class="datePicker" />
+	<?= form_dropdown('discussionDate', $dates, 0) ?>
+	<!-- <input type="text" name="discussionDate" id="discussionDate" class="datePicker" /> -->
 </div>
+<?php } ?>
 <table>
 	<tr>
 		<th><?= form_label('Discussion Date', 'discussionDate') ?></th>
