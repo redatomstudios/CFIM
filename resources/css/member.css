@@ -160,9 +160,9 @@ input[type="button"], input[type="submit"], button {
 	width: auto;
 	height: auto;
 	padding: 0 20px;
-	font-size: 1.2em;
-	line-height: 30px;
-	margin-top: 6px;
+	font-size: 1.1em;
+	/*line-height: 30px;*/
+	/*margin-top: 6px;*/
 	color: white;
 	border: #169DD8 solid 1px!important;
 	cursor: pointer;
