@@ -97,7 +97,7 @@ class Admin extends CI_Controller {
 		else{
 
 			$post = $this->input->post();
-			if($this->validateAddProject($post)){
+			if($this->isNotValidAddProject($post) == 0){
 			// if(true){
 
 				$this->load->model('sectorsModel');
@@ -137,10 +137,23 @@ class Admin extends CI_Controller {
 
 				
 			}
-			else
+			elseif($this->isNotValidAddProject($post) == 1)
 				echo "Fill evrythig u idiot!!";
+			elseif($this->isNotValidAddProject($post) == 2)
+				echo "A member cannot be a leader";
 
 		}
+	}
+	
+	private function isNotValidAddProject($data){
+		if(($data['name'] == '') || ($data['companyName'] == '') || ($data['companyAddress'] == '') || ($data['contactPerson'] == '') || ($data['contactEmail'] == '') || ($data['contactTel'] == '') || ($data['sector'] == '') || ($data['subsector'] == '') || ($data['province'] == '') || ($data['city'] == '') || ($data['discussionDate'] == '') || ($data['status'] == '') || ($data['leader'] == '') || ($data['projectMembers'] == '') || ($data['dealSize'] == ''))
+			return 1;
+		$leader = $data['leader'];
+		$members = $data['projectMembers'];
+		if(in_array($leader, $members))
+			return 2;
+
+		return 0;
 	}
 
 	public function addMember() { 
@@ -254,11 +267,7 @@ class Admin extends CI_Controller {
 
 	
 
-	private function validateAddProject($data){
-		if(($data['name'] != '') && ($data['companyName'] != '') && ($data['companyAddress'] != '') && ($data['contactPerson'] != '') && ($data['contactEmail'] != '') && ($data['contactTel'] != '') && ($data['sector'] != '') && ($data['subsector'] != '') && ($data['province'] != '') && ($data['city'] != '') && ($data['discussionDate'] != '') && ($data['status'] != '') && ($data['leader'] != '') && ($data['projectMembers'] != '') && ($data['dealSize'] != ''))
-			return TRUE;
-		return FALSE;
-	}
+	
 
 	private function uploader( $pid ){
 		if(!is_dir($_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/uploads/' . $pid))

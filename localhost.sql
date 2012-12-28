@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2012 at 09:08 PM
+-- Generation Time: Dec 28, 2012 at 09:51 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -19,7 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `cfim`
 --
-DROP DATABASE `cfim`;
 CREATE DATABASE `cfim` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `cfim`;
 
@@ -29,6 +28,7 @@ USE `cfim`;
 -- Table structure for table `attachments`
 --
 
+DROP TABLE IF EXISTS `attachments`;
 CREATE TABLE IF NOT EXISTS `attachments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS `attachments` (
 -- Table structure for table `captcha`
 --
 
+DROP TABLE IF EXISTS `captcha`;
 CREATE TABLE IF NOT EXISTS `captcha` (
   `captcha_id` bigint(13) unsigned NOT NULL AUTO_INCREMENT,
   `captcha_time` int(10) unsigned NOT NULL,
@@ -92,10 +93,12 @@ INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUE
 -- Table structure for table `cities`
 --
 
+DROP TABLE IF EXISTS `cities`;
 CREATE TABLE IF NOT EXISTS `cities` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
 
 --
@@ -127,8 +130,8 @@ INSERT INTO `cities` (`id`, `name`) VALUES
 (22, 'Blue Mountain'),
 (23, 'Blytheville'),
 (24, 'Bonanza'),
-(25, 'Booneville'),
 (26, 'Bono'),
+(25, 'Booneville'),
 (27, 'Bradley (city)'),
 (28, 'Branch'),
 (29, 'Briarcliff'),
@@ -152,6 +155,7 @@ INSERT INTO `cities` (`id`, `name`) VALUES
 -- Table structure for table `comments`
 --
 
+DROP TABLE IF EXISTS `comments`;
 CREATE TABLE IF NOT EXISTS `comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `orderNumber` varchar(15) NOT NULL,
@@ -180,6 +184,7 @@ INSERT INTO `comments` (`id`, `orderNumber`, `projectId`, `memberId`, `body`, `a
 -- Table structure for table `documents`
 --
 
+DROP TABLE IF EXISTS `documents`;
 CREATE TABLE IF NOT EXISTS `documents` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `filename` varchar(50) NOT NULL,
@@ -208,6 +213,7 @@ INSERT INTO `documents` (`id`, `filename`, `timestamp`, `projectId`, `size`) VAL
 -- Table structure for table `expenses`
 --
 
+DROP TABLE IF EXISTS `expenses`;
 CREATE TABLE IF NOT EXISTS `expenses` (
   `id` int(11) NOT NULL,
   `projectId` int(11) NOT NULL,
@@ -227,6 +233,7 @@ CREATE TABLE IF NOT EXISTS `expenses` (
 -- Table structure for table `jobtitles`
 --
 
+DROP TABLE IF EXISTS `jobtitles`;
 CREATE TABLE IF NOT EXISTS `jobtitles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -249,6 +256,7 @@ INSERT INTO `jobtitles` (`id`, `name`) VALUES
 -- Table structure for table `members`
 --
 
+DROP TABLE IF EXISTS `members`;
 CREATE TABLE IF NOT EXISTS `members` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `memberName` varchar(50) NOT NULL,
@@ -285,6 +293,7 @@ INSERT INTO `members` (`id`, `memberName`, `username`, `password`, `rank`, `titl
 -- Table structure for table `projects`
 --
 
+DROP TABLE IF EXISTS `projects`;
 CREATE TABLE IF NOT EXISTS `projects` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -322,10 +331,12 @@ INSERT INTO `projects` (`id`, `name`, `leaderId`, `sectorId`, `subSectorId`, `ge
 -- Table structure for table `provinces`
 --
 
+DROP TABLE IF EXISTS `provinces`;
 CREATE TABLE IF NOT EXISTS `provinces` (
   `id` int(2) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
 
 --
@@ -374,11 +385,13 @@ INSERT INTO `provinces` (`id`, `name`) VALUES
 -- Table structure for table `sectors`
 --
 
+DROP TABLE IF EXISTS `sectors`;
 CREATE TABLE IF NOT EXISTS `sectors` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `subsectorOf` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
