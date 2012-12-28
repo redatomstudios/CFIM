@@ -1,11 +1,11 @@
 <?php if(isset($dates)) { ?>
 <div class="gridOne spaceTop">
-<?= form_open('member/index') ?>
+<?= form_open('admin/index') ?>
 	<label for="discussionDate">Discussion Date: </label>
 	<?= form_dropdown('discussionDate', $dates, 0) ?>
 	<!-- <input type="text" name="discussionDate" id="discussionDate" class="datePicker" /> -->
 	<?= form_submit('submission', 'Filter') ?>
-	<?= anchor('/member', '<input type="button" value="All">') ?>
+	<?= anchor('/admin/index', '<input type="button" value="All">') ?>
 <?= form_close() ?>
 </div>
 <?php } ?>
