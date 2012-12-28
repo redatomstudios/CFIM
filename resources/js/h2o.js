@@ -39,16 +39,17 @@ jQuery(document).ready(function() {
 					});
 					if ( !valid ) {
 						// remove invalid value, as it didn't match anything
-						// $( element )
-						// 	.val( "" )
-						// 	.attr( "title", value + " didn't match any item" )
-						// 	.tooltip( "open" );
-						// select.val( "" );
-						// setTimeout(function() {
-						// 	input.tooltip( "close" ).attr( "title", "" );
-						// }, 2500 );
-						// input.data( "autocomplete" ).term = "";
-						// return false;
+						$( element )
+							//.val( "" )
+							//.attr( "title", value + " didn't match any item" )
+							//.tooltip( "open" );
+						select.val( $( element ).val() );
+						console.log($( element ).val(), select.val());
+						setTimeout(function() {
+							input.tooltip( "close" ).attr( "title", "" );
+						}, 2500 );
+						input.data( "autocomplete" ).term = "";
+						return false;
 					}
 				}
 
@@ -146,5 +147,10 @@ jQuery(document).ready(function() {
  
     $(function() {
         $( ".combobox" ).combobox();
+    });
+
+    $('form').submit(function(e) {
+    	//e.preventDefault();
+    	//console.log($(this).serialize());
     });
 });

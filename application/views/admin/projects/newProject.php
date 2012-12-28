@@ -31,18 +31,22 @@
 <div class="gridTwo spaceTop">
 	<?= form_label('Sector', 'sector') ?>
 	<?= form_dropdown('sector', $sectors, (isset($sector)?$sector:'1'), 'class = "combobox"') ?>
+	<?= form_hidden('newSector') ?>
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Sub-Sector', 'subsector') ?>
 	<?= form_dropdown('subsector', $subsectors, (isset($subsector)?$subsector:'1'), 'class = "combobox"') ?>
+	<?= form_hidden('newSubsector') ?>
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Geographical Region', 'province') ?>
 	<?= form_dropdown('province', $provinces, (isset($province)?$province:'1'), 'class = "combobox"') ?>
+	<?= form_hidden('newProvince') ?>
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('City', 'city') ?>
 	<?= form_dropdown('city', $cities, (isset($city)?$city:'1'), 'class = "combobox"') ?>
+	<?= form_hidden('newCity') ?>
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Discussion Date', 'discussionDate') ?>
