@@ -10,13 +10,66 @@ class Admin extends CI_Controller {
 		
 		$this->load->model('adminModel');
 		$this->load->model('membersModel');
+		$this->load->model('projectsModel');
 	}
 
 	public function index() {
 
-		$data['currentPage'] = 'home';
-		$this->load->view('admin/header', $data);
-		$this->load->view('admin/dashboard');
+		$data = $this->getProjectFormData();
+		$data['projects'] = $this->projectsModel->getProjectNames();
+		$data['leaders'] = $this->projectsModel->getLeaders();
+		$data['dates'] = $this->projectsModel->getDiscussionDates();
+		$data1['currentPage'] = 'modProject';
+
+		$data['sectors'][0] = 'ANY';
+		$data['subsectors'][0] = 'ANY';
+		$data['provinces'][0] = 'ANY';
+		$data['cities'][0] = 'ANY';
+		$data['status'][0] = 'ANY';
+		$data['projectMembers'][0] = 'ANY';
+		$data['leaders'][0] = 'ANY';
+		$data['projects'][0] = 'ANY';
+
+
+		ksort($data['sectors']);
+		ksort($data['subsectors']);
+		ksort($data['provinces']);
+		ksort($data['cities']);
+		ksort($data['status']);
+		ksort($data['projectMembers']);
+		ksort($data['leaders']);
+		ksort($data['projects']);
+
+		if($data['memberProjects'] = $this->projectsModel->getProjects($this->session->userdata('id'))){
+
+			$this->load->model('sectorsModel');
+			$this->load->model('provincesModel');
+			$ps = array();
+			foreach ($data['memberProjects'] as $project) {
+				# code...
+				$leaderName = $this->membersModel->getName($project['leaderId']);
+				$sector = $this->sectorsModel->getName($project['sectorId']);
+				$subsector = $this->sectorsModel->getName($project['subSectorId']);
+				$geoRegion = $this->provincesModel->getName($project['geoRegion']);
+				$p['id'] = $project['id'];
+				$p['projectName'] = $project['name'];
+				$p['projectLeader'] = $leaderName;
+				$p['sector'] = $sector;
+				$p['subSector'] = $subsector;
+				$p['geoRegion'] = $geoRegion;
+				$p['dealSize'] = $project['dealSize'];
+				$p['date'] = $project['discussionDate'];
+				$p['status'] = $project['status'];
+				$ps[] = $p;
+			}
+			$data['memberProjects'] = $ps;
+		}
+		$d1['currentPage'] = 'home';
+		$d1['username'] = $this->session->userdata('username');
+		// echo "<pre>";
+		// print_r($data['dates']);
+		$this->load->view('admin/header', $d1);
+		$this->load->view('admin/projects/listProjects', $data);
 		$this->load->view('admin/footer');
 	}
 

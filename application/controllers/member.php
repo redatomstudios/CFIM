@@ -136,9 +136,21 @@ class Member extends CI_Controller{
 	public function changePassword(){
 		# code...
 		$this->load->model('loginModel');
-		
+		$d1['currentPage'] = 'changePassword';
+		$d1['username'] = $this->session->userdata('username');
+		$this->load->view('member/header', $d1);
+		$this->load->view('member/changePassword');
+		$this->load->view('member/footer');
 	}
 
+	public function investedProjects(){
+		# code...
+		$d1['currentPage'] = 'investedProjects';
+		$d1['username'] = $this->session->userdata('username');
+		$this->load->view('member/header', $d1);
+		// $this->load->view('member/changePassword');
+		$this->load->view('member/footer');
+	}
 	private function getProjectFormData() {
 
 		$this->load->model('sectorsModel');
