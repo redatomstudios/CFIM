@@ -75,7 +75,7 @@
 >>>>>>> 11826bee013b53f8249e91eaa604598aab2947e9
 </div>
 <div class="gridTwo spaceTop">
-	<?= form_submit('submit','Submit') ?>
+	<?= form_submit('submission','Submit') ?>
 	<?= form_button('cancel','Cancel') ?>
 </div>
 <?= form_close() ?>

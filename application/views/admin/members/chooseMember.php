@@ -7,6 +7,6 @@
 	<?= form_dropdown('username', $usernames); ?>
 </div>
 <div class="gridOne spaceTop">
-	<?= form_submit('submit', 'Submit'); ?>
+	<?= form_submit('submission', 'Submit'); ?>
 </div>
 <?= form_close(); ?>

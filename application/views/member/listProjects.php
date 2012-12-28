@@ -8,7 +8,7 @@
 	<label for="discussionDate">Discussion Date: </label>
 	<?= form_dropdown('discussionDate', $dates, 0) ?>
 	<!-- <input type="text" name="discussionDate" id="discussionDate" class="datePicker" /> -->
-	<?= form_submit('submit', 'Filter') ?>
+	<?= form_submit('submission', 'Filter') ?>
 	<?= anchor('/member', '<input type="button" value="All">') ?>
 </div>
 <?php } ?>

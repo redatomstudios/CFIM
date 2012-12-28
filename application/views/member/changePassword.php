@@ -5,6 +5,6 @@ Old Password: <?= form_password('oldPassword') ?>
 New Password: <?= form_password('newPassword') ?>
 
 <br />
-<?= form_submit('submit', 'Submit') ?>
+<?= form_submit('submission', 'Submit') ?>
 
 <?= form_close() ?>

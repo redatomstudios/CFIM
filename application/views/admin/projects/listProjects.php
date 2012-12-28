@@ -49,8 +49,8 @@
 				<th>Sub-Sector</th>
 				<th>Geo Region</th>
 				<th>Deal Size</th>
-				<td>Discussion<br />Date</td>
-				<td>Expenses<br />Status</td>
+				<th>Discussion<br />Date</th>
+				<th>Expenses<br />Status</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -63,8 +63,8 @@
 				<td><?= $project['subSector'] ?></td>
 				<td><?= $project['geoRegion'] ?></td>
 				<td><?= $project['dealSize'] ?></td>
-				<th><?= $project['date'] ?></th>
-				<th><?= $project['status'] ?></th>
+				<td><?= $project['date'] ?></td>
+				<td><?= $project['status'] ?></td>
 			</tr>
 			
 			
