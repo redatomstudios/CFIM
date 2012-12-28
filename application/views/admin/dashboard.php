@@ -11,6 +11,7 @@
 <div class="gridOne spaceTop">
 	<strong>Projects for Discussion:</strong>
 </div>
+<?php if($memberProjects != FALSE) { ?>
 <div class="gridOne">
 	<table class="data">
 		<thead>
@@ -24,16 +25,17 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php $temp = 51; do { ?>
+			<?php foreach ($memberProjects as $project) {	 ?>
 			<tr>
-				<td>Project Name</td>
-				<td>Project Leader</td>
-				<td>Sector</td>
-				<td>Sub-Sector</td>
-				<td>Geo Region</td>
-				<td><?= $temp ?></td>
+				<td><?= $project['projectName'] ?></td>
+				<td><?= $project['projectLeader'] ?></td>
+				<td><?= $project['sector'] ?></td>
+				<td><?= $project['subSector'] ?></td>
+				<td><?= $project['geoRegion'] ?></td>
+				<td><?= $project['dealSize'] ?></td>
 			</tr>
-			<?php $temp--; } while($temp) ?>
+			<?php  } ?>
 	</table>
 </div>
+<?php } ?>
 <div class="clear"></div>

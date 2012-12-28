@@ -76,10 +76,9 @@ class Admin extends CI_Controller {
 		}
 		$d1['currentPage'] = 'home';
 		$d1['username'] = $this->session->userdata('username');
-		// echo "<pre>";
-		// print_r($data['dates']);
+
 		$this->load->view('admin/header', $d1);
-		$this->load->view('admin/projects/listProjects', $data);
+		$this->load->view('admin/dashboard', $data);
 		$this->load->view('admin/footer');
 	}
 

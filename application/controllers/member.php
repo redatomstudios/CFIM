@@ -81,7 +81,6 @@ class Member extends CI_Controller{
 		$this->load->view('member/footer');
 	}
 
-
 	public function myProjects(){
 		# code...
 		$data = $this->getProjectFormData();
@@ -138,8 +137,6 @@ class Member extends CI_Controller{
 		$this->load->view('member/header', $d1);
 		$this->load->view('member/listProjects', $data);
 		$this->load->view('member/footer');
-		
-
 	}
 
 	public function changePassword(){
@@ -160,6 +157,7 @@ class Member extends CI_Controller{
 		// $this->load->view('member/changePassword');
 		$this->load->view('member/footer');
 	}
+
 	private function getProjectFormData() {
 
 		$this->load->model('sectorsModel');
@@ -233,8 +231,26 @@ class Member extends CI_Controller{
 			$this->load->view('member/viewProject', $data);
 			$this->load->view('member/footer');
 		}	
-		else
-			echo 'Project Details Not Accessible by you!!';
+		else{
+			$this->load->model('sectorsModel');
+			$this->load->model('provincesModel');
+			$this->load->model('citiesModel');
+			$this->load->model('membersModel');
+
+
+			$data = $this->projectsModel->getProject($id);
+
+			$data['leader'] = $this->membersModel->getName($data['leaderId']);
+			$data['sector'] = $this->sectorsModel->getName($data['sectorId']);
+			$data['subsector'] = $this->sectorsModel->getName($data['subSectorId']);
+			$data['georegion'] = $this->provincesModel->getName($data['geoRegion']);
+
+			$d1['currentPage'] = 'myProjects';
+			$d1['username'] = $this->session->userdata('username');
+			$this->load->view('member/header',$d1);
+			$this->load->view('member/viewProject', $data);
+			$this->load->view('member/footer');
+		}
 	}
 
 	public function viewInvested($id = 0){
