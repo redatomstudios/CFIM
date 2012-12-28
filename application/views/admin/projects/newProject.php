@@ -75,7 +75,7 @@
 	<?= form_upload(array('name' => 'file[]', 'id' => 'file' ,'multiple' => 'multiple')) ?>
 </div>
 <div class="gridTwo spaceTop">
-	<?= form_submit('submit','Submit') ?>
+	<?= form_submit('submission','Submit') ?>
 	<?= form_button('cancel','Cancel') ?>
 </div>
 <?= form_close() ?>

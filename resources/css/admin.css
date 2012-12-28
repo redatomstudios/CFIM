@@ -217,3 +217,15 @@ input[name="cancel"]:active, button[name="cancel"]:hover {
 	max-height: 200px;
 	overflow: auto;
 }
+
+div#popupSlider {
+	height: 0;
+	width: 987px;
+	background: #FFF;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	display: none;
+}
