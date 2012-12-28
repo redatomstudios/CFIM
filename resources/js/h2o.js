@@ -164,7 +164,7 @@ jQuery(document).ready(function() {
         $( ".combobox" ).combobox();
     });
 
-    $('form').submit(function(e) {
+    $('form.confirmationRequired').submit(function(e) {
     	formObj = this;
     	var isConfirmed = $(this).find('input[name="confirmed"]')[0];
     	confirmObj = isConfirmed;

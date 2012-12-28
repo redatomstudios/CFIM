@@ -36,7 +36,7 @@
 	<?= form_dropdown('leader', array('ANY')); ?>
 </div>
 <div class="gridOne spaceTop">
-	<?= form_submit('submit', 'Submit'); ?>
+	<?= form_submit('submission', 'Submit'); ?>
 	<?= form_button('cancel', 'Cancel'); ?>
 </div>
 <?= form_close(); ?>
