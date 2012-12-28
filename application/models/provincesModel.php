@@ -21,4 +21,9 @@ class ProvincesModel extends CI_Model{
 		return $ret->row()->name;
 	}
 
+	public function insertProvince($name){
+		$this->db->insert('provinces', array('name' => $name));
+		return $this->db->insert_id();
+	}
+
 }

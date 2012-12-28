@@ -11,6 +11,10 @@ class Test extends CI_Controller{
 		$this->load->model('expensesModel');
 	}
 
+	public function test_insertSubsector($name, $subsector){
+		# code...
+	}
+
 	public function test_insertComments(){
 		# code...
 		$data['orderNumber'] = 2;

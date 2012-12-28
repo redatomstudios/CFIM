@@ -49,8 +49,8 @@ class ProjectsModel extends CI_Model{
 		$v = array(
 			'name' => $data['name'],
 			'leaderId' => $data['leader'],
-			'sectorId' => ($data['sector'] + 1),
-			'subsectorId' => ($data['subsector'] + 1),
+			'sectorId' => ($data['sector']),
+			'subsectorId' => ($data['subsector']),
 			'geoRegion' => $data['province'],
 			'city' => $data['city'],
 			'discussionDate' => $data['discussionDate'],

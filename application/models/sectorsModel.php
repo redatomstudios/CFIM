@@ -12,7 +12,9 @@ class SectorsModel extends CI_Model{
 		# code...
 		$this->db->select('name');
 		$ret = $this->db->get_where('sectors', array('id' => $id));
-		return $ret->row()->name;
+		if($ret->num_rows() >0)
+			return $ret->row()->name;
+		return FALSE;
 	}
 	
 	public function getSectors(){
@@ -32,22 +34,20 @@ class SectorsModel extends CI_Model{
 		return $query->result_array();
 	}
 
-	public function insertSector($name){
-		# code...
-		$query = $this->db->insert('sectors', array('name' => $name, 'subsectorOf' => 0));
-		return $query;
+	private function getSectorId($sector){
+		$this->db->select('id');
+		$query = $this->db->get_where('sectors', array('name' => $sector));
+		return $query->row()->id;
 	}
 
-	private function getSectorID($sector){
-		# code...
-		$query = $this->db->select('id');
-		$query = $this->db->get_where('sectors', array('name' => $sector));
+	public function insertSector($name){
+		$query = $this->db->insert('sectors', array('name' => $name));
+		return $this->db->insert_id();
 	}
 
 	public function insertSubsector($name, $subsectorOf){
-		# code...
-		$query = $this->db->insert('sectors', array('name' => $name, 'subsectorOf' => getSectorID($subsectorOf)));
-
-		return $query;
+		echo "<br>Name: $name <br>Subsector: $subsectorOf";
+		$query = $this->db->insert('sectors', array('name' => $name, 'subsectorOf' => $subsectorOf));
+		return $this->db->insert_id();
 	}
 }

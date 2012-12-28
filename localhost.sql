@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2012 at 02:44 PM
+-- Generation Time: Dec 28, 2012 at 09:08 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `captcha` (
   `word` varchar(20) NOT NULL,
   PRIMARY KEY (`captcha_id`),
   KEY `word` (`word`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
 --
 -- Dumping data for table `captcha`
@@ -70,7 +70,21 @@ INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUE
 (10, 1356604191, '::1', 'wRkNnF'),
 (11, 1356604193, '::1', 'CAWknL'),
 (12, 1356605998, '::1', 'XKOjuE'),
-(13, 1356614977, '::1', 'YnjQEy');
+(13, 1356614977, '::1', 'YnjQEy'),
+(14, 1356616727, '::1', 'xHSvSP'),
+(15, 1356617596, '::1', 'ogTkFr'),
+(16, 1356619340, '::1', 'glDiON'),
+(17, 1356632353, '::1', 'GXLJqB'),
+(18, 1356665590, '::1', 'lpXtns'),
+(19, 1356677148, '::1', 'emnkNk'),
+(20, 1356685068, '::1', 'ahyqAS'),
+(21, 1356696555, '::1', 'CWsvKu'),
+(22, 1356697422, '::1', 'pijvrt'),
+(23, 1356710963, '::1', 'TYiOmv'),
+(24, 1356713466, '::1', 'AFGcZh'),
+(25, 1356714274, '::1', 'tbLHws'),
+(26, 1356715669, '::1', 'orZsGU'),
+(27, 1356715678, '::1', 'YjOBzs');
 
 -- --------------------------------------------------------
 
@@ -81,9 +95,8 @@ INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUE
 CREATE TABLE IF NOT EXISTS `cities` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
 
 --
 -- Dumping data for table `cities`
@@ -114,8 +127,8 @@ INSERT INTO `cities` (`id`, `name`) VALUES
 (22, 'Blue Mountain'),
 (23, 'Blytheville'),
 (24, 'Bonanza'),
-(26, 'Bono'),
 (25, 'Booneville'),
+(26, 'Bono'),
 (27, 'Bradley (city)'),
 (28, 'Branch'),
 (29, 'Briarcliff'),
@@ -148,15 +161,18 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `attachments` varchar(100) NOT NULL COMMENT 'document ids csv',
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `counter` varchar(100) NOT NULL COMMENT 'member ids csv',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `projectId` (`projectId`,`orderNumber`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `comments`
 --
 
 INSERT INTO `comments` (`id`, `orderNumber`, `projectId`, `memberId`, `body`, `attachments`, `timestamp`, `counter`) VALUES
-(1, '1', 45, 2, 'This project is good!!', '', '2012-12-27 13:16:52', ',2');
+(3, '1', 45, 2, 'This project is good!!', '', '2012-12-27 15:23:35', ''),
+(5, '2', 45, 2, 'This project is good!!', '', '2012-12-27 15:24:25', ''),
+(11, '2', 46, 3, 'This project is good!!', '', '2012-12-27 15:30:16', '');
 
 -- --------------------------------------------------------
 
@@ -171,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `documents` (
   `projectId` int(11) NOT NULL,
   `size` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `documents`
@@ -180,7 +196,30 @@ CREATE TABLE IF NOT EXISTS `documents` (
 INSERT INTO `documents` (`id`, `filename`, `timestamp`, `projectId`, `size`) VALUES
 (7, '.htaccess', '2012-12-27 10:31:15', 46, 1),
 (8, 'CFIM+Projects.xls', '2012-12-27 10:31:15', 46, 114),
-(9, 'CFIMProject.txt', '2012-12-27 10:31:15', 46, 1);
+(9, 'CFIMProject.txt', '2012-12-27 10:31:15', 46, 1),
+(10, 'part1B.pdf', '2012-12-28 12:11:25', 47, 114),
+(11, 'Final-FI-28.9.11.pdf', '2012-12-28 12:11:25', 47, 135),
+(12, 'TreeListRecursion.pdf', '2012-12-28 12:23:15', 49, 41),
+(13, 'LinkedListBasics.pdf', '2012-12-28 12:23:15', 49, 46);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expenses`
+--
+
+CREATE TABLE IF NOT EXISTS `expenses` (
+  `id` int(11) NOT NULL,
+  `projectId` int(11) NOT NULL,
+  `memberId` int(11) NOT NULL,
+  `update` text NOT NULL,
+  `attachments` varchar(100) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `expenses` int(10) NOT NULL COMMENT 'null if update',
+  `voucher` text NOT NULL,
+  `reviewedBy` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -223,20 +262,22 @@ CREATE TABLE IF NOT EXISTS `members` (
   `otherEmail` varchar(50) NOT NULL,
   `contactTel1` varchar(12) NOT NULL,
   `contactTel2` int(12) NOT NULL,
-  `projects` varchar(50) DEFAULT NULL,
+  `projects` varchar(50) DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `members`
 --
 
 INSERT INTO `members` (`id`, `memberName`, `username`, `password`, `rank`, `titleId`, `status`, `subordinates`, `officeEmail`, `otherEmail`, `contactTel1`, `contactTel2`, `projects`) VALUES
-(1, 'Administrator', 'admin', '4fcab400858d58a02b48f097bfdbc411e838ee12', 2, 1, 'Active', '', 'admin@gmail.com', 'adminother@gmail.com', '2856547853', 2147483647, NULL),
-(2, 'Dummy Member 1', 'dm1', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 3, '2', '', 'dm1@gmail.com', 'dm1other@gmail.com', '2856547853', 2147483647, ',45,46'),
-(3, 'Dummy Member 2', 'dm2', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 4, 'Active', '', 'dm2@gmail.com', 'dm2other@gmail.com', '12345', 2147483647, ',45,46'),
-(8, 'Amala George', 'ammu', '4fcab400858d58a02b48f097bfdbc411e838ee12', 2, 4, 'Active', '2,3', 'albinin0002@gmail.com', 'albinin0002@gmail.com', '9620732469', 2147483647, NULL);
+(1, 'Administrator', 'admin', '4fcab400858d58a02b48f097bfdbc411e838ee12', 2, 1, 'Active', '', 'admin@gmail.com', 'adminother@gmail.com', '2856547853', 2147483647, ''),
+(2, 'Dummy Member 1', 'dm1', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 3, '2', '', 'dm1@gmail.com', 'dm1other@gmail.com', '2856547853', 2147483647, ',45,46,48,49'),
+(3, 'Dummy Member 2', 'dm2', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 4, 'Active', '', 'dm2@gmail.com', 'dm2other@gmail.com', '12345', 2147483647, ',45,46,47'),
+(8, 'Amala George', 'ammu', '4fcab400858d58a02b48f097bfdbc411e838ee12', 2, 4, 'Active', '2,3', 'albinin0002@gmail.com', 'albinin0002@gmail.com', '9620732469', 2147483647, ''),
+(9, 'Dummy Member 3', 'dm3', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 3, '0', '', '', '', '', 0, ',48'),
+(10, 'Dummy Member 4', 'dm4', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 3, '0', '9', 'dm4@asdas.com', '', '954646546', 23121984, ',49');
 
 -- --------------------------------------------------------
 
@@ -263,15 +304,17 @@ CREATE TABLE IF NOT EXISTS `projects` (
   `contactEmail` varchar(100) NOT NULL,
   `contactTel` int(12) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
 
 --
 -- Dumping data for table `projects`
 --
 
 INSERT INTO `projects` (`id`, `name`, `leaderId`, `sectorId`, `subSectorId`, `geoRegion`, `city`, `discussionDate`, `status`, `members`, `documents`, `dealSize`, `companyName`, `companyAddress`, `contactPerson`, `contactEmail`, `contactTel`) VALUES
-(45, 'Dummy Project', 2, 2, 4, 1, 1, '2012-12-27', 'Preliminary', '3', '', 12, 'red', 'asdas', 'adasd', '', 0),
-(46, 'Dummy Project 3', 2, 2, 4, 1, 1, '01/17/2013', 'Preliminary', '3', ',7,8,9', 4, 'ads', '', 'asd', '', 0);
+(45, 'Dummy Project', 2, 2, 4, 1, 1, '01/17/2013', 'Preliminary', '3', '', 12, 'red', 'asdas', 'adasd', '', 0),
+(46, 'Dummy Project 3', 2, 2, 4, 1, 1, '01/17/2013', 'Preliminary', '3', ',7,8,9', 4, 'ads', '', 'asd', '', 0),
+(47, 'Dummy Project 2', 3, 2, 4, 1, 1, '12/29/2012', 'Preliminary', '9', ',10,11', 12, 'redasdasd', 'asdas', 'adasd', 'asdasd@adsad.com', 2147483647),
+(48, 'Dummy Project 2', 9, 2, 4, 1, 1, '12/29/2012', 'Preliminary', '2', '', 12, 'ads', 'asdas', '', 'asdasd@adsad.com', 0);
 
 -- --------------------------------------------------------
 
@@ -283,7 +326,7 @@ CREATE TABLE IF NOT EXISTS `provinces` (
   `id` int(2) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
 
 --
 -- Dumping data for table `provinces`
@@ -334,9 +377,9 @@ INSERT INTO `provinces` (`id`, `name`) VALUES
 CREATE TABLE IF NOT EXISTS `sectors` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
-  `subsectorOf` int(11) NOT NULL,
+  `subsectorOf` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `sectors`

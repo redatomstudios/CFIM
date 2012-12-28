@@ -77,9 +77,70 @@ class Admin extends CI_Controller {
 		$d1['currentPage'] = 'home';
 		$d1['username'] = $this->session->userdata('username');
 
+
+
 		$this->load->view('admin/header', $d1);
 		$this->load->view('admin/dashboard', $data);
 		$this->load->view('admin/footer');
+	}
+
+	public function addProject() { 
+		$this->load->model('projectsModel');
+
+		if(!$this->input->post()){
+			$data = $this->getProjectFormData();
+			$data['currentPage'] = 'newProject';
+			$this->load->view('admin/header', $data);
+			$this->load->view('admin/projects/newProject', $data);
+			$this->load->view('admin/footer');
+		}
+		else{
+
+			$post = $this->input->post();
+			if($this->validateAddProject($post)){
+			// if(true){
+
+				$this->load->model('sectorsModel');
+				$this->load->model('citiesModel');
+				$this->load->model('provincesModel');
+
+				if($post['newSector'] != ''){
+					$post['sector'] = $this->sectorsModel->insertSector($post['newSector']);
+				}
+
+				if($post['newSubsector'] != ''){
+					$post['subsector'] = $this->sectorsModel->insertSubsector($post['newSubsector'], $post['sector']);
+				}
+
+				if($post['newCity'] != ''){
+					$post['city'] = $this->citiesModel->insertCity($post['newCity']);
+				}
+
+				if($post['newProvince'] != ''){
+					$post['province'] = $this->provincesModel->insertProvince($post['newProvince']);
+				}
+
+				$pid = $this->projectsModel->insertProject($post);
+				
+				if(!$uploads = $this->uploader($pid))
+					echo "Upload Error";	//Echo this error
+				else{
+					$this->load->model('documentsModel');
+
+					$ids = $this->documentsModel->insertDocument($pid, $uploads);
+					$ids = implode(',', $ids);
+
+					$this->projectsModel->updateDocuments($pid, $ids);
+				}
+				redirect('/admin');
+
+
+				
+			}
+			else
+				echo "Fill evrythig u idiot!!";
+
+		}
 	}
 
 	public function addMember() { 
@@ -191,39 +252,7 @@ class Admin extends CI_Controller {
 		return $data;
 	}
 
-	public function addProject() { 
-		$this->load->model('projectsModel');
-
-		if(!$this->input->post()){
-			$data = $this->getProjectFormData();
-			$data['currentPage'] = 'newProject';
-			$this->load->view('admin/header', $data);
-			$this->load->view('admin/projects/newProject', $data);
-			$this->load->view('admin/footer');
-		}
-		else{
-
-			if($this->validateAddProject($this->input->post())){
-				// echo "<pre>";
-				$pid = $this->projectsModel->insertProject($this->input->post());
-				
-				if(!$uploads = $this->uploader($pid))
-					echo "Upload Error";	//Echo this error
-				else{
-					$this->load->model('documentsModel');
-
-					$ids = $this->documentsModel->insertDocument($pid, $uploads);
-					$ids = implode(',', $ids);
-
-					$this->projectsModel->updateDocuments($pid, $ids);
-				}
-				redirect('/admin');
-			}
-			else
-				echo "Fill evrythig u idiot!!";
-
-		}
-	}
+	
 
 	private function validateAddProject($data){
 		if(($data['name'] != '') && ($data['companyName'] != '') && ($data['companyAddress'] != '') && ($data['contactPerson'] != '') && ($data['contactEmail'] != '') && ($data['contactTel'] != '') && ($data['sector'] != '') && ($data['subsector'] != '') && ($data['province'] != '') && ($data['city'] != '') && ($data['discussionDate'] != '') && ($data['status'] != '') && ($data['leader'] != '') && ($data['projectMembers'] != '') && ($data['dealSize'] != ''))
