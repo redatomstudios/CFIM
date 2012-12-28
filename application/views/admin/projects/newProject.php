@@ -95,7 +95,9 @@ var subSectors = {}; ' . $jsString . '
 	<?= form_label('Attachments', 'file') ?>
 	<?= form_upload(array('name' => 'file[]', 'id' => 'file' ,'multiple' => 'multiple')) ?>
 </div>
-<?php if(isset($id)) { ?>
+<?php
+	if(isset($id)) {
+?>
 <div class="clear"></div>
 <div class="gridOne spaceTop spaceBottom">
 	<table class="data" id="uploadedFiles">
@@ -104,15 +106,33 @@ var subSectors = {}; ' . $jsString . '
 			<th>Upload Time</th>
 			<th>Delete?</th>
 		</tr>
-		<?php foreach ($attachments as $at) { ?>
+		<?php 
+			foreach ($attachments as $at) { 
+		?>
 		<tr>
 			<td style="text-align: center;"><?= $at['filename'] ?></td>
 			<td style="text-align: center;"><?= $at['timestamp'] ?></td>
-			<td style="text-align: center;"><input type="checkbox" value="fileID" name="deletions[]" /></td>
+			<td style="text-align: center;"><input type="checkbox" value="<?= $at['id'] ?>" name="deletions[]" /></td>
 		</tr>
 
-		<?php } ?>
+		<?php 
+			}
+
+		?>
 	</table>
+	<script>
+	filesToDelete = '';
+		$('#uploadedFiles').on('click', 'input[type="checkbox"]', function(){
+			if(this.checked) {
+				filesToDelete += this.value + ',';
+			} else {
+				filesToDelete = filesToDelete.split(this.value + ',').join('');
+			}
+			document.getElementById('deleteFiles').value = filesToDelete.substring(0, filesToDelete.length - 1);
+			console.log(filesToDelete);
+		});
+	</script>
+	<input id="deleteFiles" type="hidden" name"deleteFiles" value="" />
 </div> 
 <div class="clear"></div>
 <?php } ?>
