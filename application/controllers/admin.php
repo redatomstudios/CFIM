@@ -148,8 +148,31 @@ class Admin extends CI_Controller {
 	public function editProject($id = 0) { // Temporary, to test project search, list and editing.
 
 		if($id != 0){
+
 			$data = $this->getProjectFormData();
+
+			$project = $this->projectsModel->getProject($id);
+
+			$members = explode(',', $project['members']);
+			$members = array_filter($members);
+
+			$data['id'] = $project['id'];
+			$data['name'] = $project['name'];
+			$data['companyName'] = $project['companyName'];
+			$data['companyAddress'] = $project['companyAddress'];
+			$data['contactPerson'] = $project['contactPerson'];
+			$data['sector'] = $project['sectorId'];
+			$data['subsector'] = $project['subSectorId'];
+			$data['province'] = $project['geoRegion'];
+			$data['city'] = $project['city'];
+			$data['discussionDate'] = $project['discussionDate'];
+			$data['thisStatus'] = $project['status'];
+			$data['leader'] = $project['leaderId'];
+			$data['selectedProjectMembers'] = $members;
+			$data['dealSize'] = $project['dealSize'];
+
 			$data1['currentPage'] = 'modProject';
+
 			$this->load->view('admin/header', $data1);
 			$this->load->view('admin/projects/newProject', $data);
 			$this->load->view('admin/footer');

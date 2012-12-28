@@ -13,7 +13,7 @@
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Company Address', 'companyAddress') ?>
-	<?= form_input(array('name' => 'companyAddress', 'id' => 'companyAddress', 'value' => (isset($cAddress)?$cAddress:''))) ?>
+	<?= form_input(array('name' => 'companyAddress', 'id' => 'companyAddress', 'value' => (isset($companyAddress)?$companyAddress:''))) ?>
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Contact Person', 'contactPerson') ?>
