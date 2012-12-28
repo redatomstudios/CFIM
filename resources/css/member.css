@@ -210,10 +210,13 @@ input[name="cancel"]:active, button[name="cancel"]:hover {
 }
 
 div#popupSlider {
-	height: 90%;
-	width: 90%;
+	height: 0;
+	width: 987px;
 	background: #FFF;
-	position: absolute;
-	top: 5%;
-	left: 5%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	display: none;
 }
