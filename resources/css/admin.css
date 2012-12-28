@@ -209,6 +209,8 @@ input[name="cancel"]:active, button[name="cancel"]:hover {
 .ui-combobox-input {
 	margin: 0;
 	padding: 0.3em;
+	background: none;
+	color: inherit;
 }
 
 .ui-autocomplete.ui-menu.ui-widget.ui-widget-content.ui-corner-all {
