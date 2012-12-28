@@ -267,7 +267,8 @@ class Admin extends CI_Controller {
 			$this->load->view('admin/footer');
 		}
 		else{
-			
+			echo "<pre>";
+			print_r($this->input->post());
 		}
 	}
 

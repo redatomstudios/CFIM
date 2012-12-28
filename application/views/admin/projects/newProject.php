@@ -108,7 +108,7 @@ var subSectors = {}; ' . $jsString . '
 		<tr>
 			<td style="text-align: center;"><?= $at['filename'] ?></td>
 			<td style="text-align: center;"><?= $at['timestamp'] ?></td>
-			<td style="text-align: center;"><input type="checkbox" value="fileID" name="deletions[]" /></td>
+			<td style="text-align: center;"><input type="checkbox" value="<?= $at['id'] ?>" name="deletions[]" /></td>
 		</tr>
 
 		<?php } ?>
