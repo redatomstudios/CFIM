@@ -144,7 +144,94 @@ class Admin extends CI_Controller {
 
 		}
 	}
-	
+
+	public function editProject($id = 0) { // Temporary, to test project search, list and editing.
+
+		if($id != 0){
+			$data = $this->getProjectFormData();
+			$data['currentPage'] = 'newProject';
+			$this->load->view('admin/header', $data);
+			$this->load->view('admin/projects/newProject', $data);
+			$this->load->view('admin/footer');
+		}
+		elseif(!$this->input->post()){
+			
+			$data = $this->getProjectFormData();
+			$data['projects'] = $this->projectsModel->getProjectNames();
+			$data['leaders'] = $this->projectsModel->getLeaders();
+
+			$data['sectors'][0] = 'ANY';
+			$data['subsectors'][0] = 'ANY';
+			$data['provinces'][0] = 'ANY';
+			$data['cities'][0] = 'ANY';
+			$data['status'][0] = 'ANY';
+			$data['projectMembers'][0] = 'ANY';
+			$data['leaders'][0] = 'ANY';
+			$data['projects'][0] = 'ANY';
+
+
+			ksort($data['sectors']);
+			ksort($data['subsectors']);
+			ksort($data['provinces']);
+			ksort($data['cities']);
+			ksort($data['status']);
+			ksort($data['projectMembers']);
+			ksort($data['leaders']);
+			ksort($data['projects']);
+
+			$this->load->view('admin/header', $data1);
+			
+			$this->load->view('admin/projects/searchProject', $data);
+			$this->load->view('admin/footer');
+		}
+		elseif(!$this->input->post('id')){
+			// $projects = $this->projectsModel->searchProjects($this->input->post());
+			// echo "<pre>";
+			// print_r($projects);
+			// $this->load->view('admin/header', $d1);
+			// $this->load->view('admin/projects/listProject', $data);
+			// $this->load->view('admin/footer');
+			if($data['memberProjects'] = $this->projectsModel->searchProjects($this->input->post())){
+
+				$this->load->model('sectorsModel');
+				$this->load->model('provincesModel');
+				$ps = array();
+				foreach ($data['memberProjects'] as $project) {
+					# code...
+					$leaderName = $this->membersModel->getName($project['leaderId']);
+					$sector = $this->sectorsModel->getName($project['sectorId']);
+					$subsector = $this->sectorsModel->getName($project['subSectorId']);
+					$geoRegion = $this->provincesModel->getName($project['geoRegion']);
+					$p['id'] = $project['id'];
+					$p['projectName'] = $project['name'];
+					$p['projectLeader'] = $leaderName;
+					$p['sector'] = $sector;
+					$p['subSector'] = $subsector;
+					$p['geoRegion'] = $geoRegion;
+					$p['dealSize'] = $project['dealSize'];
+					$p['date'] = $project['discussionDate'];
+					$p['status'] = $project['status'];
+					$ps[] = $p;
+				}
+				$data['memberProjects'] = $ps;
+			}
+
+
+			$d1['currentPage'] = 'modProject';
+			$d1['username'] = $this->session->userdata('username');
+
+			$data['edit'] = 1;	// To show project names as hyperlinks for editing
+
+
+			$this->load->view('admin/header', $d1);
+			$this->load->view('admin/dashboard', $data);
+			$this->load->view('admin/footer');
+		}
+		else{
+			
+		}
+	}
+
 	private function isNotValidAddProject($data){
 		if(($data['name'] == '') || ($data['companyName'] == '') || ($data['companyAddress'] == '') || ($data['contactPerson'] == '') || ($data['contactEmail'] == '') || ($data['contactTel'] == '') || ($data['sector'] == '') || ($data['subsector'] == '') || ($data['province'] == '') || ($data['city'] == '') || ($data['discussionDate'] == '') || ($data['status'] == '') || ($data['leader'] == '') || ($data['projectMembers'] == '') || ($data['dealSize'] == ''))
 			return 1;
@@ -265,10 +352,6 @@ class Admin extends CI_Controller {
 		return $data;
 	}
 
-	
-
-	
-
 	private function uploader( $pid ){
 		if(!is_dir($_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/uploads/' . $pid))
 				mkdir($_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/uploads/' . $pid);
@@ -309,50 +392,9 @@ class Admin extends CI_Controller {
 		}
 
 		if($error > 0){ return FALSE; }else{ return $data; }
-
 	}
 
-	public function editProject() { // Temporary, to test project search, list and editing.
-		$this->load->model('projectsModel');
-		if(!$this->input->post()){
-			
-			$data = $this->getProjectFormData();
-			$data['projects'] = $this->projectsModel->getProjectNames();
-			$data['leaders'] = $this->projectsModel->getLeaders();
-			$data1['currentPage'] = 'modProject';
-
-			$data['sectors'][0] = 'ANY';
-			$data['subsectors'][0] = 'ANY';
-			$data['provinces'][0] = 'ANY';
-			$data['cities'][0] = 'ANY';
-			$data['status'][0] = 'ANY';
-			$data['projectMembers'][0] = 'ANY';
-			$data['leaders'][0] = 'ANY';
-			$data['projects'][0] = 'ANY';
-
-
-			ksort($data['sectors']);
-			ksort($data['subsectors']);
-			ksort($data['provinces']);
-			ksort($data['cities']);
-			ksort($data['status']);
-			ksort($data['projectMembers']);
-			ksort($data['leaders']);
-			ksort($data['projects']);
-
-			$this->load->view('admin/header', $data1);
-			$this->load->view('admin/projects/searchProject', $data);
-			$this->load->view('admin/footer');
-		}
-		elseif(!$this->input->post('id')){
-			$projects = $this->projectsModel->searchProjects($this->input->post());
-			echo "<pre>";
-			print_r($projects);
-		}
-		else{
-			
-		}
-	}
+	
 
 	private function getProjectFormData() {
 

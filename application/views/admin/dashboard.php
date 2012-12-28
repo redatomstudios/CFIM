@@ -26,7 +26,7 @@
 		<tbody>
 			<?php foreach ($memberProjects as $project) {	 ?>
 			<tr>
-				<td><?= $project['projectName'] ?></td>
+				<td><?= ((isset($edit))?(anchor('/admin/editProject/'.$project['id'], $project['projectName'])):$project['projectName']) ?></td>
 				<td><?= $project['projectLeader'] ?></td>
 				<td><?= $project['sector'] ?></td>
 				<td><?= $project['subSector'] ?></td>
