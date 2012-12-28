@@ -149,8 +149,8 @@ class Admin extends CI_Controller {
 
 		if($id != 0){
 			$data = $this->getProjectFormData();
-			$data['currentPage'] = 'newProject';
-			$this->load->view('admin/header', $data);
+			$data1['currentPage'] = 'modProject';
+			$this->load->view('admin/header', $data1);
 			$this->load->view('admin/projects/newProject', $data);
 			$this->load->view('admin/footer');
 		}
@@ -179,8 +179,10 @@ class Admin extends CI_Controller {
 			ksort($data['leaders']);
 			ksort($data['projects']);
 
+
+			$data1['currentPage'] = 'modProject';
 			$this->load->view('admin/header', $data1);
-			
+
 			$this->load->view('admin/projects/searchProject', $data);
 			$this->load->view('admin/footer');
 		}
@@ -394,8 +396,6 @@ class Admin extends CI_Controller {
 		if($error > 0){ return FALSE; }else{ return $data; }
 	}
 
-	
-
 	private function getProjectFormData() {
 
 		$this->load->model('sectorsModel');
@@ -441,6 +441,5 @@ class Admin extends CI_Controller {
 
 		return $data;
 	}
-
 
 }
