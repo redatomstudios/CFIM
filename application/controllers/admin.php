@@ -39,8 +39,18 @@ class Admin extends CI_Controller {
 		ksort($data['projectMembers']);
 		ksort($data['leaders']);
 		ksort($data['projects']);
+		
+		if($this->input->post()){
+			$d['discussionDate'] = $this->input->post('discussionDate');
+			$data['memberProjects'] = $this->projectsModel->searchProjects($d);
+			// $data['memberProjects'] = $this->projectsModel->getProjects();
+		}
+		else{
+			$data['memberProjects'] = $this->projectsModel->getProjects();
+		}
 
-		if($data['memberProjects'] = $this->projectsModel->getProjects($this->session->userdata('id'))){
+
+		if($data['memberProjects']){
 
 			$this->load->model('sectorsModel');
 			$this->load->model('provincesModel');
@@ -194,11 +204,11 @@ class Admin extends CI_Controller {
 		}
 		else{
 
-			echo "<pre>";
+			// echo "<pre>";
 			$pid = $this->projectsModel->insertProject($this->input->post());
 			
 			if(!$uploads = $this->uploader($pid))
-				echo "Upload Error";
+				echo "Upload Error";	//Echo this error
 			else{
 				$this->load->model('documentsModel');
 
@@ -207,7 +217,7 @@ class Admin extends CI_Controller {
 
 				$this->projectsModel->updateDocuments($pid, $ids);
 			}
-				redirect('/admin');
+			redirect('/admin');
 
 		}
 	}

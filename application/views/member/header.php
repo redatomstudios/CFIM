@@ -27,7 +27,7 @@
 				<li<?= $currentPage == 'home' 		? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>member">Home</a></li>
 				<li<?= $currentPage == 'myProjects' ? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>member/myProjects">My Projects</li>
 				<li<?= $currentPage == 'investedProjects' ? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>member/investedProjects">My Invested Projects</a></li>
-				<li<?= $currentPage == 'changePassword' 	? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>member/changePassword">Change Password></li>
+				<li<?= $currentPage == 'changePassword' 	? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>member/changePassword">Change Password</li>
 				<li><a href="<?= base_url() ?>home/logout">Logout</a></li>
 			</ul>
 			<div class="clear"></div>

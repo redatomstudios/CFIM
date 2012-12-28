@@ -39,7 +39,16 @@ class Member extends CI_Controller{
 		ksort($data['leaders']);
 		ksort($data['projects']);
 
-		if($data['memberProjects'] = $this->projectsModel->getProjects($this->session->userdata('id'))){
+		if($this->input->post()){
+			$d['discussionDate'] = $this->input->post('discussionDate');
+			$data['memberProjects'] = $this->projectsModel->searchProjects($d);
+			// $data['memberProjects'] = $this->projectsModel->getProjects();
+		}
+		else{
+			$data['memberProjects'] = $this->projectsModel->getProjects();
+		}
+
+		if($data['memberProjects']){
 
 			$this->load->model('sectorsModel');
 			$this->load->model('provincesModel');
@@ -204,7 +213,7 @@ class Member extends CI_Controller{
 			return;
 		}
 
-		if($this->membersModel->checkVisibility($this->session->userdata('id'), $id)){
+		if($this->membersModel->isMemberOf($this->session->userdata('id'), $id)){
 			$this->load->model('sectorsModel');
 			$this->load->model('provincesModel');
 			$this->load->model('citiesModel');
@@ -219,6 +228,7 @@ class Member extends CI_Controller{
 			$data['georegion'] = $this->provincesModel->getName($data['geoRegion']);
 
 			$d1['currentPage'] = 'myProjects';
+			$d1['username'] = $this->session->userdata('username');
 			$this->load->view('member/header',$d1);
 			$this->load->view('member/viewProject', $data);
 			$this->load->view('member/footer');
@@ -239,8 +249,6 @@ class Member extends CI_Controller{
 		$this->load->view('member/viewInvestedProject');
 		$this->load->view('member/footer');
 	}
-
-
 
 
 }

@@ -4,6 +4,7 @@ class MembersModel extends CI_Model{
 
 	public function __construct(){
 		# code...
+		parent::__construct();
 		$this->db->flush_cache();
 	}
 
@@ -115,14 +116,12 @@ class MembersModel extends CI_Model{
 		$res = $this->db->get_where('members', array('id' => $id));
 		return $res->row()->memberName;
 	}
-
 	
-	public function checkVisibility($memberId, $projectId){
+	public function isMemberOf($memberId, $projectId){
 		# code...
 		$this->db->select('projects');
-		$res = $this->db->get_where('members', array('id' => $memberId));
-		$projects = explode(',', $res->row()->projects);
+		$projects = $this->db->get_where('members', array('id' => $memberId))->row()->projects;
+		$projects = explode(',', $projects);
 		return in_array($projectId, $projects);
-	}
-		
+	}		
 }

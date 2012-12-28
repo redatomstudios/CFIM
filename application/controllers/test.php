@@ -8,6 +8,7 @@ class Test extends CI_Controller{
 		$this->load->model('membersModel');
 		$this->load->model('projectsModel');
 		$this->load->model('commentsModel');
+		$this->load->model('expensesModel');
 	}
 
 	public function test_insertComments(){
@@ -33,5 +34,13 @@ class Test extends CI_Controller{
 		$comments = $this->commentsModel->getComments($projectId);
 		echo "<pre>";
 		print_r($comments);
+	}
+
+	public function test_isMemberOf(){
+		# code...
+		if($this->membersModel->isMemberOf(9, 48))
+			echo "Member";
+		else
+			echo "Not member!! GTFO";
 	}
 }

@@ -13,12 +13,13 @@ class ProjectsModel extends CI_Model{
 	}
 
 	public function getDiscussionDates(){
-		$this->db->select('id, discussionDate');
+		$this->db->select('DISTINCT(discussionDate), id');
 		$res = $this->db->get('projects');
+		// echo $this->db->last_query();
 		if($res->num_rows() > 0){
 			$res = $res->result_array();
 			foreach ($res as $row) {
-				$r[$row['id']] = $row['discussionDate'];
+				$r[$row['discussionDate']] = $row['discussionDate'];
 			}
 
 			return $r;
@@ -72,7 +73,8 @@ class ProjectsModel extends CI_Model{
 			$this->db->where('id', $value);
 			$this->db->set('projects', 'concat(projects, ",'.$id.'")', FALSE);
 			$this->db->update('members');
-			// echo "<br>".$this->db->last_query();
+			echo "<br>".$this->db->last_query();
+			
 		}
 
 		//Updating project field in team leader
@@ -119,29 +121,35 @@ class ProjectsModel extends CI_Model{
 	public function searchProjects($data){
 		
 		$where = array();
-		if($data['name'] != 0){
+		if((isset($data['name'])) && ($data['name'] != 0)){
 			$where['id'] = $data['name'];
 		}
 		else{
-			if($data['sector'] != 0)
+			if(isset($data['sector']) && ($data['sector'] != 0))
 				$where['sectorId'] = $data['sector'];
-			if($data['subsector'] != 0)
+			if(isset($data['subsector']) && ($data['subsector'] != 0))
 				$where['subsectorId'] = $data['subsector'];
-			if($data['province'] != 0)
+			if(isset($data['province']) && ($data['province'] != 0))
 				$where['geoRegion'] = $data['province'];
-			if($data['city'] != 0)
+			if(isset($data['city']) && ($data['city'] != 0))
 				$where['city'] = $data['city'];
-			if($data['discussionDate'] != '')
+			if(isset($data['discussionDate']) && ($data['discussionDate'] != ''))
 				$where['discussionDate'] = $data['discussionDate'];
-			if($data['status'] != 0)
+			if(isset($data['status']) && ($data['status'] != 0))
 				$where['status'] = $data['status'];
-			if($data['leader'] != 0)
+			if(isset($data['leader']) && ($data['leader'] != 0))
 				$where['leaderId'] = $data['leader'];
 		}
 
 		// echo "<pre>";
 		// print_r($where);
-		return $this->db->get_where('projects', $where)->result_array();
+		$ret = $this->db->get_where('projects', $where);
+		if($ret->num_rows() > 0)
+			return $ret->result_array();
+
+		return FALSE;
+
+
 	}
 
 }

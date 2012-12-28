@@ -1,11 +1,11 @@
 <div class="gridOne spaceTop">
-	<strong>Project Name:</strong> <?php // Echo project name here ?>
+	<strong>Project Name:</strong> <?= $name ?>
 </div>
-<div class="gridOne spaceTop">
+<!-- <div class="gridOne spaceTop">
 	<label for="discussionDate">Discussion Date: </label>
 	<input type="text" name="discussionDate" id="discussionDate" class="datePicker" />
-</div>
-<table>
+</div> -->
+<table border="1">
 	<tr>
 		<th>Project Leader</th>
 		<th>Sector</th>
@@ -17,7 +17,7 @@
 	</tr>
 	<tr>
 		<td>
-			<?= $name ?>
+			<?= $leader ?>
 		</td>
 		<td>
 			<?=  $sector ?>
