@@ -48,6 +48,7 @@ jQuery(document).ready(function() {
 					select.children( "option" ).each(function() {
 						if ( $( this ).text().match( matcher ) ) {
 							this.selected = valid = true;
+							select.value = this.value;
 							select[0].parentNode.children[3].value = "";
 							return false;
 						}
@@ -160,9 +161,7 @@ jQuery(document).ready(function() {
 		});
 	})( jQuery );
  
-    $(function() {
-        $( ".combobox" ).combobox();
-    });
+    // $( ".combobox" ).combobox();
 
     $('form.confirmationRequired').submit(function(e) {
     	formObj = this;
@@ -203,4 +202,11 @@ jQuery(document).ready(function() {
 	    	$('#popupSlider').show().animate({height: 100 + '%'}).html(divString);
 	    }
     });
+	
+	$('#liveSector').change(function(){
+		$('#liveSubsector').html(subSectors[this.value]);
+		// $('.combobox').combobox('destroy');
+		// $( ".combobox" ).combobox();
+	});
+
 });
