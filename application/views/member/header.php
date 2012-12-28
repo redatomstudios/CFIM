@@ -20,7 +20,7 @@
 </head>
 <body>
 	<header>
-		<div id="username">Username: <?php echo "Mary" // Echo username here ?></div> <div id="dateTime"><span id="dateDisplay">12/12/2012</span> <span id="timeDisplay">12:12 AM</span></div>
+		<div id="username">Username: <?php echo $username;// Echo username here ?></div> <div id="dateTime"><span id="dateDisplay">12/12/2012</span> <span id="timeDisplay">12:12 AM</span></div>
 		<div class="clear"></div>
 		<nav>
 			<ul>

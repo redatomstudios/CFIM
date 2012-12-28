@@ -11,6 +11,31 @@ class ProjectsModel extends CI_Model{
 		$res = $this->db->get_where('projects', array('id' => $id));
 		return $res->row_array();
 	}
+
+	public function getDiscussionDates(){
+		$this->db->select('id, discussionDate');
+		$res = $this->db->get('projects');
+		if($res->num_rows() > 0){
+			$res = $res->result_array();
+			foreach ($res as $row) {
+				$r[$row['id']] = $row['discussionDate'];
+			}
+
+			return $r;
+		}
+
+		return FALSE;
+		# code...
+	}
+
+	public function getProjects(){
+		# code...
+		$projects = $this->db->get('projects');
+		if($projects->num_rows() > 0)
+			return $projects->result_array();
+		return FALSE;
+	}
+
 	public function insertProject($data){
 		# code...
 		$subordinates = '';
@@ -92,14 +117,7 @@ class ProjectsModel extends CI_Model{
 	}
 
 	public function searchProjects($data){
-		# code...
-
-		// $where = array(
-		// 	'' => );
-		// $this->db->get_where('projects', $where);
-
-		// echo "asdsa<pre>";
-		// print_r($data);
+		
 		$where = array();
 		if($data['name'] != 0){
 			$where['id'] = $data['name'];

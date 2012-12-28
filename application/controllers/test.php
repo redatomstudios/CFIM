@@ -12,9 +12,9 @@ class Test extends CI_Controller{
 
 	public function test_insertComments(){
 		# code...
-		$data['orderNumber'] = '1';
-		$data['projectId'] = 45;
-		$data['memberId'] = 2;
+		$data['orderNumber'] = 2;
+		$data['projectId'] = 46;
+		$data['memberId'] = 3;
 		$data['body'] = 'This project is good!!';
 
 		$this->commentsModel->insertComment($data);
@@ -22,7 +22,7 @@ class Test extends CI_Controller{
 
 
 	public function test_agreeComment(){
-		if($this->commentsModel->agreeComment('1', '45', '2'))
+		if($this->commentsModel->agreeComment('2', '45', '3'))
 			echo "Success!!";
 		else
 			echo "Failed!!";
