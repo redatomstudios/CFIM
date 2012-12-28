@@ -1,16 +1,15 @@
+<?php if(isset($dates)) { ?>
 <div class="gridOne spaceTop">
-	<label for="meetingDate">Meeting Date: </label><select name="meetingDate" id="meetingDate">
-		<option selected="selected">ALL</option>
-		<option>Option 2</option>
-		<option>Option 3</option>
-		<option>Option 4</option>
-		<option>Option 5</option>
-		<option>Option 6</option>
-	</select>
+<?= form_open('member/index') ?>
+	<label for="discussionDate">Discussion Date: </label>
+	<?= form_dropdown('discussionDate', $dates, 0) ?>
+	<!-- <input type="text" name="discussionDate" id="discussionDate" class="datePicker" /> -->
+	<?= form_submit('submission', 'Filter') ?>
+	<?= anchor('/member', '<input type="button" value="All">') ?>
+<?= form_close() ?>
 </div>
-<div class="gridOne spaceTop">
-	<strong>Projects for Discussion:</strong>
-</div>
+<?php } ?>
+
 <?php if($memberProjects != FALSE) { ?>
 <div class="gridOne">
 	<table class="data">

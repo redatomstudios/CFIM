@@ -1,18 +1,19 @@
 <div class="gridOne spaceTop">
 	<strong>Display Criteria:</strong>
 </div>
-<?= form_open('member/index') ?>
+
 <?php if(isset($dates)) { ?>
 <div class="gridOne spaceTop">
-
+<?= form_open('member/index') ?>
 	<label for="discussionDate">Discussion Date: </label>
 	<?= form_dropdown('discussionDate', $dates, 0) ?>
 	<!-- <input type="text" name="discussionDate" id="discussionDate" class="datePicker" /> -->
-	<?= form_submit('submit', 'Filter') ?>
+	<?= form_submit('submission', 'Filter') ?>
 	<?= anchor('/member', '<input type="button" value="All">') ?>
+<?= form_close() ?>
 </div>
 <?php } ?>
-<?= form_close() ?>
+
 
 <table>
 	<tr>
