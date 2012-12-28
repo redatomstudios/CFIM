@@ -96,6 +96,28 @@ console.log(subSectors);
 	<?= form_label('Attachments', 'file') ?>
 	<?= form_upload(array('name' => 'file[]', 'id' => 'file' ,'multiple' => 'multiple')) ?>
 </div>
+<?php if(isset($id)) { ?>
+<div class="gridOne spaceTop spaceBottom">
+	<table class="data" id="uploadedFiles">
+		<tr>
+			<th>Delete</th>
+			<th>Filename</th>
+			<th>Upload Time</th>
+		</tr>
+		<?php // Echo these rows for each file ?>
+		<tr>
+			<td><input type="checkbox" value="fileID" name="deletions[]" /></td>
+			<td>Filename.jpg</td>
+			<td>12:12 12/12/2012</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" value="fileID" name="deletions[]" /></td>
+			<td>Filename2.jpg</td>
+			<td>12:12 12/12/2012</td>
+		</tr>
+	</table>
+</div> 
+<?php } ?>
 <div class="gridTwo spaceTop">
 	<?= form_submit('submission','Submit') ?>
 	<?= form_button('cancel','Cancel') ?>
