@@ -203,25 +203,34 @@ class Admin extends CI_Controller {
 		}
 		else{
 
-			// echo "<pre>";
-			$pid = $this->projectsModel->insertProject($this->input->post());
-			
-			if(!$uploads = $this->uploader($pid))
-				echo "Upload Error";	//Echo this error
-			else{
-				$this->load->model('documentsModel');
+			if($this->validateAddProject($this->input->post())){
+				// echo "<pre>";
+				$pid = $this->projectsModel->insertProject($this->input->post());
+				
+				if(!$uploads = $this->uploader($pid))
+					echo "Upload Error";	//Echo this error
+				else{
+					$this->load->model('documentsModel');
 
-				$ids = $this->documentsModel->insertDocument($pid, $uploads);
-				$ids = implode(',', $ids);
+					$ids = $this->documentsModel->insertDocument($pid, $uploads);
+					$ids = implode(',', $ids);
 
-				$this->projectsModel->updateDocuments($pid, $ids);
+					$this->projectsModel->updateDocuments($pid, $ids);
+				}
+				redirect('/admin');
 			}
-			redirect('/admin');
+			else
+				echo "Fill evrythig u idiot!!";
 
 		}
 	}
 
-	
+	private function validateAddProject($data){
+		if(($data['name'] != '') && ($data['companyName'] != '') && ($data['companyAddress'] != '') && ($data['contactPerson'] != '') && ($data['contactEmail'] != '') && ($data['contactTel'] != '') && ($data['sector'] != '') && ($data['subsector'] != '') && ($data['province'] != '') && ($data['city'] != '') && ($data['discussionDate'] != '') && ($data['status'] != '') && ($data['leader'] != '') && ($data['projectMembers'] != '') && ($data['dealSize'] != ''))
+			return TRUE;
+		return FALSE;
+	}
+
 	private function uploader( $pid ){
 		if(!is_dir($_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/uploads/' . $pid))
 				mkdir($_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/uploads/' . $pid);
