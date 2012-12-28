@@ -34,6 +34,7 @@ jQuery(document).ready(function() {
 					select.children( "option" ).each(function() {
 						if ( $( this ).text().match( matcher ) ) {
 							this.selected = valid = true;
+							select[0].parentNode.children[3].value = "";
 							return false;
 						}
 					});
@@ -43,8 +44,8 @@ jQuery(document).ready(function() {
 							//.val( "" )
 							//.attr( "title", value + " didn't match any item" )
 							//.tooltip( "open" );
-						select.val( $( element ).val() );
-						console.log($( element ).val(), select.val());
+						select.val( "" );
+						select[0].parentNode.children[3].value = $( element ).val();
 						setTimeout(function() {
 							input.tooltip( "close" ).attr( "title", "" );
 						}, 2500 );
@@ -150,7 +151,7 @@ jQuery(document).ready(function() {
     });
 
     $('form').submit(function(e) {
-    	//e.preventDefault();
-    	//console.log($(this).serialize());
+    	e.preventDefault();
+    	console.log($(this).serialize());
     });
 });
