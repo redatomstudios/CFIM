@@ -85,7 +85,7 @@ console.log(subSectors);
 </div>
 <div class="gridOne spaceTop spaceBottom">
 	<?= form_label('Project Members', 'projectMembers') ?>
-	<?= form_multiselect('projectMembers[]', $projectMembers, (isset($selectedProjectMembers)?$selectedProjectMembers:'')) ?>
+	<?= form_multiselect('projectMembers[]', $projectMembers, (isset($selectedProjectMembers)?$selectedProjectMembers:''), 'class = "projectMembers"') ?>
 </div>
 <div class="clear"></div>
 <div class="gridTwo spaceTop">

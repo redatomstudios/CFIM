@@ -29,6 +29,15 @@ jQuery(document).ready(function() {
 	// Add hidden element to forms to check if they've been confirmed
 	$('form').prepend('<input type="hidden" name="confirmed" value="false" />');
 
+	var selectedValue = $('.projectLeader')[0].value;
+	$('.projectMembers option').each(function() {
+		if(this.value == selectedValue) {
+			$(this).attr({disabled: 'disabled'}).removeAttr('selected');
+		} else {
+			$(this).removeAttr('disabled');
+		}
+	});
+
     $('form.confirmationRequired').submit(function(e) {
     	formObj = this;
     	var isConfirmed = $(this).find('input[name="confirmed"]')[0];
@@ -71,8 +80,19 @@ jQuery(document).ready(function() {
 	    }
     });
 	
-	$('#liveSector').change(function(){
+	$('#liveSector').change(function() {
 		$('#liveSubsector').html(subSectors[this.value]);
+	});
+
+	$('.projectLeader').click(function() {
+		var selectedValue = this.value;
+		$('.projectMembers option').each(function() {
+			if(this.value == selectedValue) {
+				$(this).attr({disabled: 'disabled'}).removeAttr('selected');
+			} else {
+				$(this).removeAttr('disabled');
+			}
+		});
 	});
 
 });
