@@ -135,6 +135,10 @@ input, select {
 	padding: 0;
 }
 
+input[type="checkbox"] {
+	width: auto;
+}
+
 select[multiple="multiple"] {
 	height: auto;
 }

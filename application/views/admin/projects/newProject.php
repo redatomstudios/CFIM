@@ -53,7 +53,6 @@ if(subSectors["' . $sectorCategory . '"]) {
 	echo'
 <script>
 var subSectors = {}; ' . $jsString . ' 
-console.log(subSectors);
 </script>
 ';
 	?>
@@ -96,6 +95,30 @@ console.log(subSectors);
 	<?= form_label('Attachments', 'file') ?>
 	<?= form_upload(array('name' => 'file[]', 'id' => 'file' ,'multiple' => 'multiple')) ?>
 </div>
+<?php if(isset($id)) { ?>
+<div class="clear"></div>
+<div class="gridOne spaceTop spaceBottom">
+	<table class="data" id="uploadedFiles">
+		<tr>
+			<th>Filename</th>
+			<th>Upload Time</th>
+			<th>Delete?</th>
+		</tr>
+		<?php // Echo these rows for each file ?>
+		<tr>
+			<td style="text-align: center;">Filename.jpg</td>
+			<td style="text-align: center;">12:12 12/12/2012</td>
+			<td style="text-align: center;"><input type="checkbox" value="fileID" name="deletions[]" /></td>
+		</tr>
+		<tr>
+			<td style="text-align: center;">Filename2.jpg</td>
+			<td style="text-align: center;">12:12 12/12/2012</td>
+			<td style="text-align: center;"><input type="checkbox" value="fileID" name="deletions[]" /></td>
+		</tr>
+	</table>
+</div> 
+<div class="clear"></div>
+<?php } ?>
 <div class="gridTwo spaceTop">
 	<?= form_submit('submission','Submit') ?>
 	<?= form_button('cancel','Cancel') ?>
