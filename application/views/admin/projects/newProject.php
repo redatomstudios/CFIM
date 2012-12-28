@@ -104,17 +104,14 @@ var subSectors = {}; ' . $jsString . '
 			<th>Upload Time</th>
 			<th>Delete?</th>
 		</tr>
-		<?php // Echo these rows for each file ?>
+		<?php foreach ($attachments as $at) { ?>
 		<tr>
-			<td style="text-align: center;">Filename.jpg</td>
-			<td style="text-align: center;">12:12 12/12/2012</td>
+			<td style="text-align: center;"><?= $at['filename'] ?></td>
+			<td style="text-align: center;"><?= $at['timestamp'] ?></td>
 			<td style="text-align: center;"><input type="checkbox" value="fileID" name="deletions[]" /></td>
 		</tr>
-		<tr>
-			<td style="text-align: center;">Filename2.jpg</td>
-			<td style="text-align: center;">12:12 12/12/2012</td>
-			<td style="text-align: center;"><input type="checkbox" value="fileID" name="deletions[]" /></td>
-		</tr>
+
+		<?php } ?>
 	</table>
 </div> 
 <div class="clear"></div>

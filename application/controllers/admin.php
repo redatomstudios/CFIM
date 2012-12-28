@@ -149,12 +149,25 @@ class Admin extends CI_Controller {
 
 		if($id != 0){
 
+			$this->load->model('documentsModel');
+
 			$data = $this->getProjectFormData();
 
 			$project = $this->projectsModel->getProject($id);
 
 			$members = explode(',', $project['members']);
 			$members = array_filter($members);
+
+			$attachments = explode(',', $project['documents']);
+			$attachments = array_filter($attachments);
+
+			$at = array();
+			foreach ($attachments as $attachment) {
+				# code...
+				$d = $this->documentsModel->getDocument($attachment);
+				$at[] = $d;
+			}
+
 
 			$data['id'] = $project['id'];
 			$data['name'] = $project['name'];
@@ -170,6 +183,7 @@ class Admin extends CI_Controller {
 			$data['leader'] = $project['leaderId'];
 			$data['selectedProjectMembers'] = $members;
 			$data['dealSize'] = $project['dealSize'];
+			$data['attachments'] = $at;
 
 			$data1['currentPage'] = 'modProject';
 
