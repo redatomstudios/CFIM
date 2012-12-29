@@ -8,6 +8,14 @@ class Login extends CI_Controller {
 		$this->load->model('loginModel');
 	}
 	public function index(){
+		if($this->session->userdata('rank') == 1)
+			redirect('/supervisor');
+		elseif($this->session->userdata('rank') == 2)
+			redirect('/admin');
+		elseif($this->session->userdata('rank') == 3)
+			redirect('/member');
+		elseif($this->session->userdata('rank') == 4)
+			redirect('/finance');
 
 		$this->load->helper('captcha');
 		$this->load->helper('string');
