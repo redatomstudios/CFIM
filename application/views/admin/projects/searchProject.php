@@ -8,11 +8,37 @@
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Sector', 'sector'); ?>
-	<?= form_dropdown('sector', $sectors); ?>
+	<?= form_dropdown('sector', $sectors, 1, 'id="liveSector"'); ?>
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Sub-Sector', 'subsector'); ?>
-	<?= form_dropdown('subsector', $subsectors); ?>
+	<?php 
+	$jsString = '';
+	$subSectors = array();
+	foreach($subsectors as $key => $thisSector) {
+		$thisSector = explode(':', $thisSector); 
+		if(sizeof($thisSector) == 2) {
+			$sectorCategory = $thisSector[1];
+			$sectorName = $thisSector[0];
+			$jsString .= '
+if(subSectors["' . $sectorCategory . '"]) { 
+	subSectors["' . $sectorCategory . '"] += "<option value=\'' . $key . '\'>' . $sectorName . '</option>"; 
+} else {
+	subSectors["' . $sectorCategory . '"] = "<option value=\'0\'>ANY</option>";
+	subSectors["' . $sectorCategory . '"] += "<option value=\'' . $key . '\'>' . $sectorName . '</option>"; 
+}';
+		$subSectors[$sectorCategory][0] = 'ANY';
+		$subSectors[$sectorCategory][$key] = $sectorName;
+		}
+	}
+
+	echo'
+<script>
+var subSectors = {}; ' . $jsString . ' 
+</script>
+';
+	?>
+	<?= form_dropdown('subsector', $subSectors[1], 0, 'id="liveSubsector"'); ?>
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Geographical Region', 'province'); ?>
