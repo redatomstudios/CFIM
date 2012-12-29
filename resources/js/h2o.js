@@ -97,4 +97,12 @@ jQuery(document).ready(function() {
 		});
 	});
 
+	$('#memberRank').change(function() {
+		if(this.value == "3") {
+			$('#displaySubordinates').show();
+		} else {
+			$('#displaySubordinates').hide();
+		}
+	})
+
 });

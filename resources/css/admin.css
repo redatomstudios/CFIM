@@ -150,6 +150,7 @@ input[type="button"], input[type="submit"], button {
 	font-size: 1.1em;
 	/*line-height: 30px;*/
 	/*margin-top: 6px;*/
+	margin-right: 20px;
 	color: white;
 	border: #169DD8 solid 1px!important;
 	cursor: pointer;
@@ -231,5 +232,9 @@ div#popupSlider {
 	left: 0;
 	right: 0;
 	margin: auto;
+	display: none;
+}
+
+div#displaySubordinates {
 	display: none;
 }

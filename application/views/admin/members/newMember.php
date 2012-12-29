@@ -1,16 +1,16 @@
 <?= form_open('admin/'.(isset($id)?'editMember':'addMember'), 'class = "confirmationRequired"') ?>
 <?= form_hidden('id',(isset($id)?$id:'')) ?>
 <div class="gridOne spaceTop spaceBottom">
-	<?= form_label('Member Name', 'name') ?><?= form_input(array('name' => 'name', 'id' => 'name', 'value' => (isset($name)?$name:''))) ?>
+	<?= form_label('Member Name', 'name') ?><?= form_input(array('name' => 'name', 'id' => 'name', 'value' => (isset($name)?$name:''), 'required' => 'required')) ?>
 </div>
 <div class="gridTwo spaceTop">
-	<?= form_label('Username', 'username') ?><?= form_input(array('name' => 'username', 'id' => 'username', 'value' => (isset($username)?$username:''))) ?>
+	<?= form_label('Username', 'username') ?><?= form_input(array('name' => 'username', 'id' => 'username', 'value' => (isset($username)?$username:''), 'required' => 'required')) ?>
 </div>
 <div class="gridTwo spaceTop">
-	<?= form_label('Password', 'password') ?><?= form_password(array('name' => 'password', 'id' => 'password')) ?>
+	<?= form_label('Password', 'password') ?><?= form_password(array('name' => 'password', 'id' => 'password', 'required' => 'required')) ?>
 </div>
 <div class="gridTwo spaceTop">
-	<?= form_label('Rank', 'rank') ?><?= form_dropdown('rank', $ranks,(isset($rank)?$rank:'2')) ?>
+	<?= form_label('Rank', 'rank') ?><?= form_dropdown('rank', $ranks, (isset($rank)?$rank:'2'), 'id = "memberRank"') ?>
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Title', 'title') ?>
@@ -21,7 +21,7 @@
 	<?= form_label('Status', 'status') ?><?= form_dropdown('status', $status, (isset($currentStatus)?$currentStatus:'0')) ?>
 </div>
 <div class="clear"></div>
-<div class="gridOne spaceTop spaceBottom">
+<div class="gridOne spaceTop spaceBottom" id="displaySubordinates">
 	<?= form_label('Subordinates', 'subordinates') ?><?= form_multiselect('subordinates[]', $subordinates, (isset($selectedSubordinates)?$selectedSubordinates:'')) ?>
 </div>
 <div class="clear"></div>
