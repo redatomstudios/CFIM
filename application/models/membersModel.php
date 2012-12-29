@@ -15,7 +15,10 @@ class MembersModel extends CI_Model{
 
 	public function getMember($id){
 		# code...
-		return $this->db->get_where('members', array('id' => $id))->row();
+		$res = $this->db->get_where('members', array('id' => $id));
+		if($res->num_rows() > 0)
+			return $res->row();
+		return FALSE;
 	}
 
 	public function getSubordinates(){
@@ -34,29 +37,6 @@ class MembersModel extends CI_Model{
 
 	public function insertMember($data){
 		# code...
-
-		$subordinates = '';
-		foreach ($data['subordinates'] as $value) {
-			# code...
-			$subordinates .= $value.',';
-		}
-		if($subordinates != NULL)
-			$subordinates = substr($subordinates, 0, strlen($subordinates)-1);
-
-		$insert = array(
-			'memberName' => $data['name'],
-			'username' => $data['username'],
-			'password' => sha1($data['password']),
-			'rank' => $data['rank'],
-			'titleId' => $data['title'],
-			'status' => $data['status'],
-			'subordinates' => $subordinates,
-			'officeEmail' => $data['officeEmail'],
-			'otherEmail' => $data['otherEmail'],
-			'contactTel1' => $data['tel1'],
-			'contactTel2' => $data['tel2']
-			);
-		
 		return $this->db->insert('members', $insert);
 	}
 
