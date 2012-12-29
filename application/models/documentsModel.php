@@ -13,7 +13,7 @@ class DocumentsModel extends CI_Model{
 		// print_r($data);
 		foreach ($datas as $data) {
 			$data['projectId'] = $pid;
-			echo "<br>";
+			// echo "<br>";
 			$this->db->insert('documents', $data);
 			$ids[] = $this->db->insert_id();
 		}

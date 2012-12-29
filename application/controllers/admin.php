@@ -267,8 +267,45 @@ class Admin extends CI_Controller {
 			$this->load->view('admin/footer');
 		}
 		else{
-			echo "<pre>";
-			print_r($this->input->post());
+
+			$post = $this->input->post();
+			if($this->isNotValidAddProject($post) == 0){
+			// if(true){
+
+				$this->load->model('sectorsModel');
+				$this->load->model('citiesModel');
+				$this->load->model('provincesModel');
+
+				if($post['newSector'] != ''){
+					$post['sector'] = $this->sectorsModel->insertSector($post['newSector']);
+				}
+
+				if($post['newSubsector'] != ''){
+					$post['subsector'] = $this->sectorsModel->insertSubsector($post['newSubsector'], $post['sector']);
+				}
+
+				if($post['newCity'] != ''){
+					$post['city'] = $this->citiesModel->insertCity($post['newCity']);
+				}
+
+				if($post['newProvince'] != ''){
+					$post['province'] = $this->provincesModel->insertProvince($post['newProvince']);
+				}
+
+				// $pid = $this->projectsModel->updateProject($post);
+				
+				if(!$uploads = $this->uploader($pid))
+					echo "Upload Error";	//Echo this error
+				else{
+					$this->load->model('documentsModel');
+
+					// $ids = $this->documentsModel->insertDocument($pid, $uploads);
+					$ids = implode(',', $ids);
+
+					// $this->projectsModel->updateDocuments($pid, $ids);
+				}
+				redirect('/admin');
+			}
 		}
 	}
 

@@ -86,6 +86,9 @@ class ProjectsModel extends CI_Model{
 		return $id;
 	}
 
+	public function updateProject($data){
+		# code...
+	}
 	public function updateDocuments($pid, $ids){
 		# code...
 		$this->db->where('id', $pid);
@@ -148,8 +151,6 @@ class ProjectsModel extends CI_Model{
 			return $ret->result_array();
 
 		return FALSE;
-
-
 	}
 
 }
