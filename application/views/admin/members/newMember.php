@@ -1,4 +1,4 @@
-<?= form_open('admin/'.(isset($id)?'editMember':'addMember')) ?>
+<?= form_open('admin/'.(isset($id)?'editMember':'addMember'), 'class = "confirmationRequired"') ?>
 <?= form_hidden('id',(isset($id)?$id:'')) ?>
 <div class="gridOne spaceTop spaceBottom">
 	<?= form_label('Member Name', 'name') ?><?= form_input(array('name' => 'name', 'id' => 'name', 'value' => (isset($name)?$name:''))) ?>
@@ -13,7 +13,9 @@
 	<?= form_label('Rank', 'rank') ?><?= form_dropdown('rank', $ranks,(isset($rank)?$rank:'2')) ?>
 </div>
 <div class="gridTwo spaceTop">
-	<?= form_label('Title', 'title') ?><?= form_dropdown('title', $titles, (isset($title)?$title:'1')) ?>
+	<?= form_label('Title', 'title') ?>
+	<?= form_dropdown('title', $titles, (isset($title)?$title:'1')) ?>
+	<?= form_input(array('name' => 'newTitle', 'placeholder' => 'New Title')) ?>
 </div>
 <div class="gridTwo spaceTop spaceBottom">
 	<?= form_label('Status', 'status') ?><?= form_dropdown('status', $status, (isset($currentStatus)?$currentStatus:'0')) ?>
