@@ -101,11 +101,11 @@ var subSectors = {}; ' . $jsString . '
 <div class="clear"></div>
 <div class="gridOne spaceTop spaceBottom">
 	<table class="data" id="uploadedFiles">
-		<tr>
+		<thead>
 			<th>Filename</th>
 			<th>Upload Time</th>
 			<th>Delete?</th>
-		</tr>
+		</thead>
 		<?php 
 			foreach ($attachments as $at) { 
 		?>
