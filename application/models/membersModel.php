@@ -37,33 +37,16 @@ class MembersModel extends CI_Model{
 
 	public function insertMember($data){
 		# code...
-		return $this->db->insert('members', $insert);
+		return $this->db->insert('members', $data);
 	}
 
-	public function updateMember($data){
-		$subordinates = '';
-		foreach ($data['subordinates'] as $value) {
-			# code...
-			$subordinates .= $value.',';
-		}
-		if($subordinates != NULL)
-			$subordinates = substr($subordinates, 0, strlen($subordinates)-1);
-
-		$insert = array(
-			'memberName' => $data['name'],
-			'username' => $data['username'],
-			'password' => sha1($data['password']),
-			'rank' => $data['rank'],
-			'titleId' => $data['title'],
-			'status' => $data['status'],
-			'subordinates' => $subordinates,
-			'officeEmail' => $data['officeEmail'],
-			'otherEmail' => $data['otherEmail'],
-			'contactTel1' => $data['tel1'],
-			'contactTel2' => $data['tel2']
-			);
-		$this->db->where('id',$data['id']);
-		return $this->db->update('members', $insert);
+	public function updateMember($memberId, $data){
+		// echo "<pre>";
+		// print_r($data);
+		$this->db->where('id', $memberId);
+		$this->db->update('members', $data);
+		// echo $this->db->last_query();
+		return $memberId;
 	}
 
 	public function getMemberUsernames(){

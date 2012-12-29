@@ -351,18 +351,20 @@ class Admin extends CI_Controller {
 
 	public function addMember() { 
 		# code...
-		if($post = $this->input->post()){
+		if($data = $this->input->post()){
 			
-			$verify = $this->isNotValidAddMember($post);
+			$verify = $this->isNotValidAddMember($data);
 			if($verify == 0){
 
 				$subordinates = '';
-				foreach ($data['subordinates'] as $value) {
-					# code...
-					$subordinates .= $value.',';
+				if(isset($data['subordinates'])){
+					foreach ($data['subordinates'] as $value) {
+						# code...
+						$subordinates .= $value.',';
+					}
+					if($subordinates != NULL)
+						$subordinates = substr($subordinates, 0, strlen($subordinates)-1);
 				}
-				if($subordinates != NULL)
-					$subordinates = substr($subordinates, 0, strlen($subordinates)-1);
 
 				$insert = array(
 					'memberName' => $data['name'],
@@ -431,18 +433,20 @@ class Admin extends CI_Controller {
 
 	public function isNotValidAddMember($data){
 		# code...
-		if($data['name'] != '' && $data['username'] != '' && $data['password'] != '' && $data['title'] != '' && $data['officeEmail'] != '' && $data['otherEmail'] != '' && $data['tel1'] != '' && $data['tel2'] != '')
+		if(!($data['name'] != '' && $data['username'] != '' && $data['password'] != '' && $data['title'] != '' && $data['officeEmail'] != '' && $data['otherEmail'] != '' && $data['tel1'] != '' && $data['tel2'] != ''))
 			return 1;
 		elseif(!in_array($data['rank'], [1, 2, 3, 4]))
 			return 2;
 		elseif(!in_array($data['status'], [0, 1]))
 			return 3;
-
+		if(isset($data['subordinates']))
 		foreach ($data['subordinates'] as $subordinate) {
 			# code...
 			if(!$this->membersModel->getMember($subordinate))
 				return 4;
 		}
+
+		//ALSO validate Members only have subordinates
 
 
 		return 0;
@@ -465,15 +469,61 @@ class Admin extends CI_Controller {
 			
 			if(!$this->input->post('id')){				
 				$data = $this->getMemberFormData();
-				$data['currentPage'] = 'modMember';
-				$this->load->view('admin/header', $data);
+				$d1['currentPage'] = 'modMember';
+				$this->load->view('admin/header', $d1);
 				$this->load->view('admin/members/newMember', $data);
 				$this->load->view('admin/footer');
 			}
 			else{
-				if($this->membersModel->updateMember($this->input->post()))
-					redirect('admin');
-				echo "Member Not Updated!! Error in values!!";
+
+				$this->load->model('titlesModel');
+				// echo "<pre>";
+
+				$data = $this->input->post();
+				// print_r($data);
+				$verify = $this->isNotValidAddMember($this->input->post());
+				if($verify == 0){
+
+					$subordinates = '';
+					if(isset($data['subordinates'])){
+						foreach ($data['subordinates'] as $value) {
+							# code...
+							$subordinates .= $value.',';
+						}
+						if($subordinates != NULL)
+							$subordinates = substr($subordinates, 0, strlen($subordinates)-1);
+					}
+
+					$insert = array(
+						'memberName' => $data['name'],
+						'username' => $data['username'],
+						'password' => sha1($data['password']),
+						'rank' => $data['rank'],
+						'titleId' => $data['title'],
+						'status' => $data['status'],
+						'subordinates' => $subordinates,
+						'officeEmail' => $data['officeEmail'],
+						'otherEmail' => $data['otherEmail'],
+						'contactTel1' => $data['tel1'],
+						'contactTel2' => $data['tel2']
+						);
+
+					if($data['newTitle'] != ''){
+						$data['titleId'] = $this->titlesModel->insertTitle($data['newTitle']);
+					}
+
+					if($this->membersModel->updateMember($data['id'], $insert))
+						redirect('admin');
+					echo "Member Not Added!! Error in values!!";
+				}
+				elseif($verify == 1)
+					echo "Fill all values!!";
+				elseif($verify == 2)
+					echo "Insert proper rank!!";
+				elseif($verify == 3)
+					echo "Insert proper status!!";
+				elseif($verify == 4)
+					echo "Invalid Subordinate!!";
 			}
 
 		}
