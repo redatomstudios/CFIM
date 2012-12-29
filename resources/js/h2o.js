@@ -29,7 +29,9 @@ jQuery(document).ready(function() {
 	// Add hidden element to forms to check if they've been confirmed
 	$('form').prepend('<input type="hidden" name="confirmed" value="false" />');
 
-	var selectedValue = $('.projectLeader')[0].value;
+	if($('.projectLeader')[0]) {
+		var selectedValue = $('.projectLeader')[0].value;
+	}
 	$('.projectMembers option').each(function() {
 		if(this.value == selectedValue) {
 			$(this).attr({disabled: 'disabled'}).removeAttr('selected');
