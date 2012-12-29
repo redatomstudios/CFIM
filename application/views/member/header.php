@@ -17,10 +17,59 @@
 	<script src="<?= base_url() ?>resources/js/jquery-ui-1.9.2.custom.min.js?<?= hash_file('crc32', 'resources/js/jquery-ui-1.9.2.custom.min.js') ?>"></script>
 	<script src="<?= base_url() ?>resources/js/jquery.dataTables.min.js?<?= hash_file('crc32', 'resources/js/jquery.dataTables.min.js') ?>"></script>
 	<script src="<?= base_url() ?>resources/js/h2o.js?<?= hash_file('crc32', 'resources/js/h2o.js') ?>"></script>
+	<script>
+		function getTime() {
+			var dateObj = new Date(),
+				hoursNow = dateObj.getHours(),
+				minutesNow = dateObj.getMinutes(),
+				secondsNow = dateObj.getSeconds();
+
+				if(secondsNow < 10) {
+					secondsNow = '0' + secondsNow;
+				}
+
+				if(minutesNow < 10) {
+					minutesNow = '0' + minutesNow;
+				}
+
+				if(hoursNow < 10) {
+					hoursNow = '0' + hoursNow;
+				}
+
+			return hoursNow + ':' + minutesNow + ':' + secondsNow;	
+		}
+
+		function getDate() {
+			var dateObj = new Date(),
+				yearsNow = dateObj.getFullYear(),
+				monthsNow = dateObj.getMonth(),
+				daysNow = dateObj.getDay();
+
+				if(monthsNow < 10) {
+					monthsNow = '0' + monthsNow;
+				}
+
+				if(daysNow < 10) {
+					daysNow = '0' + daysNow;
+				}
+
+			return daysNow + '/' + monthsNow + '/' + yearsNow;		
+		}
+
+		function updateHUD() {
+			$('span#dateDisplay').html(getDate());
+			$('span#timeDisplay').html(getTime());
+			setTimeout('updateHUD()', 1000);
+		}
+
+		jQuery(document).ready(function($) {
+			updateHUD();
+		});
+	</script>
 </head>
 <body>
 	<header>
-		<div id="username">Username: <?php echo $username;// Echo username here ?></div> <div id="dateTime"><span id="dateDisplay">12/12/2012</span> <span id="timeDisplay">12:12 AM</span></div>
+		<div id="username" class="spaceBottom">Username: <?php echo $username; ?></div> <div id="dateTime"><span id="dateDisplay" class="spaceBottom">12/12/2012</span> <span id="timeDisplay">12:12 AM</span></div>
 		<div class="clear"></div>
 		<nav>
 			<ul>

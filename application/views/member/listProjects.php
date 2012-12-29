@@ -15,39 +15,41 @@
 <?php } ?>
 
 
-<table>
+<!-- <table>
+	<thead>
+		<tr>
+			<th><?= form_label('Discussion Date', 'discussionDate') ?></th>
+			<th><?= form_label('Sector', 'sector') ?></th>
+			<th><?= form_label('Sub-Sector', 'subSector') ?></th>
+			<th><?= form_label('Geographical Region', 'geoRegion') ?></th>
+			<th><?= form_label('Status', 'status') ?></th>
+		</tr>
+	</thead>
 	<tr>
-		<th><?= form_label('Discussion Date', 'discussionDate') ?></th>
-		<th><?= form_label('Sector', 'sector') ?></th>
-		<th><?= form_label('Sub-Sector', 'subSector') ?></th>
-		<th><?= form_label('Geographical Region', 'geoRegion') ?></th>
-		<th><?= form_label('Status', 'status') ?></th>
+		<td style="text-align: center;">
+			<?= form_input(array('name' => 'discussionDate', 'id' => 'discussionDate', 'class' => 'datePicker', 'value' => 'ALL', 'style' => 'width: 90%;' )) ?>
+		</td>
+		<td style="text-align: center;">
+			<?= form_dropdown('sector', $sectors, '0', 'style="width: 90%;"') ?>
+		</td>
+		<td style="text-align: center;">
+			<?= form_dropdown('subSector', $subsectors, '0', 'style="width: 90%;"') ?>
+		</td>
+		<td style="text-align: center;">
+			<?= form_dropdown('province', $provinces, '0', 'style="width: 90%;"') ?>
+		</td>
+		<td style="text-align: center;">
+			<?= form_dropdown('status', $status, '0', 'style="width: 90%;"') ?>
+		</td>
 	</tr>
 	<tr>
-		<td>
-			<?= form_input(array('name' => 'discussionDate', 'id' => 'discussionDate', 'class' => 'datePicker', 'value' => 'ALL')) ?>
-		</td>
-		<td>
-			<?= form_dropdown('sector', $sectors, '0') ?>
-		</td>
-		<td>
-			<?= form_dropdown('subSector', $subsectors, '0') ?>
-		</td>
-		<td>
-			<?= form_dropdown('province', $provinces, '0') ?>
-		</td>
-		<td>
-			<?= form_dropdown('status', $status, '0') ?>
-		</td>
+		<td colspan="5" style="text-align: center;"><input type="submit" value="Display" /></td>
 	</tr>
-	<tr>
-		<td colspan="5"><input type="submit" value="Display" /></td>
-	</tr>
-</table>
+</table> -->
 
 
 <?php if(isset($memberProjects) && ($memberProjects != FALSE)) { ?>
-<div class="gridOne">
+<div class="gridOne spaceTop">
 	<table class="data">
 		<thead>
 			<tr>
@@ -57,8 +59,8 @@
 				<th>Sub-Sector</th>
 				<th>Geo Region</th>
 				<th>Deal Size</th>
-				<td>Discussion<br />Date</td>
-				<td>Expenses<br />Status</td>
+				<th>Discussion<br />Date</th>
+				<th>Expenses<br />Status</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -70,8 +72,8 @@
 				<td><?= $project['subSector'] ?></td>
 				<td><?= $project['geoRegion'] ?></td>
 				<td><?= $project['dealSize'] ?></td>
-				<th><?= $project['date'] ?></th>
-				<th><?= $project['status'] ?></th>
+				<td><?= $project['date'] ?></td>
+				<td><?= $project['status'] ?></td>
 			</tr>
 			<tr>
 				<td></td>
