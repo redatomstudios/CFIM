@@ -75,26 +75,17 @@
 				<td><?= $project['date'] ?></td>
 				<td><?= $project['status'] ?></td>
 			</tr>
+			<?php foreach ($project['comments'] as $comment) { ?>
 			<tr>
 				<td></td>
-				<td colspan="5">Comment Body</td>
-				<td>Member Name</td>
-				<td>Time Stamp</td>
+				<td colspan="5"><?= $comment['body'] ?></td>
+				<td><?= $this->membersModel->getName($comment['memberId']) ?></td>
+				<td><?= $comment['timestamp'] ?></td>
 			</tr>
-			<tr>
-				<td></td>
-				<td colspan="5">Comment Body</td>
-				<td>Member Name</td>
-				<td>Time Stamp</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td colspan="5">Comment Body</td>
-				<td>Member Name</td>
-				<td>Time Stamp</td>
-			</tr>
+			<?php } ?>
 			
-			<?php  } ?>
+			
+		<?php  } ?>
 		</tbody>
 	</table>
 </div>

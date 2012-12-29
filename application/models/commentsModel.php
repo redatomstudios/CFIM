@@ -12,12 +12,21 @@ class CommentsModel extends CI_Model{
 		return $this->db->insert('comments', $data);
 	}
 
-	public function getComments($projectId){
+	public function getAllComments($projectId){
 		$this->db->order_by('orderNumber', 'desc');
 		$res = $this->db->get_where('comments', array('projectId' => $projectId));
 		return $res->result_array();
 	}
 
+	public function getComments($projectId, $limit = 0){
+
+		$this->db->order_by('orderNumber', 'desc');
+		if($limit != 0)
+			$res = $this->db->get_where('comments', array('projectId' => $projectId, 'orderNumber REGEXP' => '^-?[0-9]+$'), $limit);
+		else
+			$res = $this->db->get_where('comments', array('projectId' => $projectId, 'orderNumber REGEXP' => '^-?[0-9]+$'));
+		return $res->result_array();
+	}
 	public function agreeComment($orderNumber, $projectId, $memberId){
 		# code...
 		if(!$this->isAgree($orderNumber, $projectId, $memberId)){

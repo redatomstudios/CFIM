@@ -50,10 +50,14 @@ class Member extends CI_Controller{
 
 		if($data['memberProjects']){
 
+			// echo "<pre>";
 			$this->load->model('sectorsModel');
 			$this->load->model('provincesModel');
+			$this->load->model('commentsModel');
 			$ps = array();
 			foreach ($data['memberProjects'] as $project) {
+
+				// echo "<br> <br>";
 				# code...
 				$leaderName = $this->membersModel->getName($project['leaderId']);
 				$sector = $this->sectorsModel->getName($project['sectorId']);
@@ -68,17 +72,86 @@ class Member extends CI_Controller{
 				$p['dealSize'] = $project['dealSize'];
 				$p['date'] = $project['discussionDate'];
 				$p['status'] = $project['status'];
+				$p['comments'] = $this->commentsModel->getComments($p['id'], 3);
+
 				$ps[] = $p;
 			}
+			// print_r($ps);
+
 			$data['memberProjects'] = $ps;
 		}
 		$d1['currentPage'] = 'home';
 		$d1['username'] = $this->session->userdata('username');
 		// echo "<pre>";
 		// print_r($data['dates']);
+
+
 		$this->load->view('member/header', $d1);
 		$this->load->view('member/listProjects', $data);
 		$this->load->view('member/footer');
+	}
+
+	public function viewProject($id = 0){
+		# code...
+		if($id == 0){
+			echo "No Project Specified";
+			return;
+		}
+
+		if($this->membersModel->isMemberOf($this->session->userdata('id'), $id)){
+			$this->load->model('sectorsModel');
+			$this->load->model('provincesModel');
+			$this->load->model('citiesModel');
+			$this->load->model('membersModel');
+			$this->load->model('commentsModel');
+			
+			echo "<pre>";
+
+
+			$data = $this->projectsModel->getProject($id);
+
+			$data['leader'] = $this->membersModel->getName($data['leaderId']);
+			$data['sector'] = $this->sectorsModel->getName($data['sectorId']);
+			$data['subsector'] = $this->sectorsModel->getName($data['subSectorId']);
+			$data['georegion'] = $this->provincesModel->getName($data['geoRegion']);
+
+			$data['comments'] = $this->commentsModel->getAllComments($id);
+
+			$d1['currentPage'] = 'myProjects';
+			$d1['username'] = $this->session->userdata('username');
+			// $this->load->view('member/header',$d1);
+			// $this->load->view('member/viewProject', $data);
+			// $this->load->view('member/footer');
+
+			print_r($data);
+
+		}	
+		else{
+			$this->load->model('sectorsModel');
+			$this->load->model('provincesModel');
+			$this->load->model('citiesModel');
+			$this->load->model('membersModel');
+			$this->load->model('commentsModel');
+			
+			echo "<pre>";
+
+			$data = $this->projectsModel->getProject($id);
+
+			$data['comments'] = $this->commentsModel->getAllComments($id);
+
+			$data['leader'] = $this->membersModel->getName($data['leaderId']);
+			$data['sector'] = $this->sectorsModel->getName($data['sectorId']);
+			$data['subsector'] = $this->sectorsModel->getName($data['subSectorId']);
+			$data['georegion'] = $this->provincesModel->getName($data['geoRegion']);
+
+			$d1['currentPage'] = 'myProjects';
+			$d1['username'] = $this->session->userdata('username');
+			// $this->load->view('member/header',$d1);
+			// $this->load->view('member/viewProject', $data);
+			// $this->load->view('member/footer');
+
+			print_r($data);
+		}
 	}
 
 	public function myProjects(){
@@ -141,12 +214,21 @@ class Member extends CI_Controller{
 
 	public function changePassword(){
 		# code...
-		$this->load->model('loginModel');
-		$d1['currentPage'] = 'changePassword';
-		$d1['username'] = $this->session->userdata('username');
-		$this->load->view('member/header', $d1);
-		$this->load->view('member/changePassword');
-		$this->load->view('member/footer');
+
+		if(!$this->input->post()){
+			$d1['currentPage'] = 'changePassword';
+			$d1['username'] = $this->session->userdata('username');
+			$this->load->view('member/header', $d1);
+			$this->load->view('member/changePassword');
+			$this->load->view('member/footer');
+		}
+		else{
+			$this->load->model('loginModel');
+			if($this->loginModel->changePassword($this->session->userdata('id'), $this->input->post('oldPassword'), $this->input->post('newPassword')))
+				redirect('/member');
+			echo "Password change failed";
+
+		}
 	}
 
 	public function investedProjects(){
@@ -204,54 +286,7 @@ class Member extends CI_Controller{
 		return $data;
 	}
 
-	public function viewProject($id = 0){
-		# code...
-		if($id == 0){
-			echo "No Project Specified";
-			return;
-		}
-
-		if($this->membersModel->isMemberOf($this->session->userdata('id'), $id)){
-			$this->load->model('sectorsModel');
-			$this->load->model('provincesModel');
-			$this->load->model('citiesModel');
-			$this->load->model('membersModel');
-
-
-			$data = $this->projectsModel->getProject($id);
-
-			$data['leader'] = $this->membersModel->getName($data['leaderId']);
-			$data['sector'] = $this->sectorsModel->getName($data['sectorId']);
-			$data['subsector'] = $this->sectorsModel->getName($data['subSectorId']);
-			$data['georegion'] = $this->provincesModel->getName($data['geoRegion']);
-
-			$d1['currentPage'] = 'myProjects';
-			$d1['username'] = $this->session->userdata('username');
-			$this->load->view('member/header',$d1);
-			$this->load->view('member/viewProject', $data);
-			$this->load->view('member/footer');
-		}	
-		else{
-			$this->load->model('sectorsModel');
-			$this->load->model('provincesModel');
-			$this->load->model('citiesModel');
-			$this->load->model('membersModel');
-
-
-			$data = $this->projectsModel->getProject($id);
-
-			$data['leader'] = $this->membersModel->getName($data['leaderId']);
-			$data['sector'] = $this->sectorsModel->getName($data['sectorId']);
-			$data['subsector'] = $this->sectorsModel->getName($data['subSectorId']);
-			$data['georegion'] = $this->provincesModel->getName($data['geoRegion']);
-
-			$d1['currentPage'] = 'myProjects';
-			$d1['username'] = $this->session->userdata('username');
-			$this->load->view('member/header',$d1);
-			$this->load->view('member/viewProject', $data);
-			$this->load->view('member/footer');
-		}
-	}
+	
 
 	public function viewInvested($id = 0){
 		if($id == 0){

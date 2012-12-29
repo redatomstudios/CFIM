@@ -50,6 +50,20 @@ class LoginModel extends CI_Model{
 		return FALSE;
 
 	}
+
+	public function changePassword($memberId, $old, $new){
+        # code...
+        $this->db->select('password');
+        $oldPwd = $this->db->get_where('members', array('id' => $memberId))->row()->password;
+        if(sha1($old) == $oldPwd){
+            $this->db->where('id', $memberId);
+            if($this->db->update('members', array('password' => sha1($new))))
+                return TRUE;
+            echo "Password Change Failed!!";
+        }
+        else
+            return FALSE;
+    }
 }
 
 ?>

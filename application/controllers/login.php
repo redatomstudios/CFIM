@@ -57,20 +57,7 @@ class Login extends CI_Controller {
 			echo "Wrong captcha!!";
 	}
 
-	public function changePassword($memberId, $old, $new){
-    	# code...
-    	$this->db->select('password');
-    	$oldPwd = $this->get_where('members', array('id' => $memberId))->row()->password;
-    	if(sha1($old) == $oldPwd){
-    		$this->db->where('id', $memberId);
-    		if($this->db->update('members', array('password' => sha1($new))))
-    			echo "Password Change Sucess!!";
-    		else
-    			echo "Password Change Failed!!";
-    	}
-    	else
-    		echo 'Please re-enter the current password';
-    }
+	
 
 	
 

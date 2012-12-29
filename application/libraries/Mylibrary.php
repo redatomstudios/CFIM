@@ -10,9 +10,7 @@ class Mylibrary {
 
     }
 
-    public function changePassword($memberId, $old, $new){
-    	# code...
-    }
+    
 
     public function deleteFromCSV($csv, $value){
     	# code...
