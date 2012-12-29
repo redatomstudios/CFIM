@@ -13,4 +13,13 @@ class Mylibrary {
     public function changePassword($memberId, $old, $new){
     	# code...
     }
+
+    public function deleteFromCSV($csv, $value){
+    	# code...
+    	$csv = str_replace($value, '', $csv);
+    	$arr = explode(',', $csv);
+    	$arr = array_filter($arr);
+    	$csv = implode(',', $arr);
+    	return $csv;
+    }
 }

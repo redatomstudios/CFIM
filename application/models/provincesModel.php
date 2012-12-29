@@ -23,6 +23,7 @@ class ProvincesModel extends CI_Model{
 
 	public function insertProvince($name){
 		$this->db->insert('provinces', array('name' => $name));
+		echo $this->db->last_query();
 		return $this->db->insert_id();
 	}
 

@@ -28,5 +28,12 @@ class DocumentsModel extends CI_Model{
 		return FALSE;
 	}
 
+	public function deleteDocument($id){
+		# code...
+		
+		$this->db->delete('documents', array('id' => $id));
+
+	}
+
 }
 ?>

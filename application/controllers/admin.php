@@ -174,6 +174,8 @@ class Admin extends CI_Controller {
 			$data['companyName'] = $project['companyName'];
 			$data['companyAddress'] = $project['companyAddress'];
 			$data['contactPerson'] = $project['contactPerson'];
+			$data['contactEmail'] = $project['contactEmail'];
+			$data['contactTel'] = $project['contactTel'];
 			$data['sector'] = $project['sectorId'];
 			$data['subsector'] = $project['subSectorId'];
 			$data['province'] = $project['geoRegion'];
@@ -269,12 +271,15 @@ class Admin extends CI_Controller {
 		else{
 
 			$post = $this->input->post();
-			if($this->isNotValidAddProject($post) == 0){
+			// echo "<pre>";
+			// print_r($post);
+			if($this->isNotValidAddProject($post) != 2){
 			// if(true){
 
 				$this->load->model('sectorsModel');
 				$this->load->model('citiesModel');
 				$this->load->model('provincesModel');
+				$this->load->model('documentsModel');
 
 				if($post['newSector'] != ''){
 					$post['sector'] = $this->sectorsModel->insertSector($post['newSector']);
@@ -292,19 +297,43 @@ class Admin extends CI_Controller {
 					$post['province'] = $this->provincesModel->insertProvince($post['newProvince']);
 				}
 
-				// $pid = $this->projectsModel->updateProject($post);
+				$pid = $this->projectsModel->updateProject($post);
 				
 				if(!$uploads = $this->uploader($pid))
 					echo "Upload Error";	//Echo this error
 				else{
 					$this->load->model('documentsModel');
 
-					// $ids = $this->documentsModel->insertDocument($pid, $uploads);
+					$ids = $this->documentsModel->insertDocument($pid, $uploads);
 					$ids = implode(',', $ids);
 
-					// $this->projectsModel->updateDocuments($pid, $ids);
+					$this->projectsModel->updateDocuments($pid, $ids);
 				}
-				redirect('/admin');
+				if(isset($post['deletions'])){
+					$deletes = $post['deletions'];
+					foreach ($deletes as $documentId) {
+						# code...
+						/*
+						1. Delete file from server
+						2. Delete entry from projects
+						3. Delete entry from documents
+						*/
+						$doc = $this->documentsModel->getDocument($documentId);
+						$name = $doc['filename'];
+
+						unlink($_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/uploads/' . $pid . '/' . $name);
+
+						$this->projectsModel->deleteDocument($pid, $documentId);
+
+						$this->documentsModel->deleteDocument($documentId);
+
+					}
+				}
+
+				// redirect('/admin');
+			}
+			else{
+				echo "Team member cannot be a team leader!!";
 			}
 		}
 	}

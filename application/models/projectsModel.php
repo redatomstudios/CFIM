@@ -88,12 +88,96 @@ class ProjectsModel extends CI_Model{
 
 	public function updateProject($data){
 		# code...
+		$id = $data['id'];
+
+		echo "<pre>";
+		print_r($data);
+
+		$subordinates = '';
+		foreach($data['projectMembers'] as $value) {
+			$subordinates .= $value . ',';
+		}
+		if($subordinates != NULL)
+			$subordinates = trim($subordinates, ',');
+
+		$v = array(
+			'name' => $data['name'],
+			'leaderId' => $data['leader'],
+			'sectorId' => ($data['sector']),
+			'subsectorId' => ($data['subsector']),
+			'geoRegion' => $data['province'],
+			'city' => $data['city'],
+			'discussionDate' => $data['discussionDate'],
+			'status' => $data['status'],
+			'members' => $subordinates,
+			'dealSize' => $data['dealSize'],
+			'companyName' => $data['companyName'],
+			'companyAddress' => $data['companyAddress'],
+			'contactPerson' => $data['contactPerson'],
+			'contactEmail' => $data['contactEmail'],
+			'contactTel' => $data['contactTel']);
+		
+		$this->db->where(array('id' => $id));
+		$this->db->update('projects', $v);
+		echo $this->db->last_query();
+
+		
+
+		//Updating project fields in team members
+		foreach ($data['projectMembers'] as $value) {
+			# code...
+			//Check projects column in member table
+			$this->db->select('projects');
+			$res = $this->db->get_where('members', array('id' => $value));
+			$projs = explode(',', $res->row()->projects);
+			if(!in_array($id, $projs)){
+
+				echo "<br> Adding $id to members table of member $value";		//UNCOMMENT
+				$this->db->where('id', $value);
+				$this->db->set('projects', 'concat(projects, ",'.$id.'")', FALSE);
+				$this->db->update('members');
+				echo "<br>".$this->db->last_query();
+			}
+			
+		}
+
+		//Updating project field in team leader
+		$this->db->select('projects');
+		$res = $this->db->get_where('members', array('id' => $data['leader']));
+		$projs = explode(',', $res->row()->projects);
+		if(!in_array($id, $projs)){
+
+			echo "<br> Adding $id to members table of member " . $data['leader'];		//UNCOMMENT
+			$this->db->where('id', $data['leader']);
+			$this->db->set('projects', 'concat(projects, ",'.$id.'")', FALSE);
+			$this->db->update('members');
+		}
+
+		// echo "<br>".$this->db->last_query();
+		return $id;
 	}
+
 	public function updateDocuments($pid, $ids){
 		# code...
 		$this->db->where('id', $pid);
 		$this->db->set('documents', 'concat(documents, ",'.$ids.'")', FALSE);
 		$this->db->update('projects');
+	}
+
+	public function deleteDocument($projectId, $documentId){
+		# code...
+		$this->db->select('documents');
+		$res = $this->db->get_where('projects', array('id' => $projectId));
+		$docs = $res->row()->documents;
+		$csv = str_replace($documentId, '', $docs);
+    	$arr = explode(',', $csv);
+    	$arr = array_filter($arr);
+    	$csv = implode(',', $arr);
+    	// $csv;
+    	$this->db->where('id', $projectId);
+    	$this->db->update('projects', array('documents' => $csv));
+
+
 	}
 
 	public function getProjectNames(){
