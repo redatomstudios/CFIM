@@ -8,7 +8,7 @@
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Sector', 'sector'); ?>
-	<?= form_dropdown('sector', $sectors, 1, 'id="liveSector"'); ?>
+	<?= form_dropdown('sector', $sectors, 0, 'id="liveSector"'); ?>
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Sub-Sector', 'subsector'); ?>
@@ -31,14 +31,14 @@ if(subSectors["' . $sectorCategory . '"]) {
 		$subSectors[$sectorCategory][$key] = $sectorName;
 		}
 	}
-
+	$subSectors[0][0] = 'ANY';
 	echo'
 <script>
 var subSectors = {}; ' . $jsString . ' 
 </script>
 ';
 	?>
-	<?= form_dropdown('subsector', $subSectors[1], 0, 'id="liveSubsector"'); ?>
+	<?= form_dropdown('subsector', $subSectors[0], 0, 'id="liveSubsector"'); ?>
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Geographical Region', 'province'); ?>
