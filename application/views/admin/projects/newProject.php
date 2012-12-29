@@ -5,32 +5,32 @@
 <?= form_hidden('id',(isset($id)?$id:'')) ?>
 <div class="gridOne spaceTop spaceBottom">
 	<?= form_label('Project Name', 'name') ?>
-	<?= form_input(array('name' => 'name', 'id' => 'name', 'value' => (isset($name)?$name:''))) ?>
+	<?= form_input(array('name' => 'name', 'id' => 'name', 'value' => (isset($name)?$name:''), 'required' => 'required')) ?>
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Company Name', 'companyName') ?>
-	<?= form_input(array('name' => 'companyName', 'id' => 'companyName', 'value' => (isset($companyName)?$companyName:''))) ?>
+	<?= form_input(array('name' => 'companyName', 'id' => 'companyName', 'value' => (isset($companyName)?$companyName:''), 'required' => 'required')) ?>
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Company Address', 'companyAddress') ?>
-	<?= form_input(array('name' => 'companyAddress', 'id' => 'companyAddress', 'value' => (isset($companyAddress)?$companyAddress:''))) ?>
+	<?= form_input(array('name' => 'companyAddress', 'id' => 'companyAddress', 'value' => (isset($companyAddress)?$companyAddress:''), 'required' => 'required')) ?>
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Contact Person', 'contactPerson') ?>
-	<?= form_input(array('name' => 'contactPerson', 'id' => 'contactPerson', 'value' => (isset($contactPerson)?$contactPerson:''))) ?>
+	<?= form_input(array('name' => 'contactPerson', 'id' => 'contactPerson', 'value' => (isset($contactPerson)?$contactPerson:''), 'required' => 'required')) ?>
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Contact Email', 'contactEmail') ?>
-	<?= form_input(array('name' => 'contactEmail', 'id' => 'contactEmail', 'value' => (isset($contactEmail)?$contactEmail:''))) ?>
+	<?= form_input(array('name' => 'contactEmail', 'id' => 'contactEmail', 'value' => (isset($contactEmail)?$contactEmail:''), 'required' => 'required')) ?>
 </div>
 <div class="gridTwo spaceTop spaceBottom">
 	<?= form_label('Contact Tel', 'contactTel') ?>
-	<?= form_input(array('name' => 'contactTel', 'id' => 'contactTel', 'value' => (isset($contactTel)?$contactTel:''))) ?>
+	<?= form_input(array('name' => 'contactTel', 'id' => 'contactTel', 'value' => (isset($contactTel)?$contactTel:''), 'required' => 'required')) ?>
 </div>
 <div class="clear"></div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Sector', 'sector') ?>
-	<?= form_dropdown('sector', $sectors, (isset($sector)?$sector:'1'), 'class = "combobox", id="liveSector"') ?>
+	<?= form_dropdown('sector', $sectors, (isset($sector)?$sector:'1'), 'class = "combobox" id="liveSector" required="required"') ?>
 	<?= form_input(array('name' => 'newSector', 'placeholder' => 'New Sector')) ?>
 </div>
 <div class="gridTwo spaceTop">
@@ -56,7 +56,7 @@ var subSectors = {}; ' . $jsString . '
 </script>
 ';
 	?>
-	<?= form_dropdown('subsector', $subSectors[(isset($sector)?$sector:'1')], (isset($subsector)?$subsector:'1'), 'class = "combobox" id="liveSubsector"') ?>
+	<?= form_dropdown('subsector', $subSectors[(isset($sector)?$sector:'1')], (isset($subsector)?$subsector:'1'), 'class = "combobox" id="liveSubsector" required="required"') ?>
 	<?= form_input(array('name' => 'newSubsector', 'placeholder' => 'New Subsector')) ?>
 </div>
 <div class="gridTwo spaceTop">
@@ -71,7 +71,7 @@ var subSectors = {}; ' . $jsString . '
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Discussion Date', 'discussionDate') ?>
-	<?= form_input(array('name' => 'discussionDate', 'id' => 'discussionDate', 'class' => 'datePicker', 'value' => (isset($discussionDate)?$discussionDate:''))) ?>
+	<?= form_input(array('name' => 'discussionDate', 'id' => 'discussionDate', 'class' => 'datePicker', 'value' => (isset($discussionDate)?$discussionDate:''), 'required' => 'required')) ?>
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Status', 'status') ?>
@@ -89,7 +89,7 @@ var subSectors = {}; ' . $jsString . '
 <div class="clear"></div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Indicative Deal Size', 'dealSize') ?>
-	<?= form_input(array('name' => 'dealSize', 'id' => 'dealSize', 'value' => (isset($dealSize)?$dealSize:''))) ?>
+	<?= form_input(array('name' => 'dealSize', 'id' => 'dealSize', 'value' => (isset($dealSize)?$dealSize:''), 'required' => 'required')) ?>
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Attachments', 'file') ?>

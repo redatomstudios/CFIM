@@ -77,7 +77,7 @@ jQuery(document).ready(function() {
 	    		}
 	    	}
 	    	console.log(confirmObj, formObj);
-	    	divString += "<div class='gridTwo spaceTop'><input type='button' value='Confirm' onClick='submitForm(confirmObj, formObj)' /><input type='button' value='Cancel' onclick='hidePopupSlider();' /></div>"; 
+	    	divString += "<div class='clear'></div><div class='gridOne spaceTop'><input type='button' value='Confirm' onClick='submitForm(confirmObj, formObj)' /><input type='button' value='Cancel' onclick='hidePopupSlider();' /></div>"; 
 	    	$('#popupSlider').show().animate({height: 100 + '%'}).html(divString);
 	    }
     });
@@ -96,5 +96,13 @@ jQuery(document).ready(function() {
 			}
 		});
 	});
+
+	$('#memberRank').change(function() {
+		if(this.value == "3") {
+			$('#displaySubordinates').show();
+		} else {
+			$('#displaySubordinates').hide();
+		}
+	})
 
 });
