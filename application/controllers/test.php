@@ -11,8 +11,45 @@ class Test extends CI_Controller{
 		$this->load->model('expensesModel');
 	}
 
-	public function test_insertSubsector($name, $subsector){
+	public function index(){
 		# code...
+		$this->db->select('rank');
+		$res = $this->db->get('members')->row();
+
+		$i = $res->rank;
+
+		if(is_int($i))
+			echo "$i is int <br>";
+
+		echo "$i <br>";
+
+		$arr = array_fill(1, 4);
+		if($i in $arr)
+			echo "true";
+		else
+			echo "false";
+
+
+	}
+
+	public function test_sortDates(){
+		# code...
+		echo "<pre>";
+
+		$arr[] = date_create_from_format("m/d/Y", "12/29/2011")->format('Ymd');
+		$arr[] = date_create_from_format("m/d/Y", "12/20/2012")->format('Ymd');
+		$arr[] = date_create_from_format("m/d/Y", "12/25/2012")->format('Ymd');
+		print_r($arr);
+		// ksort($arr);
+		sort($arr);
+		print_r($arr);
+		// echo $arr[0]->format('m/d/Y');
+
+
+	}
+
+
+	public function test_insertSubsector($name, $subsector){
 	}
 
 	public function test_insertComments(){

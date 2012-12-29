@@ -12,4 +12,9 @@ class TitlesModel extends CI_Model{
 		$query = $this->db->get('jobtitles');
 		return $query->result_array();
 	}
+
+	public function insertTitle($name){
+		$this->db->insert('jobtitles', array('name' => $name));
+		return $this->db->insert_id();
+	}
 }

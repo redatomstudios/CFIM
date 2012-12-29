@@ -18,7 +18,7 @@
 	<?= form_input(array('name' => 'newTitle', 'placeholder' => 'New Title')) ?>
 </div>
 <div class="gridTwo spaceTop spaceBottom">
-	<?= form_label('Status', 'status') ?><?= form_dropdown('status', $status, (isset($currentStatus)?$currentStatus:'0')) ?>
+	<?= form_label('Status', 'status') ?><?= form_dropdown('status', $status, (isset($currentStatus)?$currentStatus:'1')) ?>
 </div>
 <div class="clear"></div>
 <div class="gridOne spaceTop spaceBottom" id="displaySubordinates">
