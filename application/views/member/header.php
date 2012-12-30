@@ -20,9 +20,10 @@
 	<script>
 		function getTime() {
 			var dateObj = new Date(),
-				hoursNow = dateObj.getHours(),
+				hoursNow = dateObj.getHours() + 1,
 				minutesNow = dateObj.getMinutes(),
-				secondsNow = dateObj.getSeconds();
+				secondsNow = dateObj.getSeconds(),
+				Suffix = "AM";
 
 				if(secondsNow < 10) {
 					secondsNow = '0' + secondsNow;
@@ -32,18 +33,24 @@
 					minutesNow = '0' + minutesNow;
 				}
 
+				// if(hoursNow > 12) {
+				// 	hoursNow -= 12;
+				// 	Suffix = "PM";
+				// }
+
 				if(hoursNow < 10) {
 					hoursNow = '0' + hoursNow;
 				}
 
-			return hoursNow + ':' + minutesNow + ':' + secondsNow;	
+			return ( hoursNow - 1 ) + ':' + minutesNow + ':' + secondsNow;	
 		}
 
 		function getDate() {
+			var Months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 			var dateObj = new Date(),
 				yearsNow = dateObj.getFullYear(),
-				monthsNow = dateObj.getMonth(),
-				daysNow = dateObj.getDay();
+				monthsNow = Months[dateObj.getMonth()],
+				daysNow = dateObj.getDate();
 
 				if(monthsNow < 10) {
 					monthsNow = '0' + monthsNow;
@@ -53,7 +60,7 @@
 					daysNow = '0' + daysNow;
 				}
 
-			return daysNow + '/' + monthsNow + '/' + yearsNow;		
+			return monthsNow + ' ' + daysNow + ', ' + yearsNow;		
 		}
 
 		function updateHUD() {
