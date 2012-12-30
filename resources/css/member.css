@@ -91,7 +91,7 @@ nav li.currentPage {
 	background: #FFF;
 	border: solid thin white;
 	border-top: none;
-	box-shadow: 0 10px 0 white, 3px 0 10px #DDD, -3px 0 10px #DDD;
+	box-shadow: 0 10px 0 white, 3px 0 10px rgba(0, 0, 0, 0.1), -3px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 nav li:not(.currentPage):hover {
@@ -113,7 +113,7 @@ li a:hover, li a:visited, li a:active {
 	padding: 20px;
 	min-height: 100%;
 	background: #FFF;
-	box-shadow: 0 10px 0 #FFF, 3px 0 10px #DDD, -3px 0 10px #DDD;
+	box-shadow: 0 10px 0 #FFF, 3px 0 10px rgba(0, 0, 0, 0.1), -3px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .gridTwo {
@@ -227,15 +227,14 @@ table.dataTable tr.even {
 }
 
 table.dataTable td {
+	padding: 0;
+}
+
+table.dataTable td:not(.comments) {
 	vertical-align: middle;
 	line-height: 1em;
 	min-height: 2em;
 	padding: 15px 10px;
-}
-
-.dataTables_wrapper {
-/*	max-height: 350px;
-	overflow: auto;*/
 }
 
 .dataTables_filter {
@@ -251,7 +250,8 @@ table.dataTable td.control {
 }
 
 div.innerDetails table {
-	width: 100%;
+	width: 99%;
+	margin-left: 1%;
 }
 
 div.innerDetails tr.followonComment {

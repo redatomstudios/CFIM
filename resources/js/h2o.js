@@ -22,9 +22,7 @@ jQuery(document).ready(function() {
 	});
 
 	$('table.displayOnly').dataTable({
-		"sScrollY": "350px",
         "bPaginate": false,
-        "bScrollCollapse": true,
         "bFilter" : false,
         "bInfo" : false,
         "bSort": false

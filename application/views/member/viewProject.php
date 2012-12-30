@@ -195,9 +195,10 @@
 			function fnFormatDetails( oTable, nTr )
 			{
 			  var oData = oTable.fnGetData( nTr );
-			  var sOut =
-			    '<div class="innerDetails">'+
-			      '<table cellpadding="5" cellspacing="0" border="0" >';
+			  var sOut = '<div class="innerDetails">';
+			  	if(oData.responses.length) {
+			      sOut += '<table cellpadding="5" cellspacing="0" border="0" >' +
+			      		'<tr class="followonComment"><td colspan="4" style="font-weight: bold;">Follow On Comments</td></tr>';
 			      for( thisComment in oData.comments ) {
 			      	sOut += 
 				      	'<tr class="followonComment">' +
@@ -207,21 +208,23 @@
 				        	'<td>' + oData.comments[thisComment].comment + '</td>' +
 			        	'</tr>'	;
 			      }
-			      // sOut += '</table>';
-			      if(oData.responses.length) {
-				      // sOut += '<table class="responseComments" cellpadding="5" cellspacing="0" border="0" >';
-				      for( thisComment in oData.responses ) {
-				      	sOut += 
-					      	'<tr class="responseComment">' +
-					        	'<td>' + oData.responses[thisComment].name + '</td>' +
-					        	'<td>' + oData.responses[thisComment].date + '</td>' +
-					        	'<td>' + oData.responses[thisComment].attachment + '</td>' +
-					        	'<td>' + oData.responses[thisComment].comment + '</td>' +
-				        	'</tr>'	;
-				      }
-				      sOut += '</table>';
-				    }
-				    sOut += '</div>';
+			  	}
+		        // sOut += '</table>';
+		        if(oData.responses.length) {
+			        // sOut += '<table class="responseComments" cellpadding="5" cellspacing="0" border="0" >';
+			        sOut += '<tr class="responseComment"><td colspan="4" style="font-weight: bold;">Responses</td></tr>';
+			        for( thisComment in oData.responses ) {
+			        	sOut += 
+			  	      	'<tr class="responseComment">' +
+			  	        	'<td>' + oData.responses[thisComment].name + '</td>' +
+			  	        	'<td>' + oData.responses[thisComment].date + '</td>' +
+			  	        	'<td>' + oData.responses[thisComment].attachment + '</td>' +
+			  	        	'<td>' + oData.responses[thisComment].comment + '</td>' +
+			          	'</tr>'	;
+			        }
+			        sOut += '</table>';
+			      }
+			      sOut += '</div>';
 			  return sOut;
 			}
 		} );

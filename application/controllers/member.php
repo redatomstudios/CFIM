@@ -206,6 +206,7 @@ class Member extends CI_Controller{
 			$data['memberProjects'] = $ps;
 		}
 		$d1['currentPage'] = 'myProjects';
+		$data['currentPage'] = 'myProjects';
 		$d1['username'] = $this->session->userdata('username');
 		$this->load->view('member/header', $d1);
 		$this->load->view('member/listProjects', $data);
