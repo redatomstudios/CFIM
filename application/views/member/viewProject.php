@@ -192,22 +192,22 @@
 			  var oData = oTable.fnGetData( nTr );
 			  var sOut =
 			    '<div class="innerDetails">'+
-			      '<table class="followonComments" cellpadding="5" cellspacing="0" border="0" >';
+			      '<table cellpadding="5" cellspacing="0" border="0" >';
 			      for( thisComment in oData.comments ) {
 			      	sOut += 
-				      	'<tr>' +
+				      	'<tr class="followonComment">' +
 				        	'<td>' + oData.comments[thisComment].name + '</td>' +
 				        	'<td>' + oData.comments[thisComment].date + '</td>' +
 				        	'<td>' + oData.comments[thisComment].attachment + '</td>' +
 				        	'<td>' + oData.comments[thisComment].comment + '</td>' +
 			        	'</tr>'	;
 			      }
-			      sOut += '</table>'
+			      // sOut += '</table>';
 			      if(oData.responses.length) {
-				      sOut += '<table class="responseComments" cellpadding="5" cellspacing="0" border="0" >';
+				      // sOut += '<table class="responseComments" cellpadding="5" cellspacing="0" border="0" >';
 				      for( thisComment in oData.responses ) {
 				      	sOut += 
-					      	'<tr>' +
+					      	'<tr class="responseComment">' +
 					        	'<td>' + oData.responses[thisComment].name + '</td>' +
 					        	'<td>' + oData.responses[thisComment].date + '</td>' +
 					        	'<td>' + oData.responses[thisComment].attachment + '</td>' +
@@ -285,12 +285,12 @@
 		</tbody>
 	</table>
 </div>
-<?php // Only echo these if viewer is not a member of the project ?>
+<?php if(isset($status)) { // Only echo these if viewer is not a member of the project ?>
 <div class="gridOne spaceTop">
 	<input type="button" value="Add New Comment"/> <input type="button" value="Back to Home"/>
 </div>
-<?php if(0) {// End of things to echo only if viewer is not a member of the project ?>
-<?php // Only echo these if viewer is a member of the project ?>
+<?php } // End of things to echo only if viewer is not a member of the project ?>
+<?php if(0) { // Only echo these if viewer is a member of the project ?>
 <div class="gridOne spaceTop spaceBottom"> Update on Progress: </div>
 <div class="gridOne spaceTop">
 	<table class="data">

@@ -221,6 +221,10 @@ div#popupSlider {
 	display: none;
 }
 
+table.dataTable tr.even {
+	background: #F6F6F6;
+}
+
 table.dataTable td {
 	vertical-align: middle;
 	line-height: 1em;
@@ -234,4 +238,16 @@ table.dataTable td {
 
 table.dataTable td.control {
 	cursor: pointer;
+}
+
+div.innerDetails table {
+	width: 100%;
+}
+
+div.innerDetails tr.followonComment {
+	background: rgba(0, 0, 255, 0.1);
+}
+
+div.innerDetails tr.responseComment {
+	background: rgba(0, 255, 0, 0.1);
 }
