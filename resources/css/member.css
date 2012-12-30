@@ -220,3 +220,11 @@ div#popupSlider {
 	margin: auto;
 	display: none;
 }
+
+table.data td, table.commentedTable td {
+	vertical-align: middle;
+}
+
+.centered {
+	text-align: center;
+}

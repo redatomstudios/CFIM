@@ -105,25 +105,25 @@ class Member extends CI_Controller{
 			$this->load->model('membersModel');
 			$this->load->model('commentsModel');
 			
-			echo "<pre>";
-
-
 			$data = $this->projectsModel->getProject($id);
 
 			$data['leader'] = $this->membersModel->getName($data['leaderId']);
 			$data['sector'] = $this->sectorsModel->getName($data['sectorId']);
 			$data['subsector'] = $this->sectorsModel->getName($data['subSectorId']);
 			$data['georegion'] = $this->provincesModel->getName($data['geoRegion']);
+			unset($data['status']); // Status isn't displayed if the member is a part of the team
 
 			$data['comments'] = $this->commentsModel->getAllComments($id);
 
 			$d1['currentPage'] = 'myProjects';
 			$d1['username'] = $this->session->userdata('username');
-			// $this->load->view('member/header',$d1);
-			// $this->load->view('member/viewProject', $data);
-			// $this->load->view('member/footer');
+			$this->load->view('member/header',$d1);
+			$this->load->view('member/viewProject', $data);
+			$this->load->view('member/footer');
 
-			print_r($data);
+			// echo "<pre>";
+			// print_r($data);
+			// echo "</pre>";
 
 		}	
 		else{
@@ -132,8 +132,6 @@ class Member extends CI_Controller{
 			$this->load->model('citiesModel');
 			$this->load->model('membersModel');
 			$this->load->model('commentsModel');
-			
-			echo "<pre>";
 
 			$data = $this->projectsModel->getProject($id);
 
@@ -146,11 +144,13 @@ class Member extends CI_Controller{
 
 			$d1['currentPage'] = 'myProjects';
 			$d1['username'] = $this->session->userdata('username');
-			// $this->load->view('member/header',$d1);
-			// $this->load->view('member/viewProject', $data);
-			// $this->load->view('member/footer');
+			$this->load->view('member/header',$d1);
+			$this->load->view('member/viewProject', $data);
+			$this->load->view('member/footer');
 
-			print_r($data);
+			// echo "<pre>";
+			// print_r($data);
+			// echo "</pre>";
 		}
 	}
 

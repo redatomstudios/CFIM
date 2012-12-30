@@ -46,7 +46,6 @@
 		        "bProcessing": true,
 		        "sScrollY": "350px",
 		        "aaData": dataSource.aaData,
-		        "bSort": false,
 		        "bPaginate": false,
 		        "aoColumns": [
 		            { "mDataProp": "name", "sClass": "control" },
