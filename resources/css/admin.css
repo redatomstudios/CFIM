@@ -74,6 +74,7 @@ nav li.currentPage {
 	background: #FFF;
 	border: solid thin white;
 	border-top: none;
+	box-shadow: 0 10px 0 white, 3px 0 10px #DDD, -3px 0 10px #DDD;
 }
 
 nav li:not(.currentPage):hover {

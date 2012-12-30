@@ -157,8 +157,13 @@
 		            { 
 		            	"mDataProp": null,
 		            	"sClass": "centered",
-		            	"sDefaultContent": 	'<input style="width: 100%; padding: 0;" type="button" value="Agree" /> <br />' +
-											'<input style="width: 100%; padding: 0;" type="button" value="Comment" />', 
+		            	<?php if(isset($status)) { ?>
+		            		"sDefaultContent": 	'<input style="width: 100%; padding: 0 10px;" type="button" value="Agree" /> <br />' +
+											'<input style="width: 100%; padding: 0 10px;" type="button" value="Comment" />', 
+									<?php } else { ?>
+										"sDefaultContent": 	'<input style="width: 100%; padding: 0 15px;" type="button" value="Respond" />', 
+									<?php } ?>
+
 									"bSortable": false
 		            }
 		        ],
@@ -268,7 +273,7 @@
 	</table>
 </div>
 <div class="clear"></div>
-<div class="gridOne">
+<div class="gridOne spaceTop spaceBottom">
 	<table class="commentedTable">
 		<thead>
 			<tr>
@@ -290,10 +295,10 @@
 	<input type="button" value="Add New Comment"/> <input type="button" value="Back to Home"/>
 </div>
 <?php } // End of things to echo only if viewer is not a member of the project ?>
-<?php if(0) { // Only echo these if viewer is a member of the project ?>
-<div class="gridOne spaceTop spaceBottom"> Update on Progress: </div>
+<?php if(!isset($status)) { // Only echo these if viewer is a member of the project ?>
+<div class="gridOne spaceTop spaceBottom"> <strong>Update on Progress</strong>: </div>
 <div class="gridOne spaceTop">
-	<table class="data">
+	<table class="displayOnly">
 		<thead>
 			<tr>
 				<th>Member</th>
@@ -308,7 +313,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php $temp = 5; do { ?>
+			<?php $temp = 15; do { ?>
 			<tr>
 				<td>Ben</td>
 				<td>Dinner with the CEO.</td>
@@ -316,7 +321,7 @@
 				<td>12/12/2012</td>
 				<td>15:34</td>
 				<td>4000</td>
-				<td>*</td>
+				<td><input type="button" value="View" /></td>
 				<td>Approved</td>
 				<td><?php // Reason for status, if any ?></td>
 			</tr>			
@@ -324,14 +329,11 @@
 		</tbody>
 	</table>
 </div>
-<div class="gridOne">
+<div class="gridOne spaceTop" style="text-align: right; font-weight: bold; font-size: 1.5em;">
 	Total: 5000
 </div>
 <div class="gridTwo spaceTop">
-	<input type="button" value="Add New Update"/>
-</div>
-<div class="gridTwo spaceTop">
-	<input type="button" value="Add Expenses"/>
+	<input type="button" value="Add New Update"/> <input type="button" value="Add Expenses"/>
 </div>
 <?php } // End of things to echo only if viewer is a member of the project ?>
 <div class="clear"></div>

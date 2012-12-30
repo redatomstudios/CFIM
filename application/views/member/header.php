@@ -20,7 +20,7 @@
 	<script>
 		function getTime() {
 			var dateObj = new Date(),
-				hoursNow = dateObj.getHours() + 1,
+				hoursNow = dateObj.getHours(),
 				minutesNow = dateObj.getMinutes(),
 				secondsNow = dateObj.getSeconds(),
 				Suffix = "AM";
@@ -42,7 +42,7 @@
 					hoursNow = '0' + hoursNow;
 				}
 
-			return ( hoursNow - 1 ) + ':' + minutesNow + ':' + secondsNow;	
+			return hoursNow + ':' + minutesNow + ':' + secondsNow;	
 		}
 
 		function getDate() {
@@ -66,11 +66,11 @@
 		function updateHUD() {
 			$('span#dateDisplay').html(getDate());
 			$('span#timeDisplay').html(getTime());
-			setTimeout('updateHUD()', 1000);
 		}
 
 		jQuery(document).ready(function($) {
 			updateHUD();
+			setInterval('updateHUD()', 1000);
 		});
 	</script>
 </head>

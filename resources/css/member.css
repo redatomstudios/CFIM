@@ -91,6 +91,7 @@ nav li.currentPage {
 	background: #FFF;
 	border: solid thin white;
 	border-top: none;
+	box-shadow: 0 10px 0 white, 3px 0 10px #DDD, -3px 0 10px #DDD;
 }
 
 nav li:not(.currentPage):hover {
@@ -127,7 +128,7 @@ li a:hover, li a:visited, li a:active {
 }
 
 .spaceTop {
-	margin-top: 19px;
+	margin-top: 50px;
 }
 
 .rightAlign {
@@ -135,7 +136,7 @@ li a:hover, li a:visited, li a:active {
 }
 
 .spaceBottom {
-	margin-bottom: 19px;
+	margin-bottom: 50px;
 }
 
 label {
@@ -176,7 +177,7 @@ input[type="button"], input[type="submit"], button {
 	background: -ms-linear-gradient(top,#14D3F0 0,#0AB1E0 51%,#09A5DB 52%,#0084C9 100%);
 	background: linear-gradient(top,#14D3F0 0,#0AB1E0 51%,#09A5DB 52%,#0084C9 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#14d3f0',endColorstr='#0084c9',GradientType=0);
-	font-weight: bold;
+	/*font-weight: bold;*/
 }
 
 input[type="button"]:hover, input[type="submit"]:hover, button:hover {
@@ -230,6 +231,15 @@ table.dataTable td {
 	line-height: 1em;
 	min-height: 2em;
 	padding: 15px 10px;
+}
+
+.dataTables_wrapper {
+/*	max-height: 350px;
+	overflow: auto;*/
+}
+
+.dataTables_filter {
+	margin: 10px;
 }
 
 .centered {
