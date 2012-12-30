@@ -131,12 +131,20 @@ li a:hover, li a:visited, li a:active {
 	margin-top: 50px;
 }
 
+.spaceTop.small {
+	margin-top: 20px;
+}
+
 .rightAlign {
 	text-align: right;
 }
 
 .spaceBottom {
 	margin-bottom: 50px;
+}
+
+.spaceBottom.small {
+	margin-bottom: 20px;
 }
 
 label {
