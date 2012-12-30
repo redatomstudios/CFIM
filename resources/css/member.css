@@ -221,10 +221,17 @@ div#popupSlider {
 	display: none;
 }
 
-table.data td, table.commentedTable td {
+table.dataTable td {
 	vertical-align: middle;
+	line-height: 1em;
+	min-height: 2em;
+	padding: 15px 10px;
 }
 
 .centered {
 	text-align: center;
+}
+
+table.dataTable td.control {
+	cursor: pointer;
 }

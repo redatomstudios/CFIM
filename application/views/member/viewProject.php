@@ -141,12 +141,17 @@
 		        "aaData": dataSource.aaData,
 		        "bPaginate": false,
 		        "bInfo": false,
-		        "aaSorting": [[3, 'asc']],
+		        "aaSorting": [[4, 'asc']],
 		        "aoColumns": [
-		            { "mDataProp": "member", "sClass": "control", "bSortable": false },
+				        {
+		               "mDataProp": null,
+		               "sClass": "control centered",
+		               "sDefaultContent": '<img src="'+sImageUrl+'details_open.png'+'">',
+		               "bSortable": false
+		            },
+		            { "mDataProp": "member", "bSortable": false },
 		            { "mDataProp": "comment", "bSortable": false },
 		            { "mDataProp": "attachment", "bSortable": false },
-		            // { "mDataProp": "date" },
 		            { "mDataProp": "time" },
 		            { "mDataProp": "agreements", "bSortable": false },
 		            { 
@@ -156,20 +161,25 @@
 											'<input style="width: 100%; padding: 0;" type="button" value="Comment" />', 
 									"bSortable": false
 		            }
-		        ]
+		        ],
+		        "oLanguage": {
+		        	"sEmptyTable": "No comments on this project yet."
+		        }
 		    } );
 
-		    // $('#commentedTable td.control').live( 'ready', function () {
-		    $('.commentedTable td.control').each(function () {
+		    $('.commentedTable td.control').live( 'click', function () {
+		    //$('.commentedTable td.control').each(function () {
 			  var nTr = this.parentNode;
 			  var i = $.inArray( nTr, anOpen );
 			   
 			  if ( i === -1 ) {
+			  	$('img', this).attr( 'src', sImageUrl+"details_close.png" );
 			    var nDetailsRow = oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'comments' );
 			    $('div.innerDetails', nDetailsRow).slideDown();
 			    anOpen.push( nTr );
 			  }
 			  else {
+			  	$('img', this).attr( 'src', sImageUrl+"details_open.png" );
 			    $('div.innerDetails', $(nTr).next()[0]).slideUp( function () {
 			      oTable.fnClose( nTr );
 			      anOpen.splice( i, 1 );
@@ -180,7 +190,6 @@
 			function fnFormatDetails( oTable, nTr )
 			{
 			  var oData = oTable.fnGetData( nTr );
-			  //console.log(oData.comments, oData.responses.length);
 			  var sOut =
 			    '<div class="innerDetails">'+
 			      '<table class="followonComments" cellpadding="5" cellspacing="0" border="0" >';
@@ -263,54 +272,22 @@
 	<table class="commentedTable">
 		<thead>
 			<tr>
+				<th></th>
 				<th>Member</th>
 				<th>Comments</th>
 				<th>Attachment</th>
-<!-- 				<th>Date</th> -->
 				<th>Time</th>
 				<th>Agreements</th>
 				<th><?php // Actions like comment or agree ?></th>
 			</tr>
 		</thead>
 		<tbody>
-<!-- 			<?php $temp = 5; do { ?>
-			<tr>
-				<td>Ben</td>
-				<td>This project is good.</td>
-				<td><input type="button" value="View" /></td>
-				<td>12/12/2012</td>
-				<td>15:34</td>
-				<td>23</td>
-				<td class="centered">
-					<input style="width: 100%; padding: 0;" type="button" value="Agree" /> <br />
-					<input style="width: 100%; padding: 0;" type="button" value="Comment" />
-				</td>
-			</tr>
-			<?php if(0) {// Only echo this part if there are follow on comments ?>
-			<tr>
-				<td colspan="7">Follow On Comments</td>
-			</tr>
-			<tr>
-				<td>John</td>
-				<td>I like this project as well.</td>
-				<td></td>
-				<td>12/13/2012</td>
-				<td>00:24</td>
-				<td>23</td>
-				<td></td>
-			</tr>
-			<?php }// End of part to echo only if there are follow on comments ?>
-			
-			<?php $temp--; } while($temp) ?> -->
 		</tbody>
 	</table>
 </div>
 <?php // Only echo these if viewer is not a member of the project ?>
-<div class="gridTwo spaceTop">
-	<input type="button" value="Add New Comment"/>
-</div>
-<div class="gridTwo spaceTop">
-	<input type="button" value="Back to Home"/>
+<div class="gridOne spaceTop">
+	<input type="button" value="Add New Comment"/> <input type="button" value="Back to Home"/>
 </div>
 <?php if(0) {// End of things to echo only if viewer is not a member of the project ?>
 <?php // Only echo these if viewer is a member of the project ?>

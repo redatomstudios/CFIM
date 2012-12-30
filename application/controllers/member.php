@@ -115,7 +115,7 @@ class Member extends CI_Controller{
 
 			$data['comments'] = $this->commentsModel->getAllComments($id);
 
-			$d1['currentPage'] = 'myProjects';
+			$d1['currentPage'] = 'home';
 			$d1['username'] = $this->session->userdata('username');
 			$this->load->view('member/header',$d1);
 			$this->load->view('member/viewProject', $data);
@@ -142,7 +142,7 @@ class Member extends CI_Controller{
 			$data['subsector'] = $this->sectorsModel->getName($data['subSectorId']);
 			$data['georegion'] = $this->provincesModel->getName($data['geoRegion']);
 
-			$d1['currentPage'] = 'myProjects';
+			$d1['currentPage'] = 'home';
 			$d1['username'] = $this->session->userdata('username');
 			$this->load->view('member/header',$d1);
 			$this->load->view('member/viewProject', $data);
