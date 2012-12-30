@@ -61,13 +61,6 @@
 		}
 	}
 
-	// echo "<pre>";
-	// print_r($comments);
-	// print_r($rootComments);
-	// print_r($memberReplies);
-	// print_r($teamReplies);
-	// echo "</pre>";
-
 /* Once the comments are organize, we need to store them into a 
  * JSON object so the frontend javascript can access and process it
  * the structure of the JSON object is as follows:
@@ -148,18 +141,20 @@
 		        "aaData": dataSource.aaData,
 		        "bPaginate": false,
 		        "bInfo": false,
+		        "aaSorting": [[3, 'asc']],
 		        "aoColumns": [
-		            { "mDataProp": "member", "sClass": "control" },
-		            { "mDataProp": "comment" },
-		            { "mDataProp": "attachment" },
+		            { "mDataProp": "member", "sClass": "control", "bSortable": false },
+		            { "mDataProp": "comment", "bSortable": false },
+		            { "mDataProp": "attachment", "bSortable": false },
 		            // { "mDataProp": "date" },
 		            { "mDataProp": "time" },
-		            { "mDataProp": "agreements" },
+		            { "mDataProp": "agreements", "bSortable": false },
 		            { 
 		            	"mDataProp": null,
 		            	"sClass": "centered",
 		            	"sDefaultContent": 	'<input style="width: 100%; padding: 0;" type="button" value="Agree" /> <br />' +
-											'<input style="width: 100%; padding: 0;" type="button" value="Comment" />'
+											'<input style="width: 100%; padding: 0;" type="button" value="Comment" />', 
+									"bSortable": false
 		            }
 		        ]
 		    } );
