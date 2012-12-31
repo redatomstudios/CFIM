@@ -176,8 +176,6 @@ class ProjectsModel extends CI_Model{
     	// $csv;
     	$this->db->where('id', $projectId);
     	$this->db->update('projects', array('documents' => $csv));
-
-
 	}
 
 	public function getProjectNames(){
@@ -235,6 +233,11 @@ class ProjectsModel extends CI_Model{
 			return $ret->result_array();
 
 		return FALSE;
+	}
+
+	public function getInvestedProjects(){
+		# code...
+		$this->db->get_where('projects', array('status' => 'Invested'));
 	}
 
 }

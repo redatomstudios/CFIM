@@ -105,7 +105,7 @@ class Member extends CI_Controller{
 			$this->load->model('membersModel');
 			$this->load->model('commentsModel');
 			
-			echo "<pre>";
+			// echo "<pre>";
 
 
 			$data = $this->projectsModel->getProject($id);
@@ -119,11 +119,11 @@ class Member extends CI_Controller{
 
 			$d1['currentPage'] = 'myProjects';
 			$d1['username'] = $this->session->userdata('username');
-			// $this->load->view('member/header',$d1);
-			// $this->load->view('member/viewProject', $data);
-			// $this->load->view('member/footer');
+			$this->load->view('member/header',$d1);
+			$this->load->view('member/viewProject', $data);
+			$this->load->view('member/footer');
 
-			print_r($data);
+			// print_r($data);
 
 		}	
 		else{
@@ -185,6 +185,8 @@ class Member extends CI_Controller{
 
 			$this->load->model('sectorsModel');
 			$this->load->model('provincesModel');
+			$this->load->model('commentsModel');
+			
 			$ps = array();
 			foreach ($data['memberProjects'] as $project) {
 				# code...
@@ -201,6 +203,7 @@ class Member extends CI_Controller{
 				$p['dealSize'] = $project['dealSize'];
 				$p['date'] = $project['discussionDate'];
 				$p['status'] = $project['status'];
+				$p['comments'] = $this->commentsModel->getComments($p['id'], 3);
 				$ps[] = $p;
 			}
 			$data['memberProjects'] = $ps;
