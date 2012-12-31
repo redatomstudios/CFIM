@@ -1,9 +1,9 @@
-﻿-- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 3.5.2
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 30, 2012 at 05:06 PM
+-- Generation Time: Dec 31, 2012 at 12:37 PM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `attachments`
 --
 
+DROP TABLE IF EXISTS `attachments`;
 CREATE TABLE IF NOT EXISTS `attachments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -41,6 +42,7 @@ CREATE TABLE IF NOT EXISTS `attachments` (
 -- Table structure for table `captcha`
 --
 
+DROP TABLE IF EXISTS `captcha`;
 CREATE TABLE IF NOT EXISTS `captcha` (
   `captcha_id` bigint(13) unsigned NOT NULL AUTO_INCREMENT,
   `captcha_time` int(10) unsigned NOT NULL,
@@ -48,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `captcha` (
   `word` varchar(20) NOT NULL,
   PRIMARY KEY (`captcha_id`),
   KEY `word` (`word`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=48 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=59 ;
 
 --
 -- Dumping data for table `captcha`
@@ -101,7 +103,18 @@ INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUE
 (44, 1356777871, '122.166.175.33', 'QHavmJ'),
 (45, 1356789106, '::1', 'nWEZtc'),
 (46, 1356802053, '::1', 'xtptsG'),
-(47, 1356855874, '::1', 'oVewWI');
+(47, 1356855874, '::1', 'oVewWI'),
+(48, 1356891001, '::1', 'VIeSlO'),
+(49, 1356891019, '::1', 'lVZTBo'),
+(50, 1356891033, '::1', 'IXkcVn'),
+(51, 1356892393, '::1', 'kMJhMY'),
+(52, 1356892413, '::1', 'eXIafm'),
+(53, 1356899128, '::1', 'uRzjfD'),
+(54, 1356903696, '::1', 'nKeLtt'),
+(55, 1356903698, '::1', 'PmiGWR'),
+(56, 1356933954, '::1', 'tuTzyP'),
+(57, 1356948251, '::1', 'cBSrOV'),
+(58, 1356950159, '::1', 'IvPovG');
 
 -- --------------------------------------------------------
 
@@ -109,6 +122,7 @@ INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUE
 -- Table structure for table `cities`
 --
 
+DROP TABLE IF EXISTS `cities`;
 CREATE TABLE IF NOT EXISTS `cities` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
@@ -170,6 +184,7 @@ INSERT INTO `cities` (`id`, `name`) VALUES
 -- Table structure for table `comments`
 --
 
+DROP TABLE IF EXISTS `comments`;
 CREATE TABLE IF NOT EXISTS `comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `orderNumber` varchar(15) NOT NULL,
@@ -180,7 +195,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `counter` varchar(100) NOT NULL COMMENT 'member ids csv',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `comments`
@@ -191,7 +206,13 @@ INSERT INTO `comments` (`id`, `orderNumber`, `projectId`, `memberId`, `body`, `a
 (2, '1.1.1', 45, 2, 'I''m responding to this', '', '2012-12-30 14:33:00', ''),
 (3, '1.2.1', 45, 2, 'This is another response by a random person', '', '2012-12-30 14:33:00', ''),
 (4, '1.3.2', 45, 2, 'This is a team response', '', '2012-12-30 14:33:39', ''),
-(5, '1.4.2', 45, 2, 'This is another team response', '', '2012-12-30 14:33:39', '');
+(5, '1.4.2', 45, 2, 'This is another team response', '', '2012-12-30 14:33:39', ''),
+(6, '2', 45, 3, 'Just another root comment!', '', '2012-12-30 17:01:34', ''),
+(7, '2.1.1', 45, 2, 'Don''t post random comments on here.', '', '2012-12-30 17:01:34', ''),
+(8, '2.2.2', 45, 3, 'I can do anything I want!', '', '2012-12-30 17:01:34', ''),
+(9, '3', 45, 2, 'Root comments are so cool guys!ZZ*&!', '', '2012-12-30 17:08:17', ''),
+(10, '3.1.1', 45, 3, 'You said we couldn''t post random comments =/', '', '2012-12-30 17:08:17', ''),
+(11, '3.2.2', 45, 2, 'I lied! :D', '', '2012-12-30 17:08:17', '');
 
 -- --------------------------------------------------------
 
@@ -199,6 +220,7 @@ INSERT INTO `comments` (`id`, `orderNumber`, `projectId`, `memberId`, `body`, `a
 -- Table structure for table `documents`
 --
 
+DROP TABLE IF EXISTS `documents`;
 CREATE TABLE IF NOT EXISTS `documents` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `filename` varchar(50) NOT NULL,
@@ -223,6 +245,7 @@ INSERT INTO `documents` (`id`, `filename`, `timestamp`, `projectId`, `size`) VAL
 -- Table structure for table `jobtitles`
 --
 
+DROP TABLE IF EXISTS `jobtitles`;
 CREATE TABLE IF NOT EXISTS `jobtitles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -245,6 +268,7 @@ INSERT INTO `jobtitles` (`id`, `name`) VALUES
 -- Table structure for table `members`
 --
 
+DROP TABLE IF EXISTS `members`;
 CREATE TABLE IF NOT EXISTS `members` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `memberName` varchar(50) NOT NULL,
@@ -269,10 +293,10 @@ CREATE TABLE IF NOT EXISTS `members` (
 
 INSERT INTO `members` (`id`, `memberName`, `username`, `password`, `rank`, `titleId`, `status`, `subordinates`, `officeEmail`, `otherEmail`, `contactTel1`, `contactTel2`, `projects`) VALUES
 (1, 'Administrator', 'admin', '4fcab400858d58a02b48f097bfdbc411e838ee12', 2, 1, 'Active', '', 'admin@gmail.com', 'adminother@gmail.com', '2856547853', 2147483647, NULL),
-(2, 'Dummy Member 1', 'dm1', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 3, '2', '', 'dm1@gmail.com', 'dm1other@gmail.com', '2856547853', 2147483647, ',45,46,47,48,49,50,51,52,53,54,55,56'),
-(3, 'Dummy Member 2', 'dm2', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 4, 'Active', '', 'dm2@gmail.com', 'dm2other@gmail.com', '12345', 2147483647, ',45,46'),
+(2, 'John Connor', 'dm1', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 3, '2', '', 'dm1@gmail.com', 'dm1other@gmail.com', '2856547853', 2147483647, ',45,46,47,48,49,50,51,52,53,54,55,56'),
+(3, 'Jane Doe', 'dm2', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 4, 'Active', '', 'dm2@gmail.com', 'dm2other@gmail.com', '12345', 2147483647, ',45,46'),
 (8, 'Amala George', 'ammu', '4fcab400858d58a02b48f097bfdbc411e838ee12', 2, 4, 'Active', '2,3', 'albinin0002@gmail.com', 'albinin0002@gmail.com', '9620732469', 2147483647, NULL),
-(9, 'James Randall', 'godfrzero', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 1, '0', '', '', '', '', 0, NULL);
+(9, 'James Randall', 'godfrzero', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 1, 'Active', '', '', '', '', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -280,6 +304,7 @@ INSERT INTO `members` (`id`, `memberName`, `username`, `password`, `rank`, `titl
 -- Table structure for table `projects`
 --
 
+DROP TABLE IF EXISTS `projects`;
 CREATE TABLE IF NOT EXISTS `projects` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -315,6 +340,7 @@ INSERT INTO `projects` (`id`, `name`, `leaderId`, `sectorId`, `subSectorId`, `ge
 -- Table structure for table `provinces`
 --
 
+DROP TABLE IF EXISTS `provinces`;
 CREATE TABLE IF NOT EXISTS `provinces` (
   `id` int(2) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -367,6 +393,7 @@ INSERT INTO `provinces` (`id`, `name`) VALUES
 -- Table structure for table `sectors`
 --
 
+DROP TABLE IF EXISTS `sectors`;
 CREATE TABLE IF NOT EXISTS `sectors` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
