@@ -2,6 +2,17 @@
 
 class Mylibrary {
 
+    public function __construct()
+    {
+        # code...
+        function replace($matches) {
+            foreach ($matches as $match) {
+                return "'";
+            }
+        }
+
+    }
+
     public function loginCheck(){
     	$th =& get_instance();
     	if($th->session->userdata('username') == FALSE)
@@ -20,4 +31,16 @@ class Mylibrary {
     	$csv = implode(',', $arr);
     	return $csv;
     }
+
+    
+    public function escapeFunction($data){
+        
+        
+
+        $data = preg_replace_callback('/\"/', 'replace', $data);
+        return $data;
+    }
+
+   
+
 }

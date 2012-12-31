@@ -97,7 +97,7 @@ class Member extends CI_Controller{
 			echo "No Project Specified";
 			return;
 		}
-		$this->load->library('mylibrary');
+
 		if($this->membersModel->isMemberOf($this->session->userdata('id'), $id)){
 			$this->load->model('sectorsModel');
 			$this->load->model('provincesModel');
@@ -105,7 +105,12 @@ class Member extends CI_Controller{
 			$this->load->model('membersModel');
 			$this->load->model('commentsModel');
 			
+<<<<<<< HEAD
 			// echo "<pre>";
+
+
+=======
+>>>>>>> d6c414d2d0b936642c723f18e8834c39b39c96ab
 			$data = $this->projectsModel->getProject($id);
 
 			$data['leader'] = $this->membersModel->getName($data['leaderId']);
@@ -122,9 +127,13 @@ class Member extends CI_Controller{
 			$this->load->view('member/viewProject', $data);
 			$this->load->view('member/footer');
 
+<<<<<<< HEAD
 			// print_r($data);
+=======
+			// echo "<pre>";
 			// print_r($data);
 			// echo "</pre>";
+>>>>>>> d6c414d2d0b936642c723f18e8834c39b39c96ab
 
 		}	
 		else{
@@ -292,12 +301,7 @@ class Member extends CI_Controller{
 	}
 
 	
-	public function agreeComment(){
-		# code...
-		$this->load->model('commentsModel');
-		$this->commentsModel->agreeComment($this->input->post('rootID'), $this->input->post('projectID'), $this->input->post('userID'));
-		redirect('/member/viewProject/'.$this->input->post('projectID'));
-	}
+
 	public function viewInvested($id = 0){
 		if($id == 0){
 			echo "No Project Specified";

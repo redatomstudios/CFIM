@@ -11,6 +11,12 @@ class Test extends CI_Controller{
 		$this->load->model('expensesModel');
 	}
 
+	public function test_escape(){
+		# code...
+		$this->load->library('mylibrary');
+		echo $this->mylibrary->escapeFunction("\"Hello\"");
+	}
+
 	public function index(){
 		# code...
 		$this->db->select('rank');
@@ -24,7 +30,7 @@ class Test extends CI_Controller{
 		echo "$i <br>";
 
 		$arr = array_fill(1, 4);
-		if($i in $arr)
+		if(in_array($i, $arr))
 			echo "true";
 		else
 			echo "false";
