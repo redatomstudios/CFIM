@@ -16,7 +16,16 @@ jQuery(document).ready(function() {
 	$('table.data').dataTable({
 		"sScrollY": "350px",
         "bPaginate": false,
+        "bFilter" : false,
+        "bInfo" : false,
         "bScrollCollapse": true
+	});
+
+	$('table.displayOnly').dataTable({
+        "bPaginate": false,
+        "bFilter" : false,
+        "bInfo" : false,
+        "bSort": false
 	});
 
 	$('.datePicker').datepicker({minDate: 0, numberOfMonths: 3});
@@ -106,3 +115,5 @@ jQuery(document).ready(function() {
 	})
 
 });
+
+

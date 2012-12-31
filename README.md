@@ -1,28 +1,17 @@
 CFIM
 ====
-
-- Integrate Views
-- Add confirmation before submission <- Generalize with JS?
 - Validation
-- Add ComboBoxes
+- Generalized attachment management
 
 Backend Changes
 ===============
+- Bring $comments to myProjects, just the latest three for each project
+- Add 'On-Going' as status in myProjects
+- Remove colon from subsectors in member -> Home and My Projects
+- On failed captcha or failed login, redirect back to login with error <- I'll integrate notificiations at the end
 
-- currentStatus variable needed in editMember, this should fix the PHP error
-- Autoselect subordinates when editMember is loaded
-- Subordinate and Project Member selection live update
-- Sub-Region live update
+Notes
+=====
 
-
-Updates
-=======
-
-- Check Modify Existing Projects link
-- Add radiobuttons in its view. For now I have echoed out those search results
-- Check if the captchas are getting deleted automatically. I think they are not
-
-Required Changes
-================
-
-- In Add New Project section, solve the sub-sector and project members thingie
+- Just My Invested Projects left in member accounts, finish that and we're done with member accounts
+- Since there's no $comments defined in myProjects, table won't render until that value is passed in

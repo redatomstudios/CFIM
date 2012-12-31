@@ -1,7 +1,3 @@
-<div class="gridOne spaceTop">
-	<strong>Display Criteria:</strong>
-</div>
-
 <?php if(isset($dates)) { ?>
 <div class="gridOne spaceTop">
 <?= form_open('member/index') ?>
@@ -12,82 +8,149 @@
 	<?= anchor('/member', '<input type="button" value="All">') ?>
 <?= form_close() ?>
 </div>
-<?php } ?>
-
-
-<!-- <table>
-	<thead>
-		<tr>
-			<th><?= form_label('Discussion Date', 'discussionDate') ?></th>
-			<th><?= form_label('Sector', 'sector') ?></th>
-			<th><?= form_label('Sub-Sector', 'subSector') ?></th>
-			<th><?= form_label('Geographical Region', 'geoRegion') ?></th>
-			<th><?= form_label('Status', 'status') ?></th>
-		</tr>
-	</thead>
-	<tr>
-		<td style="text-align: center;">
-			<?= form_input(array('name' => 'discussionDate', 'id' => 'discussionDate', 'class' => 'datePicker', 'value' => 'ALL', 'style' => 'width: 90%;' )) ?>
-		</td>
-		<td style="text-align: center;">
-			<?= form_dropdown('sector', $sectors, '0', 'style="width: 90%;"') ?>
-		</td>
-		<td style="text-align: center;">
-			<?= form_dropdown('subSector', $subsectors, '0', 'style="width: 90%;"') ?>
-		</td>
-		<td style="text-align: center;">
-			<?= form_dropdown('province', $provinces, '0', 'style="width: 90%;"') ?>
-		</td>
-		<td style="text-align: center;">
-			<?= form_dropdown('status', $status, '0', 'style="width: 90%;"') ?>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="5" style="text-align: center;"><input type="submit" value="Display" /></td>
-	</tr>
-</table> -->
-
-
-<?php if(isset($memberProjects) && ($memberProjects != FALSE)) { ?>
+<?php } else { ?>
+<?= form_open('member/myProjects') ?>
 <div class="gridOne spaceTop">
-	<table class="data">
+	<table class="displayOnly">
 		<thead>
 			<tr>
-				<th>Project<br />Name</th>
-				<th>Project<br />Leader</th>
+				<th>Discussion Date</th>
 				<th>Sector</th>
 				<th>Sub-Sector</th>
 				<th>Geo Region</th>
-				<th>Deal Size</th>
-				<th>Discussion<br />Date</th>
-				<th>Expenses<br />Status</th>
+				<th>Status</th> 
 			</tr>
 		</thead>
-		<tbody>
-		<?php foreach ($memberProjects as $project) { ?>
-			<tr>
-				<td><?= anchor('/member/viewProject/'.$project['id'], $project['projectName']) ?></td>
-				<td><?= $project['projectLeader'] ?></td>
-				<td><?= $project['sector'] ?></td>
-				<td><?= $project['subSector'] ?></td>
-				<td><?= $project['geoRegion'] ?></td>
-				<td><?= $project['dealSize'] ?></td>
-				<td><?= $project['date'] ?></td>
-				<td><?= $project['status'] ?></td>
-			</tr>
-			<?php foreach ($project['comments'] as $comment) { ?>
-			<tr>
-				<td></td>
-				<td colspan="5"><?= $comment['body'] ?></td>
-				<td><?= $this->membersModel->getName($comment['memberId']) ?></td>
-				<td><?= $comment['timestamp'] ?></td>
-			</tr>
-			<?php } ?>
-			
-			
-		<?php  } ?>
-		</tbody>
+		<tr>
+			<td>
+				<?= form_input(array('name' => 'discussionDate', 'class' => 'datePicker', 'style' => 'width: 100%;')) ?>
+			</td>
+			<td>
+				<?= form_dropdown('sector', $sectors, (isset($something) ? $something : '0'), 'style="width: 100%;"') ?>
+			</td>
+			<td>
+				<?= form_dropdown('subsectors', $subsectors, (isset($something) ? $something : '0'), 'style="width: 100%;"') ?>
+			</td>
+			<td>
+				<?= form_dropdown('province', $provinces, (isset($something) ? $something : '0'), 'style="width: 100%;"') ?>
+			</td>
+			<td>
+				<?= form_dropdown('status', $status, (isset($something) ? $something : '0'), 'style="width: 100%;"') ?>
+			</td>
+		</tr>
 	</table>
 </div>
+<div class="gridOne" style="text-align: right; margin-top: 10px;">
+	<input type="button" value="Display" />	
+</div>
+<?= form_close() ?>
 <?php } ?>
+
+<?php 
+	if(isset($memberProjects) && ($memberProjects != FALSE)) { 
+?>
+<style>
+	div.innerDetails { display: none }
+</style>
+<script>
+	var dataSource = 	{ "aaData": [
+										<?php foreach ($memberProjects as $project) { ?>
+											{
+												'name': '<?= anchor("/member/viewProject/".$project["id"], $project["projectName"]) ?>',
+												'leader': '<?= $project["projectLeader"] ?>',
+												'sector': '<?= $project["sector"] ?>',
+												'subsector': '<?= $project["subSector"] ?>',
+												'region': '<?= $project["geoRegion"] ?>',
+												'dealSize': '<?= $project["dealSize"] ?>',
+												<?php if($currentPage == 'myProjects') { ?> 'discussionDate': '<?= $project["date"] ?>',<?php } ?>
+												'status': '<?= $project["status"] ?>',
+												"comments": [
+												<?php  foreach ($project['comments'] as $comment) { ?>
+													{
+														"name" : "<?= $this->membersModel->getName($comment['memberId']) ?>",
+														"comment" : "<?= $comment['body'] ?>",
+														"date" : "<?= $comment['timestamp'] ?>"
+													},
+													<?php }  ?>
+												]
+											},
+										<?php } ?>
+										] }
+	// Code for proper display of comments in member accounts
+		jQuery(document).ready(function($) {
+		  var anOpen = [];
+		    var sImageUrl = "http://www.datatables.net/release-datatables/examples/examples_support/";
+		     
+		    var oTable = $('.commentedTable').dataTable( {
+		        "bProcessing": true,
+		        "sScrollY": "350px",
+		        "aaData": dataSource.aaData,
+		        "bPaginate": false,
+		        "aoColumns": [
+		            { "mDataProp": "name", "sClass": "control" },
+		            { "mDataProp": "leader" },
+		            { "mDataProp": "sector" },
+		            { "mDataProp": "subsector" },
+		            { "mDataProp": "region" },
+		            { "mDataProp": "dealSize" },
+		            { "mDataProp": "status" }
+		        ]
+		    } );
+
+		    // $('#commentedTable td.control').live( 'ready', function () {
+		    $('.commentedTable td.control').each(function () {
+			  var nTr = this.parentNode;
+			  var i = $.inArray( nTr, anOpen );
+			   
+			  if ( i === -1 ) {
+			    var nDetailsRow = oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'comments' );
+			    $('div.innerDetails', nDetailsRow).slideDown();
+			    anOpen.push( nTr );
+			  }
+			  else {
+			    $('div.innerDetails', $(nTr).next()[0]).slideUp( function () {
+			      oTable.fnClose( nTr );
+			      anOpen.splice( i, 1 );
+			    } );
+			  }
+			} );
+			 
+			function fnFormatDetails( oTable, nTr )
+			{
+			  var oData = oTable.fnGetData( nTr );
+			  var sOut =
+			    '<div class="innerDetails">'+
+			      '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px; width: 100%">';
+			      for( thisComment in oData.comments ) {
+			      	sOut += 
+				      	'<tr>' +
+				        	'<td>'+oData.comments[thisComment].name+'</td>' +
+				        	'<td>'+oData.comments[thisComment].comment+'</td>' +
+				        	'<td>'+oData.comments[thisComment].date+'</td>' +
+			        	'</tr>'	;
+			      }
+			      sOut += 
+				      '</table>'+
+				    '</div>';
+			  return sOut;
+			}
+		} );
+</script>
+<div class="gridOne spaceTop">
+	<table cellpadding="0" cellspacing="0" border="0" class="display commentedTable">
+	    <thead>
+	        <tr>
+	            <th>Name</th>
+	            <th>Leader</th>
+	            <th>Sector</th>
+	            <th>Sub-Sector</th>
+	            <th>Region</th>
+	            <th>Deal Size</th>
+	            <th>Status</th>
+	        </tr>
+	    </thead>
+	    <tbody></tbody>
+	</table>
+</div>
 <div class="clear"></div>
+<?php } ?>

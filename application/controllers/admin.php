@@ -435,9 +435,9 @@ class Admin extends CI_Controller {
 		# code...
 		if(!($data['name'] != '' && $data['username'] != '' && $data['password'] != '' && $data['title'] != '' && $data['officeEmail'] != '' && $data['otherEmail'] != '' && $data['tel1'] != '' && $data['tel2'] != ''))
 			return 1;
-		elseif(!in_array($data['rank'], [1, 2, 3, 4]))
+		elseif(!in_array($data['rank'], array(1, 2, 3, 4)))
 			return 2;
-		elseif(!in_array($data['status'], [0, 1]))
+		elseif(!in_array($data['status'], array(0, 1)))
 			return 3;
 		if(isset($data['subordinates']))
 		foreach ($data['subordinates'] as $subordinate) {
