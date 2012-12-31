@@ -21,7 +21,7 @@ function submitForm(confirm, form) {
 }
 
 function openForm(dataFields) {
-	var form = "<form action='" + dataFields.action + "' method='" + dataFields.method + "' class='spaceTop' />";
+	var form = "<form action='" + dataFields.action + "' method='" + dataFields.method + "' class='spaceTop'>";
 		form += "<h1 style='font-size: 3em; font-weight: bold; padding: 0 20px;'>" + dataFields.heading + "</h1>";
 	var elements = dataFields.elements;
 	for(thisElement in elements) {
