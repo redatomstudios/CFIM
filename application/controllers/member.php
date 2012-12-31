@@ -97,7 +97,7 @@ class Member extends CI_Controller{
 			echo "No Project Specified";
 			return;
 		}
-
+		$this->load->library('mylibrary');
 		if($this->membersModel->isMemberOf($this->session->userdata('id'), $id)){
 			$this->load->model('sectorsModel');
 			$this->load->model('provincesModel');

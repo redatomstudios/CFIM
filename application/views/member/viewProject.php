@@ -129,7 +129,7 @@ foreach($rawAgreements as $thisElement) {
  				'  \"method\" : \"POST\" }';
  				$userActions =
  					// Form to process [Agree] button
- 					form_open('/member/agreeComment') .
+ 					$this->mylibrary->escapeFunction(form_open('/member/agreeComment')) .
  						//Project ID, the id of the project whose comment the member is agreeing to
  						"<input type='hidden' name='projectID' value='".$id."' />" .
  						// ID of the root comment where agreement should be added
