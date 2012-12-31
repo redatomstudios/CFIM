@@ -93,53 +93,55 @@
  		"member" : "<?= $thisComment['name'] ?>",
  		"comment" : "<?= $thisComment['comment'] ?>",
  		"attachment" : "<?= $thisComment['attachment'] ?>",
- 		<?php 
- 			/* Lets get the number of people who agree
- 			 * The input array is just a CSV of the member IDs
- 			 * that agree
- 			 */
- 			$rawAgreements = explode(',', $thisComment['agreements']);
- 			$agreements = 0;
- 			foreach($rawAgreements as $thisElement) {
- 				if($thisElement) {
- 					$agreements++;
- 				}
- 			}
-		?>
+<?php 
+/* Lets get the number of people who agree
+ * The input array is just a CSV of the member IDs
+ * that agree
+ */
+$rawAgreements = explode(',', $thisComment['agreements']);
+$agreements = 0;
+foreach($rawAgreements as $thisElement) {
+	if($thisElement) {
+		$agreements++;
+	}
+}
+?>
  		"agreements" : "<?= $agreements ?>",
- 		<?php
- 			/*
- 			 * Determine the actions that the user can perform, based on the user type
- 			 * If user is a part of this project, then [Respond] button should appear
- 			 * Otherwise, [Agree] and [Comment] button appear
- 			 * $status is only set if the member is not a part of the project team
- 			 * so lets base the bahavior based on that variable
- 			 */
- 			if(isset($status)) {
- 				// This viewer is not a part of the project team
- 				// Show them the [Agree] and [Comment] buttons
- 				// We're already inside a buffer, so we can't use it again
- 				// Without complicating things
- 				$formData = 
- 				'{ \"elements\" : ['.
- 				'{\"name\" : \"rootID\",\"type\" : \"hidden\",\"value\" : \"'. $rootID .'\"},'.
- 				'{\"name\" : \"userID\",\"type\" : \"hidden\",\"value\" : \"'. $this->session->userdata("id") .'\"},'.
- 				'{\"name\" : \"responseType\",\"type\" : \"hidden\",\"value\" : \"1\"}],'.
- 				'  \"action\" : \"'. "formAction" .'\",'.
- 				'  \"method\" : \"POST\" }';
- 				$userActions =
- 					// Form to process [Agree] button
- 					"<form>" .
- 						// ID of the root comment where agreement should be added
- 						"<input type='hidden' name='rootID' value='".$rootID."' /> " .
- 						// User ID, the id that needs to be added to the agreements
- 						"<input type='hidden' name='userID' value='".$this->session->userdata("id")."' />" .
-						"<input style='width: 100%;' type='submit' value='Agree' />" .
- 					"</form>" .
- 					"<input style='width: 100%;' type='button' value='Comment' onclick='console.log(". $formData .")' />";
- 			}
+<?php
+/*
+ * Determine the actions that the user can perform, based on the user type
+ * If user is a part of this project, then [Respond] button should appear
+ * Otherwise, [Agree] and [Comment] button appear
+ * $status is only set if the member is not a part of the project team
+ * so lets base the bahavior based on that variable
+ */
+if(isset($status)) {
+	// This viewer is not a part of the project team
+	// Show them the [Agree] and [Comment] buttons
+	// We're already inside a buffer, so we can't use it again
+	// Without complicating things
+	$formData = 
+	'{ \"elements\" : ['.
+	'{\"name\" : \"rootID\",\"type\" : \"hidden\",\"value\" : \"'. $rootID .'\"},'.
+	'{\"name\" : \"userID\",\"type\" : \"hidden\",\"value\" : \"'. $this->session->userdata("id") .'\"},'.
+	'{\"name\" : \"responseType\",\"type\" : \"hidden\",\"value\" : \"1\"},'.
+	'{\"name\" : \"commentBody\",\"type\" : \"textarea\"},'.
+	'{\"name\" : \"file[]\",\"type\" : \"file\"}],'.
+	'  \"action\" : \"'. "formAction" .'\",'.
+	'  \"method\" : \"POST\" }';
+	$userActions =
+		// Form to process [Agree] button
+		"<form>" .
+			// ID of the root comment where agreement should be added
+			"<input type='hidden' name='rootID' value='".$rootID."' /> " .
+			// User ID, the id that needs to be added to the agreements
+			"<input type='hidden' name='userID' value='".$this->session->userdata("id")."' />" .
+			"<input style='width: 100%;' type='submit' value='Agree' />" .
+		"</form>" .
+		"<input style='width: 100%;' type='button' value='Comment' onclick='openForm(". $formData .")' />";
+}
 
-		?>
+?>
  		"actions" : "<?= $userActions ?>",
  		"time" : "<?= $thisComment['date'] ?>",
  		"comments" : [
