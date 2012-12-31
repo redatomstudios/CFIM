@@ -11,6 +11,12 @@ class Mylibrary {
             }
         }
 
+        function replaceQuotes($matches) {
+            foreach ($matches as $match) {
+                return "&quot;";
+            }
+        }
+
     }
 
     public function loginCheck(){
@@ -34,13 +40,13 @@ class Mylibrary {
 
     
     public function escapeFunction($data){
-        
-        
-
         $data = preg_replace_callback('/\"/', 'replace', $data);
         return $data;
     }
 
-   
+   public function escapeQuotes($data) {
+        $data = preg_replace_callback('/\"/', 'replaceQuotes', $data);
+        return $data;
+   }
 
 }

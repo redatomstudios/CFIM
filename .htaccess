@@ -8,15 +8,15 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 # For reuests that are not actual files or directories,
 # Rewrite to index.php/URL
-RewriteRule ^(.*)$ index.php/$1 [PT,L]
+RewriteRule ^(.*)$ index.php?/$1 [PT,L]
 
-<IfModule mod_headers.c>
-    <FilesMatch "\\.(ico|jpe?g|png|gif|swf|css|js)$">
-        Header set Cache-Control "max-age=32304000, public"
-    </FilesMatch>
-    <FilesMatch "\\.(x?html?|php)$">
-        Header set Cache-Control "max-age=600, private, must-revalidate"
-    </FilesMatch>
-    Header unset ETag
-    Header unset Last-Modified
-</IfModule>
+#<IfModule mod_headers.c>
+#    <FilesMatch "\\.(css|js)$">
+#        Header set Cache-Control "max-age=32304000, public"
+#    </FilesMatch>
+#    <FilesMatch "\\.(x?html?|php|ico|jpe?g|png|gif|swf)$">
+#        Header set Cache-Control "max-age=600, private, must-revalidate"
+#    </FilesMatch>
+#    Header unset ETag
+#    Header unset Last-Modified
+#</IfModule>

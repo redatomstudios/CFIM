@@ -121,15 +121,15 @@ if(isset($status)) {
 	// We're already inside a buffer, so we can't use it again
 	// Without complicating things
 	$formData = 
-	'{\"elements\" : ['.
-	'{\"name\" : \"rootID\",\"type\" : \"hidden\",\"value\" : \"'. $rootID .'\"},'.
-	'{\"name\" : \"userID\",\"type\" : \"hidden\",\"value\" : \"'. $this->session->userdata("id") .'\"},'.
-	'{\"name\" : \"responseType\",\"type\" : \"hidden\",\"value\" : \"1\"},'.
-	'{\"name\" : \"commentBody\",\"type\" : \"text\", \"label\" : \"Comment\"},'.
-	'{\"name\" : \"file[]\",\"type\" : \"file\", \"multiple\" : \"multiple\", \"label\" : \"Attachments\"}],'.
-	' \"action\" : \"'. "" .'\",'.
-	' \"method\" : \"POST\",'.
-	' \"heading\" : \"Post a Comment\" }';
+	'{"elements" : ['.
+	'{"name" : "rootID","type" : "hidden","value" : "'. $rootID .'"},'.
+	'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
+	'{"name" : "responseType","type" : "hidden","value" : "1"},'.
+	'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
+	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
+	' "action" : "'. "" .'",'.
+	' "method" : "POST",'.
+	' "heading" : "Post a Comment" }';
 	$userActions =
 		// Form to process [Agree] button
 		$this->mylibrary->escapeFunction(form_open('/member/agreeComment')) .
@@ -141,7 +141,24 @@ if(isset($status)) {
 			"<input type='hidden' name='userID' value='".$this->session->userdata("id")."' />" .
 			"<input style='width: 100%;' type='submit' value='Agree' />" .
 		"</form>" .
-		"<input style='width: 100%;' type='button' value='Comment' onclick='openForm(". $formData .")' />";
+		"<input style='width: 100%;' type='button' value='Comment' onclick='openForm(". $this->mylibrary->escapeQuotes($formData) .")' />";
+} else {
+	// This viewer is a member of the project team
+	// Show them the [Respond] button
+	// We're already inside a buffer, so we can't use it again
+	// Without complicating things
+	$formData = 
+	'{"elements" : ['.
+	'{"name" : "rootID","type" : "hidden","value" : "'. $rootID .'"},'.
+	'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
+	'{"name" : "responseType","type" : "hidden","value" : "2"},'.
+	'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
+	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
+	' "action" : "'. "" .'",'.
+	' "method" : "POST",'.
+	' "heading" : "Post a Response" }';
+	$userActions =
+		"<input style='width: 100%;' type='button' value='Respond' onclick='openForm(". $this->mylibrary->escapeQuotes($formData) .")' />";
 }
 
 ?>
@@ -340,7 +357,7 @@ if(isset($status)) {
 </div>
 <?php if(isset($status)) { // Only echo these if viewer is not a member of the project ?>
 <div class="gridOne spaceTop">
-	<input type="button" value="Add New Comment" onClick="openForm({'elements' : [{'name' : 'userID','type' : 'hidden','value' : '9'},{'name' : 'commentBody','type' : 'text', 'label' : 'Comment'},{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}], 'action' : '', 'method' : 'POST', 'heading' : 'New Comment' })" /> <input type="button" value="Back to Home"/>
+	<input type="button" value="Add New Comment" onClick="openForm({'elements' : [{'name' : 'userID','type' : 'hidden','value' : '9'},{'name' : 'commentBody','type' : 'text', 'label' : 'Comment'},{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}], 'action' : '', 'method' : 'POST', 'heading' : 'New Comment' })" /> <a href="<?= base_url() ?>member/"><input type="button" value="Back to Home"/></a>
 </div>
 <?php } // End of things to echo only if viewer is not a member of the project ?>
 <?php if(!isset($status)) { // Only echo these if viewer is a member of the project ?>
