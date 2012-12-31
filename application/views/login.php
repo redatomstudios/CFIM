@@ -67,7 +67,7 @@
 	</style>
 	<link href="<?= base_url() ?>resources/css/formalize.css" />
 	<script src="<?= base_url() ?>resources/js/jquery-1.8.2.min.js"></script>
-	<script src="<?= base_url() ?>resources/js/formalize.js"></script>
+	<script src="<?= base_url() ?>resources/js/jquery.formalize.min.js"></script>
 	<script>
 		// jQuery(document).ready(function($){
 		// // $.each($('input[type="text"], input[type="password"]'), function(){

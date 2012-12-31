@@ -4,12 +4,20 @@
 var confirmObj, formObj;
 
 function hidePopupSlider() {
-	$('#popupSlider').animate({height: 0}, function(){ $(this).hide().html(''); });
+	$('#popupSlider').queue('fx', []).animate({height: 0}, function(){ $(this).hide().html(''); });
+}
+
+function openPopupSlider() {
+	$('#popupSlider').queue('fx', []).show().animate({height: 100 + '%'});
 }
 
 function submitForm(confirm, form) {
 	$(confirm).attr({value: 'true'});
 	$(form).submit();
+}
+
+function openForm(dataFields) {
+	console.log(dataFields);
 }
 
 jQuery(document).ready(function() {
@@ -87,7 +95,8 @@ jQuery(document).ready(function() {
 	    	}
 	    	console.log(confirmObj, formObj);
 	    	divString += "<div class='clear'></div><div class='gridOne spaceTop'><input type='button' value='Confirm' onClick='submitForm(confirmObj, formObj)' /><input type='button' value='Cancel' onclick='hidePopupSlider();' /></div>"; 
-	    	$('#popupSlider').show().animate({height: 100 + '%'}).html(divString);
+	    	$('#popupSlider').html(divString);
+	    	openPopupSlider();
 	    }
     });
 	

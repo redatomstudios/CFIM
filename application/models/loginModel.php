@@ -40,11 +40,12 @@ class LoginModel extends CI_Model{
 		$query = $this->db->get_where('members', array('username' => $username, 'password' => sha1($passcode)));
 		if($query->num_rows() > 0){
 			// echo $query->row()->rank;
+			$row = $query->row();
 			$this->session->set_userdata(array(
-								'id' => $query->row()->id,
+								'id' => $row->id,
 								'username' => $username,
-								'rank' => $query->row()->rank ));
-			return $query->row()->rank;
+								'rank' => $row->rank ));
+			return $row->rank;
 		}
 
 		return FALSE;

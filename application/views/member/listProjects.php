@@ -120,7 +120,7 @@
 			  var oData = oTable.fnGetData( nTr );
 			  var sOut =
 			    '<div class="innerDetails">'+
-			      '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px; width: 100%">';
+			      '<table cellpadding="5" cellspacing="0" border="0">';
 			      for( thisComment in oData.comments ) {
 			      	sOut += 
 				      	'<tr>' +
