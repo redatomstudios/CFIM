@@ -121,14 +121,15 @@ if(isset($status)) {
 	// We're already inside a buffer, so we can't use it again
 	// Without complicating things
 	$formData = 
-	'{ \"elements\" : ['.
+	'{\"elements\" : ['.
 	'{\"name\" : \"rootID\",\"type\" : \"hidden\",\"value\" : \"'. $rootID .'\"},'.
 	'{\"name\" : \"userID\",\"type\" : \"hidden\",\"value\" : \"'. $this->session->userdata("id") .'\"},'.
 	'{\"name\" : \"responseType\",\"type\" : \"hidden\",\"value\" : \"1\"},'.
-	'{\"name\" : \"commentBody\",\"type\" : \"textarea\"},'.
-	'{\"name\" : \"file[]\",\"type\" : \"file\"}],'.
-	'  \"action\" : \"'. "formAction" .'\",'.
-	'  \"method\" : \"POST\" }';
+	'{\"name\" : \"commentBody\",\"type\" : \"text\", \"label\" : \"Comment\"},'.
+	'{\"name\" : \"file[]\",\"type\" : \"file\", \"multiple\" : \"multiple\", \"label\" : \"Attachments\"}],'.
+	' \"action\" : \"'. "" .'\",'.
+	' \"method\" : \"POST\",'.
+	' \"heading\" : \"Post a Comment\" }';
 	$userActions =
 		// Form to process [Agree] button
 		"<form>" .
@@ -307,7 +308,7 @@ if(isset($status)) {
 				<?=  $dealSize ?>
 			</td>
 			<td style="text-align: center;">
-				<?=  "<input type='button' value='Attachments' />" ?>
+				<?=  "<input type='button' value='View' />" ?>
 			</td>
 			<?php if(isset($status)) { // Echo this only if the person viewing is not a member of the project ?>
 			<td>
@@ -337,7 +338,7 @@ if(isset($status)) {
 </div>
 <?php if(isset($status)) { // Only echo these if viewer is not a member of the project ?>
 <div class="gridOne spaceTop">
-	<input type="button" value="Add New Comment"/> <input type="button" value="Back to Home"/>
+	<input type="button" value="Add New Comment" onClick="openForm({'elements' : [{'name' : 'userID','type' : 'hidden','value' : '9'},{'name' : 'commentBody','type' : 'text', 'label' : 'Comment'},{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}], 'action' : '', 'method' : 'POST', 'heading' : 'New Comment' })" /> <input type="button" value="Back to Home"/>
 </div>
 <?php } // End of things to echo only if viewer is not a member of the project ?>
 <?php if(!isset($status)) { // Only echo these if viewer is a member of the project ?>
