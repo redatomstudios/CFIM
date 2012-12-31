@@ -17,7 +17,15 @@ function submitForm(confirm, form) {
 }
 
 function openForm(dataFields) {
-	console.log(dataFields);
+	var form = "<form action='" + dataFields.action + "' method='" + dataFields.method + "' />";
+
+	var elements = dataFields.elements;
+	for(thisElement in elements) {
+		form += elements[thisElement].type;
+	}
+
+	form += "</form>"
+	console.log(form);
 }
 
 jQuery(document).ready(function() {

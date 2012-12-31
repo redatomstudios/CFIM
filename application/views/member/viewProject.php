@@ -93,19 +93,19 @@
  		"member" : "<?= $thisComment['name'] ?>",
  		"comment" : "<?= $thisComment['comment'] ?>",
  		"attachment" : "<?= $thisComment['attachment'] ?>",
- 		<?php 
- 			/* Lets get the number of people who agree
- 			 * The input array is just a CSV of the member IDs
- 			 * that agree
- 			 */
- 			$rawAgreements = explode(',', $thisComment['agreements']);
- 			$agreements = 0;
- 			foreach($rawAgreements as $thisElement) {
- 				if($thisElement) {
- 					$agreements++;
- 				}
- 			}
-		?>
+<?php 
+/* Lets get the number of people who agree
+ * The input array is just a CSV of the member IDs
+ * that agree
+ */
+$rawAgreements = explode(',', $thisComment['agreements']);
+$agreements = 0;
+foreach($rawAgreements as $thisElement) {
+	if($thisElement) {
+		$agreements++;
+	}
+}
+?>
  		"agreements" : "<?= $agreements ?>",
  		<?php
  			/*
@@ -140,8 +140,7 @@
  					"</form>" .
  					"<input style='width: 100%;' type='button' value='Comment' onclick='console.log(". $formData .")' />";
  			}
-
-		?>
+?>
  		"actions" : "<?= $userActions ?>",
  		"time" : "<?= $thisComment['date'] ?>",
  		"comments" : [
