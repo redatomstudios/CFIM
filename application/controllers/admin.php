@@ -122,9 +122,9 @@ class Admin extends CI_Controller {
 
 				$pid = $this->projectsModel->insertProject($post);
 				
-				if(!$uploads = $this->uploader($pid))
-					echo "Upload Error";	//Echo this error
-				else{
+				if(!$uploads = $this->uploader($pid)) {
+					//echo "Upload Error";	//Echo this error
+				} else {
 					$this->load->model('documentsModel');
 
 					$ids = $this->documentsModel->insertDocument($pid, $uploads);
@@ -604,7 +604,7 @@ class Admin extends CI_Controller {
 				$error += 0;
 			}else{
 				$error += 1;
-				echo $this->upload->display_errors();
+				//echo $this->upload->display_errors();
 			}
 		}
 

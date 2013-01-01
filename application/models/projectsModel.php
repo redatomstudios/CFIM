@@ -73,7 +73,7 @@ class ProjectsModel extends CI_Model{
 			$this->db->where('id', $value);
 			$this->db->set('projects', 'concat(projects, ",'.$id.'")', FALSE);
 			$this->db->update('members');
-			echo "<br>".$this->db->last_query();
+			//echo "<br>".$this->db->last_query();
 			
 		}
 
