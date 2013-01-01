@@ -246,12 +246,11 @@ class Member extends CI_Controller{
 		$data['projectsAsLeader'] = $this->projectsModel->getInvestedProjectsOfLeader($this->session->userdata('id'));
 
 		echo "<pre>";
-
+		$pi = array();
 		$projects = $this->membersModel->getProjects($this->session->userdata('id'), 'Invested');
 		foreach ($projects as $project) {
 			# code...
 			print_r($project);
-			$pi = array();
 			if($project['leaderId'] != $this->session->userdata('id')){
 				if($p['comments'] = $this->commentsModel->getLatestComment($project['id'])){
 					$p['id'] = $project['id'];	
