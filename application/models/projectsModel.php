@@ -235,9 +235,21 @@ class ProjectsModel extends CI_Model{
 		return FALSE;
 	}
 
-	public function getInvestedProjects(){
+	public function getInvestedProjectsOfLeader($memberId){
 		# code...
-		$this->db->get_where('projects', array('status' => 'Invested'));
+		$this->db->select('p.id, p.name, c.id, c.body, c.timestamp');
+		$this->db->from('projects p');
+		$this->db->join('comments c', 'c.projectId=p.id');
+		$this->db->where('p.leaderId', $memberId);
+		$this->db->where('p.status', 'Invested');
+		$this->db->order_by('c.timestamp desc');
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	public function getInvestedProjects($memberId){
+		# code...
+
 	}
 
 }

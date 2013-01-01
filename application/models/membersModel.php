@@ -55,18 +55,23 @@ class MembersModel extends CI_Model{
 		return $query->result_array();
 	}
 
-	public function getProjects($memberId){
+	public function getProjects($memberId, $status = ''){
 		# code...
 		$this->db->select('projects');
 		$ret = $this->db->get_where('members', array('id' => $memberId));
 		if($ret->num_rows() > 0){
 			$ret = $ret->row()->projects;
 			$ret = trim($ret, ',');
-			// echo $ret . "<br>";
 			if($ret == NULL)
 				return false;
 			$this->db->flush_cache();
-			$projects = $this->db->get_where('projects', 'id IN ('. $ret .')');
+			if($status != ''){
+				$this->db->where('status', $status);
+			}
+			$this->db->where('id IN ('. $ret .')');
+			
+			$projects = $this->db->get_where('projects');
+			echo $this->db->last_query();
 			return $projects->result_array();
 		}
 		

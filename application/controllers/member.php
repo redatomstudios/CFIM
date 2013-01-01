@@ -240,9 +240,15 @@ class Member extends CI_Controller{
 		# code...
 		$d1['currentPage'] = 'investedProjects';
 		$d1['username'] = $this->session->userdata('username');
-		$this->load->view('member/header', $d1);
+		$data['projectsAsLeader'] = $this->projectsModel->getInvestedProjectsOfLeader($this->session->userdata('id'));
+
+		$projects = $this->membersModel->getProjects($this->session->userdata('id'), 'Invested');
+
+		echo "<pre>" . $this->session->userdata('id');
+		print_r($projects);
+		// $this->load->view('member/header', $d1);
 		// $this->load->view('member/changePassword');
-		$this->load->view('member/footer');
+		// $this->load->view('member/footer');
 	}
 
 	private function getProjectFormData() {
