@@ -208,7 +208,9 @@ if(isset($status)) {
 		        "bProcessing": true,
 		        "sScrollY": "350px",
 		        "aaData": dataSource.aaData,
-		        "bPaginate": false,
+		        "bPaginate": true,
+		        "iDisplayLength": 5,
+		        "bLengthChange": false,
 		        "bInfo": false,
 		        "aaSorting": [[4, 'asc']],
 		        "aoColumns": [
@@ -296,7 +298,7 @@ if(isset($status)) {
 	<strong>Project Name:</strong> <?= $name ?>
 </div>
 <div class="gridOne spaceTop spaceBottom">
-	<table class="displayOnly">
+	<table class="singleRow">
 		<thead>
 			<tr>
 				<th>Project Leader</th>
@@ -398,7 +400,7 @@ if(isset($status)) {
 	Total: 5000
 </div>
 <div class="gridTwo spaceTop">
-	<input type="button" value="Add New Update"/> <input type="button" value="Add Expenses"/>
+	<input type="button" value="Add New Update" onClick="openForm({'elements' : [{'name' : 'userID','type' : 'hidden','value' : '9'},{'name' : 'commentBody','type' : 'text', 'label' : 'Update'},{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}], 'action' : '', 'method' : 'POST', 'heading' : 'New Update' })" /> <input type="button" value="Add Expenses"/>
 </div>
 <?php } // End of things to echo only if viewer is a member of the project ?>
 <div class="clear"></div>

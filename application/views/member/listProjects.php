@@ -1,4 +1,4 @@
-<?php if(isset($dates)) { ?>
+<?php if(isset($dates) && $currentPage != 'investedProjects') { ?>
 <div class="gridOne spaceTop">
 <?= form_open('member/index') ?>
 	<label for="discussionDate">Discussion Date: </label>
@@ -8,6 +8,8 @@
 	<?= anchor('/member', '<input type="button" value="All">') ?>
 <?= form_close() ?>
 </div>
+<?php } else if ( $currentPage == 'investedProjects' ) { ?>
+
 <?php } else { ?>
 <?= form_open('member/myProjects') ?>
 <div class="gridOne spaceTop">

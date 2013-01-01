@@ -80,11 +80,21 @@ jQuery(document).ready(function() {
 	});
 
 	$('table.displayOnly').dataTable({
-        "bPaginate": false,
+        "bPaginate": true,
+        "iDisplayLength": 5,
+        "bLengthChange": false,
         "bFilter" : false,
         "bInfo" : false,
         "bSort": false
 	});
+
+	$('table.singleRow').dataTable({
+        "bPaginate": false,
+        "bLengthChange": false,
+        "bFilter" : false,
+        "bInfo" : false,
+        "bSort": false
+	});	
 
 	$('.datePicker').datepicker({minDate: 0, numberOfMonths: 3});
 

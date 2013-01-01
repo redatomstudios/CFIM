@@ -240,8 +240,15 @@ class Member extends CI_Controller{
 		# code...
 		$d1['currentPage'] = 'investedProjects';
 		$d1['username'] = $this->session->userdata('username');
+
+		$data['currentPage'] = 'investedProjects';
+		/* 
+		 * Load invested projects here using the same format as before,
+		 * It'll be displayed on the page automatically.
+		 */
+
 		$this->load->view('member/header', $d1);
-		// $this->load->view('member/changePassword');
+		$this->load->view('member/listProjects', $data);
 		$this->load->view('member/footer');
 	}
 
