@@ -139,7 +139,7 @@ $newExpenseString =
 $rawAgreements = explode(',', $thisComment['agreements']);
 $agreements = 0;
 foreach($rawAgreements as $thisElement) {
-	if($thisElement) {
+	if(!empty($thisElement)) {
 		$agreements++;
 	}
 }
