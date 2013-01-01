@@ -243,6 +243,8 @@ class Member extends CI_Controller{
 		
 		$d1['currentPage'] = 'investedProjects';
 		$d1['username'] = $this->session->userdata('username');
+
+		$data['currentPage'] = 'investedProjects';
 		$data['projectsAsLeader'] = $this->projectsModel->getInvestedProjectsOfLeader($this->session->userdata('id'));
 
 		echo "<pre>";
@@ -258,11 +260,12 @@ class Member extends CI_Controller{
 				}
 			}
 		}
-		echo "<pre>" ;
+		
 		print_r($pi);
-		// $this->load->view('member/header', $d1);
-		// $this->load->view('member/changePassword');
-		// $this->load->view('member/footer');
+		echo "</pre>" ;
+		$this->load->view('member/header', $d1);
+		$this->load->view('member/listProjects', $data);
+		$this->load->view('member/footer');
 	}
 
 	private function getProjectFormData() {
