@@ -9,8 +9,24 @@ class Test extends CI_Controller{
 		$this->load->model('projectsModel');
 		$this->load->model('commentsModel');
 		$this->load->model('expensesModel');
+		echo "<pre>";
 	}
 
+	public function test_getLatestComments(){
+		# code...
+		$res = $this->commentsModel->getLatestComment(45);
+		print_r($res);
+	}
+	public function test_getProjects(){
+		# code...
+		$res = $this->membersModel->getProjects(9, 'Invested');
+		print_r($res);
+	}
+	public function test_investedProjects(){
+		# code...
+		$res = $this->projectsModel->getInvestedProjects(2);
+		print_r($res);
+	}
 	public function test_escape(){
 		# code...
 		$this->load->library('mylibrary');

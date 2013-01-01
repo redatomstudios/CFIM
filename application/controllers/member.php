@@ -238,18 +238,32 @@ class Member extends CI_Controller{
 
 	public function investedProjects(){
 		# code...
+
+		$this->load->model('commentsModel');
+		
 		$d1['currentPage'] = 'investedProjects';
 		$d1['username'] = $this->session->userdata('username');
+		$data['projectsAsLeader'] = $this->projectsModel->getInvestedProjectsOfLeader($this->session->userdata('id'));
 
-		$data['currentPage'] = 'investedProjects';
-		/* 
-		 * Load invested projects here using the same format as before,
-		 * It'll be displayed on the page automatically.
-		 */
+		echo "<pre>";
 
-		$this->load->view('member/header', $d1);
-		$this->load->view('member/listProjects', $data);
-		$this->load->view('member/footer');
+		$projects = $this->membersModel->getProjects($this->session->userdata('id'), 'Invested');
+		foreach ($projects as $project) {
+			# code...
+			print_r($project);
+			$pi = array();
+			if($project['leaderId'] != $this->session->userdata('id')){
+				if($p['comments'] = $this->commentsModel->getLatestComment($project['id'])){
+					$p['id'] = $project['id'];	
+					$pi[] = $p;
+				}
+			}
+		}
+		echo "<pre>" ;
+		print_r($pi);
+		// $this->load->view('member/header', $d1);
+		// $this->load->view('member/changePassword');
+		// $this->load->view('member/footer');
 	}
 
 	private function getProjectFormData() {
