@@ -83,29 +83,6 @@
  * hard coding them. So first lets define the JSON strings
  * that will determine the fields for each form
  */
-// String used to generate form for posting a NEW COMMENT in response to a ROOT COMMENT
-$respondComment = 
-'{"elements" : ['.
-'{"name" : "rootID","type" : "hidden","value" : "'. $rootID .'"},'.
-'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
-'{"name" : "responseType","type" : "hidden","value" : "1"},'.
-'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
-'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
-' "action" : "'. "" .'",'.
-' "method" : "POST",'.
-' "heading" : "Post a Comment" }';
-
-// String used to generate form for posting a RESPONSE in response to a ROOT COMMENT
-$justRespond = 
-'{"elements" : ['.
-'{"name" : "rootID","type" : "hidden","value" : "'. $rootID .'"},'.
-'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
-'{"name" : "responseType","type" : "hidden","value" : "2"},'.
-'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
-'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
-' "action" : "'. "" .'",'.
-' "method" : "POST",'.
-' "heading" : "Post a Response" }';
 
 // String used to generate form for posting a NEW ROOT COMMENT
 $newCommentString = 
@@ -183,6 +160,18 @@ if(isset($status)) {
 	 * We're already inside a buffer, so we can't use it again
 	 * Without complicating things
 	 */
+	// String used to generate form for posting a NEW COMMENT in response to a ROOT COMMENT
+	$respondComment = 
+	'{"elements" : ['.
+	'{"name" : "rootID","type" : "hidden","value" : "'. $rootID .'"},'.
+	'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
+	'{"name" : "responseType","type" : "hidden","value" : "1"},'.
+	'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
+	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
+	' "action" : "'. "" .'",'.
+	' "method" : "POST",'.
+	' "heading" : "Post a Comment" }';
+
 	$userActions =
 		// Form to process [Agree] button
 		$this->mylibrary->escapeFunction(form_open('/member/agreeComment')) .
@@ -202,6 +191,17 @@ if(isset($status)) {
 	 * We're already inside a buffer, so we can't use it again
 	 * Without complicating things
 	 */
+	// String used to generate form for posting a RESPONSE in response to a ROOT COMMENT
+	$justRespond = 
+	'{"elements" : ['.
+	'{"name" : "rootID","type" : "hidden","value" : "'. $rootID .'"},'.
+	'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
+	'{"name" : "responseType","type" : "hidden","value" : "2"},'.
+	'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
+	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
+	' "action" : "'. "" .'",'.
+	' "method" : "POST",'.
+	' "heading" : "Post a Response" }';
 	$userActions =
 		"<input style='width: 100%;' type='button' value='Respond' onclick='openForm(". $this->mylibrary->escapeQuotes($justRespond) .")' />";
 }
