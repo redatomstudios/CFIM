@@ -71,7 +71,7 @@ class MembersModel extends CI_Model{
 			$this->db->where('id IN ('. $ret .')');
 			
 			$projects = $this->db->get_where('projects');
-			echo $this->db->last_query();
+			// echo $this->db->last_query();
 			return $projects->result_array();
 		}
 		

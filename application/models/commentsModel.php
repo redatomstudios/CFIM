@@ -51,5 +51,18 @@ class CommentsModel extends CI_Model{
 		}
 		return FALSE;
 	}
+
+	public function getLatestComment($projectId){
+		# code...
+		$this->db->select('id, timestamp');
+		$this->db->limit(1);
+		$this->db->order_by('timestamp', 'desc');
+		$res = $this->db->get_where('comments', array('projectId' => $projectId));
+		echo $this->db->last_query();
+		if($res->num_rows() > 0)
+			return $res->row_array();
+		return FALSE;
+
+	}
 }
 ?>

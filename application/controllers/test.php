@@ -12,6 +12,11 @@ class Test extends CI_Controller{
 		echo "<pre>";
 	}
 
+	public function test_getLatestComments(){
+		# code...
+		$res = $this->commentsModel->getLatestComment(45);
+		print_r($res);
+	}
 	public function test_getProjects(){
 		# code...
 		$res = $this->membersModel->getProjects(9, 'Invested');
