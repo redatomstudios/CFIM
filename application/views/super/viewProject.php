@@ -20,8 +20,8 @@
 	/* Split the order number
 	 * orderNumber structure : rootID.Increment.commentType
 	 * Where 	rootID is unique to each root comment
-	 *				Increment is an index for each rootID
-	 * 				commentType is 1(Member Comment) or 2(Team Response)
+	 *			Increment is an index for each rootID
+	 * 			commentType is 1(Member Comment) or 2(Team Response)
 	 */
 		$orderNumber = explode('.', $thisComment['orderNumber']); 
 		// If the split array has only one element, then we know it's a root comment
@@ -78,6 +78,44 @@
  * responses or comments at once
  */
 
+/* Since a lot of different forms will be required on each page, 
+ * Lets use a script to automatically generate the forms instead of
+ * hard coding them. So first lets define the JSON strings
+ * that will determine the fields for each form
+ */
+
+// String used to generate form for posting a NEW ROOT COMMENT
+$newCommentString = 
+	'{"elements" : ['.
+'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
+'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
+'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
+' "action" : "",'.
+' "method" : "POST",'.
+' "heading" : "New Comment" }';
+
+// String used to generate form for posting NEW UPDATE
+$newUpdateString = 
+	'{"elements" : ['.
+'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
+'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
+'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
+' "action" : "",'.
+' "method" : "POST",'.
+' "heading" : "New Update" }';
+
+// String used to generate form for posting a NEW EXPENSE
+$newExpenseString =
+	'{"elements" : ['.
+'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
+'{"name" : "commentBody","type" : "text", "label" : "Description"},'.
+'{"name" : "expenses","type" : "text", "label" : "Amount"},'.
+'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"},'.
+'{"name" : "vouchers[]","type" : "file", "multiple" : "multiple", "label" : "Voucher"}],'.
+' "action" : "",'.
+' "method" : "POST",'.
+' "heading" : "Add Expense" }';
+
  /* Since we're creating a large and complicated outout, it'll be
   * better to store the data to an output buffer rather than
   * just storing it to a string 
@@ -99,14 +137,14 @@
  * that agree
  */
 $rawAgreements = explode(',', $thisComment['agreements']);
-$agreements = 0;
+$agreeCount = 0;
 foreach($rawAgreements as $thisElement) {
-	if($thisElement) {
-		$agreements++;
+	if(!empty($thisElement)) {
+		$agreeCount++;
 	}
 }
 ?>
- 		"agreements" : "<?= $agreements ?>",
+ 		"agreements" : "<?= $agreeCount ?>",
 <?php
 /*
  * Determine the actions that the user can perform, based on the user type
@@ -115,12 +153,15 @@ foreach($rawAgreements as $thisElement) {
  * $status is only set if the member is not a part of the project team
  * so lets base the bahavior based on that variable
  */
-if(isset($status)) {
-	// This viewer is not a part of the project team
-	// Show them the [Agree] and [Comment] buttons
-	// We're already inside a buffer, so we can't use it again
-	// Without complicating things
-	$formData = 
+if(1) { // No condition required here
+	/*
+	 * This viewer is not a part of the project team
+	 * Show them the [Agree] and [Comment] buttons
+	 * We're already inside a buffer, so we can't use it again
+	 * Without complicating things
+	 */
+	// String used to generate form for posting a NEW COMMENT in response to a ROOT COMMENT
+	$respondComment = 
 	'{"elements" : ['.
 	'{"name" : "rootID","type" : "hidden","value" : "'. $rootID .'"},'.
 	'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
@@ -130,6 +171,7 @@ if(isset($status)) {
 	' "action" : "'. "" .'",'.
 	' "method" : "POST",'.
 	' "heading" : "Post a Comment" }';
+
 	$userActions =
 		// Form to process [Agree] button
 		$this->mylibrary->escapeFunction(form_open('/member/agreeComment')) .
@@ -141,24 +183,7 @@ if(isset($status)) {
 			"<input type='hidden' name='userID' value='".$this->session->userdata("id")."' />" .
 			"<input style='width: 100%;' type='submit' value='Agree' />" .
 		"</form>" .
-		"<input style='width: 100%;' type='button' value='Comment' onclick='openForm(". $this->mylibrary->escapeQuotes($formData) .")' />";
-} else {
-	// This viewer is a member of the project team
-	// Show them the [Respond] button
-	// We're already inside a buffer, so we can't use it again
-	// Without complicating things
-	$formData = 
-	'{"elements" : ['.
-	'{"name" : "rootID","type" : "hidden","value" : "'. $rootID .'"},'.
-	'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
-	'{"name" : "responseType","type" : "hidden","value" : "2"},'.
-	'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
-	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
-	' "action" : "'. "" .'",'.
-	' "method" : "POST",'.
-	' "heading" : "Post a Response" }';
-	$userActions =
-		"<input style='width: 100%;' type='button' value='Respond' onclick='openForm(". $this->mylibrary->escapeQuotes($formData) .")' />";
+		"<input style='width: 100%;' type='button' value='Comment' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' />";
 }
 
 ?>
@@ -189,11 +214,12 @@ if(isset($status)) {
  
  ]}
  <?php
- /* Alright, now we've got our JSON data in the buffer.
- * Lets stop buffering, clear the buffer, and store the
- * buffered data to a variable so we can pass it to the 
- * front end.
+/* 
+ * Alright, now we've got everything we need.
+ * Lets store the buffer to a variable so we can
+ * play with it.
  */
+
  $JSON_comments = ob_get_clean();
 ?>
 <script>
@@ -357,12 +383,9 @@ if(isset($status)) {
 		</tbody>
 	</table>
 </div>
-<?php if(isset($status)) { // Only echo these if viewer is not a member of the project ?>
 <div class="gridOne spaceTop">
-	<input type="button" value="Add New Comment" onClick="openForm({'elements' : [{'name' : 'userID','type' : 'hidden','value' : '9'},{'name' : 'commentBody','type' : 'text', 'label' : 'Comment'},{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}], 'action' : '', 'method' : 'POST', 'heading' : 'New Comment' })" /> <a href="<?= base_url() ?>member/"><input type="button" value="Back to Home"/></a>
+	<input type="button" value="Add New Comment" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newCommentString) ?>)" />
 </div>
-<?php } // End of things to echo only if viewer is not a member of the project ?>
-<?php if(!isset($status)) { // Only echo these if viewer is a member of the project ?>
 <div class="gridOne spaceTop spaceBottom"> <strong>Update on Progress</strong>: </div>
 <div class="gridOne spaceTop">
 	<table class="displayOnly">
@@ -400,7 +423,6 @@ if(isset($status)) {
 	Total: 5000
 </div>
 <div class="gridTwo spaceTop">
-	<input type="button" value="Add New Update" onClick="openForm({'elements' : [{'name' : 'userID','type' : 'hidden','value' : '9'},{'name' : 'commentBody','type' : 'text', 'label' : 'Update'},{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}], 'action' : '', 'method' : 'POST', 'heading' : 'New Update' })" /> <input type="button" value="Add Expenses"/>
+	<input type="button" value="Add New Update" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newUpdateString) ?>)" /> <input type="button" value="Add Expenses" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newExpenseString) ?>)" />
 </div>
-<?php } // End of things to echo only if viewer is a member of the project ?>
 <div class="clear"></div>
