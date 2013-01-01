@@ -59,7 +59,9 @@ class MembersModel extends CI_Model{
 		# code...
 		$this->db->select('projects');
 		$ret = $this->db->get_where('members', array('id' => $memberId));
+
 		if($ret->num_rows() > 0){
+
 			$ret = $ret->row()->projects;
 			$ret = trim($ret, ',');
 			if($ret == NULL)
@@ -70,7 +72,7 @@ class MembersModel extends CI_Model{
 			}
 			$this->db->where('id IN ('. $ret .')');
 			
-			$projects = $this->db->get_where('projects');
+			$projects = $this->db->get('projects');
 			// echo $this->db->last_query();
 			return $projects->result_array();
 		}

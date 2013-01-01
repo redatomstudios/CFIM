@@ -60,7 +60,7 @@ class LoginModel extends CI_Model{
             $this->db->where('id', $memberId);
             if($this->db->update('members', array('password' => sha1($new))))
                 return TRUE;
-            echo "Password Change Failed!!";
+            // echo "Password Change Failed!!";
         }
         else
             return FALSE;

@@ -168,7 +168,7 @@ if(isset($status)) {
 	'{"name" : "responseType","type" : "hidden","value" : "1"},'.
 	'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
 	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
-	' "action" : "'. "" .'",'.
+	' "action" : "'. site_url('/member/addComment') .'",'.
 	' "method" : "POST",'.
 	' "heading" : "Post a Comment" }';
 

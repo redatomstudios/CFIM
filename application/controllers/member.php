@@ -249,7 +249,7 @@ class Member extends CI_Controller{
 
 		echo "<pre>";
 		$pi = array();
-		$projects = $this->membersModel->getProjects($this->session->userdata('id'), 'Invested');
+		if($projects = $this->membersModel->getProjects($this->session->userdata('id'), 'Invested'))
 		foreach ($projects as $project) {
 			# code...
 			print_r($project);
@@ -263,9 +263,9 @@ class Member extends CI_Controller{
 		
 		print_r($pi);
 		echo "</pre>" ;
-		$this->load->view('member/header', $d1);
-		$this->load->view('member/listProjects', $data);
-		$this->load->view('member/footer');
+		// $this->load->view('member/header', $d1);
+		// $this->load->view('member/listProjects', $data);
+		// $this->load->view('member/footer');
 	}
 
 	private function getProjectFormData() {
@@ -321,6 +321,7 @@ class Member extends CI_Controller{
 		$this->commentsModel->agreeComment($this->input->post('rootID'), $this->input->post('projectID'), $this->input->post('userID'));
 		redirect('/member/viewProject/'.$this->input->post('projectID'));
 	}
+
 	public function viewInvested($id = 0){
 		if($id == 0){
 			echo "No Project Specified";
@@ -333,6 +334,7 @@ class Member extends CI_Controller{
 		$this->load->view('member/viewInvestedProject');
 		$this->load->view('member/footer');
 	}
+
 
 
 }
