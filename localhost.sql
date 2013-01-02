@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 02, 2013 at 07:22 AM
+-- Generation Time: Jan 03, 2013 at 12:48 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -29,6 +29,7 @@ USE `cfim`;
 -- Table structure for table `attachments`
 --
 
+DROP TABLE IF EXISTS `attachments`;
 CREATE TABLE IF NOT EXISTS `attachments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -44,6 +45,7 @@ CREATE TABLE IF NOT EXISTS `attachments` (
 -- Table structure for table `captcha`
 --
 
+DROP TABLE IF EXISTS `captcha`;
 CREATE TABLE IF NOT EXISTS `captcha` (
   `captcha_id` bigint(13) unsigned NOT NULL AUTO_INCREMENT,
   `captcha_time` int(10) unsigned NOT NULL,
@@ -51,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `captcha` (
   `word` varchar(20) NOT NULL,
   PRIMARY KEY (`captcha_id`),
   KEY `word` (`word`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=96 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=97 ;
 
 --
 -- Dumping data for table `captcha`
@@ -65,7 +67,8 @@ INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUE
 (92, 1357102121, '::1', 'nHSxWM'),
 (93, 1357102157, '::1', 'uDFaRG'),
 (94, 1357102200, '::1', 'cjKSjK'),
-(95, 1357106631, '::1', 'zgatgC');
+(95, 1357106631, '::1', 'zgatgC'),
+(96, 1357154026, '::1', 'vFmBuz');
 
 -- --------------------------------------------------------
 
@@ -73,6 +76,7 @@ INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUE
 -- Table structure for table `cities`
 --
 
+DROP TABLE IF EXISTS `cities`;
 CREATE TABLE IF NOT EXISTS `cities` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
@@ -134,6 +138,7 @@ INSERT INTO `cities` (`id`, `name`) VALUES
 -- Table structure for table `comments`
 --
 
+DROP TABLE IF EXISTS `comments`;
 CREATE TABLE IF NOT EXISTS `comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `orderNumber` varchar(15) NOT NULL,
@@ -151,20 +156,20 @@ CREATE TABLE IF NOT EXISTS `comments` (
 --
 
 INSERT INTO `comments` (`id`, `orderNumber`, `projectId`, `memberId`, `body`, `attachments`, `timestamp`, `counter`) VALUES
-(1, '1', 45, 2, 'This project is good!!', '', '2012-12-27 13:16:52', ',2,9'),
-(2, '1.1.1', 45, 2, 'I''m responding to this', '', '2012-12-30 14:33:00', ''),
-(3, '1.2.1', 45, 2, 'This is another response by a random person', '', '2012-12-30 14:33:00', ''),
-(4, '1.3.2', 45, 2, 'This is a team response', '', '2012-12-30 14:33:39', ''),
-(5, '1.4.2', 45, 2, 'This is another team response', '', '2012-12-30 14:33:39', ''),
-(6, '2', 45, 3, 'Just another root comment!', '', '2012-12-30 17:01:34', ',9'),
-(7, '2.1.1', 45, 2, 'Don''t post random comments on here.', '', '2012-12-30 17:01:34', ''),
-(8, '2.2.2', 45, 3, 'I can do anything I want!', '', '2012-12-30 17:01:34', ''),
-(9, '3', 45, 2, 'Root comments are so cool guys!ZZ*&!', '', '2012-12-30 17:08:17', ',9'),
-(10, '3.1.1', 45, 3, 'You said we couldn''t post random comments =/', '', '2012-12-30 17:08:17', ''),
-(11, '3.2.2', 45, 2, 'I lied! :D', '', '2012-12-30 17:08:17', ''),
-(12, '1', 63, 2, 'Oh, WoW!! A precious comment!!', '', '2013-01-01 17:58:27', ''),
-(13, '1', 64, 2, 'This is the latest project!!', '', '2013-01-02 04:40:10', ''),
-(14, '2', 64, 2, 'AHA!!! Another Comment!!', '', '2013-01-02 04:43:00', '');
+(1, '1', 45, 2, 'This project is good!!', '', '2012-12-27 07:46:52', ',2,9'),
+(2, '1.1.1', 45, 2, 'I''m responding to this', '', '2012-12-30 09:03:00', ''),
+(3, '1.2.1', 45, 2, 'This is another response by a random person', '', '2012-12-30 09:03:00', ''),
+(4, '1.3.2', 45, 2, 'This is a team response', '', '2012-12-30 09:03:39', ''),
+(5, '1.4.2', 45, 2, 'This is another team response', '', '2012-12-30 09:03:39', ''),
+(6, '2', 45, 3, 'Just another root comment!', '', '2012-12-30 11:31:34', ',9'),
+(7, '2.1.1', 45, 2, 'Don''t post random comments on here.', '', '2012-12-30 11:31:34', ''),
+(8, '2.2.2', 45, 3, 'I can do anything I want!', '', '2012-12-30 11:31:34', ''),
+(9, '3', 45, 2, 'Root comments are so cool guys!ZZ*&!', '', '2012-12-30 11:38:17', ',9'),
+(10, '3.1.1', 45, 3, 'You said we couldn''t post random comments =/', '', '2012-12-30 11:38:17', ''),
+(11, '3.2.2', 45, 2, 'I lied! :D', '', '2012-12-30 11:38:17', ''),
+(12, '1', 63, 2, 'Oh, WoW!! A precious comment!!', '', '2013-01-01 12:28:27', ''),
+(13, '1', 64, 2, 'This is the latest project!!', '', '2013-01-01 23:10:10', ''),
+(14, '2', 64, 2, 'AHA!!! Another Comment!!', '', '2013-01-01 23:13:00', '');
 
 -- --------------------------------------------------------
 
@@ -172,6 +177,7 @@ INSERT INTO `comments` (`id`, `orderNumber`, `projectId`, `memberId`, `body`, `a
 -- Table structure for table `documents`
 --
 
+DROP TABLE IF EXISTS `documents`;
 CREATE TABLE IF NOT EXISTS `documents` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `filename` varchar(50) NOT NULL,
@@ -186,20 +192,32 @@ CREATE TABLE IF NOT EXISTS `documents` (
 --
 
 INSERT INTO `documents` (`id`, `filename`, `timestamp`, `projectId`, `size`) VALUES
-(7, '.htaccess', '2012-12-27 10:31:15', 46, 1),
-(8, 'CFIM+Projects.xls', '2012-12-27 10:31:15', 46, 114),
-(9, 'CFIMProject.txt', '2012-12-27 10:31:15', 46, 1),
-(10, 'pages.sql', '2013-01-01 07:36:21', 57, 277),
-(11, 'sliderRight.png', '2013-01-01 07:36:21', 57, 63),
-(12, 'mix_db_Fresh.sql', '2013-01-01 07:37:45', 58, 6);
+(7, '.htaccess', '2012-12-27 05:01:15', 46, 1),
+(8, 'CFIM+Projects.xls', '2012-12-27 05:01:15', 46, 114),
+(9, 'CFIMProject.txt', '2012-12-27 05:01:15', 46, 1),
+(10, 'pages.sql', '2013-01-01 02:06:21', 57, 277),
+(11, 'sliderRight.png', '2013-01-01 02:06:21', 57, 63),
+(12, 'mix_db_Fresh.sql', '2013-01-01 02:07:45', 58, 6);
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `expenses`
 --
--- in use(#1146 - Table 'cfim.expenses' doesn't exist)
--- Error reading data: (#1146 - Table 'cfim.expenses' doesn't exist)
+
+DROP TABLE IF EXISTS `expenses`;
+CREATE TABLE IF NOT EXISTS `expenses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `projectId` int(11) NOT NULL,
+  `memberId` int(11) NOT NULL,
+  `reviewedBy` int(11) NOT NULL,
+  `updateBody` text NOT NULL,
+  `attachments` varchar(100) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `expenses` decimal(10,2) NOT NULL,
+  `voucher` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -207,6 +225,7 @@ INSERT INTO `documents` (`id`, `filename`, `timestamp`, `projectId`, `size`) VAL
 -- Table structure for table `jobtitles`
 --
 
+DROP TABLE IF EXISTS `jobtitles`;
 CREATE TABLE IF NOT EXISTS `jobtitles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -229,6 +248,7 @@ INSERT INTO `jobtitles` (`id`, `name`) VALUES
 -- Table structure for table `members`
 --
 
+DROP TABLE IF EXISTS `members`;
 CREATE TABLE IF NOT EXISTS `members` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `memberName` varchar(50) NOT NULL,
@@ -264,6 +284,7 @@ INSERT INTO `members` (`id`, `memberName`, `username`, `password`, `rank`, `titl
 -- Table structure for table `projects`
 --
 
+DROP TABLE IF EXISTS `projects`;
 CREATE TABLE IF NOT EXISTS `projects` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -311,6 +332,7 @@ INSERT INTO `projects` (`id`, `name`, `leaderId`, `sectorId`, `subSectorId`, `ge
 -- Table structure for table `provinces`
 --
 
+DROP TABLE IF EXISTS `provinces`;
 CREATE TABLE IF NOT EXISTS `provinces` (
   `id` int(2) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -365,6 +387,7 @@ INSERT INTO `provinces` (`id`, `name`) VALUES
 -- Table structure for table `sectors`
 --
 
+DROP TABLE IF EXISTS `sectors`;
 CREATE TABLE IF NOT EXISTS `sectors` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
