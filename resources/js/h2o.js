@@ -276,5 +276,5 @@ var Notify = function(messages) {
 }
 
 jQuery(document).ready(function($){
-	$('body').append('<div id="notifier"></div>');
+	$('html').prepend('<div id="notifier"></div>');
 });

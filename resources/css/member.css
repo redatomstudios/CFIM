@@ -285,6 +285,7 @@ div#notifier {
 	text-align: center;
 	font-size: 1em;
 	font-weight: bold;
+	font-family: Arial, Verdana, sans-serif;
 }
 
 div.notification, div.alert {
