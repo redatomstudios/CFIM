@@ -14,8 +14,50 @@
 
 	$rootComments = array(); 	// Store the root comments here
 	$memberReplies = array();	// Store the comments from members not on the team here
-	$teamResponses = array();	// Store the responses from the project team here
+	$teamReplies = array();	// Store the responses from the project team here
 	
+	/* Since a lot of different forms will be required on each page, 
+	 * Lets use a script to automatically generate the forms instead of
+	 * hard coding them. So first lets define the JSON strings
+	 * that will determine the fields for each form
+	 */
+
+	// String used to generate form for posting a NEW ROOT COMMENT
+	$newCommentString = 
+	"{'elements' : [".
+	"{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
+	"{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
+	"{'name' : 'commentBody','type' : 'text', 'label' : 'Comment'},".
+	"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}],".
+	" 'action' : '" . site_url("/member/newComment") . "',".
+	" 'method' : 'POST',".
+	" 'heading' : 'New Comment' }";
+
+	// String used to generate form for posting NEW UPDATE
+	$newUpdateString = 
+	"{'elements' : [".
+	"{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
+	"{'name' : 'commentBody','type' : 'text', 'label' : 'Comment'},".
+	"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}],".
+	" 'action' : '',".
+	" 'method' : 'POST',".
+	" 'heading' : 'New Update' }";
+
+	// String used to generate form for posting a NEW EXPENSE
+	$newExpenseString =
+	"{'elements' : [".
+	"{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
+	"{'name' : 'commentBody','type' : 'text', 'label' : 'Description'},".
+	"{'name' : 'expenses','type' : 'text', 'label' : 'Amount'},".
+	"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'},".
+	"{'name' : 'vouchers[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Voucher'}],".
+	" 'action' : '',".
+	" 'method' : 'POST',".
+	" 'heading' : 'Add Expense' }";
+
+	// URL of the image sprite used to show the open and closed status
+	$sImageUrl = 'http://www.datatables.net/release-datatables/examples/examples_support';
+
 	foreach($comments as $thisComment) {
 	/* Split the order number
 	 * orderNumber structure : rootID.Increment.commentType
@@ -77,45 +119,6 @@
  * Afterwards, we can just pull each root comment and it's associated
  * responses or comments at once
  */
-
-/* Since a lot of different forms will be required on each page, 
- * Lets use a script to automatically generate the forms instead of
- * hard coding them. So first lets define the JSON strings
- * that will determine the fields for each form
- */
-
-// String used to generate form for posting a NEW ROOT COMMENT
-$newCommentString = 
-"{'elements' : [".
-"{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
-"{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
-"{'name' : 'commentBody','type' : 'text', 'label' : 'Comment'},".
-"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}],".
-" 'action' : '" . site_url("/member/newComment") . "',".
-" 'method' : 'POST',".
-" 'heading' : 'New Comment' }";
-
-// String used to generate form for posting NEW UPDATE
-$newUpdateString = 
-"{'elements' : [".
-"{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
-"{'name' : 'commentBody','type' : 'text', 'label' : 'Comment'},".
-"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}],".
-" 'action' : '',".
-" 'method' : 'POST',".
-" 'heading' : 'New Update' }";
-
-// String used to generate form for posting a NEW EXPENSE
-$newExpenseString =
-"{'elements' : [".
-"{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
-"{'name' : 'commentBody','type' : 'text', 'label' : 'Description'},".
-"{'name' : 'expenses','type' : 'text', 'label' : 'Amount'},".
-"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'},".
-"{'name' : 'vouchers[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Voucher'}],".
-" 'action' : '',".
-" 'method' : 'POST',".
-" 'heading' : 'Add Expense' }";
 
  /* Since we're creating a large and complicated outout, it'll be
   * better to store the data to an output buffer rather than
@@ -210,7 +213,11 @@ if(isset($status)) {
 }
 
 ?>
+ 		<?php if(count($teamReplies) && isset($teamReplies[$rootID]) || ( count($memberReplies) && isset($memberReplies[$rootID]) )) { ?>
  		"actions" : "<?= $userActions ?>",
+ 		<?php } else { ?>
+ 		"actions" : "",
+ 		<?php } ?>
  		"time" : "<?= $thisComment['date'] ?>",
  		"comments" : [
  			<?php if(count($memberReplies) && isset($memberReplies[$rootID])) { ?>
@@ -225,7 +232,7 @@ if(isset($status)) {
  			<?php } ?>
  		],
  		"responses" : [
-	 		<?php if(count($memberReplies) && isset($teamReplies[$rootID])) { ?>
+	 		<?php if(count($teamReplies) && isset($teamReplies[$rootID])) { ?>
 	 			<?php foreach($teamReplies[$rootID] as $teamReply) { ?>
 	 				{
 	 					"name" : "<?= $teamReply['name'] ?>",
@@ -235,7 +242,12 @@ if(isset($status)) {
 	 				},
 	 			<?php } ?>
  			<?php } ?>
- 		]
+ 		],
+ 		<?php if(count($teamReplies) && isset($teamReplies[$rootID]) || ( count($memberReplies) && isset($memberReplies[$rootID]) )) { ?>
+ 		"control" : "<img src='<?= $sImageUrl ?>/details_open.png'>"
+ 		<?php } else { ?>
+ 		"control" : ""
+ 		<?php } ?>
  	},
  <?php } ?>
  
@@ -255,8 +267,7 @@ if(isset($status)) {
 	// Code for proper display of comments in member accounts
 		jQuery(document).ready(function($) {
 		  var anOpen = [];
-		    var sImageUrl = "http://www.datatables.net/release-datatables/examples/examples_support/";
-		     
+	      var sImageUrl = '<?= $sImageUrl ?>/';
 		    var oTable = $('.commentedTable').dataTable( {
 		        "bProcessing": true,
 		        "sScrollY": "350px",
@@ -267,12 +278,13 @@ if(isset($status)) {
 		        "bInfo": false,
 		        "aaSorting": [[4, 'asc']],
 		        "aoColumns": [
-				        {
-		               "mDataProp": null,
-		               "sClass": "control centered",
-		               "sDefaultContent": '<img src="'+sImageUrl+'details_open.png'+'">',
-		               "bSortable": false
-		            },
+				        // {
+		          //      "mDataProp": null,
+		          //      "sClass": "control centered",
+		          //      "sDefaultContent": '<img src="'+sImageUrl+'details_open.png'+'">',
+		          //      "bSortable": false
+		          //   },
+			        { "mDataProp": "control", "sClass": "control centered", "bSortable": false },
 		            { "mDataProp": "member", "bSortable": false },
 		            { "mDataProp": "comment", "bSortable": false },
 		            { "mDataProp": "attachment", "bSortable": false },
