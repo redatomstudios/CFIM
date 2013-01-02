@@ -239,3 +239,37 @@ div#popupSlider {
 div#displaySubordinates {
 	display: none;
 }
+
+/* Notification Styles */
+div#notifier {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	margin: 0;
+	line-height: 2em;
+	text-align: center;
+	font-size: 1em;
+	font-weight: bold;
+}
+
+div.notification, div.alert {
+	background: #4A4;
+	width: 100%;
+	height: 0;
+	overflow: hidden;
+	border-bottom: solid thin rgba(0, 0, 0, 0.3);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
+	cursor: pointer;
+	color: #FFF;
+}
+
+div.alert {
+	background: #A22;
+	color: #FFF;
+	text-shadow: 0 1px 1px #000;
+}
+
+div.notification:hover, div.alert:hover {
+	opacity: 0.9;
+}

@@ -86,8 +86,9 @@
 		    var oTable = $('.commentedTable').dataTable( {
 		        "bProcessing": true,
 		        "sScrollY": "350px",
-		        "aaData": dataSource.aaData,
-		        "bPaginate": false,
+		        "aaData": dataSource.aaData,<?php if(isset($currentPage) && $currentPage == 'investedProjects') { ?>
+		        "aaSorting": [],
+		        <?php } ?>"bPaginate": false,
 		        "aoColumns": [
 		            { "mDataProp": "name", "sClass": "control" },
 		            { "mDataProp": "leader" },

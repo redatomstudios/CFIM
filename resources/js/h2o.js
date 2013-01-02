@@ -113,9 +113,12 @@ jQuery(document).ready(function() {
 	// Add hidden element to forms to check if they've been confirmed
 	$('form').prepend('<input type="hidden" name="confirmed" value="false" />');
 
+	// Get the value of the selected leader so we can disabled it in the member selection
 	if($('.projectLeader')[0]) {
 		var selectedValue = $('.projectLeader')[0].value;
 	}
+	// The same person can't be project leader AND member, so we disabled the selected
+	// leader in the member selection menu 
 	$('.projectMembers option').each(function() {
 		if(this.value == selectedValue) {
 			$(this).attr({disabled: 'disabled'}).removeAttr('selected');
@@ -123,6 +126,13 @@ jQuery(document).ready(function() {
 			$(this).removeAttr('disabled');
 		}
 	});
+
+	/*
+	 * For forms where confirmation is required
+	 * Serialize the inputs, parse the string and display the data 
+	 * along with a confirm and cancel button
+	 * Confirmation is shown in the general purpose 
+	 */
 
     $('form.confirmationRequired').submit(function(e) {
     	formObj = this;
@@ -167,10 +177,13 @@ jQuery(document).ready(function() {
 	    }
     });
 	
+
+	// Update the subsectors when a new sector is selected
 	$('#liveSector').change(function() {
 		$('#liveSubsector').html(subSectors[this.value]);
 	});
 
+	// When a project leader is selected, disable that option in member list
 	$('.projectLeader').click(function() {
 		var selectedValue = this.value;
 		$('.projectMembers option').each(function() {
@@ -182,6 +195,7 @@ jQuery(document).ready(function() {
 		});
 	});
 
+	// Only show the subordinates if the selected rank is MEMBER
 	$('#memberRank').change(function() {
 		if(this.value == "3") {
 			$('#displaySubordinates').show();
@@ -190,6 +204,8 @@ jQuery(document).ready(function() {
 		}
 	})
 
+	// Disabled anchors are used to display tooltips
+	// When clicked, they shouldn't do anything.
 	$('body').on('click', 'a.disabled', function(e){
 		e.preventDefault();
 	});
@@ -197,3 +213,64 @@ jQuery(document).ready(function() {
 });
 
 
+/*
+ * NOTIFICATION SYSTEM
+ */
+
+/* Notifier Variables */
+var alert_id = 0;
+var notify_delay = 3000;
+var notifyStack = [];
+var liveNotifications = 0;
+var maxParallelNotify = 2;
+var emailRegex = /\S+@\S+\.\S+/;
+
+var getElement = function(elementID) {
+	return document.getElementById(elementID);
+}
+
+var checkEmail = function(email, errorStack) {
+	if(!emailRegex.test(email)) {
+		errorStack.push(['Please enter a valid email address.', 0]);
+	}
+}
+
+// Notification functions
+var openNotification = function() {
+	if(notifyStack.length > 0 && liveNotifications <= maxParallelNotify) {
+		var thisMessage = notifyStack.shift(); // Get the latest message
+		var thisType = thisMessage.split('|')[1]; // Separate the message type and message
+		thisMessage = thisMessage.split('|')[0];
+		$('div#notifier').append('<div id="m'+alert_id+'" class="'+(thisType == '1' ? 'notification' : 'alert')+'">'+thisMessage+'</div>') // Create control string to output to JS
+		var this_id = '#m' + alert_id++;
+		$(this_id).animate({height: 2+'em'}, function(){
+			liveNotifications++;
+			if(liveNotifications < maxParallelNotify) { // Open notifications in parallel, until limit reached
+				openNotification();
+			}
+			setTimeout(function(){
+				$(this_id).queue('fx', []).animate({height: 0}, function(){
+					$(this).hide().remove();
+					if(liveNotifications == maxParallelNotify)
+						openNotification(); // When last message is fired, check stack and repeat if there are more messages.
+					liveNotifications--;
+				});
+			}, notify_delay);
+		});
+	}
+}
+
+var stackNotify = function(message, type) {
+	notifyStack.push(message + '|' + type);
+}
+
+var Notify = function(messages) {
+	$.each(messages, function(index, value){
+		stackNotify(value[0], value[1]);
+	});
+	openNotification();
+}
+
+jQuery(document).ready(function($){
+	$('body').append('<div id="notifier"></div>');
+});
