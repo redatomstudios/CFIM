@@ -124,7 +124,7 @@ class Member extends CI_Controller{
 
 		// echo "<pre>";
 		// print_r($data);
-		
+
 		$this->load->view('member/header',$d1);
 		$this->load->view('member/viewProject', $data);
 		$this->load->view('member/footer');
@@ -365,10 +365,32 @@ class Member extends CI_Controller{
 		$this->load->view('member/footer');
 	}
 
-	public function newRootComment(){
+	/*
+	* If $commentType = 'root', it is a root comment
+	* Else if $commentType = 'foolowup'
+
+	*/
+	public function newComment($commentType = 'root'){
 		# code...
+		$this->load->model('commentsModel');
+		$post = $this->input->post();
 		echo "<pre>";
 		print_r($this->input->post());
+
+		if(!isset($post['responseType']))
+			$data['orderNumber'] = $this->commentsModel->countComments($post['projectID'], 'root') + 1;
+		else
+		{
+			$count = $this->commentsModel->countComments($post['projectID'], 'followup', $post['rootID']) + 1;
+			$data['orderNumber'] = $post['rootID'] . '.' . $count . '.' . $post['responseType'];
+		}
+
+		$data['memberId'] = $this->session->userdata('id');
+		$data['projectId'] = $post['projectID'];
+		$data['body'] = $post['commentBody'];
+
+		$this->commentsModel->insertComment($data);
+		redirect('/member/viewProject/' . $post['projectID']);
 	}
 
 }

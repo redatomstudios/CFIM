@@ -91,7 +91,7 @@ $newCommentString =
 '{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.
 '{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
 '{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
-' "action" : "' . site_url('/member/newRootComment') . '",'.
+' "action" : "' . site_url('/member/newComment') . '",'.
 ' "method" : "POST",'.
 ' "heading" : "New Comment" }';
 
@@ -165,11 +165,12 @@ if(isset($status)) {
 	$respondComment = 
 	'{"elements" : ['.
 	'{"name" : "rootID","type" : "hidden","value" : "'. $rootID .'"},'.
+	'{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.
 	'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
 	'{"name" : "responseType","type" : "hidden","value" : "1"},'.
 	'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
 	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
-	' "action" : "'. site_url('/member/addComment') .'",'.
+	' "action" : "'. site_url('/member/newComment') .'",'.
 	' "method" : "POST",'.
 	' "heading" : "Post a Comment" }';
 
@@ -196,11 +197,12 @@ if(isset($status)) {
 	$justRespond = 
 	'{"elements" : ['.
 	'{"name" : "rootID","type" : "hidden","value" : "'. $rootID .'"},'.
+	'{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.
 	'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
 	'{"name" : "responseType","type" : "hidden","value" : "2"},'.
 	'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
 	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
-	' "action" : "'. "" .'",'.
+	' "action" : "'. site_url('/member/newComment') .'",'.
 	' "method" : "POST",'.
 	' "heading" : "Post a Response" }';
 	$userActions =
