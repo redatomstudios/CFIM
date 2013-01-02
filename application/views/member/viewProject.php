@@ -170,7 +170,7 @@ if(isset($status)) {
 	'{"name" : "responseType","type" : "hidden","value" : "1"},'.
 	'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
 	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
-	' "action" : "'. site_url('/member/addComment') .'",'.
+	' "action" : "'. site_url('/member/newComment') .'",'.
 	' "method" : "POST",'.
 	' "heading" : "Post a Comment" }';
 
@@ -202,7 +202,7 @@ if(isset($status)) {
 	'{"name" : "responseType","type" : "hidden","value" : "2"},'.
 	'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
 	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
-	' "action" : "'. "" .'",'.
+	' "action" : "'. site_url('/member/newComment') .'",'.
 	' "method" : "POST",'.
 	' "heading" : "Post a Response" }';
 	$userActions =

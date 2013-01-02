@@ -28,6 +28,7 @@ class CommentsModel extends CI_Model{
 			$res = $this->db->get_where('comments', array('projectId' => $projectId, 'orderNumber REGEXP' => '^-?[0-9]+$'));
 		return $res->result_array();
 	}
+
 	public function agreeComment($orderNumber, $projectId, $memberId){
 		# code...
 		if(!$this->isAgree($orderNumber, $projectId, $memberId)){
@@ -54,15 +55,34 @@ class CommentsModel extends CI_Model{
 	}
 
 	public function getLatestComment($projectId){
-		# code...
 		$this->db->select('timestamp');
 		$this->db->limit(1);
 		$this->db->order_by('timestamp', 'desc');
 		$res = $this->db->get_where('comments', array('projectId' => $projectId));
-		// echo $this->db->last_query();
 		if($res->num_rows() > 0)
 			return $res->row_array();
 		return FALSE;
+	}
+
+	/*
+	* If $root = '', it returns, the number of all comments in that project
+	* Else if $root = 'root', it returns, the number of root comments
+	* Else if $root = 'followup', it returns, the number of followup comments
+	*/
+	public function countComments($projectId, $root = '', $rootId = 0){
+		# code...
+		$this->db->select('count(`id`) AS count');
+		$this->db->where('projectId', $projectId);
+		if($root == 'root')
+			$this->db->where('`orderNumber` REGEXP \'^[0-9]+$\'');
+		elseif($root == 'followup'){
+			if($rootId == 0)
+				echo "Give the order number of the root comment";
+			else
+				$this->db->where('`orderNumber` REGEXP \'^'.$rootId.'.[0-9]+.[0-9]+$\'');
+		}
+		$res = $this->db->get('comments');
+		return $res->row()->count;
 
 	}
 }

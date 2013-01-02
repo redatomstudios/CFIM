@@ -106,4 +106,9 @@ class Test extends CI_Controller{
 		else
 			echo "Not member!! GTFO";
 	}
+
+	public function test_countComments(){
+		# code...
+		echo $this->commentsModel->countComments(45, 'followup', 2);
+	}
 }
