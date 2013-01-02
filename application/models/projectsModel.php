@@ -14,6 +14,7 @@ class ProjectsModel extends CI_Model{
 
 	public function getDiscussionDates(){
 		$this->db->select('DISTINCT(discussionDate), id');
+		$this->db->order_by("discussionDate", "asc");
 		$res = $this->db->get('projects');
 		// echo $this->db->last_query();
 		if($res->num_rows() > 0){
