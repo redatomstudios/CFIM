@@ -86,36 +86,36 @@
 
 // String used to generate form for posting a NEW ROOT COMMENT
 $newCommentString = 
-	'{"elements" : ['.
-'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
-'{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.
-'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
-'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
-' "action" : "' . site_url('/member/newComment') . '",'.
-' "method" : "POST",'.
-' "heading" : "New Comment" }';
+"{'elements' : [".
+"{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
+"{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
+"{'name' : 'commentBody','type' : 'text', 'label' : 'Comment'},".
+"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}],".
+" 'action' : '" . site_url("/member/newRootComment") . "',".
+" 'method' : 'POST',".
+" 'heading' : 'New Comment' }";
 
 // String used to generate form for posting NEW UPDATE
 $newUpdateString = 
-	'{"elements" : ['.
-'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
-'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
-'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
-' "action" : "",'.
-' "method" : "POST",'.
-' "heading" : "New Update" }';
+"{'elements' : [".
+"{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
+"{'name' : 'commentBody','type' : 'text', 'label' : 'Comment'},".
+"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}],".
+" 'action' : '',".
+" 'method' : 'POST',".
+" 'heading' : 'New Update' }";
 
 // String used to generate form for posting a NEW EXPENSE
 $newExpenseString =
-	'{"elements" : ['.
-'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
-'{"name" : "commentBody","type" : "text", "label" : "Description"},'.
-'{"name" : "expenses","type" : "text", "label" : "Amount"},'.
-'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"},'.
-'{"name" : "vouchers[]","type" : "file", "multiple" : "multiple", "label" : "Voucher"}],'.
-' "action" : "",'.
-' "method" : "POST",'.
-' "heading" : "Add Expense" }';
+"{'elements' : [".
+"{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
+"{'name' : 'commentBody','type' : 'text', 'label' : 'Description'},".
+"{'name' : 'expenses','type' : 'text', 'label' : 'Amount'},".
+"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'},".
+"{'name' : 'vouchers[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Voucher'}],".
+" 'action' : '',".
+" 'method' : 'POST',".
+" 'heading' : 'Add Expense' }";
 
  /* Since we're creating a large and complicated outout, it'll be
   * better to store the data to an output buffer rather than
@@ -165,7 +165,7 @@ if(isset($status)) {
 	$respondComment = 
 	'{"elements" : ['.
 	'{"name" : "rootID","type" : "hidden","value" : "'. $rootID .'"},'.
-	'{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.
+	'{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.	
 	'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
 	'{"name" : "responseType","type" : "hidden","value" : "1"},'.
 	'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
@@ -197,7 +197,7 @@ if(isset($status)) {
 	$justRespond = 
 	'{"elements" : ['.
 	'{"name" : "rootID","type" : "hidden","value" : "'. $rootID .'"},'.
-	'{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.
+	'{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.	
 	'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
 	'{"name" : "responseType","type" : "hidden","value" : "2"},'.
 	'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
@@ -213,23 +213,27 @@ if(isset($status)) {
  		"actions" : "<?= $userActions ?>",
  		"time" : "<?= $thisComment['date'] ?>",
  		"comments" : [
- 			<?php foreach($memberReplies[$rootID] as $memberReply) { ?>
- 				{
- 					"name" : "<?= $memberReply['name'] ?>",
- 					"comment" : "<?= $memberReply['comment'] ?>",
- 					"attachment" : "<?= $memberReply['attachment'] ?>",
- 					"date" : "<?= $memberReply['date'] ?>"
- 				},
+ 			<?php if(count($memberReplies)) { ?>
+	 			<?php foreach($memberReplies[$rootID] as $memberReply) { ?>
+	 				{
+	 					"name" : "<?= $memberReply['name'] ?>",
+	 					"comment" : "<?= $memberReply['comment'] ?>",
+	 					"attachment" : "<?= $memberReply['attachment'] ?>",
+	 					"date" : "<?= $memberReply['date'] ?>"
+	 				},
+	 			<?php } ?>
  			<?php } ?>
  		],
  		"responses" : [
- 			<?php foreach($teamReplies[$rootID] as $teamReply) { ?>
- 				{
- 					"name" : "<?= $teamReply['name'] ?>",
- 					"comment" : "<?= $teamReply['comment'] ?>",
- 					"attachment" : "<?= $teamReply['attachment'] ?>",
- 					"date" : "<?= $teamReply['date'] ?>"
- 				},
+	 		<?php if(count($memberReplies)) { ?>
+	 			<?php foreach($teamReplies[$rootID] as $teamReply) { ?>
+	 				{
+	 					"name" : "<?= $teamReply['name'] ?>",
+	 					"comment" : "<?= $teamReply['comment'] ?>",
+	 					"attachment" : "<?= $teamReply['attachment'] ?>",
+	 					"date" : "<?= $teamReply['date'] ?>"
+	 				},
+	 			<?php } ?>
  			<?php } ?>
  		]
  	},

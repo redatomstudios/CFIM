@@ -71,6 +71,8 @@ function openForm(dataFields) {
 }
 
 jQuery(document).ready(function() {
+
+	// Datatable for showing large amounts of data and comments, scrolling enabled
 	$('table.data').dataTable({
 		"sScrollY": "350px",
         "bPaginate": false,
@@ -79,6 +81,7 @@ jQuery(document).ready(function() {
         "bScrollCollapse": true
 	});
 
+	// Datatable without advanced comments functionality, just pagination
 	$('table.displayOnly').dataTable({
         "bPaginate": true,
         "iDisplayLength": 5,
@@ -88,6 +91,7 @@ jQuery(document).ready(function() {
         "bSort": false
 	});
 
+	// Datatable for showing single row, used just to show project details
 	$('table.singleRow').dataTable({
         "bPaginate": false,
         "bLengthChange": false,
@@ -96,11 +100,14 @@ jQuery(document).ready(function() {
         "bSort": false
 	});	
 
+	// Initialize datepicker plugin on all pages
 	$('.datePicker').datepicker({minDate: 0, numberOfMonths: 3});
 
+	// Apply clearfix to bodyContent, make sure the body wraps around any floats inside it
 	$('.bodyContent').append('<div class="clear"></div>');
 
-	// Initialize the confirmation and popup windows
+	// Initialize the general purpose overlay DIV
+	// Used for form submission confirmation, dynamically generated forms
 	$('body').append('<div id="popupSlider"></div>');
 
 	// Add hidden element to forms to check if they've been confirmed
@@ -182,6 +189,10 @@ jQuery(document).ready(function() {
 			$('#displaySubordinates').hide();
 		}
 	})
+
+	$('body').on('click', 'a.disabled', function(e){
+		e.preventDefault();
+	});
 
 });
 

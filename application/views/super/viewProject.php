@@ -137,14 +137,24 @@ $newExpenseString =
  * that agree
  */
 $rawAgreements = explode(',', $thisComment['agreements']);
-$agreeCount = 0;
+$agreements = 0;
+$memberNames = '';
 foreach($rawAgreements as $thisElement) {
 	if(!empty($thisElement)) {
-		$agreeCount++;
+		$memberNames .= $this->membersModel->getName($thisElement) . ", ";	
+		$agreements++;
 	}
 }
+$memberNames = substr($memberNames, 0, strlen($memberNames) - 2); // Remove the last space and comma :o
+
+/*
+ * We've got the count and member names
+ * Now lets put together an anchor string, so
+ * the member names are shown as a tooltip on hover
+ */
+$agreeString = '<a href="" class="disabled" title="' . $memberNames . '">' . $agreements . '</a>';
 ?>
- 		"agreements" : "<?= $agreeCount ?>",
+ 		"agreements" : "<?= $this->mylibrary->escapeQuotes($agreeString) ?>",
 <?php
 /*
  * Determine the actions that the user can perform, based on the user type

@@ -13,7 +13,7 @@ class Mylibrary {
 
         function replaceQuotes($matches) {
             foreach ($matches as $match) {
-                return "&quot;";
+                return "\\\"";
             }
         }
 

@@ -13,7 +13,7 @@
 <?php } else { ?>
 <?= form_open('member/myProjects') ?>
 <div class="gridOne spaceTop">
-	<table class="displayOnly">
+	<table class="singleRow">
 		<thead>
 			<tr>
 				<th>Discussion Date</th>
