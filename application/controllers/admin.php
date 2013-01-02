@@ -352,6 +352,9 @@ class Admin extends CI_Controller {
 	public function addMember() { 
 		# code...
 		if($data = $this->input->post()){
+
+			$this->load->model('titlesModel');
+			$this->load->model('membersModel');
 			
 			$verify = $this->isNotValidAddMember($data);
 			if($verify == 0){
@@ -381,7 +384,7 @@ class Admin extends CI_Controller {
 					);
 
 				if($data['newTitle'] != ''){
-					$data['titleId'] = $this->sectorsModel->insertTitle($data['newTitle']);
+					$data['titleId'] = $this->titlesModel->insertTitle($data['newTitle']);
 				}
 
 				if($this->membersModel->insertMember($insert))
