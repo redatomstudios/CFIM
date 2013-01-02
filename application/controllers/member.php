@@ -259,12 +259,14 @@ class Member extends CI_Controller{
 		foreach ($leaderProjects as $key => $row) {
 		    $timestamp1[$key]  = $row['commentTimestamp'];
 		}
+		if(sizeof($leaderProjects) > 0)
 		array_multisort( $timestamp1, SORT_DESC, $leaderProjects);
 
 
 		foreach ($memberProjects as $key => $row) {
 		    $timestamp[$key]  = $row['commentTimestamp'];
 		}
+		if(sizeof($memberProjects) > 0)
 		array_multisort( $timestamp, SORT_DESC, $memberProjects);
 
 		$data['memberProjects'] = array_merge($leaderProjects, $memberProjects);
