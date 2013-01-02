@@ -132,7 +132,7 @@ class Admin extends CI_Controller {
 
 					$this->projectsModel->updateDocuments($pid, $ids);
 				}
-				redirect('/admin');
+				redirect('/admin?n=' . urlencode('New project added successfully.') . '^1');
 
 
 				
