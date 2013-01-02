@@ -15,3 +15,12 @@ Notes
 
 - Just My Invested Projects left in member accounts, finish that and we're done with member accounts
 - Since there's no $comments defined in myProjects, table won't render until that value is passed in
+
+
+Frontend Changes
+================
+- In My Invested Projects section, remove the default sorting technique used in listProjects view
+- UPDATE DATABASE
+	http://localhost/CFIM/member/viewProject/64
+	Check this after database update
+	Root Comments present, but not showing in viewProject Page

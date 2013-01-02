@@ -15,6 +15,7 @@ class CommentsModel extends CI_Model{
 	public function getAllComments($projectId){
 		$this->db->order_by('orderNumber', 'desc');
 		$res = $this->db->get_where('comments', array('projectId' => $projectId));
+		// echo "<br>". $this->db->last_query();
 		return $res->result_array();
 	}
 
