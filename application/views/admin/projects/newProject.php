@@ -56,7 +56,18 @@ var subSectors = {}; ' . $jsString . '
 </script>
 ';
 	?>
-	<?= form_dropdown('subsector', $subSectors[(isset($sector)?$sector:'1')], (isset($subsector)?$subsector:'1'), 'class = "combobox" id="liveSubsector" required="required"') ?>
+	<?php 
+		if(isset($sector)) {
+			if(isset($subSectors[$sector])) {
+				$subSectorList = $subSectors[$sector];
+			} else {
+				$subSectorList = array();
+			}
+		} else {
+			$subSectorList = $subSectors[1];
+		}
+	?>
+	<?= form_dropdown('subsector', $subSectorList, (isset($subsector)?$subsector:'1'), 'class = "combobox" id="liveSubsector" required="required"') ?>
 	<?= form_input(array('name' => 'newSubsector', 'placeholder' => 'New Subsector')) ?>
 </div>
 <div class="gridTwo spaceTop">
