@@ -240,32 +240,87 @@ class Member extends CI_Controller{
 		# code...
 
 		$this->load->model('commentsModel');
-		
+		$this->load->model('sectorsModel');
+		$this->load->model('provincesModel');
+
+
 		$d1['currentPage'] = 'investedProjects';
 		$d1['username'] = $this->session->userdata('username');
 
 		$data['currentPage'] = 'investedProjects';
 		$data['projectsAsLeader'] = $this->projectsModel->getInvestedProjectsOfLeader($this->session->userdata('id'));
 
-		echo "<pre>";
-		$pi = array();
-		if($projects = $this->membersModel->getProjects($this->session->userdata('id'), 'Invested'))
-		foreach ($projects as $project) {
-			# code...
-			print_r($project);
-			if($project['leaderId'] != $this->session->userdata('id')){
-				if($p['comments'] = $this->commentsModel->getLatestComment($project['id'])){
-					$p['id'] = $project['id'];	
-					$pi[] = $p;
+		// echo "<pre>";
+		$memberProjects = array();
+		$leaderProjects = array();
+		if($projects = $this->membersModel->getProjects($this->session->userdata('id'), 'Invested')){
+			foreach ($projects as $project) {
+				# code...
+				// print_r($project);
+				if($project['leaderId'] != $this->session->userdata('id')){
+					// echo "BLAH";
+					$p = array();
+					$p = $project;
+					if($comment = $this->commentsModel->getLatestComment($project['id'])){
+						$p['commentTimestamp'] = $comment['timestamp'];
+					}else
+						$p['commentTimestamp'] = '';
+					$memberProjects[] = $p;
+					// echo "<br>" . sizeof($p);
+				}
+				else{
+					$p = array();
+					$p = $project;
+					if($comment = $this->commentsModel->getLatestComment($project['id'])){
+						$p['commentTimestamp'] = $comment['timestamp'];
+					}else
+						$p['commentTimestamp'] = '';
+					$leaderProjects[] = $p;
 				}
 			}
 		}
 		
-		print_r($pi);
-		echo "</pre>" ;
-		// $this->load->view('member/header', $d1);
-		// $this->load->view('member/listProjects', $data);
-		// $this->load->view('member/footer');
+		$timestamp1 = array();
+		foreach ($leaderProjects as $key => $row) {
+		    $timestamp1[$key]  = $row['commentTimestamp'];
+		}
+		array_multisort( $timestamp1, SORT_DESC, $leaderProjects);
+
+
+		foreach ($memberProjects as $key => $row) {
+		    $timestamp[$key]  = $row['commentTimestamp'];
+		}
+		array_multisort( $timestamp, SORT_DESC, $memberProjects);
+
+		$data['memberProjects'] = array_merge($leaderProjects, $memberProjects);
+		
+		$ps = array();
+		foreach ($data['memberProjects'] as $project) {
+
+			$leaderName = $this->membersModel->getName($project['leaderId']);
+			$sector = $this->sectorsModel->getName($project['sectorId']);
+			$subsector = $this->sectorsModel->getName($project['subSectorId']);
+			$geoRegion = $this->provincesModel->getName($project['geoRegion']);
+			$p['id'] = $project['id'];
+			$p['projectName'] = $project['name'];
+			$p['projectLeader'] = $leaderName;
+			$p['sector'] = $sector;
+			$p['subSector'] = $subsector;
+			$p['geoRegion'] = $geoRegion;
+			$p['dealSize'] = $project['dealSize'];
+			$p['date'] = $project['discussionDate'];
+			$p['status'] = $project['status'];
+			$p['comments'] = $this->commentsModel->getComments($p['id'], 3);
+
+			$ps[] = $p;
+		}
+
+		$data['memberProjects'] = $ps;
+
+		$this->load->view('member/header', $d1);
+		$this->load->view('member/listProjects', $data);
+		$this->load->view('member/footer');
+		
 	}
 
 	private function getProjectFormData() {
@@ -335,6 +390,10 @@ class Member extends CI_Controller{
 		$this->load->view('member/footer');
 	}
 
-
+	public function newRootComment(){
+		# code...
+		echo "<pre>";
+		print_r($this->input->post());
+	}
 
 }
