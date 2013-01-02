@@ -180,7 +180,11 @@ jQuery(document).ready(function() {
 
 	// Update the subsectors when a new sector is selected
 	$('#liveSector').change(function() {
-		$('#liveSubsector').html(subSectors[this.value]);
+		if(subSectors[this.value]) {
+			$('#liveSubsector').html(subSectors[this.value]);
+		} else {
+			$('#liveSubsector').empty();
+		}
 	});
 
 	// When a project leader is selected, disable that option in member list
