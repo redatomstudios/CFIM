@@ -91,7 +91,7 @@ $newCommentString =
 "{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
 "{'name' : 'commentBody','type' : 'text', 'label' : 'Comment'},".
 "{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}],".
-" 'action' : '" . site_url("/member/newRootComment") . "',".
+" 'action' : '" . site_url("/member/newComment") . "',".
 " 'method' : 'POST',".
 " 'heading' : 'New Comment' }";
 
@@ -213,7 +213,7 @@ if(isset($status)) {
  		"actions" : "<?= $userActions ?>",
  		"time" : "<?= $thisComment['date'] ?>",
  		"comments" : [
- 			<?php if(count($memberReplies)) { ?>
+ 			<?php if(count($memberReplies) && isset($memberReplies[$rootID])) { ?>
 	 			<?php foreach($memberReplies[$rootID] as $memberReply) { ?>
 	 				{
 	 					"name" : "<?= $memberReply['name'] ?>",
@@ -225,7 +225,7 @@ if(isset($status)) {
  			<?php } ?>
  		],
  		"responses" : [
-	 		<?php if(count($memberReplies)) { ?>
+	 		<?php if(count($memberReplies) && isset($teamReplies[$rootID])) { ?>
 	 			<?php foreach($teamReplies[$rootID] as $teamReply) { ?>
 	 				{
 	 					"name" : "<?= $teamReply['name'] ?>",
