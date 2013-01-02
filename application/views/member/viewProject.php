@@ -211,23 +211,27 @@ if(isset($status)) {
  		"actions" : "<?= $userActions ?>",
  		"time" : "<?= $thisComment['date'] ?>",
  		"comments" : [
- 			<?php foreach($memberReplies[$rootID] as $memberReply) { ?>
- 				{
- 					"name" : "<?= $memberReply['name'] ?>",
- 					"comment" : "<?= $memberReply['comment'] ?>",
- 					"attachment" : "<?= $memberReply['attachment'] ?>",
- 					"date" : "<?= $memberReply['date'] ?>"
- 				},
+ 			<?php if(count($memberReplies)) { ?>
+	 			<?php foreach($memberReplies[$rootID] as $memberReply) { ?>
+	 				{
+	 					"name" : "<?= $memberReply['name'] ?>",
+	 					"comment" : "<?= $memberReply['comment'] ?>",
+	 					"attachment" : "<?= $memberReply['attachment'] ?>",
+	 					"date" : "<?= $memberReply['date'] ?>"
+	 				},
+	 			<?php } ?>
  			<?php } ?>
  		],
  		"responses" : [
- 			<?php foreach($teamReplies[$rootID] as $teamReply) { ?>
- 				{
- 					"name" : "<?= $teamReply['name'] ?>",
- 					"comment" : "<?= $teamReply['comment'] ?>",
- 					"attachment" : "<?= $teamReply['attachment'] ?>",
- 					"date" : "<?= $teamReply['date'] ?>"
- 				},
+	 		<?php if(count($memberReplies)) { ?>
+	 			<?php foreach($teamReplies[$rootID] as $teamReply) { ?>
+	 				{
+	 					"name" : "<?= $teamReply['name'] ?>",
+	 					"comment" : "<?= $teamReply['comment'] ?>",
+	 					"attachment" : "<?= $teamReply['attachment'] ?>",
+	 					"date" : "<?= $teamReply['date'] ?>"
+	 				},
+	 			<?php } ?>
  			<?php } ?>
  		]
  	},
