@@ -183,6 +183,10 @@ jQuery(document).ready(function() {
 		}
 	})
 
+	$('body').on('click', 'a.disabled', function(e){
+		e.preventDefault();
+	});
+
 });
 
 
