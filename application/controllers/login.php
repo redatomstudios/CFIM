@@ -52,10 +52,10 @@ class Login extends CI_Controller {
 			if($this->loginModel->loginCheck($post['username'], $post['password']))
 				redirect('/home/index');
 			else
-				echo "Login Failure!!";
+				redirect('/login?n=' . urlencode('Login failed.') . '^0');
 
 		else
-			echo "Wrong captcha!!";
+			redirect('/login?n=' . urlencode('Incorrect Captcha.') . '^0');
 	}
 
 	

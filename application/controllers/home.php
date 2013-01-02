@@ -21,16 +21,15 @@ class Home extends CI_Controller {
 
 		// echo "Rank: ".$this->session->userdata('rank') ;
 		if($this->session->userdata('rank') == 1)
-			redirect('/supervisor');
+			redirect('/supervisor?n=Login%20Successful^1');
 		elseif($this->session->userdata('rank') == 2)
-			redirect('/admin');
+			redirect('/admin?n=Login%20Successful^1');
 		elseif($this->session->userdata('rank') == 3)
-			redirect('/member');
+			redirect('/member?n=Login%20Successful^1');
 		elseif($this->session->userdata('rank') == 4)
-			redirect('/finance');
+			redirect('/finance?n=Login%20Successful^1');
 		else
-			redirect('login');
-
+			redirect('login?n=' . urlencode('Please login to continue') . '^0');
 	}
 
 	public function logout(){

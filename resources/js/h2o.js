@@ -243,8 +243,8 @@ var checkEmail = function(email, errorStack) {
 var openNotification = function() {
 	if(notifyStack.length > 0 && liveNotifications <= maxParallelNotify) {
 		var thisMessage = notifyStack.shift(); // Get the latest message
-		var thisType = thisMessage.split('|')[1]; // Separate the message type and message
-		thisMessage = thisMessage.split('|')[0];
+		var thisType = thisMessage.split('^')[1]; // Separate the message type and message
+		thisMessage = thisMessage.split('^')[0];
 		$('div#notifier').append('<div id="m'+alert_id+'" class="'+(thisType == '1' ? 'notification' : 'alert')+'">'+thisMessage+'</div>') // Create control string to output to JS
 		var this_id = '#m' + alert_id++;
 		$(this_id).animate({height: 2+'em'}, function(){
@@ -265,7 +265,7 @@ var openNotification = function() {
 }
 
 var stackNotify = function(message, type) {
-	notifyStack.push(message + '|' + type);
+	notifyStack.push(message + '^' + type);
 }
 
 var Notify = function(messages) {

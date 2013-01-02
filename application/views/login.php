@@ -66,41 +66,46 @@
 			background: -webkit-gradient(linear,left top,left bottom,from(#5ADBF7),to(#1A99DC));
 			background: -moz-linear-gradient(top,#5ADBF7,#1A99DC);
 		}
+
+		/* Notification Styles */
+		div#notifier {
+			position: fixed;
+			top: 0;
+			width: 100%;
+			margin: 0;
+			line-height: 2em;
+			text-align: center;
+			font-size: 1em;
+			font-weight: bold;
+			font-family: Arial, Verdana, sans-serif;
+		}
+
+		div.notification, div.alert {
+			background: #4A4;
+			width: 100%;
+			height: 0;
+			overflow: hidden;
+			border-bottom: solid thin rgba(0, 0, 0, 0.3);
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+			text-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
+			cursor: pointer;
+			color: #FFF;
+		}
+
+		div.alert {
+			background: #A22;
+			color: #FFF;
+			text-shadow: 0 1px 1px #000;
+		}
+
+		div.notification:hover, div.alert:hover {
+			opacity: 0.9;
+		}
 	</style>
 	<link href="<?= base_url() ?>resources/css/formalize.css" />
 	<script src="<?= base_url() ?>resources/js/jquery-1.8.2.min.js"></script>
+	<script src="<?= base_url() ?>resources/js/notify.js"></script>
 	<script src="<?= base_url() ?>resources/js/jquery.formalize.min.js"></script>
-	<script>
-		// jQuery(document).ready(function($){
-		// // $.each($('input[type="text"], input[type="password"]'), function(){
-		// // 		if(this.attributes['data-hint']) {
-		// // 			this.value = this.attributes['data-hint'].value;
-		// // 			this.style.color = "rgba(0, 0, 0, 0.3)";
-		// // 		}
-		// // 	});
-
-		// 	$('input[type="text"], input[type="password"]').each(function(){
-		// 		if($(this).attr('data-hint')) {
-		// 			$(this).val($(this).attr('data-hint'));
-		// 			this.style.color = "rgba(0, 0, 0, 0.3)";
-		// 		}
-		// 	}).focus(function(){
-		// 		if(this.attributes['data-hint']) {
-		// 			if(this.value == this.attributes['data-hint'].value) {
-		// 				this.value = "";
-		// 				this.style.color = "#000";
-		// 			}
-		// 		}
-		// 	}).blur(function(){
-		// 		if(this.value == '') {
-		// 			if(this.attributes['data-hint']) {
-		// 				this.value = this.attributes['data-hint'].value;
-		// 				this.style.color = "rgba(0, 0, 0, 0.3)";
-		// 			}
-		// 		}
-		// 	});
-		// });
-	</script>
 </head>
 <body>
 <div>
@@ -114,5 +119,23 @@ echo form_submit('submission','Submit');
 form_close();
  ?>
 </div>
+<?php if(isset($_GET['n'])) { ?>
+<script>
+jQuery(document).ready(function($){
+	// NOTIFICATIONS: format is MESSAGE^TYPE
+	// USE ; TO DELIMIT MULTIPLE MESSAGE. I.E.:
+	// MESSAGE1^TYPE;MESSAGE2^TYPE;etc.
+<?php 
+	$notifications = explode(';', $_GET['n']);
+	foreach($notifications as $message) {
+		$message = explode('|', $message);
+		echo 'stackNotify("'.$message[0].'", '.(sizeof($message) == 2 ? $message[1] : 0).');
+'; // Populate the message stack
+	}
+?>
+openNotification(); // Fire notification system, and BOOM!
+});
+</script>
+<?php } ?>
 </body>
 </html>
