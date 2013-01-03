@@ -19,13 +19,24 @@ class Supervisor extends CI_Controller{
 		$d1['currentPage'] = 'home';
 
 		$data = $this->getProjectFormData();
+		if($this->input->post()){
+			$d['discussionDate'] = $this->input->post('discussionDate');
+			$data['memberProjects'] = $this->projectsModel->searchProjects($d);
+			// $data['memberProjects'] = $this->projectsModel->getProjects();
+		}
+		else{
+			$data['memberProjects'] = $this->projectsModel->getProjects();
+		}
+		if($data['memberProjects']){
 
-		if($data['memberProjects'] = $this->projectsModel->searchProjects($this->input->post())){
-
+			// echo "<pre>";
 			$this->load->model('sectorsModel');
 			$this->load->model('provincesModel');
+			$this->load->model('commentsModel');
 			$ps = array();
 			foreach ($data['memberProjects'] as $project) {
+
+				// echo "<br> <br>";
 				# code...
 				$leaderName = $this->membersModel->getName($project['leaderId']);
 				$sector = $this->sectorsModel->getName($project['sectorId']);
@@ -40,11 +51,17 @@ class Supervisor extends CI_Controller{
 				$p['dealSize'] = $project['dealSize'];
 				$p['date'] = $project['discussionDate'];
 				$p['status'] = $project['status'];
+				$p['comments'] = $this->commentsModel->getComments($p['id'], 3);
+
 				$ps[] = $p;
 			}
+			// print_r($ps);
+
 			$data['memberProjects'] = $ps;
 		}
 
+		// echo "<pre>";
+		// print_r($data);
 
 		$this->load->view('/super/header', $d1);
 		$this->load->view('/super/listProjects', $data);
