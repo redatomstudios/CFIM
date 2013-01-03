@@ -437,7 +437,6 @@ if(isset($status)) {
 				<th>Member</th>
 				<th>Update on Project</th>
 				<th>Attachment</th>
-				<th>Date</th>
 				<th>Time</th>
 				<th>Expenses</th>
 				<th>Voucher</th>
@@ -446,25 +445,29 @@ if(isset($status)) {
 			</tr>
 		</thead>
 		<tbody>
+			<?php $totalExpenses = 0; ?>
 			<?php foreach ($updates as $update) { ?>
 			<tr>
 				<td><?= $this->membersModel->getName($update['memberId']) ?></td>
 				<td><?= $update['updateBody'] ?></td>
 				<td><input type="button" value="View" /></td>
-				<td><?= $update['timestamp'] ?></td>
-				<td>15:34</td>
-				<td><?= $update['expense'] ?></td>
+				<td class="centered"><?= $update['timestamp'] ?></td>
+				<td class="centered"><?= $update['expense'] ?></td>
+				<?php $totalExpenses += $update['expense']; ?>
 				<td><input type="button" value="View" /></td>
 				<td><?= (isset($update['reviewedBy'])?'Approved by ' . $this->membersModel->getName($update['reviewedBy']) :'Not Approved Yet') ?></td>
 				<td><?php // Reason for status, if any ?></td>
 			</tr>			
 			<?php  }  ?>
+			<?php 
+				$totalExpenses *= 100;
+			?>
 		</tbody>
 	</table>
 	<?php } ?>
 </div>
 <div class="gridOne spaceTop" style="text-align: right; font-weight: bold; font-size: 1.5em;">
-	Total: 5000
+	Total: <?= intval($totalExpenses / 100) . '.' . ($totalExpenses % 100) ?>
 </div>
 <div class="gridTwo spaceTop">
 	<input type="button" value="Add New Update" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newUpdateString) ?>)" /> <input type="button" value="Add Expenses" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newExpenseString) ?>)" />
