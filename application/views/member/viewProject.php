@@ -467,7 +467,11 @@ if(isset($status)) {
 	<?php } ?>
 </div>
 <div class="gridOne spaceTop" style="text-align: right; font-weight: bold; font-size: 1.5em;">
-	Total: <?= intval($totalExpenses / 100) . '.' . ($totalExpenses % 100) ?>
+	<?php if(isset($totalExpenses)) { ?>
+		Total: <?= intval($totalExpenses / 100) . '.' . ($totalExpenses % 100) ?>
+	<?php } else { ?>
+		Total: 0
+	<?php } ?>
 </div>
 <div class="gridTwo spaceTop">
 	<input type="button" value="Add New Update" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newUpdateString) ?>)" /> <input type="button" value="Add Expenses" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newExpenseString) ?>)" />
