@@ -187,7 +187,7 @@ if(isset($status)) {
 	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
 	' "action" : "'. site_url('/member/newComment') .'",'.
 	' "method" : "POST",'.
-	" 'enctype' : 'multipart/form-data',".
+	' "enctype" : "multipart/form-data",'.
 	' "heading" : "Post a Comment" }';
 
 	// Form to process [Agree] button
@@ -229,7 +229,7 @@ if(isset($status)) {
 	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
 	' "action" : "'. site_url('/member/newComment') .'",'.
 	' "method" : "POST",'.
-	" 'enctype' : 'multipart/form-data',".
+	' "enctype" : "multipart/form-data",'.
 	' "heading" : "Post a Response" }';
 
 	// if(count($memberReplies) && isset($memberReplies[$rootID])) {
