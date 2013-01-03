@@ -187,6 +187,7 @@ if(isset($status)) {
 	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
 	' "action" : "'. site_url('/member/newComment') .'",'.
 	' "method" : "POST",'.
+	" 'enctype' : 'multipart/form-data',".
 	' "heading" : "Post a Comment" }';
 
 	// Form to process [Agree] button
@@ -228,6 +229,7 @@ if(isset($status)) {
 	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
 	' "action" : "'. site_url('/member/newComment') .'",'.
 	' "method" : "POST",'.
+	" 'enctype' : 'multipart/form-data',".
 	' "heading" : "Post a Response" }';
 
 	// if(count($memberReplies) && isset($memberReplies[$rootID])) {
@@ -411,7 +413,25 @@ if(isset($status)) {
 				<?=  $dealSize ?>
 			</td>
 			<td style="text-align: center;">
-				<?=  "<input type='button' value='View' />" ?>
+				<?php 
+					// Check if there are any attachments
+					// If so, echo the formatted data with button, otherwise echo "None"
+					if(is_array($documents) && count($documents)) {
+						// Construct JS object with details to pass to View button
+						$JSData = '{ "attachments" : [';
+						foreach($documents as $thisDocument) {
+							$JSData .= '{' . 
+											'"filename" : "' . $thisDocument['name'] . '",' .
+											'"timestamp" : "' . $thisDocument['time'] . '"' .
+										'},';
+						}
+						$JSData .= '],';
+						$viewString = "<input type='button' value='View' onClick='showAttachments(" . $this->mylibrary->escapeQuotes($JSData) . ")' />";
+					} else {
+						$viewString = "None";
+					}
+				?>
+				<?=  $viewString ?>
 			</td>
 			<?php if(isset($status)) { // Echo this only if the person viewing is not a member of the project ?>
 			<td>
@@ -501,3 +521,14 @@ if(isset($status)) {
 </div>
 <?php } // End of things to echo only if viewer is a member of the project ?>
 <div class="clear"></div>
+<script>
+filesToDelete = '';
+	$('body').on('click', 'input[type="checkbox"].deleteAttachmentFlag', function(){
+		if(this.checked) {
+			filesToDelete += this.value + ',';
+		} else {
+			filesToDelete = filesToDelete.split(this.value + ',').join('');
+		}
+		document.getElementById('attachmentsToDelete').value = filesToDelete.substring(0, filesToDelete.length - 1);
+	});
+</script>

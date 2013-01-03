@@ -74,6 +74,43 @@ function openForm(dataFields) {
 	openPopupSlider(form);
 }
 
+function showAttachments(dataFields) {
+	var data = "<div class='gridOne spaceTop'><form action='' method='POST'>";
+
+	data += "<table class='displayAttachments'>";
+	data += "<thead>" +
+				"<th>Filename</th>" +
+				"<th>Time</th>" +
+				"<th>Delete?</th>" +
+			"</thead>" +
+			"<tbody>";
+		
+	for(thisAttachment in dataFields.attachments) {
+		thisAttachment = dataFields.attachments[thisAttachment];
+		data += "<tr>" +
+					"<td>" + thisAttachment['filename'] + "</td>" +
+					"<td>" + thisAttachment['timestamp'] + "</td>" +
+					"<td><input type='checkbox' class='deleteAttachmentFlag' value='' /></td>" +
+				"</tr>";
+	}
+
+	data += "</tbody></table>"; 
+	data += '<input id="attachmentsToDelete" type="hidden" name"deleteFiles" value="" /></form>';
+	data += "<div class='clear'></div><div class='gridOne spaceTop small'><input type='submit' value='Submit' /><input type='button' value='Cancel' onclick='hidePopupSlider();' /></div>"
+	data += "</div>";
+
+	filesToDelete = '';
+
+	openPopupSlider(data);
+	$('table.displayAttachments').dataTable({
+        "bPaginate": true,
+        "bLengthChange": false,
+        "bFilter" : true,
+        "bInfo" : true,
+        "bSort": false
+	});
+}
+
 jQuery(document).ready(function() {
 
 	// Datatable for showing large amounts of data and comments, scrolling enabled
