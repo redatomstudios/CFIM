@@ -14,7 +14,8 @@
 
 	$rootComments = array(); 	// Store the root comments here
 	$memberReplies = array();	// Store the comments from members not on the team here
-	$teamResponses = array();	// Store the responses from the project team here
+	$teamReplies = array();	// Store the responses from the project team here
+	$sImageUrl = "http://www.datatables.net/release-datatables/examples/examples_support/";
 	
 	foreach($comments as $thisComment) {
 	/* Split the order number
@@ -225,7 +226,7 @@ if(isset($status)) {
  		"actions" : "<?= $userActions ?>",
  		"time" : "<?= $thisComment['date'] ?>",
  		"comments" : [
- 			<?php if(count($memberReplies)) { ?>
+ 			<?php if(count($memberReplies) && isset($memberReplies[$rootID])) { ?>
 	 			<?php foreach($memberReplies[$rootID] as $memberReply) { ?>
 	 				{
 	 					"name" : "<?= $memberReply['name'] ?>",
@@ -237,7 +238,7 @@ if(isset($status)) {
  			<?php } ?>
  		],
  		"responses" : [
-	 		<?php if(count($memberReplies)) { ?>
+	 		<?php if(count($teamReplies) && isset($teamReplies[$rootID])) { ?>
 	 			<?php foreach($teamReplies[$rootID] as $teamReply) { ?>
 	 				{
 	 					"name" : "<?= $teamReply['name'] ?>",
@@ -247,7 +248,12 @@ if(isset($status)) {
 	 				},
 	 			<?php } ?>
  			<?php } ?>
- 		]
+ 		],
+ 		<?php if( (count($memberReplies) && isset($memberReplies[$rootID])) || (count($teamReplies) && isset($teamReplies[$rootID]))) { ?>
+		"control" : "<?= '<img src=\"'.$sImageUrl.'details_open.png\">' ?>"
+		<?php } else { ?>
+		"control" : ""
+		<?php } ?>
  	},
  <?php } ?>
  
@@ -279,12 +285,7 @@ if(isset($status)) {
 		        "bInfo": false,
 		        "aaSorting": [[4, 'asc']],
 		        "aoColumns": [
-				        {
-		               "mDataProp": null,
-		               "sClass": "control centered",
-		               "sDefaultContent": '<img src="'+sImageUrl+'details_open.png'+'">',
-		               "bSortable": false
-		            },
+				    { "mDataProp": "control", "sClass": "control centered", "bSortable": false },
 		            { "mDataProp": "member", "bSortable": false },
 		            { "mDataProp": "comment", "bSortable": false },
 		            { "mDataProp": "attachment", "bSortable": false },
