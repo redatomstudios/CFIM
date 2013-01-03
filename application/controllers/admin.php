@@ -222,8 +222,9 @@ class Admin extends CI_Controller {
 
 
 			$data1['currentPage'] = 'modProject';
-			$this->load->view('admin/header', $data1);
 
+			// print_r($data['status']);
+			$this->load->view('admin/header', $data1);
 			$this->load->view('admin/projects/searchProject', $data);
 			$this->load->view('admin/footer');
 		}
@@ -440,7 +441,7 @@ class Admin extends CI_Controller {
 
 	public function isNotValidAddMember($data){
 		# code...
-		if(!($data['name'] != '' && $data['username'] != '' && $data['password'] != '' && $data['title'] != '' && $data['officeEmail'] != '' && $data['otherEmail'] != '' && $data['tel1'] != '' && $data['tel2'] != ''))
+		if(!($data['name'] != '' && $data['username'] != '' && $data['password'] != '' && $data['title'] != '' && $data['officeEmail'] != '' && $data['otherEmail'] != '' && $data['tel1'] != ''))
 			return 1;
 		elseif(!in_array($data['rank'], array(1, 2, 3, 4)))
 			return 2;
