@@ -28,6 +28,13 @@
 		if(sizeof($orderNumber) == 1) {
 			// This is a root comment
 			$rootID = $orderNumber[0];
+			$fileNames = '';
+			if(isset($thisComment['files'])){
+				foreach ($thisComment['files'] as $file) {
+					$fileNames .= $file . "</ br>";
+				}
+				$fileNames = substr($fileNames, 0, strlen($fileNames)-6);
+			}
 			$rootComments[$rootID] = array(
 					'name' => $this->membersModel->getName($thisComment["memberId"]),
 					'comment' => $thisComment['body'],
@@ -93,6 +100,7 @@ $newCommentString =
 "{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}],".
 " 'action' : '" . site_url("/member/newComment") . "',".
 " 'method' : 'POST',".
+" 'enctype' : 'multipart/form-data',".
 " 'heading' : 'New Comment' }";
 
 // String used to generate form for posting NEW UPDATE
@@ -103,6 +111,7 @@ $newUpdateString =
 "{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}],".
 " 'action' : '',".
 " 'method' : 'POST',".
+" 'enctype' : 'multipart/form-data',".
 " 'heading' : 'New Update' }";
 
 // String used to generate form for posting a NEW EXPENSE
@@ -115,6 +124,7 @@ $newExpenseString =
 "{'name' : 'vouchers[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Voucher'}],".
 " 'action' : '',".
 " 'method' : 'POST',".
+" 'enctype' : 'multipart/form-data',".
 " 'heading' : 'Add Expense' }";
 
  /* Since we're creating a large and complicated outout, it'll be

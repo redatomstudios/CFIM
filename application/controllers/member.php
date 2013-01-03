@@ -100,18 +100,53 @@ class Member extends CI_Controller{
 		$this->load->model('membersModel');
 		$this->load->model('commentsModel');
 		$this->load->model('expensesModel');
+		$this->load->model('documentsModel');
+		
+		// echo "<pre>";
 
 		if($id == 0){
 			echo "No Project Specified";
 			return;
 		}
 		
+		// print_r($comments);
+		$tempComments = array();
+		$comments = $this->commentsModel->getAllComments($id);
+		if($comments){
+			foreach ($comments as $comment) {
+				# code...
+				$names = array();
+				$docs = $comment['attachments'];
+				if($docs != ''){
+					$docs = trim($docs, ',');
+					$docs = explode(',', $docs);
+					$name = array();
+					if(sizeof($docs) > 0){
+						
+						foreach ($docs as $doc) {
+							# code...
+							// echo "<br>" . $doc;
+							$document = $this->documentsModel->getDocument($doc);
+							// print_r($document);
+							$name[] = $document->filename;
+						}
+					}
+				}
+				$c = $comment;
+				if(isset($name)) $c['files'] = $name;
+				$tempComments[] = $c;
+			}
+		}$comments = $tempComments;
+
+				// print_r($tempComments);
+
+		
 		$data = $this->projectsModel->getProject($id);
 		$data['leader'] = $this->membersModel->getName($data['leaderId']);
 		$data['sector'] = $this->sectorsModel->getName($data['sectorId']);
 		$data['subsector'] = $this->sectorsModel->getName($data['subSectorId']);
 		$data['georegion'] = $this->provincesModel->getName($data['geoRegion']);
-		$data['comments'] = $this->commentsModel->getAllComments($id);
+		$data['comments'] = $comments;
 		$data['updates'] = $this->expensesModel->getAll($id);
 
 		// if(sizeof($data['updates']) > 0)
@@ -121,7 +156,6 @@ class Member extends CI_Controller{
 
 		$d1['currentPage'] = 'home';
 		$d1['username'] = $this->session->userdata('username');	
-
 
 		// echo "<pre>";
 		// print_r($data);
@@ -377,8 +411,8 @@ class Member extends CI_Controller{
 		$this->load->library('mylibrary');
 
 		$post = $this->input->post();
-		echo "<pre>";
-		print_r($this->input->post());
+		// echo "<pre>";
+		// print_r($this->input->post());
 
 		if(!isset($post['responseType']))
 			$data['orderNumber'] = $this->commentsModel->countComments($post['projectID'], 'root') + 1;
@@ -393,7 +427,7 @@ class Member extends CI_Controller{
 		$data['body'] = $post['commentBody'];
 		if(!$uploads = $this->mylibrary->uploader($post['projectID'])) {
 			// redirect('/admin/addProject?n=' . urlencode('Upload Failure.') . '^0');
-			echo "No Uploads";	//Echo this error
+			// echo "No Uploads";	//Echo this error
 		} else {
 			$this->load->model('documentsModel');
 
@@ -401,11 +435,11 @@ class Member extends CI_Controller{
 			$ids = implode(',', $ids);
 
 			// $this->projectsModel->updateDocuments($pid, $ids);
-			$data['body'] = $ids;
+			$data['attachments'] = $ids;
 		}
 
 		$this->commentsModel->insertComment($data);
-		// redirect('/member/viewProject/' . $post['projectID']);
+		redirect('/member/viewProject/' . $post['projectID']);
 	}
 
 	public function newUpdate(){

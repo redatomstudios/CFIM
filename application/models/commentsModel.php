@@ -16,7 +16,9 @@ class CommentsModel extends CI_Model{
 		$this->db->order_by('orderNumber', 'desc');
 		$res = $this->db->get_where('comments', array('projectId' => $projectId));
 		// echo "<br>". $this->db->last_query();
-		return $res->result_array();
+		if($res->num_rows() > 0)
+			return $res->result_array();
+		return FALSE;
 	}
 
 	public function getComments($projectId, $limit = 0){
