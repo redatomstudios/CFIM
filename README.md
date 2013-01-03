@@ -16,7 +16,6 @@ Admin
 > - Completed
 
 - Add New Project
-> - Remove ANY from project leader/member selection
 > - Require all fields for project creation
 > - Fix undefined offset: 1 on line 43, newProject.php
 

@@ -593,7 +593,7 @@ class Admin extends CI_Controller {
 		$data['sectors'] = $sec;
 		
 		$sec = array();
-		$sec[0] = 'ANY';
+		$sec[0] = 'ANY:0';
 		$subsectors = $this->sectorsModel->getSubsectors(0);
 		foreach ($subsectors as $subs) {
 			$sec[$subs['id']] = $subs['name'].':'.$subs['subsectorOf'];
