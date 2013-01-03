@@ -107,9 +107,10 @@ $newCommentString =
 $newUpdateString = 
 "{'elements' : [".
 "{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
+"{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
 "{'name' : 'commentBody','type' : 'text', 'label' : 'Comment'},".
 "{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}],".
-" 'action' : '',".
+" 'action' : '" . site_url("/member/newUpdate") . "',".
 " 'method' : 'POST',".
 " 'enctype' : 'multipart/form-data',".
 " 'heading' : 'New Update' }";
@@ -118,11 +119,12 @@ $newUpdateString =
 $newExpenseString =
 "{'elements' : [".
 "{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
+"{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
 "{'name' : 'commentBody','type' : 'text', 'label' : 'Description'},".
-"{'name' : 'expenses','type' : 'text', 'label' : 'Amount'},".
+"{'name' : 'expense','type' : 'text', 'label' : 'Amount'},".
 "{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'},".
 "{'name' : 'vouchers[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Voucher'}],".
-" 'action' : '',".
+" 'action' : '" . site_url("/member/newExpense") . "',".
 " 'method' : 'POST',".
 " 'enctype' : 'multipart/form-data',".
 " 'heading' : 'Add Expense' }";

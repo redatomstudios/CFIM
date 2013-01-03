@@ -393,7 +393,6 @@ class Member extends CI_Controller{
 
 		return $data;
 	}
-
 	
 	public function agreeComment(){
 		# code...
@@ -402,9 +401,6 @@ class Member extends CI_Controller{
 		redirect('/member/viewProject/'.$this->input->post('projectID'));
 	}
 
-	
-
-	
 	public function newComment(){
 		# code...
 		$this->load->model('commentsModel');
@@ -468,9 +464,7 @@ class Member extends CI_Controller{
 		}
 
 		$this->expensesModel->insertUpdate($data);
-		print_r($_FILES);
-		print_r($post);
-		print_r($data);
+		redirect('/member/viewProject/'.$post['projectID']);
 	}
 
 	public function newExpense(){
@@ -479,12 +473,13 @@ class Member extends CI_Controller{
 		$this->load->library('mylibrary');
 
 		$post = $this->input->post();
-		echo "<pre>";
+		// echo "<pre>";
 		
 		$data = array();
 		$data['projectId'] = $post['projectID'];
 		$data['memberId'] = $post['userID'];
 		$data['updateBody'] = $post['commentBody'];
+		$data['expense'] = $post['expense'];
 		
 
 		if(!$attachments = $this->mylibrary->uploader($post['projectID'])) {
@@ -513,10 +508,10 @@ class Member extends CI_Controller{
 			$data['vouchers'] = $ids;
 		}
 
-		$this->expensesModel->insertExpense($data);
-		print_r($_FILES);
-		print_r($post);
-		print_r($data);
+		if($this->expensesModel->insertExpense($data))
+			redirect('/member/viewProject/'.$post['projectID']);
+		else
+			redirect('/member/viewProject/'.$post['projectID'].'?n=' . urlencode('Enter Expense'));
 	}
 
 }
