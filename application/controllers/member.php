@@ -425,4 +425,50 @@ class Member extends CI_Controller{
 		print_r($data);
 	}
 
+	public function newExpense(){
+		# code...
+		$this->load->model('expensesModel');
+		$this->load->library('mylibrary');
+
+		$post = $this->input->post();
+		echo "<pre>";
+		
+		$data = array();
+		$data['projectId'] = $post['projectID'];
+		$data['memberId'] = $post['userID'];
+		$data['updateBody'] = $post['commentBody'];
+		
+
+		if(!$attachments = $this->mylibrary->uploader($post['projectID'])) {
+			// redirect('/admin/addProject?n=' . urlencode('Upload Failure.') . '^0');
+			echo "No Uploads";	//Echo this error
+		} else {
+			$this->load->model('documentsModel');
+
+			$ids = $this->documentsModel->insertDocument($post['projectID'], $attachments);
+			$ids = implode(',', $ids);
+
+			// $this->projectsModel->updateDocuments($pid, $ids);
+			$data['attachments'] = $ids;
+		}
+
+		if(!$vouchers = $this->mylibrary->uploader($post['projectID'], 'vouchers')) {
+			// redirect('/admin/addProject?n=' . urlencode('Upload Failure.') . '^0');
+			echo "No Uploads";	//Echo this error
+		} else {
+			$this->load->model('documentsModel');
+
+			$ids = $this->documentsModel->insertDocument($post['projectID'], $vouchers);
+			$ids = implode(',', $ids);
+
+			// $this->projectsModel->updateDocuments($pid, $ids);
+			$data['vouchers'] = $ids;
+		}
+
+		$this->expensesModel->insertExpense($data);
+		print_r($_FILES);
+		print_r($post);
+		print_r($data);
+	}
+
 }

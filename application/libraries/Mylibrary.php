@@ -49,7 +49,7 @@ class Mylibrary {
         return $data;
    }
 
-   public function uploader( $pid ){
+   public function uploader($pid, $fieldName = 'file'){
 
         $th =& get_instance();
 
@@ -57,16 +57,16 @@ class Mylibrary {
                 mkdir($_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/uploads/' . $pid);
 
         $th->load->library('upload');  // NOTE: always load the library outside the loop
-        $th->total_count_of_files = count($_FILES['file']['name']);
+        $th->total_count_of_files = count($_FILES[$fieldName]['name']);
         $data = array();
          /*Because here we are adding the "$_FILES['userfile']['name']" which increases the count, and for next loop it raises an exception, And also If we have different types of fileuploads */
         for($i=0; $i < $th->total_count_of_files; $i++){
 
-            $_FILES['filename']['name']    = $_FILES['file']['name'][$i];
-            $_FILES['filename']['type']    = $_FILES['file']['type'][$i];
-            $_FILES['filename']['tmp_name'] = $_FILES['file']['tmp_name'][$i];
-            $_FILES['filename']['error']       = $_FILES['file']['error'][$i];
-            $_FILES['filename']['size']    = $_FILES['file']['size'][$i];
+            $_FILES['filename']['name']    = $_FILES[$fieldName]['name'][$i];
+            $_FILES['filename']['type']    = $_FILES[$fieldName]['type'][$i];
+            $_FILES['filename']['tmp_name'] = $_FILES[$fieldName]['tmp_name'][$i];
+            $_FILES['filename']['error']       = $_FILES[$fieldName]['error'][$i];
+            $_FILES['filename']['size']    = $_FILES[$fieldName]['size'][$i];
 
             $config['file_name']     = $_FILES['filename']['name'];
             $config['upload_path'] = $_SERVER['DOCUMENT_ROOT'] . base_url(). 'resources/uploads/' . $pid;
