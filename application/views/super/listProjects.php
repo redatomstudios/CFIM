@@ -1,9 +1,9 @@
 <div class="gridOne spaceTop small">
 <?= form_open() ?>
 	<label for="projectLeader">Project Leader: </label>
-	<?= form_dropdown('projectLeader', $dates, 0) ?>
+	<?= form_dropdown('projectLeader', $members, 0) ?>
 	<label for="projectMember">Project Member: </label>
-	<?= form_dropdown('projectMember', $dates, 0) ?>
+	<?= form_dropdown('projectMember', $members, 0) ?>
 </div>
 <div class="gridOne spaceTop small">
 	<table class="displayOnly">

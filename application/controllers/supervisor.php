@@ -16,11 +16,11 @@ class Supervisor extends CI_Controller{
 		# code...
 
 		$d1['username'] = $this->session->userdata('username');
-
 		$d1['currentPage'] = 'home';
 
+		$data = $this->getProjectFormData();
 		$this->load->view('/super/header', $d1);
-		$this->load->view('/super/listProjects');
+		$this->load->view('/super/listProjects', $data);
 		$this->load->view('/super/footer');
 	}
 
@@ -68,7 +68,7 @@ class Supervisor extends CI_Controller{
 		foreach ($res as $value) {
 			$members[$value['id']] = $value['memberName'];
 		}
-		$data['projectMembers'] = $members;
+		$data['members'] = $members;
 		$data['leaders'] = $members;
 
 		return $data;

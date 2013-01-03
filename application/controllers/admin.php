@@ -584,6 +584,8 @@ class Admin extends CI_Controller {
 		$this->load->model('citiesModel');
 		$this->load->model('membersModel');
 
+		$sec = array();
+		$sec[0] = 'ANY';
 		$sectors = $this->sectorsModel->getSectors();
 		foreach ($sectors as $sector) {
 			$sec[$sector['id']] = $sector['name'];
@@ -591,6 +593,7 @@ class Admin extends CI_Controller {
 		$data['sectors'] = $sec;
 		
 		$sec = array();
+		$sec[0] = 'ANY';
 		$subsectors = $this->sectorsModel->getSubsectors(0);
 		foreach ($subsectors as $subs) {
 			$sec[$subs['id']] = $subs['name'].':'.$subs['subsectorOf'];
@@ -598,6 +601,7 @@ class Admin extends CI_Controller {
 		$data['subsectors'] = $sec;
 
 		$sec = array();
+		$sec[0] = 'ANY';
 		$subsectors = $this->provincesModel->getProvinces();
 		foreach ($subsectors as $subs) {
 			$sec[$subs['id']] = $subs['name'];
@@ -605,15 +609,17 @@ class Admin extends CI_Controller {
 		$data['provinces'] = $sec;
 
 		$sec = array();
+		$sec[0] = 'ANY';
 		$subsectors = $this->citiesModel->getCities();
 		foreach ($subsectors as $subs) {
 			$sec[$subs['id']] = $subs['name'];
 		}
 		$data['cities'] = $sec;
 
-		$data['status'] = array('Preliminary' => 'Preliminary', 'In-depth DD' => 'In-depth DD', 'Invested' => 'Invested', 'Pending' => 'Pending', 'Rejected' => 'Rejected', 'Exited' => 'Exited');
+		$data['status'] = array(0 => 'ALL', 'Preliminary' => 'Preliminary', 'In-depth DD' => 'In-depth DD', 'Invested' => 'Invested', 'Pending' => 'Pending', 'Rejected' => 'Rejected', 'Exited' => 'Exited');
 
 		$res = $this->membersModel->getTeamMembers();
+		$members[0] = 'ANY';
 		foreach ($res as $value) {
 			$members[$value['id']] = $value['memberName'];
 		}
