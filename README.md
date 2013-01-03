@@ -21,11 +21,11 @@ Admin
 - Add New Project
 > - *Remove ANY from project leader/member selection* <-Fixed
 > - *Require all fields for project creation*
-> - Fix undefined offset: 1 on line 43, newProject.php **<- These will fix themselves if ANY is removed**
+> - *Fix undefined offset: 1 on line 43, newProject.php*
 
 - Modify Existing Project
 > - *All required*
-> - Fix undefined offset: 1 on line 43, newProject.php **<- These will fix themselves if ANY is removed**
+> - *Fix undefined offset: 1 on line 43, newProject.php*
 
 - Add New Member
 > - *Only require Member Name, Username, Password, Rank, Title, Status*
