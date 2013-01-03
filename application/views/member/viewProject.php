@@ -1,3 +1,22 @@
+<?php
+function createViewButton($documents) {
+	if(is_array($documents) && count($documents)) {
+	  // Construct JS object with details to pass to View button
+	  $JSData = '{ "attachments" : [';
+	  foreach($documents as $thisDocument) {
+	    $JSData .= '{' . 
+	            '"filename" : "' . $thisDocument['filename'] . '",' .
+	            '"timestamp" : "' . $thisDocument['timestamp'] . '"' .
+	          '},';
+	  }
+	  $JSData .= ']}';
+	  $viewString = "<input type='button' value='View' onClick='showAttachments(" . $JSData . ")' />";
+	} else {
+	  $viewString = "None";
+	}
+	return $viewString;
+}
+?>
 <style>
 	div.innerDetails { display: none }
 </style>
@@ -487,12 +506,26 @@ if(isset($status)) {
 			<tr>
 				<td><?= $this->membersModel->getName($update['memberId']) ?></td>
 				<td><?= $update['updateBody'] ?></td>
-				<td><input type="button" value="View" /></td>
+
+				<?php 
+		          // Check if there are any attachments
+		          // If so, echo the formatted data with button, otherwise echo "None"
+				  $viewString = createViewButton($update['attachments']);
+		        ?>
+
+				<td class="centered"><?= $viewString ?></td>
 				<td class="centered"><?= $update['timestamp'] ?></td>
 				<?php if(intval($update['expense'])) { ?>
 					<td class="centered"><?= $update['expense'] ?></td>
 					<?php $totalExpenses += $update['expense']; ?>
-					<td><input type="button" value="View" /></td>
+
+					<?php 
+			          // Check if there are any attachments
+			          // If so, echo the formatted data with button, otherwise echo "None"
+			          $viewString = createViewButton($update['voucher']);
+			        ?>
+
+					<td class='centered'><?= $viewString ?></td>
 					<td><?= (isset($update['reviewedBy'])?'Approved by ' . $this->membersModel->getName($update['reviewedBy']) :'Not Approved Yet') ?></td>
 				<?php } else { ?>
 					<td></td>

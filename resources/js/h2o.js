@@ -75,7 +75,7 @@ function openForm(dataFields) {
 }
 
 function showAttachments(dataFields) {
-	var data = "<div class='gridOne spaceTop'>";
+	var data = "<div class='bodyContent'><div class='gridOne spaceTop'>";
 
 	// data += "<form action='' method='POST'>";
 	data += "<table class='displayAttachments'>";
@@ -99,7 +99,7 @@ function showAttachments(dataFields) {
 	// data += '<input id="attachmentsToDelete" type="hidden" name"deleteFiles" value="" /></form>';
 	// data += "<div class='clear'></div><div class='gridOne spaceTop small'><input type='submit' value='Submit' /><input type='button' value='Cancel' onclick='hidePopupSlider();' /></div>"
 	data += "<div class='clear'></div></=div class='gridOne spaceTop small'><input type='button' value='Close' onclick='hidePopupSlider();' /></div>";
-	data += "</div>";
+	data += "</div></div>";
 
 	filesToDelete = '';
 
