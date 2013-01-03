@@ -227,7 +227,7 @@ class ProjectsModel extends CI_Model{
 			if(isset($data['discussionDate']) && ($data['discussionDate'] != ''))
 				$where['discussionDate'] = $data['discussionDate'];
 
-			if(isset($data['status']) && (ctype_alpha($data['status'])))
+			if(isset($data['status']) && (!preg_match("/[0-9]/", $data['status'])))
 				$where['status'] = $data['status'];
 
 			if(isset($data['leader']) && ($data['leader'] != 0))

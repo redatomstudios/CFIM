@@ -35,21 +35,10 @@ class Test extends CI_Controller{
 
 	public function index(){
 		# code...
-		$this->db->select('rank');
-		$res = $this->db->get('members')->row();
-
-		$i = $res->rank;
-
-		if(is_int($i))
-			echo "$i is int <br>";
-
-		echo "$i <br>";
-
-		$arr = array_fill(1, 4);
-		if(in_array($i, $arr))
-			echo "true";
+		if(preg_match("/[0-9]/", 'In-depth DD'))
+			echo "Matches";
 		else
-			echo "false";
+			echo "No match";
 
 
 	}
