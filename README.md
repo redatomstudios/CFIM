@@ -12,7 +12,8 @@ Final Sweep Changes
 
 Admin
 -----
-- Home: Verified
+- Home: 
+> - Completed
 
 - Add New Project
 > - Remove ANY from project leader/member selection
@@ -41,5 +42,50 @@ Admin
 - Logout
 > - Completed
 
-Member
-------
+Member - Project Member
+-----------------------
+- Home: 
+> - Completed
+
+- My Projects
+> - Completed
+
+- My Invested Projects
+> - Completed
+
+- Change Password
+> - Completed
+
+- Logout
+> - Completed
+
+- Viewing a project
+> - 
+
+Member - Not Project Member
+---------------------------
+ - Home: 
+> - Completed
+
+- My Projects
+> - Completed
+
+- My Invested Projects
+> - Completed
+
+- Change Password
+> - Completed
+
+- Logout
+> - Completed
+
+- Viewing a project
+> - 
+
+Supervisor
+----------
+Pending
+
+Finance
+-------
+Pending
