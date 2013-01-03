@@ -54,7 +54,7 @@ var subSectors = {}; ' . $jsString . '
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Status', 'status'); ?>
-	<?= form_dropdown('status', $status); ?>
+	<?= form_dropdown('status', $status, '0'); ?>
 </div>
 <div class="clear"></div>
 <div class="gridOne spaceTop spaceBottom">
