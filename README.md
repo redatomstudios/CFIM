@@ -64,7 +64,7 @@ Member - Project Member
 
 Member - Not Project Member
 ---------------------------
- - Home: 
+- Home: 
 > - Completed
 
 - My Projects
