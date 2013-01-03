@@ -14,7 +14,8 @@
 
 	$rootComments = array(); 	// Store the root comments here
 	$memberReplies = array();	// Store the comments from members not on the team here
-	$teamResponses = array();	// Store the responses from the project team here
+	$teamReplies = array();	// Store the responses from the project team here
+	$sImageUrl = "http://www.datatables.net/release-datatables/examples/examples_support/";
 	
 	foreach($comments as $thisComment) {
 	/* Split the order number
@@ -217,15 +218,20 @@ if(isset($status)) {
 	' "action" : "'. site_url('/member/newComment') .'",'.
 	' "method" : "POST",'.
 	' "heading" : "Post a Response" }';
-	$userActions =
+
+	// if(count($memberReplies) && isset($memberReplies[$rootID])) {
+		$userActions =
 		"<input style='width: 100%;' type='button' value='Respond' onclick='openForm(". $this->mylibrary->escapeQuotes($justRespond) .")' />";
+	// } else {
+		// $userActions = "";
+	// }
 }
 
 ?>
  		"actions" : "<?= $userActions ?>",
  		"time" : "<?= $thisComment['date'] ?>",
  		"comments" : [
- 			<?php if(count($memberReplies)) { ?>
+ 			<?php if(count($memberReplies) && isset($memberReplies[$rootID])) { ?>
 	 			<?php foreach($memberReplies[$rootID] as $memberReply) { ?>
 	 				{
 	 					"name" : "<?= $memberReply['name'] ?>",
@@ -237,7 +243,7 @@ if(isset($status)) {
  			<?php } ?>
  		],
  		"responses" : [
-	 		<?php if(count($memberReplies)) { ?>
+	 		<?php if(count($teamReplies) && isset($teamReplies[$rootID])) { ?>
 	 			<?php foreach($teamReplies[$rootID] as $teamReply) { ?>
 	 				{
 	 					"name" : "<?= $teamReply['name'] ?>",
@@ -247,7 +253,12 @@ if(isset($status)) {
 	 				},
 	 			<?php } ?>
  			<?php } ?>
- 		]
+ 		],
+ 		<?php if( (count($memberReplies) && isset($memberReplies[$rootID])) || (count($teamReplies) && isset($teamReplies[$rootID]))) { ?>
+		"control" : "<?= '<img src=\"'.$sImageUrl.'details_open.png\">' ?>"
+		<?php } else { ?>
+		"control" : ""
+		<?php } ?>
  	},
  <?php } ?>
  
@@ -279,12 +290,7 @@ if(isset($status)) {
 		        "bInfo": false,
 		        "aaSorting": [[4, 'asc']],
 		        "aoColumns": [
-				        {
-		               "mDataProp": null,
-		               "sClass": "control centered",
-		               "sDefaultContent": '<img src="'+sImageUrl+'details_open.png'+'">',
-		               "bSortable": false
-		            },
+				    { "mDataProp": "control", "sClass": "control centered", "bSortable": false },
 		            { "mDataProp": "member", "bSortable": false },
 		            { "mDataProp": "comment", "bSortable": false },
 		            { "mDataProp": "attachment", "bSortable": false },
@@ -437,7 +443,6 @@ if(isset($status)) {
 				<th>Member</th>
 				<th>Update on Project</th>
 				<th>Attachment</th>
-				<th>Date</th>
 				<th>Time</th>
 				<th>Expenses</th>
 				<th>Voucher</th>
@@ -446,25 +451,33 @@ if(isset($status)) {
 			</tr>
 		</thead>
 		<tbody>
+			<?php $totalExpenses = 0; ?>
 			<?php foreach ($updates as $update) { ?>
 			<tr>
 				<td><?= $this->membersModel->getName($update['memberId']) ?></td>
 				<td><?= $update['updateBody'] ?></td>
 				<td><input type="button" value="View" /></td>
-				<td><?= $update['timestamp'] ?></td>
-				<td>15:34</td>
-				<td><?= $update['expense'] ?></td>
+				<td class="centered"><?= $update['timestamp'] ?></td>
+				<td class="centered"><?= $update['expense'] ?></td>
+				<?php $totalExpenses += $update['expense']; ?>
 				<td><input type="button" value="View" /></td>
 				<td><?= (isset($update['reviewedBy'])?'Approved by ' . $this->membersModel->getName($update['reviewedBy']) :'Not Approved Yet') ?></td>
 				<td><?php // Reason for status, if any ?></td>
 			</tr>			
 			<?php  }  ?>
+			<?php 
+				$totalExpenses *= 100;
+			?>
 		</tbody>
 	</table>
 	<?php } ?>
 </div>
 <div class="gridOne spaceTop" style="text-align: right; font-weight: bold; font-size: 1.5em;">
-	Total: 5000
+	<?php if(isset($totalExpenses)) { ?>
+		Total: <?= intval($totalExpenses / 100) . '.' . ($totalExpenses % 100) ?>
+	<?php } else { ?>
+		Total: 0
+	<?php } ?>
 </div>
 <div class="gridTwo spaceTop">
 	<input type="button" value="Add New Update" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newUpdateString) ?>)" /> <input type="button" value="Add Expenses" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newExpenseString) ?>)" />

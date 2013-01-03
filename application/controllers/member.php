@@ -160,7 +160,7 @@ class Member extends CI_Controller{
 				}
 
 				if($update['expense'] != NULL && intval($update['expense'])){
-					$docs = $update['vouchers'];
+					$docs = ( isset($update['vouchers']) ? $update['vouchers'] : '' );
 					if($docs != ''){
 						$voucherName = array();
 
