@@ -143,6 +143,7 @@ class Member extends CI_Controller{
 
 		$tempUpdates = array();
 		$updates = $this->expensesModel->getAll($id);
+		// print_r($updates);
 		if($updates){
 			foreach ($updates as $update) {
 				# code...
@@ -194,6 +195,25 @@ class Member extends CI_Controller{
 
 		
 		$data = $this->projectsModel->getProject($id);
+		$docs = $data['documents'];
+		if($docs != ''){
+			// $voucherName = array();
+
+			$docs = trim($docs, ',');
+			$docs = explode(',', $docs);
+			
+			if(sizeof($docs) > 0){
+				foreach ($docs as $doc) {
+					$document = $this->documentsModel->getDocument($doc);
+					$n['filename'] = $document->filename;
+					$n['timestamp'] = $document->timestamp;
+					$voucherName[] = $n;
+				}
+			}
+			$data['documents'] = $voucherName;
+		}
+
+
 		$data['leader'] = $this->membersModel->getName($data['leaderId']);
 		$data['sector'] = $this->sectorsModel->getName($data['sectorId']);
 		$data['subsector'] = $this->sectorsModel->getName($data['subSectorId']);
