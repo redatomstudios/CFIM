@@ -98,6 +98,7 @@ function showAttachments(dataFields) {
 	data += "</tbody></table>"; 
 	// data += '<input id="attachmentsToDelete" type="hidden" name"deleteFiles" value="" /></form>';
 	// data += "<div class='clear'></div><div class='gridOne spaceTop small'><input type='submit' value='Submit' /><input type='button' value='Cancel' onclick='hidePopupSlider();' /></div>"
+	data += "<div class='clear'></div></=div class='gridOne spaceTop small'><input type='button' value='Close' onclick='hidePopupSlider();' /></div>";
 	data += "</div>";
 
 	filesToDelete = '';
@@ -107,7 +108,7 @@ function showAttachments(dataFields) {
         "bPaginate": true,
         "bLengthChange": false,
         "bFilter" : true,
-        "bInfo" : true,
+        "bInfo" : false,
         "bSort": false
 	});
 }

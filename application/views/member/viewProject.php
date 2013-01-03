@@ -29,13 +29,13 @@
 		if(sizeof($orderNumber) == 1) {
 			// This is a root comment
 			$rootID = $orderNumber[0];
-			$fileNames = '';
-			if(isset($thisComment['files'])){
-				foreach ($thisComment['files'] as $file) {
-					$fileNames .= $file . "</ br>";
-				}
-				$fileNames = substr($fileNames, 0, strlen($fileNames)-6);
-			}
+			// $fileNames = '';
+			// if(isset($thisComment['files'])){
+			// 	foreach ($thisComment['files'] as $file) {
+			// 		$fileNames .= $file . "</ br>";
+			// 	}
+			// 	$fileNames = substr($fileNames, 0, strlen($fileNames)-6);
+			// }
 			$rootComments[$rootID] = array(
 					'name' => $this->membersModel->getName($thisComment["memberId"]),
 					'comment' => $thisComment['body'],
@@ -421,12 +421,12 @@ if(isset($status)) {
 		            $JSData = '{ "attachments" : [';
 		            foreach($documents as $thisDocument) {
 		              $JSData .= '{' . 
-		                      '"filename" : "' . $thisDocument['name'] . '",' .
-		                      '"timestamp" : "' . $thisDocument['time'] . '"' .
+		                      '"filename" : "' . $thisDocument['filename'] . '",' .
+		                      '"timestamp" : "' . $thisDocument['timestamp'] . '"' .
 		                    '},';
 		            }
-		            $JSData .= '],';
-		            $viewString = "<input type='button' value='View' onClick='showAttachments(" . $this->mylibrary->escapeQuotes($JSData) . ")' />";
+		            $JSData .= ']}';
+		            $viewString = "<input type='button' value='View' onClick='showAttachments(" . $JSData . ")' />";
 		          } else {
 		            $viewString = "None";
 		          }
