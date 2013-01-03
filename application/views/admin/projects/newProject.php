@@ -140,7 +140,6 @@ var subSectors = {}; ' . $jsString . '
 				filesToDelete = filesToDelete.split(this.value + ',').join('');
 			}
 			document.getElementById('deleteFiles').value = filesToDelete.substring(0, filesToDelete.length - 1);
-			console.log(filesToDelete);
 		});
 	</script>
 	<input id="deleteFiles" type="hidden" name"deleteFiles" value="" />
