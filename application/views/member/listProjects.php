@@ -31,7 +31,14 @@
 				<?= form_dropdown('sector', $sectors, (isset($something) ? $something : '0'), 'style="width: 100%;"') ?>
 			</td>
 			<td>
-				<?= form_dropdown('subsector', $subsectors, (isset($something) ? $something : '0'), 'style="width: 100%;"') ?>
+				<?php 
+					$subsectorNames = array();
+					foreach( $subsectors as $index => $thisSubsector ) {
+						$thisSubsector = explode(':', $thisSubsector);
+						$subsectorNames[$index] = $thisSubsector[0];
+					}
+				?>
+				<?= form_dropdown('subsector', $subsectorNames, (isset($something) ? $something : '0'), 'style="width: 100%;"') ?>
 			</td>
 			<td>
 				<?= form_dropdown('province', $provinces, (isset($something) ? $something : '0'), 'style="width: 100%;"') ?>
@@ -156,4 +163,8 @@
 	</table>
 </div>
 <div class="clear"></div>
+<?php } else { ?> 
+<div class="gridOne spaceTop centered" style="font-size: 1.3em;">
+	No projects matching criteria
+</div>
 <?php } ?>
