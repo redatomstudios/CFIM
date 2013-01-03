@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 03, 2013 at 12:48 AM
+-- Generation Time: Jan 03, 2013 at 01:17 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -53,22 +53,14 @@ CREATE TABLE IF NOT EXISTS `captcha` (
   `word` varchar(20) NOT NULL,
   PRIMARY KEY (`captcha_id`),
   KEY `word` (`word`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=97 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=98 ;
 
 --
 -- Dumping data for table `captcha`
 --
 
 INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUES
-(88, 1357100002, '::1', 'qONryd'),
-(89, 1357100869, '::1', 'cYjwtN'),
-(90, 1357100996, '::1', 'dXBBOS'),
-(91, 1357101800, '::1', 'BSSLCG'),
-(92, 1357102121, '::1', 'nHSxWM'),
-(93, 1357102157, '::1', 'uDFaRG'),
-(94, 1357102200, '::1', 'cjKSjK'),
-(95, 1357106631, '::1', 'zgatgC'),
-(96, 1357154026, '::1', 'vFmBuz');
+(97, 1357170989, '::1', 'bbCbet');
 
 -- --------------------------------------------------------
 
@@ -214,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `expenses` (
   `updateBody` text NOT NULL,
   `attachments` varchar(100) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `expenses` decimal(10,2) NOT NULL,
+  `expense` decimal(10,2) NOT NULL,
   `voucher` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

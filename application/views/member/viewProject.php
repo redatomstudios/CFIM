@@ -37,9 +37,10 @@
 	$newUpdateString = 
 	"{'elements' : [".
 	"{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
+	"{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
 	"{'name' : 'commentBody','type' : 'text', 'label' : 'Comment'},".
 	"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}],".
-	" 'action' : '',".
+	" 'action' : '" . site_url("/member/newUpdate") . "',".
 	" 'method' : 'POST',".
 	" 'heading' : 'New Update' }";
 

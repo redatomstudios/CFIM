@@ -395,4 +395,23 @@ class Member extends CI_Controller{
 		redirect('/member/viewProject/' . $post['projectID']);
 	}
 
+	public function newUpdate(){
+		# code...
+		$this->load->model('expensesModel');
+		$this->load->library('mylibrary');
+
+		$post = $this->input->post();
+		echo "<pre>";
+		
+		$data = array();
+		$data['projectId'] = $post['projectID'];
+		$data['memberId'] = $post['userID'];
+		$data['updateBody'] = $post['commentBody'];
+		if(!$data['attachments'] = $this->mylibrary->uploader($post['projectID']))
+			$data['attachments'] = NULL;
+		print_r($_FILES);
+		print_r($post);
+		print_r($data);
+	}
+
 }
