@@ -156,7 +156,9 @@ class Member extends CI_Controller{
 					if(sizeof($docs) > 0){
 						foreach ($docs as $doc) {
 							$document = $this->documentsModel->getDocument($doc);
-							$attachmentName[] = $document->filename;
+							$n['filename'] = $document->filename;
+							$n['timestamp'] = $document->timestamp;
+							$attachmentName[] = $n;
 						}
 					}
 				}
@@ -172,7 +174,9 @@ class Member extends CI_Controller{
 						if(sizeof($docs) > 0){
 							foreach ($docs as $doc) {
 								$document = $this->documentsModel->getDocument($doc);
-								$voucherName[] = $document->filename;
+								$n['filename'] = $document->filename;
+								$n['timestamp'] = $document->timestamp;
+								$voucherName[] = $n;
 							}
 						}
 					}
