@@ -19,6 +19,33 @@ class Supervisor extends CI_Controller{
 		$d1['currentPage'] = 'home';
 
 		$data = $this->getProjectFormData();
+
+		if($data['memberProjects'] = $this->projectsModel->searchProjects($this->input->post())){
+
+			$this->load->model('sectorsModel');
+			$this->load->model('provincesModel');
+			$ps = array();
+			foreach ($data['memberProjects'] as $project) {
+				# code...
+				$leaderName = $this->membersModel->getName($project['leaderId']);
+				$sector = $this->sectorsModel->getName($project['sectorId']);
+				$subsector = $this->sectorsModel->getName($project['subSectorId']);
+				$geoRegion = $this->provincesModel->getName($project['geoRegion']);
+				$p['id'] = $project['id'];
+				$p['projectName'] = $project['name'];
+				$p['projectLeader'] = $leaderName;
+				$p['sector'] = $sector;
+				$p['subSector'] = $subsector;
+				$p['geoRegion'] = $geoRegion;
+				$p['dealSize'] = $project['dealSize'];
+				$p['date'] = $project['discussionDate'];
+				$p['status'] = $project['status'];
+				$ps[] = $p;
+			}
+			$data['memberProjects'] = $ps;
+		}
+
+
 		$this->load->view('/super/header', $d1);
 		$this->load->view('/super/listProjects', $data);
 		$this->load->view('/super/footer');
