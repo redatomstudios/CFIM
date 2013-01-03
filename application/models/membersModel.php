@@ -21,6 +21,14 @@ class MembersModel extends CI_Model{
 		return FALSE;
 	}
 
+	public function checkUsernameExists($username){
+		# code...
+		$res = $this->db->get_where('members', array('username' => $username));
+		if($res->num_rows() > 0)
+			return TRUE;
+		return FALSE;
+	}
+
 	public function getSubordinates(){
 		# code...
 		$this->db->select('id, memberName');

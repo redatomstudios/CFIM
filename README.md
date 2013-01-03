@@ -19,17 +19,17 @@ Admin
 > - Completed
 
 - Add New Project
-> - *Remove ANY from project leader/member selection*
-> - Require all fields for project creation
-> - *Fix undefined offset: 1 on line 43, newProject.php*
+> - *Remove ANY from project leader/member selection* <-Fixed
+> - *Require all fields for project creation*
+> - Fix undefined offset: 1 on line 43, newProject.php **<- These will fix themselves if ANY is removed**
 
 - Modify Existing Project
-> - All required
-> - *Fix undefined offset: 1 on line 43, newProject.php*
+> - *All required*
+> - Fix undefined offset: 1 on line 43, newProject.php **<- These will fix themselves if ANY is removed**
 
 - Add New Member
-> - Only require Member Name, Username, Password, Rank, Title, Status
-> - Check for repeating usernames before adding to DB
+> - *Only require Member Name, Username, Password, Rank, Title, Status*
+> - *Check for repeating usernames before adding to DB*
 > - *Check member exclusion when selected as project leader*
 
 - Modify Current Member

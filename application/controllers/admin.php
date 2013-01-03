@@ -381,6 +381,8 @@ class Admin extends CI_Controller {
 			$verify = $this->isNotValidAddMember($data);
 			if($verify == 0){
 
+				if($this->membersModel->checkUsernameExists($data['username']))
+					redirect('/admin/addMember?n=' . urlencode('Username Exists'));
 				$subordinates = '';
 				if(isset($data['subordinates'])){
 					foreach ($data['subordinates'] as $value) {
@@ -390,6 +392,7 @@ class Admin extends CI_Controller {
 					if($subordinates != NULL)
 						$subordinates = substr($subordinates, 0, strlen($subordinates)-1);
 				}
+
 
 				$insert = array(
 					'memberName' => $data['name'],
@@ -458,7 +461,7 @@ class Admin extends CI_Controller {
 
 	public function isNotValidAddMember($data){
 		# code...
-		if(!($data['name'] != '' && $data['username'] != '' && $data['password'] != '' && $data['title'] != '' && $data['officeEmail'] != '' && $data['otherEmail'] != '' && $data['tel1'] != ''))
+		if(!($data['name'] != '' && $data['username'] != '' && $data['password'] != '' && $data['title'] != ''))
 			return 1;
 		elseif(!in_array($data['rank'], array(1, 2, 3, 4)))
 			return 2;
