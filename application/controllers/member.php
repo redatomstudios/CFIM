@@ -112,22 +112,26 @@ class Member extends CI_Controller{
 		// print_r($comments);
 		$tempComments = array();
 		$comments = $this->commentsModel->getAllComments($id);
+		// echo "<pre>";
 		if($comments){
 			foreach ($comments as $comment) {
 				# code...
 				$names = array();
+				$docs = '';
 				$docs = $comment['attachments'];
 				if($docs != ''){
+					// echo "<br><br><br>" . $docs;
 					$docs = trim($docs, ',');
 					$docs = explode(',', $docs);
-					$name = array();
+					
 					if(sizeof($docs) > 0){
-						
+						$name = array();
 						foreach ($docs as $doc) {
 							# code...
 							// echo "<br>" . $doc;
 							$document = $this->documentsModel->getDocument($doc);
 							// print_r($document);
+
 							$n['filename'] = $document->filename;
 							$n['timestamp'] = $document->timestamp;
 							$name[] = $n;
@@ -135,8 +139,11 @@ class Member extends CI_Controller{
 					}
 				}
 				$c = $comment;
+				
 				if(isset($name)) $c['files'] = $name;
+				unset($name);
 				$tempComments[] = $c;
+				// print_r($c);
 			}
 		}$comments = $tempComments;
 
@@ -187,6 +194,8 @@ class Member extends CI_Controller{
 				$c = $update;
 				if(isset($attachmentName)) $c['attachments'] = $attachmentName;
 				if(isset($voucherName)) $c['vouchers'] = $voucherName;
+				unset($attachmentName);
+				unset($voucherName);
 				$tempUpdates[] = $c;
 			}
 		}$updates = $tempUpdates;
@@ -503,8 +512,11 @@ class Member extends CI_Controller{
 			$data['attachments'] = $ids;
 		}
 
+		// echo "<pre>";
+		// print_r($data);
 		$this->commentsModel->insertComment($data);
-		// redirect('/member/viewProject/' . $post['projectID']);
+		// echo $this->db->last_query();
+		redirect('/member/viewProject/' . $post['projectID']);
 	}
 
 	public function newUpdate(){

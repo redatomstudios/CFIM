@@ -58,7 +58,7 @@ function createViewButton($documents) {
 			$rootComments[$rootID] = array(
 					'name' => $this->membersModel->getName($thisComment["memberId"]),
 					'comment' => $thisComment['body'],
-					'attachment' => createViewButton($thisComment['files']),
+					'attachment' => createViewButton((isset($thisComment['files'])?$thisComment['files']:'')),
 					'agreements' => $thisComment['counter'],
 					'date' => $thisComment['timestamp']
 				);
