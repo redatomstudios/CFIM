@@ -91,8 +91,8 @@ class ProjectsModel extends CI_Model{
 		# code...
 		$id = $data['id'];
 
-		echo "<pre>";
-		print_r($data);
+		// echo "<pre>";
+		// print_r($data);
 
 		$subordinates = '';
 		foreach($data['projectMembers'] as $value) {
@@ -120,7 +120,7 @@ class ProjectsModel extends CI_Model{
 		
 		$this->db->where(array('id' => $id));
 		$this->db->update('projects', $v);
-		echo $this->db->last_query();
+		// echo $this->db->last_query();
 
 		
 
@@ -133,11 +133,11 @@ class ProjectsModel extends CI_Model{
 			$projs = explode(',', $res->row()->projects);
 			if(!in_array($id, $projs)){
 
-				echo "<br> Adding $id to members table of member $value";		//UNCOMMENT
+				// echo "<br> Adding $id to members table of member $value";		//UNCOMMENT
 				$this->db->where('id', $value);
 				$this->db->set('projects', 'concat(projects, ",'.$id.'")', FALSE);
 				$this->db->update('members');
-				echo "<br>".$this->db->last_query();
+				// echo "<br>".$this->db->last_query();
 			}
 			
 		}
@@ -148,7 +148,7 @@ class ProjectsModel extends CI_Model{
 		$projs = explode(',', $res->row()->projects);
 		if(!in_array($id, $projs)){
 
-			echo "<br> Adding $id to members table of member " . $data['leader'];		//UNCOMMENT
+			// echo "<br> Adding $id to members table of member " . $data['leader'];		//UNCOMMENT
 			$this->db->where('id', $data['leader']);
 			$this->db->set('projects', 'concat(projects, ",'.$id.'")', FALSE);
 			$this->db->update('members');

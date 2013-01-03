@@ -117,15 +117,15 @@ class Admin extends CI_Controller {
 					$post['city'] = $this->citiesModel->insertCity($post['newCity']);
 				}
 
-				if($post['newProvince'] != ''){
+			if($post['newProvince'] != ''){
 					$post['province'] = $this->provincesModel->insertProvince($post['newProvince']);
 				}
 
 				$pid = $this->projectsModel->insertProject($post);
 				
 				if(!$uploads = $this->mylibrary->uploader($pid)) {
-					redirect('/admin/addProject?n=' . urlencode('Upload Failure.') . '^0');
-					//echo "Upload Error";	//Echo this error
+					// redirect('/admin/addProject?n=' . urlencode('Upload Failure.') . '^0');
+					echo "No Uploads";	//Echo this error
 				} else {
 					$this->load->model('documentsModel');
 
@@ -282,6 +282,7 @@ class Admin extends CI_Controller {
 				$this->load->model('citiesModel');
 				$this->load->model('provincesModel');
 				$this->load->model('documentsModel');
+				$this->load->library('mylibrary');
 
 				if($post['newSector'] != ''){
 					$post['sector'] = $this->sectorsModel->insertSector($post['newSector']);
@@ -301,8 +302,9 @@ class Admin extends CI_Controller {
 
 				$pid = $this->projectsModel->updateProject($post);
 				
-				if(!$uploads = $this->mylibrary->uploader($pid)) {
-					echo "Upload Error";	//Echo this error
+				if(!$uploads = $this->mylibrary->uploader($pid)) 
+					// redirect('/admin/editProject?n=' . urlencode('Upload Failure.') . '^0');
+					echo "No Uploads";
 				else{
 					$this->load->model('documentsModel');
 

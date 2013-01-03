@@ -354,27 +354,14 @@ class Member extends CI_Controller{
 		redirect('/member/viewProject/'.$this->input->post('projectID'));
 	}
 
-	public function viewInvested($id = 0){
-		if($id == 0){
-			echo "No Project Specified";
-			return;
-		}
+	
 
-		$d1['currentPage'] = 'myProjects';
-
-		$this->load->view('member/header',$d1);
-		$this->load->view('member/viewInvestedProject');
-		$this->load->view('member/footer');
-	}
-
-	/*
-	* If $commentType = 'root', it is a root comment
-	* Else if $commentType = 'foolowup'
-
-	*/
-	public function newComment($commentType = 'root'){
+	
+	public function newComment(){
 		# code...
 		$this->load->model('commentsModel');
+		$this->load->library('mylibrary');
+
 		$post = $this->input->post();
 		echo "<pre>";
 		print_r($this->input->post());
@@ -390,9 +377,21 @@ class Member extends CI_Controller{
 		$data['memberId'] = $this->session->userdata('id');
 		$data['projectId'] = $post['projectID'];
 		$data['body'] = $post['commentBody'];
+		if(!$uploads = $this->mylibrary->uploader($post['projectID'])) {
+			// redirect('/admin/addProject?n=' . urlencode('Upload Failure.') . '^0');
+			echo "No Uploads";	//Echo this error
+		} else {
+			$this->load->model('documentsModel');
+
+			$ids = $this->documentsModel->insertDocument($post['projectID'], $uploads);
+			$ids = implode(',', $ids);
+
+			// $this->projectsModel->updateDocuments($pid, $ids);
+			$data['body'] = $ids;
+		}
 
 		$this->commentsModel->insertComment($data);
-		redirect('/member/viewProject/' . $post['projectID']);
+		// redirect('/member/viewProject/' . $post['projectID']);
 	}
 
 	public function newUpdate(){
@@ -407,8 +406,20 @@ class Member extends CI_Controller{
 		$data['projectId'] = $post['projectID'];
 		$data['memberId'] = $post['userID'];
 		$data['updateBody'] = $post['commentBody'];
-		if(!$data['attachments'] = $this->mylibrary->uploader($post['projectID']))
-			$data['attachments'] = NULL;
+		if(!$uploads = $this->mylibrary->uploader($post['projectID'])) {
+			// redirect('/admin/addProject?n=' . urlencode('Upload Failure.') . '^0');
+			echo "No Uploads";	//Echo this error
+		} else {
+			$this->load->model('documentsModel');
+
+			$ids = $this->documentsModel->insertDocument($post['projectID'], $uploads);
+			$ids = implode(',', $ids);
+
+			// $this->projectsModel->updateDocuments($pid, $ids);
+			$data['attachments'] = $ids;
+		}
+
+		$this->expensesModel->insertUpdate($data);
 		print_r($_FILES);
 		print_r($post);
 		print_r($data);
