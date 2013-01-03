@@ -187,6 +187,7 @@ if(isset($status)) {
 	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
 	' "action" : "'. site_url('/member/newComment') .'",'.
 	' "method" : "POST",'.
+	' "enctype" : "multipart/form-data",'.
 	' "heading" : "Post a Comment" }';
 
 	// Form to process [Agree] button
@@ -228,6 +229,7 @@ if(isset($status)) {
 	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
 	' "action" : "'. site_url('/member/newComment') .'",'.
 	' "method" : "POST",'.
+	' "enctype" : "multipart/form-data",'.
 	' "heading" : "Post a Response" }';
 
 	// if(count($memberReplies) && isset($memberReplies[$rootID])) {
@@ -519,3 +521,14 @@ if(isset($status)) {
 </div>
 <?php } // End of things to echo only if viewer is a member of the project ?>
 <div class="clear"></div>
+<script>
+filesToDelete = '';
+  $('body').on('click', 'input[type="checkbox"].deleteAttachmentFlag', function(){
+    if(this.checked) {
+      filesToDelete += this.value + ',';
+    } else {
+      filesToDelete = filesToDelete.split(this.value + ',').join('');
+    }
+    document.getElementById('attachmentsToDelete').value = filesToDelete.substring(0, filesToDelete.length - 1);
+  });
+</script>
