@@ -60,7 +60,11 @@ Member - Project Member
 > - Completed
 
 - Viewing a project
-> - 
+> - Viewing of project attachments
+> - Viewing of update/expense attachments
+> - Viewing for expense vouchers
+> - When displaying update, Expenses, Voucher and Review should be blank ( Might be able to accomplish this in FE just check if Expenses is 0 )
+> - Reviewed By Finance should be: Approved, Rejected or Pending
 
 Member - Not Project Member
 ---------------------------
@@ -80,7 +84,8 @@ Member - Not Project Member
 > - Completed
 
 - Viewing a project
-> - 
+> - Viewing of project attachments
+> - Hide agree button is member has already agreed
 
 Supervisor
 ----------
