@@ -483,9 +483,9 @@ class Admin extends CI_Controller {
 	public function editMember() { 
 		if(!$this->input->post()){
 
-			$res = $this->membersModel->getMemberUsernames();
+			$res = $this->membersModel->getMemberNames();
 			foreach ($res as $row) {
-				$usernames[$row['id']] = $row['username'];
+				$usernames[$row['id']] = $row['memberName'];
 			}
 			$data['usernames'] = $usernames;
 			$data['currentPage'] = 'modMember';
@@ -497,8 +497,8 @@ class Admin extends CI_Controller {
 			
 			if(!$this->input->post('id')){				
 				$data = $this->getMemberFormData();
-				
-				
+
+
 				$d1['currentPage'] = 'modMember';
 				$this->load->view('admin/header', $d1);
 				$this->load->view('admin/members/newMember', $data);

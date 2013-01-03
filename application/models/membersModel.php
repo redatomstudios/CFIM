@@ -105,5 +105,12 @@ class MembersModel extends CI_Model{
 		$projects = $this->db->get_where('members', array('id' => $memberId))->row()->projects;
 		$projects = explode(',', $projects);
 		return in_array($projectId, $projects);
-	}		
+	}
+
+	public function getMemberNames(){
+			# code...
+		$this->db->select('id, memberName');
+		$query = $this->db->get_where('members', "rank in (2,3)");
+		return $query->result_array();
+	}	
 }
