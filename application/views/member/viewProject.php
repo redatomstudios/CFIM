@@ -218,8 +218,13 @@ if(isset($status)) {
 	' "action" : "'. site_url('/member/newComment') .'",'.
 	' "method" : "POST",'.
 	' "heading" : "Post a Response" }';
-	$userActions =
+
+	// if(count($memberReplies) && isset($memberReplies[$rootID])) {
+		$userActions =
 		"<input style='width: 100%;' type='button' value='Respond' onclick='openForm(". $this->mylibrary->escapeQuotes($justRespond) .")' />";
+	// } else {
+		// $userActions = "";
+	// }
 }
 
 ?>
