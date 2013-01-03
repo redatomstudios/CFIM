@@ -1,27 +1,18 @@
--- phpMyAdmin SQL Dump
--- version 3.5.2.2
+﻿-- phpMyAdmin SQL Dump
+-- version 3.5.2
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 03, 2013 at 01:17 AM
--- Server version: 5.5.27
--- PHP Version: 5.4.7
+-- Host: localhost
+-- Generation Time: Jan 03, 2013 at 06:53 PM
+-- Server version: 5.5.25a
+-- PHP Version: 5.4.4
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
 --
 -- Database: `cfim`
 --
-DROP DATABASE `cfim`;
-CREATE DATABASE `cfim` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `cfim`;
 
 -- --------------------------------------------------------
 
@@ -53,14 +44,20 @@ CREATE TABLE IF NOT EXISTS `captcha` (
   `word` varchar(20) NOT NULL,
   PRIMARY KEY (`captcha_id`),
   KEY `word` (`word`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=98 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=111 ;
 
 --
 -- Dumping data for table `captcha`
 --
 
 INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUES
-(97, 1357170989, '::1', 'bbCbet');
+(104, 1357232392, '::1', 'jsNtoO'),
+(105, 1357233093, '::1', 'LctjOS'),
+(106, 1357233894, '::1', 'qEPMEt'),
+(107, 1357233904, '::1', 'TBlgol'),
+(108, 1357235348, '::1', 'bbqOxr'),
+(109, 1357235356, '::1', 'igeqiV'),
+(110, 1357235365, '::1', 'tTmEkL');
 
 -- --------------------------------------------------------
 
@@ -141,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `counter` varchar(100) NOT NULL COMMENT 'member ids csv',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `comments`
@@ -161,7 +158,9 @@ INSERT INTO `comments` (`id`, `orderNumber`, `projectId`, `memberId`, `body`, `a
 (11, '3.2.2', 45, 2, 'I lied! :D', '', '2012-12-30 11:38:17', ''),
 (12, '1', 63, 2, 'Oh, WoW!! A precious comment!!', '', '2013-01-01 12:28:27', ''),
 (13, '1', 64, 2, 'This is the latest project!!', '', '2013-01-01 23:10:10', ''),
-(14, '2', 64, 2, 'AHA!!! Another Comment!!', '', '2013-01-01 23:13:00', '');
+(14, '2', 64, 2, 'AHA!!! Another Comment!!', '', '2013-01-01 23:13:00', ''),
+(15, '1.1.2', 64, 2, 'Okay', '', '2013-01-03 12:38:39', ''),
+(16, '4', 45, 9, 'Heh, respond shouldn''t be showing up for this....I think.', '', '2013-01-03 12:48:01', '');
 
 -- --------------------------------------------------------
 
@@ -177,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `documents` (
   `projectId` int(11) NOT NULL,
   `size` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `documents`
@@ -185,11 +184,13 @@ CREATE TABLE IF NOT EXISTS `documents` (
 
 INSERT INTO `documents` (`id`, `filename`, `timestamp`, `projectId`, `size`) VALUES
 (7, '.htaccess', '2012-12-27 05:01:15', 46, 1),
-(8, 'CFIM+Projects.xls', '2012-12-27 05:01:15', 46, 114),
 (9, 'CFIMProject.txt', '2012-12-27 05:01:15', 46, 1),
 (10, 'pages.sql', '2013-01-01 02:06:21', 57, 277),
 (11, 'sliderRight.png', '2013-01-01 02:06:21', 57, 63),
-(12, 'mix_db_Fresh.sql', '2013-01-01 02:07:45', 58, 6);
+(12, 'mix_db_Fresh.sql', '2013-01-01 02:07:45', 58, 6),
+(13, 'sliderRight.png', '2013-01-03 10:26:45', 65, 63),
+(14, 'sliderRight.png', '2013-01-03 11:21:43', 48, 63),
+(15, 'viewPriceTable.php', '2013-01-03 11:21:44', 48, 7);
 
 -- --------------------------------------------------------
 
@@ -209,7 +210,16 @@ CREATE TABLE IF NOT EXISTS `expenses` (
   `expense` decimal(10,2) NOT NULL,
   `voucher` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `expenses`
+--
+
+INSERT INTO `expenses` (`id`, `projectId`, `memberId`, `reviewedBy`, `updateBody`, `attachments`, `timestamp`, `expense`, `voucher`) VALUES
+(1, 45, 2, 0, 'genius', '', '2013-01-03 11:45:19', 500.30, ''),
+(2, 45, 2, 0, 'Update', '', '2013-01-03 14:29:48', 0.00, ''),
+(3, 45, 2, 0, 'Expense', '', '2013-01-03 14:30:15', 920.00, '');
 
 -- --------------------------------------------------------
 
@@ -265,8 +275,8 @@ CREATE TABLE IF NOT EXISTS `members` (
 
 INSERT INTO `members` (`id`, `memberName`, `username`, `password`, `rank`, `titleId`, `status`, `subordinates`, `officeEmail`, `otherEmail`, `contactTel1`, `contactTel2`, `projects`) VALUES
 (1, 'Administrator', 'admin', '4fcab400858d58a02b48f097bfdbc411e838ee12', 2, 1, 'Active', '', 'admin@gmail.com', 'adminother@gmail.com', '2856547853', 2147483647, NULL),
-(2, 'John Connor', 'dm1', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 3, '2', '', 'dm1@gmail.com', 'dm1other@gmail.com', '2856547853', 2147483647, ',45,46,47,48,49,50,51,52,53,54,55,56,57,58,63,64,6'),
-(3, 'Jane Doe', 'dm2', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 4, 'Active', '', 'dm2@gmail.com', 'dm2other@gmail.com', '12345', 2147483647, ',45,46,57,58,63,64,65,66'),
+(2, 'John Connor', 'dummy1', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 3, '1', '', 'dm1@gmail.com', 'dm1other@gmail.com', '2856547853', 2147483647, ',45,46,47,48,49,50,51,52,53,54,55,56,57,58,63,64,6'),
+(3, 'Jane Doe', 'dm2', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 4, 'Active', '', 'dm2@gmail.com', 'dm2other@gmail.com', '12345', 2147483647, ',45,46,57,58,63,64,65,66,48'),
 (8, 'Amala George', 'ammu', '4fcab400858d58a02b48f097bfdbc411e838ee12', 2, 4, 'Active', '2,3', 'albinin0002@gmail.com', 'albinin0002@gmail.com', '9620732469', 2147483647, NULL),
 (9, 'James Randall', 'godfrzero', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 1, 'Active', '', '', '', '', 0, NULL);
 
@@ -304,9 +314,9 @@ CREATE TABLE IF NOT EXISTS `projects` (
 
 INSERT INTO `projects` (`id`, `name`, `leaderId`, `sectorId`, `subSectorId`, `geoRegion`, `city`, `discussionDate`, `status`, `members`, `documents`, `dealSize`, `companyName`, `companyAddress`, `contactPerson`, `contactEmail`, `contactTel`) VALUES
 (45, 'Dummy Project', 2, 2, 4, 1, 1, '2012-12-27', 'Invested', '3', '', '12', 'red', 'asdas', 'adasd', '', 0),
-(46, 'Dummy Project 3', 2, 2, 4, 1, 1, '01/17/2013', 'Invested', '3', ',7,8,9', '4', 'ads', '', 'asd', '', 0),
+(46, 'Dummy Project 3', 2, 2, 4, 1, 1, '01/17/2013', 'Invested', '3', '7,9', '4', 'ads', 'asd', 'asd', 'asd', 0),
 (47, 'Test1', 2, 7, 3, 35, 1, '01/14/2013', 'Preliminary', '9', '', '19', 'Testing Co', 'Sydney Australia', 'John Chen', 'john909c@gmail.com', 187654321),
-(48, 'Hercules', 9, 1, 3, 23, 30, '01/16/2013', 'Preliminary', '3', '', '22', 'Olympus Consulting.', 'Mt. Olympus', 'Zeus', 'thunder@awesome.com', 1234567890),
+(48, 'Hercules', 9, 1, 3, 23, 30, '01/16/2013', 'Preliminary', '3', ',14,15', '22', 'Olympus Consulting.', 'Mt. Olympus', 'Zeus', 'thunder@awesome.com', 1234567890),
 (57, 'Hercules', 2, 2, 4, 16, 1, '02/21/2013', 'Invested', '3,9', ',10,11', '20', 'Olympus Consulting.', 'Mt. Olympus', 'Zeus', 'thunder@awesome.com', 1234567890),
 (58, 'Rabbithole', 9, 1, 6, 9, 18, '03/28/2013', 'Preliminary', '2,3', ',12', '20', 'Umbrella Corp.', 'The Hive', 'Alice', 'alice@umbrella.com', 1234567890),
 (59, 'Fort Minor', 9, 7, 5, 18, 20, '01/31/2013', 'Invested', '2,3', '', '10', 'Fort Minor', '2200 Fort Ave. Minor, Arcade', 'Mike Shinoda', 'mike.shinoda@awesome.com', 1234567890),
@@ -315,7 +325,7 @@ INSERT INTO `projects` (`id`, `name`, `leaderId`, `sectorId`, `subSectorId`, `ge
 (62, 'Final Test', 2, 1, 3, 1, 1, '02/03/2013', 'Preliminary', '3,9', '', '5', 'Testers', 'Test Drive', 'Tester', 'test@tester.com', 123458760),
 (63, 'The Waste Land', 2, 1, 3, 1, 1, '01/30/2013', 'Invested', '3,9', '', '155', 'waSTeS', 'asdad', 'wasteboy', 'wb@gmialc.com', 2147483647),
 (64, 'Coconut Tree', 3, 8, 3, 36, 1, '01/18/2013', 'Invested', '2,9', '', '69', 'Watermelon', 'Kurumbathumani', 'Kottayam Santha', 'santha@HOTmail.com', 2147483647),
-(65, 'Administrator Koshi', 3, 1, 3, 1, 1, '01/26/2013', 'Invested', '2,9', '', '4', 'Asss', 'Sick', 'Mofo', 'Assd@asd.com', 965874521),
+(65, 'Administrator Koshi', 3, 1, 3, 1, 1, '01/26/2013', 'Invested', '2,9', ',13', '4', 'Asss', 'Sick', 'Mofo', 'Assd@asd.com', 965874521),
 (66, 'Nothing', 3, 1, 3, 1, 1, '01/26/2013', 'Invested', '9', '', '99', 'as', 'sse', 'sde', 'sad@sadas.com', 324234432);
 
 -- --------------------------------------------------------
@@ -400,7 +410,3 @@ INSERT INTO `sectors` (`id`, `name`, `subsectorOf`) VALUES
 (6, 'Sector Format', 1),
 (7, 'Energy', 0),
 (8, 'RedHot', 0);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
