@@ -138,6 +138,52 @@ class Member extends CI_Controller{
 			}
 		}$comments = $tempComments;
 
+
+		$tempUpdates = array();
+		$updates = $this->expensesModel->getAll($id);
+		if($updates){
+			foreach ($updates as $update) {
+				# code...
+				$docs = $update['attachments'];
+				if($docs != ''){
+					$attachmentName = array();
+
+					$docs = trim($docs, ',');
+					$docs = explode(',', $docs);
+					
+					if(sizeof($docs) > 0){
+						foreach ($docs as $doc) {
+							$document = $this->documentsModel->getDocument($doc);
+							$attachmentName[] = $document->filename;
+						}
+					}
+				}
+
+				if($update['expense'] != NULL){
+					$docs = $update['vouchers'];
+					if($docs != ''){
+						$voucherName = array();
+
+						$docs = trim($docs, ',');
+						$docs = explode(',', $docs);
+						
+						if(sizeof($docs) > 0){
+							foreach ($docs as $doc) {
+								$document = $this->documentsModel->getDocument($doc);
+								$voucherName[] = $document->filename;
+							}
+						}
+					}
+				}
+
+
+				$c = $update;
+				if(isset($attachmentName)) $c['attachments'] = $attachmentName;
+				if(isset($voucherName)) $c['vouchers'] = $voucherName;
+				$tempUpdates[] = $c;
+			}
+		}$updates = $tempUpdates;
+
 				// print_r($tempComments);
 
 		
@@ -147,7 +193,7 @@ class Member extends CI_Controller{
 		$data['subsector'] = $this->sectorsModel->getName($data['subSectorId']);
 		$data['georegion'] = $this->provincesModel->getName($data['geoRegion']);
 		$data['comments'] = $comments;
-		$data['updates'] = $this->expensesModel->getAll($id);
+		$data['updates'] = $updates;
 
 		// if(sizeof($data['updates']) > 0)
 		if($this->membersModel->isMemberOf($this->session->userdata('id'), $id))

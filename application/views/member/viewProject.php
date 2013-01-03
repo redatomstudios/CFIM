@@ -430,6 +430,7 @@ if(isset($status)) {
 <?php if(!isset($status)) { // Only echo these if viewer is a member of the project ?>
 <div class="gridOne spaceTop spaceBottom"> <strong>Update on Progress</strong>: </div>
 <div class="gridOne spaceTop">
+	<?php if(sizeof($updates) > 0) { ?>
 	<table class="displayOnly">
 		<thead>
 			<tr>
@@ -445,21 +446,22 @@ if(isset($status)) {
 			</tr>
 		</thead>
 		<tbody>
-			<?php $temp = 15; do { ?>
+			<?php foreach ($updates as $update) { ?>
 			<tr>
-				<td>Ben</td>
-				<td>Dinner with the CEO.</td>
+				<td><?= $this->membersModel->getName($update['memberId']) ?></td>
+				<td><?= $update['updateBody'] ?></td>
 				<td><input type="button" value="View" /></td>
-				<td>12/12/2012</td>
+				<td><?= $update['timestamp'] ?></td>
 				<td>15:34</td>
-				<td>4000</td>
+				<td><?= $update['expense'] ?></td>
 				<td><input type="button" value="View" /></td>
-				<td>Approved</td>
+				<td><?= (isset($update['reviewedBy'])?'Approved by ' . $this->membersModel->getName($update['reviewedBy']) :'Not Approved Yet') ?></td>
 				<td><?php // Reason for status, if any ?></td>
 			</tr>			
-			<?php $temp--; } while($temp) ?>
+			<?php  }  ?>
 		</tbody>
 	</table>
+	<?php } ?>
 </div>
 <div class="gridOne spaceTop" style="text-align: right; font-weight: bold; font-size: 1.5em;">
 	Total: 5000
