@@ -10,19 +10,19 @@
 	<?= form_label('Password', 'password') ?><?= form_password(array('name' => 'password', 'id' => 'password', 'required' => 'required')) ?>
 </div>
 <div class="gridTwo spaceTop">
-	<?= form_label('Rank', 'rank') ?><?= form_dropdown('rank', $ranks, (isset($rank)?$rank:'2'), 'id = "memberRank"') ?>
+	<?= form_label('Rank', 'rank') ?><?= form_dropdown('rank', $ranks, (isset($rank)?$rank:'2'), 'id = "memberRank" required="required"') ?>
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Title', 'title') ?>
-	<?= form_dropdown('title', $titles, (isset($title)?$title:'1')) ?>
+	<?= form_dropdown('title', $titles, (isset($title)?$title:'1'), 'id="title" required="required"') ?>
 	<?= form_input(array('name' => 'newTitle', 'placeholder' => 'New Title')) ?>
 </div>
 <div class="gridTwo spaceTop spaceBottom">
-	<?= form_label('Status', 'status') ?><?= form_dropdown('status', $status, (isset($currentStatus)?$currentStatus:'1')) ?>
+	<?= form_label('Status', 'status') ?><?= form_dropdown('status', $status, (isset($currentStatus)?$currentStatus:'1'), 'id = "status" required="required"') ?>
 </div>
 <div class="clear"></div>
 <div class="gridOne spaceTop spaceBottom" id="displaySubordinates">
-	<?= form_label('Subordinates', 'subordinates') ?><?= form_multiselect('subordinates[]', $subordinates, (isset($selectedSubordinates)?$selectedSubordinates:'')) ?>
+	<?= form_label('Subordinates', 'subordinates') ?><?= form_multiselect('subordinates[]', $subordinates, (isset($selectedSubordinates)?$selectedSubordinates:''), 'id="subordinates" required="required"') ?>
 </div>
 <div class="clear"></div>
 <div class="gridTwo spaceTop">
