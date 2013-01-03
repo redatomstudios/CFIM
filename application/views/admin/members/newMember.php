@@ -22,7 +22,7 @@
 </div>
 <div class="clear"></div>
 <div class="gridOne spaceTop spaceBottom" id="displaySubordinates">
-	<?= form_label('Subordinates', 'subordinates') ?><?= form_multiselect('subordinates[]', $subordinates, (isset($selectedSubordinates)?$selectedSubordinates:''), 'id="subordinates" required="required"') ?>
+	<?= form_label('Subordinates', 'subordinates') ?><?= form_multiselect('subordinates[]', $subordinates, (isset($selectedSubordinates)?$selectedSubordinates:''), 'id="subordinates"') ?>
 </div>
 <div class="clear"></div>
 <div class="gridTwo spaceTop">
