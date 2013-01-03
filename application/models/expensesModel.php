@@ -39,6 +39,14 @@ class ExpensesModel extends CI_Model{
 		return FALSE;
 	}
 
+	public function getAll($projectId){
+		# code...
+		$ret = $this->db->get_where('expenses', array('projectId' => $projectId));
+		if($ret->num_rows() > 0)
+			return $ret->result_array();
+		return FALSE;
+	}
+
 }
 
 ?>

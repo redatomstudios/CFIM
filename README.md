@@ -19,8 +19,8 @@ Notes
 
 Frontend Changes
 ================
-- In My Invested Projects section, remove the default sorting technique used in listProjects view
 - UPDATE DATABASE
 	http://localhost/CFIM/member/viewProject/64
 	Check this after database update
 	Root Comments present, but not showing in viewProject Page
+- In My Projects section, the search project form not getting submitted
