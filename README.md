@@ -33,7 +33,7 @@ Admin
 > - *Check member exclusion when selected as project leader*
 
 - Modify Current Member
-> - *Don't* require password here
+> - *Don't require password here*
 > - *If* password is set, then that means *change password*
 > - List name instead of username in dropdown when selecting member to edit
 > - *Check member exclusion when selected as project leader*

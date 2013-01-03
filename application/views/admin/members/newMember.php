@@ -6,9 +6,11 @@
 <div class="gridTwo spaceTop">
 	<?= form_label('Username', 'username') ?><?= form_input(array('name' => 'username', 'id' => 'username', 'value' => (isset($username)?$username:''), 'required' => 'required')) ?>
 </div>
+<?php if(!isset($id)){ ?>
 <div class="gridTwo spaceTop">
 	<?= form_label('Password', 'password') ?><?= form_password(array('name' => 'password', 'id' => 'password', 'required' => 'required')) ?>
 </div>
+<?php } ?>
 <div class="gridTwo spaceTop">
 	<?= form_label('Rank', 'rank') ?><?= form_dropdown('rank', $ranks, (isset($rank)?$rank:'2'), 'id = "memberRank" required="required"') ?>
 </div>

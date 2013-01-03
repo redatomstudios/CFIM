@@ -497,6 +497,8 @@ class Admin extends CI_Controller {
 			
 			if(!$this->input->post('id')){				
 				$data = $this->getMemberFormData();
+				
+				
 				$d1['currentPage'] = 'modMember';
 				$this->load->view('admin/header', $d1);
 				$this->load->view('admin/members/newMember', $data);
