@@ -128,8 +128,9 @@ class Member extends CI_Controller{
 							// echo "<br>" . $doc;
 							$document = $this->documentsModel->getDocument($doc);
 							// print_r($document);
-							$name['filename'][] = $document->filename;
-							$name['timestamp'][] = $document->timestamp;
+							$n['filename'] = $document->filename;
+							$n['timestamp'] = $document->timestamp;
+							$name[] = $n;
 						}
 					}
 				}
@@ -559,3 +560,5 @@ class Member extends CI_Controller{
 	}
 
 }
+
+?>

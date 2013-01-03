@@ -24,8 +24,7 @@ class DocumentsModel extends CI_Model{
 		# code...
 		$res = $this->db->get_where('documents', array('id' => $id));
 		if($res->num_rows() > 0) {
-			$row = $res->result_array();
-			return $row[0];
+			return $res->row();
 		}
 		return FALSE;
 	}
