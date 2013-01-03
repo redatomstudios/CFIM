@@ -36,10 +36,10 @@ Admin
 > - *Don't* require password here
 > - *If* password is set, then that means *change password*
 > - List name instead of username in dropdown when selecting member to edit
-> - Check member exclusion when selected as project leader
+> - *Check member exclusion when selected as project leader*
 
 - Statistics
-> - Integrate view
+> - Integrate view **<- View completed, statistics.php. Use dashboard.php without passing $dates for listing projects**
 > - test
 
 - Logout
