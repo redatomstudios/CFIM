@@ -152,8 +152,10 @@ $newExpenseString =
  */
 $rawAgreements = explode(',', $thisComment['agreements']);
 $agreements = 0;
+$agreeingMembers = array(); // IDs of members who agree
 foreach($rawAgreements as $thisElement) {
 	if(!empty($thisElement)) {
+		array_push($agreeingMembers, $thisElement);
 		$agreements++;
 	}
 }
@@ -187,8 +189,8 @@ if(isset($status)) {
 	' "method" : "POST",'.
 	' "heading" : "Post a Comment" }';
 
-	$userActions =
-		// Form to process [Agree] button
+	// Form to process [Agree] button
+	$agreeButton = 
 		$this->mylibrary->escapeFunction(form_open('/member/agreeComment')) .
 			//Project ID, the id of the project whose comment the member is agreeing to
 			"<input type='hidden' name='projectID' value='".$id."' />" .
@@ -197,8 +199,17 @@ if(isset($status)) {
 			// User ID, the id that needs to be added to the agreements
 			"<input type='hidden' name='userID' value='".$this->session->userdata("id")."' />" .
 			"<input style='width: 100%;' type='submit' value='Agree' />" .
-		"</form>" .
-		"<input style='width: 100%;' type='button' value='Comment' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' />";
+		"</form>";
+
+	// Check if the viewer has already agreed with the comment
+	if(in_array($this->session->userdata("id"), $agreeingMembers)) {
+		$userActions = 
+			"<input style='width: 100%;' type='button' value='Comment' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' />";
+	} else {
+		$userActions =
+			$agreeButton . 
+			"<input style='width: 100%;' type='button' value='Comment' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' />";
+	}
 } else {
 	/*
 	 * This viewer is a member of the project team

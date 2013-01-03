@@ -88,7 +88,7 @@ Member - Not Project Member
 
 - Viewing a project
 > - Viewing of project attachments
-> - Hide agree button is member has already agreed
+> - *Hide agree button if member has already agreed*
 
 Supervisor
 ----------
