@@ -31,7 +31,7 @@
 				<?= form_dropdown('sector', $sectors, (isset($something) ? $something : '0'), 'style="width: 100%;"') ?>
 			</td>
 			<td>
-				<?= form_dropdown('subsectors', $subsectors, (isset($something) ? $something : '0'), 'style="width: 100%;"') ?>
+				<?= form_dropdown('subsector', $subsectors, (isset($something) ? $something : '0'), 'style="width: 100%;"') ?>
 			</td>
 			<td>
 				<?= form_dropdown('province', $provinces, (isset($something) ? $something : '0'), 'style="width: 100%;"') ?>
@@ -43,7 +43,7 @@
 	</table>
 </div>
 <div class="gridOne" style="text-align: right; margin-top: 10px;">
-	<input type="button" value="Display" />	
+	<input type="submit" value="Display" />	
 </div>
 <?= form_close() ?>
 <?php } ?>

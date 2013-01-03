@@ -159,41 +159,47 @@ class Member extends CI_Controller{
 		ksort($data['projects']);
 
 		if($post = $this->input->post()){
-
+			// echo "<pre>";
+			// print_r($post);
 			$data['memberProjects'] = $this->projectsModel->searchProjects($post);
 		}
 		else{
-			if($data['memberProjects'] = $this->membersModel->getProjects($this->session->userdata('id'))){
+			$data['memberProjects'] = $this->membersModel->getProjects($this->session->userdata('id'));
+			
+		}
+		if($data['memberProjects']){
 
-				$this->load->model('sectorsModel');
-				$this->load->model('provincesModel');
-				$this->load->model('commentsModel');
-				
-				$ps = array();
-				foreach ($data['memberProjects'] as $project) {
-					# code...
-					$leaderName = $this->membersModel->getName($project['leaderId']);
-					$sector = $this->sectorsModel->getName($project['sectorId']);
-					$subsector = $this->sectorsModel->getName($project['subSectorId']);
-					$geoRegion = $this->provincesModel->getName($project['geoRegion']);
-					$p['id'] = $project['id'];
-					$p['projectName'] = $project['name'];
-					$p['projectLeader'] = $leaderName;
-					$p['sector'] = $sector;
-					$p['subSector'] = $subsector;
-					$p['geoRegion'] = $geoRegion;
-					$p['dealSize'] = $project['dealSize'];
-					$p['date'] = $project['discussionDate'];
-					$p['status'] = $project['status'];
-					$p['comments'] = $this->commentsModel->getComments($p['id'], 3);
-					$ps[] = $p;
-				}
-				$data['memberProjects'] = $ps;
+			$this->load->model('sectorsModel');
+			$this->load->model('provincesModel');
+			$this->load->model('commentsModel');
+			
+			$ps = array();
+			foreach ($data['memberProjects'] as $project) {
+				# code...
+				$leaderName = $this->membersModel->getName($project['leaderId']);
+				$sector = $this->sectorsModel->getName($project['sectorId']);
+				$subsector = $this->sectorsModel->getName($project['subSectorId']);
+				$geoRegion = $this->provincesModel->getName($project['geoRegion']);
+				$p['id'] = $project['id'];
+				$p['projectName'] = $project['name'];
+				$p['projectLeader'] = $leaderName;
+				$p['sector'] = $sector;
+				$p['subSector'] = $subsector;
+				$p['geoRegion'] = $geoRegion;
+				$p['dealSize'] = $project['dealSize'];
+				$p['date'] = $project['discussionDate'];
+				$p['status'] = $project['status'];
+				$p['comments'] = $this->commentsModel->getComments($p['id'], 3);
+				$ps[] = $p;
 			}
+			$data['memberProjects'] = $ps;
 		}
 
 		$d1['currentPage'] = 'myProjects';
 		$d1['username'] = $this->session->userdata('username');
+
+		// echo "<pre>";
+		// print_r($data['memberProjects']);
 
 		$this->load->view('member/header', $d1);
 		$this->load->view('member/listProjects', $data);

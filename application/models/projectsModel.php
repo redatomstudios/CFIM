@@ -206,6 +206,7 @@ class ProjectsModel extends CI_Model{
 
 	public function searchProjects($data){
 		
+		// print_r($data);
 		$where = array();
 		if((isset($data['name'])) && ($data['name'] != 0)){
 			$where['id'] = $data['name'];
@@ -213,25 +214,37 @@ class ProjectsModel extends CI_Model{
 		else{
 			if(isset($data['sector']) && ($data['sector'] != 0))
 				$where['sectorId'] = $data['sector'];
+
 			if(isset($data['subsector']) && ($data['subsector'] != 0))
 				$where['subsectorId'] = $data['subsector'];
+
 			if(isset($data['province']) && ($data['province'] != 0))
 				$where['geoRegion'] = $data['province'];
+
 			if(isset($data['city']) && ($data['city'] != 0))
 				$where['city'] = $data['city'];
+
 			if(isset($data['discussionDate']) && ($data['discussionDate'] != ''))
 				$where['discussionDate'] = $data['discussionDate'];
-			if(isset($data['status']) && ($data['status'] != 0))
+
+			if(isset($data['status']) && (ctype_alpha($data['status'])))
 				$where['status'] = $data['status'];
+
 			if(isset($data['leader']) && ($data['leader'] != 0))
 				$where['leaderId'] = $data['leader'];
 		}
 
+
 		// echo "<pre>";
 		// print_r($where);
+		// echo $data['status'];
+		// if($data['status'] != 0)
+		// 	echo "Status not 0";
 		$ret = $this->db->get_where('projects', $where);
-		if($ret->num_rows() > 0)
+		if($ret->num_rows() > 0){
+			// echo $this->db->last_query();
 			return $ret->result_array();
+		}
 
 		return FALSE;
 	}
