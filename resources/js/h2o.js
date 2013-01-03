@@ -75,13 +75,14 @@ function openForm(dataFields) {
 }
 
 function showAttachments(dataFields) {
-	var data = "<div class='gridOne spaceTop'><form action='' method='POST'>";
+	var data = "<div class='gridOne spaceTop'>";
 
+	// data += "<form action='' method='POST'>";
 	data += "<table class='displayAttachments'>";
 	data += "<thead>" +
 				"<th>Filename</th>" +
 				"<th>Time</th>" +
-				"<th>Delete?</th>" +
+				// "<th>Delete?</th>" +
 			"</thead>" +
 			"<tbody>";
 		
@@ -90,13 +91,13 @@ function showAttachments(dataFields) {
 		data += "<tr>" +
 					"<td>" + thisAttachment['filename'] + "</td>" +
 					"<td>" + thisAttachment['timestamp'] + "</td>" +
-					"<td><input type='checkbox' class='deleteAttachmentFlag' value='' /></td>" +
+					// "<td><input type='checkbox' class='deleteAttachmentFlag' value='' /></td>" +
 				"</tr>";
 	}
 
 	data += "</tbody></table>"; 
-	data += '<input id="attachmentsToDelete" type="hidden" name"deleteFiles" value="" /></form>';
-	data += "<div class='clear'></div><div class='gridOne spaceTop small'><input type='submit' value='Submit' /><input type='button' value='Cancel' onclick='hidePopupSlider();' /></div>"
+	// data += '<input id="attachmentsToDelete" type="hidden" name"deleteFiles" value="" /></form>';
+	// data += "<div class='clear'></div><div class='gridOne spaceTop small'><input type='submit' value='Submit' /><input type='button' value='Cancel' onclick='hidePopupSlider();' /></div>"
 	data += "</div>";
 
 	filesToDelete = '';
