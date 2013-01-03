@@ -84,7 +84,11 @@ class MembersModel extends CI_Model{
 		# code...
 		$this->db->select('memberName');
 		$res = $this->db->get_where('members', array('id' => $id));
-		return $res->row()->memberName;
+		if($res->num_rows()) {
+			return $res->row()->memberName;
+		} else {
+			return "";
+		}
 	}
 	
 	public function isMemberOf($memberId, $projectId){

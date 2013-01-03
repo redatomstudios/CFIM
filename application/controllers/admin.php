@@ -566,7 +566,7 @@ class Admin extends CI_Controller {
 		$data['rank'] = $member->rank;
 		$data['title'] = $member->titleId;
 		$data['status'] = array( 1 => 'Active',
-								 2 => 'Exausted');
+								 2 => 'Suspended');
 		$data['currentStatus'] = $member->status;
 		$data['selectedSubordinates'] = explode(',', $member->subordinates);
 		$data['officeEmail'] = $member->officeEmail;
