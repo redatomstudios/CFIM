@@ -1,26 +1,45 @@
 CFIM
 ====
-- Validation
 - Generalized attachment management
 
 Backend Changes
 ===============
 - Add 'On-Going' as status in myProjects
-- Remove colon from subsectors in member -> Home and My Projects
 - REMOVE UNNECESSARY OUTPUT STREAMS <- interfering with location headers right now when modifying projects etc.
-- On failed captcha or failed login, redirect back to login with error <- I'll integrate notificiations at the end
 
-Notes
-=====
+Final Sweep Changes
+===================
 
-- Just My Invested Projects left in member accounts, finish that and we're done with member accounts
-- Since there's no $comments defined in myProjects, table won't render until that value is passed in
+Admin
+-----
+- Home: Verified
 
+- Add New Project
+> - Remove ANY from project leader/member selection
+> - Require all fields for project creation
+> - Fix undefined offset: 1 on line 43, newProject.php
 
-Frontend Changes
-================
-- UPDATE DATABASE
-	http://localhost/CFIM/member/viewProject/64
-	Check this after database update
-	Root Comments present, but not showing in viewProject Page
-- In My Projects section, the search project form not getting submitted
+- Modify Existing Project
+> - All required
+> - Fix undefined offset: 1 on line 43, newProject.php
+
+- Add New Member
+> - Only require Member Name, Username, Password, Rank, Title, Status
+> - Check for repeating usernames before adding to DB
+> - Check member exclusion when selected as project leader
+
+- Modify Current Member
+> - *Don't* require password here
+> - *If* password is set, then that means *change password*
+> - List name instead of username in dropdown when selecting member to edit
+> - Check member exclusion when selected as project leader
+
+- Statistics
+> - Integrate view
+> - test
+
+- Logout
+> - Completed
+
+Member
+------

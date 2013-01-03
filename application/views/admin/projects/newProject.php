@@ -25,7 +25,7 @@
 </div>
 <div class="gridTwo spaceTop spaceBottom">
 	<?= form_label('Contact Tel', 'contactTel') ?>
-	<?= form_input(array('name' => 'contactTel', 'id' => 'contactTel', 'value' => (isset($contactTel)?$contactTel:''), 'required' => 'required')) ?>
+	<?= form_input(array('name' => 'contactTel', 'id' => 'contactTel', 'value' => (isset($contactTel)?$contactTel:''))) ?>
 </div>
 <div class="clear"></div>
 <div class="gridTwo spaceTop">
