@@ -229,8 +229,8 @@ class Member extends CI_Controller{
 		$d1['currentPage'] = 'home';
 		$d1['username'] = $this->session->userdata('username');	
 
-		echo "<pre>";
-		print_r($data);
+		// echo "<pre>";
+		// print_r($data);
 
 		$this->load->view('member/header',$d1);
 		$this->load->view('member/viewProject', $data);
@@ -574,7 +574,7 @@ class Member extends CI_Controller{
 			$ids = implode(',', $ids);
 
 			// $this->projectsModel->updateDocuments($pid, $ids);
-			$data['vouchers'] = $ids;
+			$data['voucher'] = $ids;
 		}
 
 		if($this->expensesModel->insertExpense($data))
