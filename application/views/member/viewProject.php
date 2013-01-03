@@ -458,10 +458,16 @@ if(isset($status)) {
 				<td><?= $update['updateBody'] ?></td>
 				<td><input type="button" value="View" /></td>
 				<td class="centered"><?= $update['timestamp'] ?></td>
-				<td class="centered"><?= $update['expense'] ?></td>
-				<?php $totalExpenses += $update['expense']; ?>
-				<td><input type="button" value="View" /></td>
-				<td><?= (isset($update['reviewedBy'])?'Approved by ' . $this->membersModel->getName($update['reviewedBy']) :'Not Approved Yet') ?></td>
+				<?php if(intval($update['expense'])) { ?>
+					<td class="centered"><?= $update['expense'] ?></td>
+					<?php $totalExpenses += $update['expense']; ?>
+					<td><input type="button" value="View" /></td>
+					<td><?= (isset($update['reviewedBy'])?'Approved by ' . $this->membersModel->getName($update['reviewedBy']) :'Not Approved Yet') ?></td>
+				<?php } else { ?>
+					<td></td>
+					<td></td>
+					<td></td>
+				<?php } ?>
 				<td><?php // Reason for status, if any ?></td>
 			</tr>			
 			<?php  }  ?>

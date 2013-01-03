@@ -21,11 +21,11 @@ Admin
 - Add New Project
 > - *Remove ANY from project leader/member selection*
 > - Require all fields for project creation
-> - Fix undefined offset: 1 on line 43, newProject.php **<- These will fix themselves if ANY is removed**
+> - *Fix undefined offset: 1 on line 43, newProject.php*
 
 - Modify Existing Project
 > - All required
-> - Fix undefined offset: 1 on line 43, newProject.php **<- These will fix themselves if ANY is removed**
+> - *Fix undefined offset: 1 on line 43, newProject.php*
 
 - Add New Member
 > - Only require Member Name, Username, Password, Rank, Title, Status
@@ -66,9 +66,7 @@ Member - Project Member
 > - Viewing of project attachments
 > - Viewing of update/expense attachments
 > - Viewing for expense vouchers
-> - When displaying update, Expenses, Voucher and Review should be blank 
->  
->  ( Might be able to accomplish this in FE just check if Expenses is 0 )
+> - *When displaying update, Expenses, Voucher and Review should be blank*
 > - Reviewed By Finance should be: Approved, Rejected or Pending
 
 Member - Not Project Member
