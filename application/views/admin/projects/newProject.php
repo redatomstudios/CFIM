@@ -117,7 +117,7 @@ var subSectors = {}; ' . $jsString . '
 			<th>Upload Time</th>
 			<th>Delete?</th>
 		</thead>
-		<?php 
+		<?php
 			foreach ($attachments as $at) { 
 		?>
 		<tr>
