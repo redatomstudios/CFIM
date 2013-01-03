@@ -128,7 +128,8 @@ class Member extends CI_Controller{
 							// echo "<br>" . $doc;
 							$document = $this->documentsModel->getDocument($doc);
 							// print_r($document);
-							$name[] = $document->filename;
+							$name['filename'][] = $document->filename;
+							$name['timestamp'][] = $document->timestamp;
 						}
 					}
 				}
@@ -467,10 +468,7 @@ class Member extends CI_Controller{
 		$data['memberId'] = $this->session->userdata('id');
 		$data['projectId'] = $post['projectID'];
 		$data['body'] = $post['commentBody'];
-		if(!$uploads = $this->mylibrary->uploader($post['projectID'])) {
-			// redirect('/admin/addProject?n=' . urlencode('Upload Failure.') . '^0');
-			// echo "No Uploads";	//Echo this error
-		} else {
+		if($uploads = $this->mylibrary->uploader($post['projectID'])) {
 			$this->load->model('documentsModel');
 
 			$ids = $this->documentsModel->insertDocument($post['projectID'], $uploads);
@@ -481,7 +479,7 @@ class Member extends CI_Controller{
 		}
 
 		$this->commentsModel->insertComment($data);
-		redirect('/member/viewProject/' . $post['projectID']);
+		// redirect('/member/viewProject/' . $post['projectID']);
 	}
 
 	public function newUpdate(){
