@@ -58,7 +58,7 @@ function createViewButton($documents) {
 			$rootComments[$rootID] = array(
 					'name' => $this->membersModel->getName($thisComment["memberId"]),
 					'comment' => $thisComment['body'],
-					'attachment' => $thisComment['attachments'],
+					'attachment' => createViewButton($thisComment['files']),
 					'agreements' => $thisComment['counter'],
 					'date' => $thisComment['timestamp']
 				);
@@ -163,7 +163,7 @@ $newExpenseString =
  	{
  		"member" : "<?= $thisComment['name'] ?>",
  		"comment" : "<?= $thisComment['comment'] ?>",
- 		"attachment" : "<?= $thisComment['attachment'] ?>",
+ 		"attachment" : "<?= $this->mylibrary->escapeQuotes($thisComment['attachment']) ?>",
 <?php 
 /* Lets get the number of people who agree
  * The input array is just a CSV of the member IDs
@@ -268,7 +268,7 @@ if(isset($status)) {
 	 				{
 	 					"name" : "<?= $memberReply['name'] ?>",
 	 					"comment" : "<?= $memberReply['comment'] ?>",
-	 					"attachment" : "<?= $memberReply['attachment'] ?>",
+	 					"attachment" : "<?= createViewButton($memberReply['attachment']) ?>",
 	 					"date" : "<?= $memberReply['date'] ?>"
 	 				},
 	 			<?php } ?>
@@ -280,7 +280,7 @@ if(isset($status)) {
 	 				{
 	 					"name" : "<?= $teamReply['name'] ?>",
 	 					"comment" : "<?= $teamReply['comment'] ?>",
-	 					"attachment" : "<?= $teamReply['attachment'] ?>",
+	 					"attachment" : "<?= createViewButton($teamReply['attachment']) ?>",
 	 					"date" : "<?= $teamReply['date'] ?>"
 	 				},
 	 			<?php } ?>
@@ -435,20 +435,8 @@ if(isset($status)) {
 				<?php 
 		          // Check if there are any attachments
 		          // If so, echo the formatted data with button, otherwise echo "None"
-		          if(is_array($documents) && count($documents)) {
-		            // Construct JS object with details to pass to View button
-		            $JSData = '{ "attachments" : [';
-		            foreach($documents as $thisDocument) {
-		              $JSData .= '{' . 
-		                      '"filename" : "' . $thisDocument['filename'] . '",' .
-		                      '"timestamp" : "' . $thisDocument['timestamp'] . '"' .
-		                    '},';
-		            }
-		            $JSData .= ']}';
-		            $viewString = "<input type='button' value='View' onClick='showAttachments(" . $JSData . ")' />";
-		          } else {
-		            $viewString = "None";
-		          }
+
+		          $viewString = createViewButton($documents);
 		        ?>
 		        <?=  $viewString ?>
 			</td>
