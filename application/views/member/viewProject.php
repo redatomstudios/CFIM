@@ -411,7 +411,25 @@ if(isset($status)) {
 				<?=  $dealSize ?>
 			</td>
 			<td style="text-align: center;">
-				<?=  "<input type='button' value='View' />" ?>
+				<?php 
+		          // Check if there are any attachments
+		          // If so, echo the formatted data with button, otherwise echo "None"
+		          if(is_array($documents) && count($documents)) {
+		            // Construct JS object with details to pass to View button
+		            $JSData = '{ "attachments" : [';
+		            foreach($documents as $thisDocument) {
+		              $JSData .= '{' . 
+		                      '"filename" : "' . $thisDocument['name'] . '",' .
+		                      '"timestamp" : "' . $thisDocument['time'] . '"' .
+		                    '},';
+		            }
+		            $JSData .= '],';
+		            $viewString = "<input type='button' value='View' onClick='showAttachments(" . $this->mylibrary->escapeQuotes($JSData) . ")' />";
+		          } else {
+		            $viewString = "None";
+		          }
+		        ?>
+		        <?=  $viewString ?>
 			</td>
 			<?php if(isset($status)) { // Echo this only if the person viewing is not a member of the project ?>
 			<td>
