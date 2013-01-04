@@ -90,7 +90,7 @@ $newCommentString =
 '{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
 '{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
 '{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
-' "action" : "",'.
+' "action" : "'. site_url('/supervisor/newComment') .'",'.
 ' "method" : "POST",'.
 ' "heading" : "New Comment" }';
 
@@ -184,7 +184,7 @@ if(1) { // No condition required here
 
 	$userActions =
 		// Form to process [Agree] button
-		$this->mylibrary->escapeFunction(form_open('/member/agreeComment')) .
+		$this->mylibrary->escapeFunction(form_open('/supervisor/agreeComment')) .
 			//Project ID, the id of the project whose comment the member is agreeing to
 			"<input type='hidden' name='projectID' value='".$id."' />" .
 			// ID of the root comment where agreement should be added
