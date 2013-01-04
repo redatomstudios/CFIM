@@ -345,7 +345,7 @@ if(isset($status)) {
 		    //$('.commentedTable td.control').each(function () {
 			  var nTr = this.parentNode;
 			  var i = $.inArray( nTr, anOpen );
-
+			  console.log(fnFormatDetails(oTable, nTr));
 			  if ( i === -1 ) {
 			  	$('img', this).attr( 'src', sImageUrl+"details_close.png" );
 			    var nDetailsRow = oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'comments' );
