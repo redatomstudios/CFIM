@@ -51,7 +51,7 @@
 	var dataSource = 	{ "aaData": [
 										<?php foreach ($memberProjects as $project) { ?>
 											{
-												'name': '<?= anchor("/member/viewProject/".$project["id"], $project["projectName"]) ?>',
+												'name': '<?= anchor("/supervisor/viewProject/".$project["id"], $project["projectName"]) ?>',
 												'leader': '<?= $project["projectLeader"] ?>',
 												'sector': '<?= $project["sector"] ?>',
 												'subsector': '<?= $project["subSector"] ?>',
