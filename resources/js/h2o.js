@@ -81,7 +81,7 @@ function showAttachments(dataFields) {
 	data += "<table class='displayAttachments'>";
 	data += "<thead>" +
 				"<th>Filename</th>" +
-				"<th>Time</th>" +
+				"<th style='width: 150px;'>Time</th>" +
 				// "<th>Delete?</th>" +
 			"</thead>" +
 			"<tbody>";
@@ -89,8 +89,8 @@ function showAttachments(dataFields) {
 	for(thisAttachment in dataFields.attachments) {
 		thisAttachment = dataFields.attachments[thisAttachment];
 		data += "<tr>" +
-					"<td>" + thisAttachment['filename'] + "</td>" +
-					"<td>" + thisAttachment['timestamp'] + "</td>" +
+					"<td><a href='" + thisAttachment['rootURL'] + "resources/uploads/" + thisAttachment['projectID'] + "/" + thisAttachment['filename'] + "' target='_blank'>" + thisAttachment['filename'] + "</a></td>" +
+					"<td style='width: 150px; text-align: center;'>" + thisAttachment['timestamp'] + "</td>" +
 					// "<td><input type='checkbox' class='deleteAttachmentFlag' value='' /></td>" +
 				"</tr>";
 	}

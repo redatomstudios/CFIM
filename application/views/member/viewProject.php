@@ -4,14 +4,15 @@ function createViewButton($documents, $id) {
 	  // Construct JS object with details to pass to View button
 	  $JSData = '{ "attachments" : [';
 	  foreach($documents as $thisDocument) {
-	  	$linkString = '<a href="' . base_url() . 'resources/uploads/' . $id . '/' . $thisDocument['filename'] . '"> ' . $thisDocument['filename'] . '</a>';
 	    $JSData .= '{' . 
-	            '"filename" : "' . $linkString . '",' .
+	            '"filename" : "' . $thisDocument['filename'] . '",' .
+	            '"projectID" : "' . $id . '",' .
+	            '"rootURL" : "' . base_url() . '",' .
 	            '"timestamp" : "' . $thisDocument['timestamp'] . '"' .
 	          '},';
 	  }
 	  $JSData .= ']}';
-	  $viewString = '<input type="button" value="View" onClick="showAttachments(' . $JSData . ')" />';
+	  $viewString = "<input type='button' value='View' onClick='showAttachments(" . $JSData . ")' />";
 	} else {
 	  $viewString = "None";
 	}
@@ -344,7 +345,7 @@ if(isset($status)) {
 		    //$('.commentedTable td.control').each(function () {
 			  var nTr = this.parentNode;
 			  var i = $.inArray( nTr, anOpen );
-			  console.log(fnFormatDetails(oTable, nTr));
+
 			  if ( i === -1 ) {
 			  	$('img', this).attr( 'src', sImageUrl+"details_close.png" );
 			    var nDetailsRow = oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'comments' );
@@ -500,7 +501,7 @@ if(isset($status)) {
 		          // Check if there are any attachments
 		          // If so, echo the formatted data with button, otherwise echo "None"
 				if(isset($update['attachments'])) {
-					$viewString = createViewButton($update['attachments']);
+					$viewString = createViewButton($update['attachments'], $id);
 				} else {
 					$viewString = 'None';
 				}
@@ -516,7 +517,7 @@ if(isset($status)) {
 			          // Check if there are any attachments
 			          // If so, echo the formatted data with button, otherwise echo "None"
 					if(isset($update['vouchers'])) {
-						$viewString = createViewButton($update['vouchers']);
+						$viewString = createViewButton($update['vouchers'], $id);
 					} else {
 						$viewString = 'None';
 					}
