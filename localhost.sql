@@ -1,14 +1,20 @@
-﻿-- phpMyAdmin SQL Dump
--- version 3.5.2
+-- phpMyAdmin SQL Dump
+-- version 3.5.2.2
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jan 03, 2013 at 06:53 PM
--- Server version: 5.5.25a
--- PHP Version: 5.4.4
+-- Host: 127.0.0.1
+-- Generation Time: Jan 04, 2013 at 11:03 PM
+-- Server version: 5.5.27
+-- PHP Version: 5.4.7
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `cfim`
@@ -44,20 +50,16 @@ CREATE TABLE IF NOT EXISTS `captcha` (
   `word` varchar(20) NOT NULL,
   PRIMARY KEY (`captcha_id`),
   KEY `word` (`word`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=111 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=114 ;
 
 --
 -- Dumping data for table `captcha`
 --
 
 INSERT INTO `captcha` (`captcha_id`, `captcha_time`, `ip_address`, `word`) VALUES
-(104, 1357232392, '::1', 'jsNtoO'),
-(105, 1357233093, '::1', 'LctjOS'),
-(106, 1357233894, '::1', 'qEPMEt'),
-(107, 1357233904, '::1', 'TBlgol'),
-(108, 1357235348, '::1', 'bbqOxr'),
-(109, 1357235356, '::1', 'igeqiV'),
-(110, 1357235365, '::1', 'tTmEkL');
+(111, 1357329415, '::1', 'PlMDjA'),
+(112, 1357329641, '::1', 'eCvAOt'),
+(113, 1357329689, '::1', 'oxwbIz');
 
 -- --------------------------------------------------------
 
@@ -145,22 +147,22 @@ CREATE TABLE IF NOT EXISTS `comments` (
 --
 
 INSERT INTO `comments` (`id`, `orderNumber`, `projectId`, `memberId`, `body`, `attachments`, `timestamp`, `counter`) VALUES
-(1, '1', 45, 2, 'This project is good!!', '', '2012-12-27 07:46:52', ',2,9'),
-(2, '1.1.1', 45, 2, 'I''m responding to this', '', '2012-12-30 09:03:00', ''),
-(3, '1.2.1', 45, 2, 'This is another response by a random person', '', '2012-12-30 09:03:00', ''),
-(4, '1.3.2', 45, 2, 'This is a team response', '', '2012-12-30 09:03:39', ''),
-(5, '1.4.2', 45, 2, 'This is another team response', '', '2012-12-30 09:03:39', ''),
-(6, '2', 45, 3, 'Just another root comment!', '', '2012-12-30 11:31:34', ',9'),
-(7, '2.1.1', 45, 2, 'Don''t post random comments on here.', '', '2012-12-30 11:31:34', ''),
-(8, '2.2.2', 45, 3, 'I can do anything I want!', '', '2012-12-30 11:31:34', ''),
-(9, '3', 45, 2, 'Root comments are so cool guys!ZZ*&!', '', '2012-12-30 11:38:17', ',9'),
-(10, '3.1.1', 45, 3, 'You said we couldn''t post random comments =/', '', '2012-12-30 11:38:17', ''),
-(11, '3.2.2', 45, 2, 'I lied! :D', '', '2012-12-30 11:38:17', ''),
-(12, '1', 63, 2, 'Oh, WoW!! A precious comment!!', '', '2013-01-01 12:28:27', ''),
-(13, '1', 64, 2, 'This is the latest project!!', '', '2013-01-01 23:10:10', ''),
-(14, '2', 64, 2, 'AHA!!! Another Comment!!', '', '2013-01-01 23:13:00', ''),
-(15, '1.1.2', 64, 2, 'Okay', '', '2013-01-03 12:38:39', ''),
-(16, '4', 45, 9, 'Heh, respond shouldn''t be showing up for this....I think.', '', '2013-01-03 12:48:01', '');
+(1, '1', 45, 2, 'This project is good!!', '', '2012-12-27 02:16:52', ',2,9'),
+(2, '1.1.1', 45, 2, 'I''m responding to this', '', '2012-12-30 03:33:00', ''),
+(3, '1.2.1', 45, 2, 'This is another response by a random person', '', '2012-12-30 03:33:00', ''),
+(4, '1.3.2', 45, 2, 'This is a team response', '', '2012-12-30 03:33:39', ''),
+(5, '1.4.2', 45, 2, 'This is another team response', '', '2012-12-30 03:33:39', ''),
+(6, '2', 45, 3, 'Just another root comment!', '', '2012-12-30 06:01:34', ',9'),
+(7, '2.1.1', 45, 2, 'Don''t post random comments on here.', '', '2012-12-30 06:01:34', ''),
+(8, '2.2.2', 45, 3, 'I can do anything I want!', '', '2012-12-30 06:01:34', ''),
+(9, '3', 45, 2, 'Root comments are so cool guys!ZZ*&!', '', '2012-12-30 06:08:17', ',9'),
+(10, '3.1.1', 45, 3, 'You said we couldn''t post random comments =/', '', '2012-12-30 06:08:17', ''),
+(11, '3.2.2', 45, 2, 'I lied! :D', '', '2012-12-30 06:08:17', ''),
+(12, '1', 63, 2, 'Oh, WoW!! A precious comment!!', '', '2013-01-01 06:58:27', ''),
+(13, '1', 64, 2, 'This is the latest project!!', '', '2013-01-01 17:40:10', ''),
+(14, '2', 64, 2, 'AHA!!! Another Comment!!', '', '2013-01-01 17:43:00', ''),
+(15, '1.1.2', 64, 2, 'Okay', '', '2013-01-03 07:08:39', ''),
+(16, '4', 45, 9, 'Heh, respond shouldn''t be showing up for this....I think.', '', '2013-01-03 07:18:01', '');
 
 -- --------------------------------------------------------
 
@@ -183,14 +185,14 @@ CREATE TABLE IF NOT EXISTS `documents` (
 --
 
 INSERT INTO `documents` (`id`, `filename`, `timestamp`, `projectId`, `size`) VALUES
-(7, '.htaccess', '2012-12-27 05:01:15', 46, 1),
-(9, 'CFIMProject.txt', '2012-12-27 05:01:15', 46, 1),
-(10, 'pages.sql', '2013-01-01 02:06:21', 57, 277),
-(11, 'sliderRight.png', '2013-01-01 02:06:21', 57, 63),
-(12, 'mix_db_Fresh.sql', '2013-01-01 02:07:45', 58, 6),
-(13, 'sliderRight.png', '2013-01-03 10:26:45', 65, 63),
-(14, 'sliderRight.png', '2013-01-03 11:21:43', 48, 63),
-(15, 'viewPriceTable.php', '2013-01-03 11:21:44', 48, 7);
+(7, '.htaccess', '2012-12-26 23:31:15', 46, 1),
+(9, 'CFIMProject.txt', '2012-12-26 23:31:15', 46, 1),
+(10, 'pages.sql', '2012-12-31 20:36:21', 57, 277),
+(11, 'sliderRight.png', '2012-12-31 20:36:21', 57, 63),
+(12, 'mix_db_Fresh.sql', '2012-12-31 20:37:45', 58, 6),
+(13, 'sliderRight.png', '2013-01-03 04:56:45', 65, 63),
+(14, 'sliderRight.png', '2013-01-03 05:51:43', 48, 63),
+(15, 'viewPriceTable.php', '2013-01-03 05:51:44', 48, 7);
 
 -- --------------------------------------------------------
 
@@ -209,6 +211,7 @@ CREATE TABLE IF NOT EXISTS `expenses` (
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `expense` decimal(10,2) NOT NULL,
   `voucher` varchar(50) NOT NULL,
+  `status` enum('Pending','Approved','Rejected','') NOT NULL DEFAULT 'Pending',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
@@ -216,10 +219,10 @@ CREATE TABLE IF NOT EXISTS `expenses` (
 -- Dumping data for table `expenses`
 --
 
-INSERT INTO `expenses` (`id`, `projectId`, `memberId`, `reviewedBy`, `updateBody`, `attachments`, `timestamp`, `expense`, `voucher`) VALUES
-(1, 45, 2, 0, 'genius', '', '2013-01-03 11:45:19', 500.30, ''),
-(2, 45, 2, 0, 'Update', '', '2013-01-03 14:29:48', 0.00, ''),
-(3, 45, 2, 0, 'Expense', '', '2013-01-03 14:30:15', 920.00, '');
+INSERT INTO `expenses` (`id`, `projectId`, `memberId`, `reviewedBy`, `updateBody`, `attachments`, `timestamp`, `expense`, `voucher`, `status`) VALUES
+(1, 45, 2, 0, 'genius', '', '2013-01-03 06:15:19', 500.30, '', 'Pending'),
+(2, 45, 2, 0, 'Update', '', '2013-01-03 08:59:48', 0.00, '', 'Pending'),
+(3, 45, 2, 0, 'Expense', '', '2013-01-03 09:00:15', 920.00, '', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -267,7 +270,7 @@ CREATE TABLE IF NOT EXISTS `members` (
   `projects` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `members`
@@ -278,7 +281,8 @@ INSERT INTO `members` (`id`, `memberName`, `username`, `password`, `rank`, `titl
 (2, 'John Connor', 'dummy1', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 3, '1', '', 'dm1@gmail.com', 'dm1other@gmail.com', '2856547853', 2147483647, ',45,46,47,48,49,50,51,52,53,54,55,56,57,58,63,64,6'),
 (3, 'Jane Doe', 'dm2', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 4, 'Active', '', 'dm2@gmail.com', 'dm2other@gmail.com', '12345', 2147483647, ',45,46,57,58,63,64,65,66,48'),
 (8, 'Amala George', 'ammu', '4fcab400858d58a02b48f097bfdbc411e838ee12', 2, 4, 'Active', '2,3', 'albinin0002@gmail.com', 'albinin0002@gmail.com', '9620732469', 2147483647, NULL),
-(9, 'James Randall', 'godfrzero', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 1, 'Active', '', '', '', '', 0, NULL);
+(9, 'James Randall', 'godfrzero', '4fcab400858d58a02b48f097bfdbc411e838ee12', 3, 1, 'Active', '', '', '', '', 0, NULL),
+(10, 'super', 'super', '4fcab400858d58a02b48f097bfdbc411e838ee12', 1, 1, '1', '', '', '', '', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -410,3 +414,7 @@ INSERT INTO `sectors` (`id`, `name`, `subsectorOf`) VALUES
 (6, 'Sector Format', 1),
 (7, 'Energy', 0),
 (8, 'RedHot', 0);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
