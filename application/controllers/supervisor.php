@@ -326,7 +326,7 @@ class Supervisor extends CI_Controller{
 		$this->load->library('mylibrary');
 
 		$post = $this->input->post();
-		echo "<pre>";
+		// echo "<pre>";
 		
 		$data = array();
 		$data['projectId'] = $post['projectID'];
@@ -346,7 +346,7 @@ class Supervisor extends CI_Controller{
 		}
 
 		$this->expensesModel->insertUpdate($data);
-		redirect('/member/viewProject/'.$post['projectID']);
+		redirect('/supervisor/viewProject/'.$post['projectID']);
 	}
 
 	public function newExpense(){
@@ -391,9 +391,9 @@ class Supervisor extends CI_Controller{
 		}
 
 		if($this->expensesModel->insertExpense($data))
-			redirect('/member/viewProject/'.$post['projectID']);
+			redirect('/supervisor/viewProject/'.$post['projectID']);
 		else
-			redirect('/member/viewProject/'.$post['projectID'].'?n=' . urlencode('Enter Expense'));
+			redirect('/supervisor/viewProject/'.$post['projectID'].'?n=' . urlencode('Enter Expense'));
 	}
 
 	public function investedProjects(){
@@ -479,9 +479,9 @@ class Supervisor extends CI_Controller{
 
 		$data['memberProjects'] = $ps;
 
-		$this->load->view('member/header', $d1);
-		$this->load->view('member/listProjects', $data);
-		$this->load->view('member/footer');
+		$this->load->view('supervisor/header', $d1);
+		$this->load->view('supervisor/listProjects', $data);
+		$this->load->view('supervisor/footer');
 	}
 
 }

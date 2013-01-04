@@ -527,7 +527,7 @@ class Member extends CI_Controller{
 		$this->load->library('mylibrary');
 
 		$post = $this->input->post();
-		echo "<pre>";
+		// echo "<pre>";
 		
 		$data = array();
 		$data['projectId'] = $post['projectID'];
