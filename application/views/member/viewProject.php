@@ -1,16 +1,17 @@
 <?php
-function createViewButton($documents) {
+function createViewButton($documents, $id) {
 	if(is_array($documents) && count($documents)) {
 	  // Construct JS object with details to pass to View button
 	  $JSData = '{ "attachments" : [';
 	  foreach($documents as $thisDocument) {
+	  	$linkString = '<a href="' . base_url() . 'resources/uploads/' . $id . '/' . $thisDocument['filename'] . '"> ' . $thisDocument['filename'] . '</a>';
 	    $JSData .= '{' . 
-	            '"filename" : "' . $thisDocument['filename'] . '",' .
+	            '"filename" : "' . $linkString . '",' .
 	            '"timestamp" : "' . $thisDocument['timestamp'] . '"' .
 	          '},';
 	  }
 	  $JSData .= ']}';
-	  $viewString = "<input type='button' value='View' onClick='showAttachments(" . $JSData . ")' />";
+	  $viewString = '<input type="button" value="View" onClick="showAttachments(' . $JSData . ')" />';
 	} else {
 	  $viewString = "None";
 	}
@@ -58,7 +59,7 @@ function createViewButton($documents) {
 			$rootComments[$rootID] = array(
 					'name' => $this->membersModel->getName($thisComment["memberId"]),
 					'comment' => $thisComment['body'],
-					'attachment' => createViewButton((isset($thisComment['files'])?$thisComment['files']:'')),
+					'attachment' => createViewButton(( isset($thisComment['files']) ? $thisComment['files'] : '' ), $id),
 					'agreements' => $thisComment['counter'],
 					'date' => $thisComment['timestamp']
 				);
@@ -73,7 +74,7 @@ function createViewButton($documents) {
 				$memberReplies[$rootID][] = array(
 					'name' => $this->membersModel->getName($thisComment["memberId"]),
 					'comment' => $thisComment['body'],
-					'attachment' => createViewButton( isset($thisComment['files']) ? $thisComment['files'] : '' ),
+					'attachment' => createViewButton(( isset($thisComment['files']) ? $thisComment['files'] : '' ), $id),
 					'date' => $thisComment['timestamp']
 				);
 			} else {
@@ -81,7 +82,7 @@ function createViewButton($documents) {
 				$teamReplies[$rootID][] = array(
 					'name' => $this->membersModel->getName($thisComment["memberId"]),
 					'comment' => $thisComment['body'],
-					'attachment' => createViewButton( isset($thisComment['files']) ? $thisComment['files'] : '' ),
+					'attachment' => createViewButton(( isset($thisComment['files']) ? $thisComment['files'] : '' ), $id),
 					'date' => $thisComment['timestamp']
 				);
 			}
@@ -325,9 +326,9 @@ if(isset($status)) {
 				    { "mDataProp": "control", "sClass": "control centered", "bSortable": false },
 		            { "mDataProp": "member", "bSortable": false },
 		            { "mDataProp": "comment", "bSortable": false },
-		            { "mDataProp": "attachment", "bSortable": false },
-		            { "mDataProp": "time" },
-		            { "mDataProp": "agreements", "bSortable": false },
+		            { "mDataProp": "attachment", "sClass": "centered", "bSortable": false },
+		            { "mDataProp": "time", "sClass": "centered" },
+		            { "mDataProp": "agreements", "sClass": "centered", "bSortable": false },
 		            { 
 		            	"mDataProp": "actions",
 		            	"sClass": "centered",
@@ -371,7 +372,7 @@ if(isset($status)) {
 				      	'<tr class="followonComment">' +
 				        	'<td>' + oData.comments[thisComment].name + '</td>' +
 				        	'<td>' + oData.comments[thisComment].date + '</td>' +
-				        	'<td>' + oData.comments[thisComment].attachment + '</td>' +
+				        	'<td class="centered">' + oData.comments[thisComment].attachment + '</td>' +
 				        	'<td>' + oData.comments[thisComment].comment + '</td>' +
 			        	'</tr>'	;
 			      }
@@ -385,7 +386,7 @@ if(isset($status)) {
 			  	      	'<tr class="responseComment">' +
 			  	        	'<td>' + oData.responses[thisComment].name + '</td>' +
 			  	        	'<td>' + oData.responses[thisComment].date + '</td>' +
-			  	        	'<td>' + oData.responses[thisComment].attachment + '</td>' +
+			  	        	'<td class="centered">' + oData.responses[thisComment].attachment + '</td>' +
 			  	        	'<td>' + oData.responses[thisComment].comment + '</td>' +
 			          	'</tr>'	;
 			        }
@@ -436,7 +437,7 @@ if(isset($status)) {
 		          // Check if there are any attachments
 		          // If so, echo the formatted data with button, otherwise echo "None"
 
-		          $viewString = createViewButton($documents);
+		          $viewString = createViewButton($documents, $id);
 		        ?>
 		        <?=  $viewString ?>
 			</td>
@@ -498,19 +499,27 @@ if(isset($status)) {
 				<?php 
 		          // Check if there are any attachments
 		          // If so, echo the formatted data with button, otherwise echo "None"
-				  $viewString = createViewButton($update['attachments']);
+				if(isset($update['attachments'])) {
+					$viewString = createViewButton($update['attachments']);
+				} else {
+					$viewString = 'None';
+				}
 		        ?>
 
 				<td class="centered"><?= $viewString ?></td>
 				<td class="centered"><?= $update['timestamp'] ?></td>
-				<?php if(intval($update['expense'])) { ?>
+				<?php if($update['expense'] != '0.00') { ?>
 					<td class="centered"><?= $update['expense'] ?></td>
 					<?php $totalExpenses += $update['expense']; ?>
 
 					<?php 
 			          // Check if there are any attachments
 			          // If so, echo the formatted data with button, otherwise echo "None"
-			          $viewString = createViewButton($update['voucher']);
+					if(isset($update['vouchers'])) {
+						$viewString = createViewButton($update['vouchers']);
+					} else {
+						$viewString = 'None';
+					}
 			        ?>
 
 					<td class='centered'><?= $viewString ?></td>
@@ -532,7 +541,7 @@ if(isset($status)) {
 </div>
 <div class="gridOne spaceTop" style="text-align: right; font-weight: bold; font-size: 1.5em;">
 	<?php if(isset($totalExpenses)) { ?>
-		Total: <?= intval($totalExpenses / 100) . '.' . ($totalExpenses % 100) ?>
+		Total: <?= intval($totalExpenses / 100) . '.' . ($totalExpenses % 100) . ( $totalExpenses % 100 < 10 ? '0' : '' ) ?>
 	<?php } else { ?>
 		Total: 0
 	<?php } ?>

@@ -171,8 +171,8 @@ class Member extends CI_Controller{
 					}
 				}
 
-				if($update['expense'] != NULL && intval($update['expense'])){
-					$docs = ( isset($update['vouchers']) ? $update['vouchers'] : '' );
+				if($update['expense'] != NULL){
+					$docs = ( isset($update['voucher']) ? $update['voucher'] : '' );
 					if($docs != ''){
 						$voucherName = array();
 
@@ -198,7 +198,9 @@ class Member extends CI_Controller{
 				unset($voucherName);
 				$tempUpdates[] = $c;
 			}
-		}$updates = $tempUpdates;
+		}
+
+		$updates = $tempUpdates;
 
 				// print_r($tempComments);
 

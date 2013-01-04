@@ -63,8 +63,8 @@ Member - Project Member
 > - Completed
 
 - Viewing a project
-> - Viewing of project attachments
-> - Viewing of update/expense attachments
+> - *Viewing of project attachments*
+> - *Viewing of update/expense attachments*
 > - Viewing for expense vouchers
 > - *When displaying update, Expenses, Voucher and Review should be blank*
 > - Reviewed By Finance should be: Approved, Rejected or Pending
@@ -87,7 +87,7 @@ Member - Not Project Member
 > - Completed
 
 - Viewing a project
-> - Viewing of project attachments
+> - *Viewing of project attachments*
 > - *Hide agree button if member has already agreed*
 
 Supervisor
