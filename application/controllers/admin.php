@@ -413,7 +413,7 @@ class Admin extends CI_Controller {
 				}
 
 				if($this->membersModel->insertMember($insert))
-					redirect('admin');
+					redirect('/admin/index?n=' . urlencode("Member added successfully") . '^1');
 				echo "Member Not Added!! Error in values!!";
 			}
 			elseif($verify == 1)
