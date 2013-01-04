@@ -1,5 +1,6 @@
+
+<?= form_open('/supervisor') ?>
 <div class="gridOne spaceTop small">
-<?= form_open() ?>
 	<label for="projectLeader">Project Leader: </label>
 	<?= form_dropdown('projectLeader', $members, 0) ?>
 	<label for="projectMember">Project Member: </label>
@@ -36,7 +37,7 @@
 	</table>
 </div>
 <div class="gridOne" style="text-align: right; margin-top: 10px;">
-	<input type="button" value="Display" />	
+	<input type="submit" value="Display" />	
 </div>
 <?= form_close() ?>
 

@@ -20,6 +20,7 @@ class Supervisor extends CI_Controller{
 
 		$data = $this->getProjectFormData();
 		if($this->input->post()){
+			$d = $this->input->post();
 			$d['discussionDate'] = $this->input->post('discussionDate');
 			$data['memberProjects'] = $this->projectsModel->searchProjects($d);
 			// $data['memberProjects'] = $this->projectsModel->getProjects();
@@ -61,7 +62,7 @@ class Supervisor extends CI_Controller{
 		}
 
 		// echo "<pre>";
-		// print_r($data);
+		// print_r($this->input->post());
 
 		$this->load->view('/super/header', $d1);
 		$this->load->view('/super/listProjects', $data);
