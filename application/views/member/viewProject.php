@@ -73,7 +73,7 @@ function createViewButton($documents) {
 				$memberReplies[$rootID][] = array(
 					'name' => $this->membersModel->getName($thisComment["memberId"]),
 					'comment' => $thisComment['body'],
-					'attachment' => $thisComment['attachments'],
+					'attachment' => createViewButton( isset($thisComment['files']) ? $thisComment['files'] : '' ),
 					'date' => $thisComment['timestamp']
 				);
 			} else {
@@ -81,7 +81,7 @@ function createViewButton($documents) {
 				$teamReplies[$rootID][] = array(
 					'name' => $this->membersModel->getName($thisComment["memberId"]),
 					'comment' => $thisComment['body'],
-					'attachment' => $thisComment['attachments'],
+					'attachment' => createViewButton( isset($thisComment['files']) ? $thisComment['files'] : '' ),
 					'date' => $thisComment['timestamp']
 				);
 			}
@@ -268,7 +268,7 @@ if(isset($status)) {
 	 				{
 	 					"name" : "<?= $memberReply['name'] ?>",
 	 					"comment" : "<?= $memberReply['comment'] ?>",
-	 					"attachment" : "<?= createViewButton($memberReply['attachment']) ?>",
+	 					"attachment" : "<?= $this->mylibrary->escapeQuotes($memberReply['attachment']) ?>",
 	 					"date" : "<?= $memberReply['date'] ?>"
 	 				},
 	 			<?php } ?>
@@ -280,7 +280,7 @@ if(isset($status)) {
 	 				{
 	 					"name" : "<?= $teamReply['name'] ?>",
 	 					"comment" : "<?= $teamReply['comment'] ?>",
-	 					"attachment" : "<?= createViewButton($teamReply['attachment']) ?>",
+	 					"attachment" : "<?= $this->mylibrary->escapeQuotes($teamReply['attachment']) ?>",
 	 					"date" : "<?= $teamReply['date'] ?>"
 	 				},
 	 			<?php } ?>
@@ -343,7 +343,7 @@ if(isset($status)) {
 		    //$('.commentedTable td.control').each(function () {
 			  var nTr = this.parentNode;
 			  var i = $.inArray( nTr, anOpen );
-			   
+			  console.log(fnFormatDetails(oTable, nTr));
 			  if ( i === -1 ) {
 			  	$('img', this).attr( 'src', sImageUrl+"details_close.png" );
 			    var nDetailsRow = oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'comments' );
@@ -363,7 +363,7 @@ if(isset($status)) {
 			{
 			  var oData = oTable.fnGetData( nTr );
 			  var sOut = '<div class="innerDetails">';
-			  	if(oData.responses.length) {
+			  	if(oData.comments.length) {
 			      sOut += '<table cellpadding="5" cellspacing="0" border="0" >' +
 			      		'<tr class="followonComment"><td colspan="4" style="font-weight: bold;">Follow On Comments</td></tr>';
 			      for( thisComment in oData.comments ) {
