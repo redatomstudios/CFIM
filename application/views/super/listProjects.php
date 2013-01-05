@@ -79,6 +79,7 @@
 													<?php }  ?>
 												]
 											},
+											
 										<?php } ?>
 										] }
 	// Code for proper display of comments in member accounts

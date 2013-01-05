@@ -38,7 +38,7 @@ class Supervisor extends CI_Controller{
 			$ps = array();
 			foreach ($data['memberProjects'] as $project) {
 
-				$exp = $this->expensesModel->getAccumulatedExpense($p['id']);
+				$exp = $this->expensesModel->getAccumulatedExpense($project['id']);
 				// echo "<br> <br>";
 				# code...
 				$leaderName = $this->membersModel->getName($project['leaderId']);
