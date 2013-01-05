@@ -80,6 +80,7 @@
 												],
 												'expenses': '<?= $project["expenses"] ?>',
 											},
+											
 										<?php } ?>
 										] }
 	// Code for proper display of comments in member accounts

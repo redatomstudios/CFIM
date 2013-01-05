@@ -34,9 +34,11 @@ class Supervisor extends CI_Controller{
 			$this->load->model('sectorsModel');
 			$this->load->model('provincesModel');
 			$this->load->model('commentsModel');
+			$this->load->model('expensesModel');
 			$ps = array();
 			foreach ($data['memberProjects'] as $project) {
 
+				$exp = $this->expensesModel->getAccumulatedExpense($project['id']);
 				// echo "<br> <br>";
 				# code...
 				$leaderName = $this->membersModel->getName($project['leaderId']);
@@ -53,6 +55,7 @@ class Supervisor extends CI_Controller{
 				$p['date'] = $project['discussionDate'];
 				$p['status'] = $project['status'];
 				$p['comments'] = $this->commentsModel->getComments($p['id'], 3);
+				$p['expenses '] = ($exp)?$exp:'0';
 
 				$ps[] = $p;
 			}
@@ -62,7 +65,7 @@ class Supervisor extends CI_Controller{
 		}
 
 		// echo "<pre>";
-		// print_r($this->input->post());
+		// print_r($data);
 
 		$this->load->view('/super/header', $d1);
 		$this->load->view('/super/listProjects', $data);
