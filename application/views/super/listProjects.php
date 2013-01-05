@@ -78,7 +78,7 @@
 													},
 													<?php }  ?>
 												],
-												'expenses': '<?= $project["expenses"] ?>',
+												'expenses': '<?= $project["expenses"] ?>'
 											},
 											
 										<?php } ?>

@@ -55,7 +55,7 @@ class Supervisor extends CI_Controller{
 				$p['date'] = $project['discussionDate'];
 				$p['status'] = $project['status'];
 				$p['comments'] = $this->commentsModel->getComments($p['id'], 3);
-				$p['expenses '] = ($exp)?$exp:'0';
+				$p['expenses'] = ($exp) ? $exp : '0';
 
 				$ps[] = $p;
 			}
@@ -64,8 +64,8 @@ class Supervisor extends CI_Controller{
 			$data['memberProjects'] = $ps;
 		}
 
-		// echo "<pre>";
-		// print_r($data);
+		echo "<pre>";
+		print_r($data);
 
 		$this->load->view('/super/header', $d1);
 		$this->load->view('/super/listProjects', $data);
