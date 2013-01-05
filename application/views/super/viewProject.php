@@ -120,7 +120,7 @@ $newCommentString =
 "{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
 "{'name' : 'commentBody','type' : 'text', 'label' : 'Comment'},".
 "{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}],".
-" 'action' : '" . site_url("/member/newComment") . "',".
+" 'action' : '" . site_url("/supervisor/newComment") . "',".
 " 'method' : 'POST',".
 " 'enctype' : 'multipart/form-data',".
 " 'heading' : 'New Comment' }";
@@ -132,7 +132,7 @@ $newUpdateString =
 "{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
 "{'name' : 'commentBody','type' : 'text', 'label' : 'Comment'},".
 "{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}],".
-" 'action' : '" . site_url("/member/newUpdate") . "',".
+" 'action' : '" . site_url("/supervisor/newUpdate") . "',".
 " 'method' : 'POST',".
 " 'enctype' : 'multipart/form-data',".
 " 'heading' : 'New Update' }";
@@ -146,7 +146,7 @@ $newExpenseString =
 "{'name' : 'expense','type' : 'text', 'label' : 'Amount'},".
 "{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'},".
 "{'name' : 'vouchers[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Voucher'}],".
-" 'action' : '" . site_url("/member/newExpense") . "',".
+" 'action' : '" . site_url("/supervisor/newExpense") . "',".
 " 'method' : 'POST',".
 " 'enctype' : 'multipart/form-data',".
 " 'heading' : 'Add Expense' }";
@@ -212,7 +212,7 @@ if(isset($status)) {
 	'{"name" : "responseType","type" : "hidden","value" : "1"},'.
 	'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
 	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
-	' "action" : "'. site_url('/member/newComment') .'",'.
+	' "action" : "'. site_url('/supervisor/newComment') .'",'.
 	' "method" : "POST",'.
 	' "enctype" : "multipart/form-data",'.
 	' "heading" : "Post a Comment" }';
@@ -226,7 +226,7 @@ if(isset($status)) {
 	'{"name" : "responseType","type" : "hidden","value" : "2"},'.
 	'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
 	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
-	' "action" : "'. site_url('/member/newComment') .'",'.
+	' "action" : "'. site_url('/supervisor/newComment') .'",'.
 	' "method" : "POST",'.
 	' "enctype" : "multipart/form-data",'.
 	' "heading" : "Post a Response" }';
