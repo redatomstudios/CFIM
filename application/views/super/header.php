@@ -83,7 +83,7 @@
 		<div class="clear"></div>
 		<nav>
 			<ul>
-				<li<?= $currentPage == 'myProjects' ? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>super">My Projects</li>
+				<li<?= $currentPage == 'myProjects' ? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>supervisor">My Projects</li>
 				<li<?= $currentPage == 'investedProjects' ? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>supervisor/investedProjects">My Invested Projects</a></li>
 				<li<?= $currentPage == 'myInvested' 	? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>supervisor/myInvested">Change Password</li>
 				<li<?= $currentPage == 'changePassword' 	? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>home/changePassword">Change Password</li>
