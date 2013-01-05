@@ -316,7 +316,7 @@ if(isset($status)) {
 		     
 		    var oTable = $('.commentedTable').dataTable( {
 		        "bProcessing": true,
-		        "sScrollY": "350px",
+		        // "sScrollY": "350px",
 		        "aaData": dataSource.aaData,
 		        "bPaginate": true,
 		        "iDisplayLength": 5,
@@ -366,7 +366,7 @@ if(isset($status)) {
 			  var oData = oTable.fnGetData( nTr );
 			  var sOut = '<div class="innerDetails">';
 			  	if(oData.comments.length) {
-			      sOut += '<table cellpadding="5" cellspacing="0" border="0" >' +
+			      sOut += '<table cellpadding="5" cellspacing="0" border="0" style="box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);">' +
 			      		'<tr class="followonComment"><td colspan="4" style="font-weight: bold;">Follow On Comments</td></tr>';
 			      for( thisComment in oData.comments ) {
 			      	sOut += 
@@ -461,7 +461,7 @@ if(isset($status)) {
 				<th>Attachment</th>
 				<th>Time</th>
 				<th>Agreements</th>
-				<th><?php // Actions like comment or agree ?></th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>

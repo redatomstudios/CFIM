@@ -64,8 +64,8 @@ class Supervisor extends CI_Controller{
 			$data['memberProjects'] = $ps;
 		}
 
-		echo "<pre>";
-		print_r($data);
+		// echo "<pre>";
+		// print_r($data);
 
 		$this->load->view('/super/header', $d1);
 		$this->load->view('/super/listProjects', $data);
