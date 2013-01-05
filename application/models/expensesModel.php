@@ -47,6 +47,12 @@ class ExpensesModel extends CI_Model{
 		return FALSE;
 	}
 
+	public function getAccumulatedExpense($projectId){
+		# code...
+		$this->db->select('SUM(`expense`) as sum');
+		$res = $this->db->get_where('expenses', array('projectId' => $projectId));
+		return $res->row()->sum;
+	}
 }
 
 ?>

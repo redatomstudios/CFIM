@@ -266,4 +266,29 @@ class ProjectsModel extends CI_Model{
 
 	}
 
+	public function getLatestFinancedProjects(){
+		# code...
+		$this->load->model('expensesModel');
+
+		$this->db->select('projectId, max(`timestamp`) as max');
+		$this->db->group_by('projectId DESC');
+		$res = $this->db->get('expenses');
+
+
+		$p = array();
+		if($res->num_rows() > 0){
+			$projects = $res->result_array();
+			// print_r($projects);
+			foreach ($projects as $project){
+				# code...
+				$pro = $this->getProject($project['projectId']);
+				$pro['accumulatedExpense'] = $this->expensesModel->getAccumulatedExpense($project['projectId']);
+				$p[] = $pro;
+			}
+		}
+		return $p;
+	}
+
+	
+
 }
