@@ -251,6 +251,7 @@ div#notifier {
 	font-size: 1em;
 	font-weight: bold;
 	font-family: Arial, Verdana, sans-serif;
+	z-index: 99999;
 }
 
 div.notification, div.alert {
