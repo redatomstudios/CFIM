@@ -312,11 +312,6 @@ if(isset($status)) {
 		            { "mDataProp": "attachment", "sClass": "centered", "bSortable": false },
 		            { "mDataProp": "time", "sClass": "centered" },
 		            { "mDataProp": "agreements", "sClass": "centered", "bSortable": false },
-		            { 
-		            	"mDataProp": "actions",
-		            	"sClass": "centered",
-						"bSortable": false
-		            }
 		        ],
 		        "oLanguage": {
 		        	"sEmptyTable": "No comments on this project yet."
@@ -513,14 +508,9 @@ if(isset($status)) {
 				<th>Attachment</th>
 				<th>Time</th>
 				<th>Agreements</th>
-				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
 		</tbody>
 	</table>
-</div>
-
-<div class="gridOne spaceTop">
-	<input type="button" value="Add New Comment" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newCommentString) ?>)" />
 </div>
