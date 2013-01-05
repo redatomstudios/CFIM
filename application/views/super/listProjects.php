@@ -77,7 +77,8 @@
 														"date" : "<?= $comment['timestamp'] ?>"
 													},
 													<?php }  ?>
-												]
+												],
+												'expenses': '<?= $project["expenses"] ?>',
 											},
 										<?php } ?>
 										] }
