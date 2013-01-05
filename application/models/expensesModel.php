@@ -25,7 +25,7 @@ class ExpensesModel extends CI_Model{
 
 	public function getExpenses($projectId){
 		# code...
-		$ret = $this->db->get_where('expense', array('projectId' => $projectId, 'expenses !=' => NULL));
+		$ret = $this->db->get_where('expenses', array('projectId' => $projectId, 'expense !=' => 0));
 		if($ret->num_rows() > 0)
 			return $ret->result_array();
 		return FALSE;
@@ -33,7 +33,7 @@ class ExpensesModel extends CI_Model{
 
 	public function getUpdates($projectId){
 		# code...
-		$ret = $this->db->get_where('expenses', array('projectId' => $projectId, 'expenses' => NULL));
+		$ret = $this->db->get_where('expenses', array('projectId' => $projectId, 'expense' => 0));
 		if($ret->num_rows() > 0)
 			return $ret->result_array();
 		return FALSE;
