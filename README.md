@@ -98,6 +98,8 @@ Supervisor
 
 - View Project
 > - Adding root comments, comments and responses aren't working right now
+> - Adding update or expenses not working right now
+> - After adding comment, response, expense or update, user is redirected to home. User should be redirected back to this project.
 
 Finance
 -------

@@ -411,7 +411,7 @@ if(isset($status)) {
 			<td>
 				<?=  $dealSize ?>
 			</td>
-			<td style="text-align: center;">
+			<td class="centered">
 				<?php 
 		          // Check if there are any attachments
 		          // If so, echo the formatted data with button, otherwise echo "None"
@@ -434,7 +434,7 @@ if(isset($status)) {
 				<th>Attachment</th>
 				<th>Time</th>
 				<th>Agreements</th>
-				<th><?php // Actions like comment or agree ?></th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -446,7 +446,6 @@ if(isset($status)) {
 	<input type="button" value="Add New Comment" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newCommentString) ?>)" />
 </div>
 
-<?php if(!isset($status)) { // Only echo these if viewer is a member of the project ?>
 <div class="gridOne spaceTop spaceBottom"> <strong>Update on Progress</strong>: </div>
 <div class="gridOne spaceTop">
 	<?php if(sizeof($updates) > 0) { ?>
@@ -523,7 +522,7 @@ if(isset($status)) {
 <div class="gridTwo spaceTop">
 	<input type="button" value="Add New Update" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newUpdateString) ?>)" /> <input type="button" value="Add Expenses" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newExpenseString) ?>)" />
 </div>
-<?php } // End of things to echo only if viewer is a member of the project ?>
+
 <div class="clear"></div>
 <script>
 filesToDelete = '';
