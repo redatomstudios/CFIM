@@ -1,13 +1,23 @@
 
 <?= form_open('/supervisor') ?>
-<div class="gridOne spaceTop small">
-	<label for="projectLeader">Project Leader: </label>
-	<?= form_dropdown('projectLeader', $members, 0) ?>
-	<label for="projectMember">Project Member: </label>
-	<?= form_dropdown('projectMember', $members, 0) ?>
+<div class="gridOne spaceTop small centered">
+	<table class="singleRow">
+		<thead>
+			<tr>
+				<th>Project Leader</th>
+				<th>Project Member</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><?= form_dropdown('projectLeader', $members, 0) ?></td>
+				<td><?= form_dropdown('projectMember', $members, 0) ?></td>
+			</tr>
+		</tbody>
+	</table>
 </div>
-<div class="gridOne spaceTop small">
-	<table class="displayOnly">
+<div class="gridOne small">
+	<table class="singleRow">
 		<thead>
 			<tr>
 				<th>Discussion Date</th>

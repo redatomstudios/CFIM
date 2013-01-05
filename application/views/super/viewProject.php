@@ -1,3 +1,24 @@
+<?php
+function createViewButton($documents, $id) {
+	if(is_array($documents) && count($documents)) {
+	  // Construct JS object with details to pass to View button
+	  $JSData = '{ "attachments" : [';
+	  foreach($documents as $thisDocument) {
+	    $JSData .= '{' . 
+	            '"filename" : "' . $thisDocument['filename'] . '",' .
+	            '"projectID" : "' . $id . '",' .
+	            '"rootURL" : "' . base_url() . '",' .
+	            '"timestamp" : "' . $thisDocument['timestamp'] . '"' .
+	          '},';
+	  }
+	  $JSData .= ']}';
+	  $viewString = "<input type='button' value='View' onClick='showAttachments(" . $JSData . ")' />";
+	} else {
+	  $viewString = "None";
+	}
+	return $viewString;
+}
+?>
 <style>
 	div.innerDetails { display: none }
 </style>
@@ -14,24 +35,32 @@
 
 	$rootComments = array(); 	// Store the root comments here
 	$memberReplies = array();	// Store the comments from members not on the team here
-	$teamResponses = array();	// Store the responses from the project team here
+	$teamReplies = array();	// Store the responses from the project team here
+	$sImageUrl = "http://www.datatables.net/release-datatables/examples/examples_support/";
 	
 	foreach($comments as $thisComment) {
 	/* Split the order number
 	 * orderNumber structure : rootID.Increment.commentType
 	 * Where 	rootID is unique to each root comment
-	 *			Increment is an index for each rootID
-	 * 			commentType is 1(Member Comment) or 2(Team Response)
+	 *				Increment is an index for each rootID
+	 * 				commentType is 1(Member Comment) or 2(Team Response)
 	 */
 		$orderNumber = explode('.', $thisComment['orderNumber']); 
 		// If the split array has only one element, then we know it's a root comment
 		if(sizeof($orderNumber) == 1) {
 			// This is a root comment
 			$rootID = $orderNumber[0];
+			// $fileNames = '';
+			// if(isset($thisComment['files'])){
+			// 	foreach ($thisComment['files'] as $file) {
+			// 		$fileNames .= $file . "</ br>";
+			// 	}
+			// 	$fileNames = substr($fileNames, 0, strlen($fileNames)-6);
+			// }
 			$rootComments[$rootID] = array(
 					'name' => $this->membersModel->getName($thisComment["memberId"]),
 					'comment' => $thisComment['body'],
-					'attachment' => $thisComment['attachments'],
+					'attachment' => createViewButton(( isset($thisComment['files']) ? $thisComment['files'] : '' ), $id),
 					'agreements' => $thisComment['counter'],
 					'date' => $thisComment['timestamp']
 				);
@@ -46,7 +75,7 @@
 				$memberReplies[$rootID][] = array(
 					'name' => $this->membersModel->getName($thisComment["memberId"]),
 					'comment' => $thisComment['body'],
-					'attachment' => $thisComment['attachments'],
+					'attachment' => createViewButton(( isset($thisComment['files']) ? $thisComment['files'] : '' ), $id),
 					'date' => $thisComment['timestamp']
 				);
 			} else {
@@ -54,7 +83,7 @@
 				$teamReplies[$rootID][] = array(
 					'name' => $this->membersModel->getName($thisComment["memberId"]),
 					'comment' => $thisComment['body'],
-					'attachment' => $thisComment['attachments'],
+					'attachment' => createViewButton(( isset($thisComment['files']) ? $thisComment['files'] : '' ), $id),
 					'date' => $thisComment['timestamp']
 				);
 			}
@@ -86,35 +115,41 @@
 
 // String used to generate form for posting a NEW ROOT COMMENT
 $newCommentString = 
-	'{"elements" : ['.
-'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
-'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
-'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
-' "action" : "'. site_url('/supervisor/newComment') .'",'.
-' "method" : "POST",'.
-' "heading" : "New Comment" }';
+"{'elements' : [".
+"{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
+"{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
+"{'name' : 'commentBody','type' : 'text', 'label' : 'Comment'},".
+"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}],".
+" 'action' : '" . site_url("/member/newComment") . "',".
+" 'method' : 'POST',".
+" 'enctype' : 'multipart/form-data',".
+" 'heading' : 'New Comment' }";
 
 // String used to generate form for posting NEW UPDATE
 $newUpdateString = 
-	'{"elements" : ['.
-'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
-'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
-'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
-' "action" : "",'.
-' "method" : "POST",'.
-' "heading" : "New Update" }';
+"{'elements' : [".
+"{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
+"{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
+"{'name' : 'commentBody','type' : 'text', 'label' : 'Comment'},".
+"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}],".
+" 'action' : '" . site_url("/member/newUpdate") . "',".
+" 'method' : 'POST',".
+" 'enctype' : 'multipart/form-data',".
+" 'heading' : 'New Update' }";
 
 // String used to generate form for posting a NEW EXPENSE
 $newExpenseString =
-	'{"elements" : ['.
-'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
-'{"name" : "commentBody","type" : "text", "label" : "Description"},'.
-'{"name" : "expenses","type" : "text", "label" : "Amount"},'.
-'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"},'.
-'{"name" : "vouchers[]","type" : "file", "multiple" : "multiple", "label" : "Voucher"}],'.
-' "action" : "",'.
-' "method" : "POST",'.
-' "heading" : "Add Expense" }';
+"{'elements' : [".
+"{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
+"{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
+"{'name' : 'commentBody','type' : 'text', 'label' : 'Description'},".
+"{'name' : 'expense','type' : 'text', 'label' : 'Amount'},".
+"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'},".
+"{'name' : 'vouchers[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Voucher'}],".
+" 'action' : '" . site_url("/member/newExpense") . "',".
+" 'method' : 'POST',".
+" 'enctype' : 'multipart/form-data',".
+" 'heading' : 'Add Expense' }";
 
  /* Since we're creating a large and complicated outout, it'll be
   * better to store the data to an output buffer rather than
@@ -130,7 +165,7 @@ $newExpenseString =
  	{
  		"member" : "<?= $thisComment['name'] ?>",
  		"comment" : "<?= $thisComment['comment'] ?>",
- 		"attachment" : "<?= $thisComment['attachment'] ?>",
+ 		"attachment" : "<?= $this->mylibrary->escapeQuotes($thisComment['attachment']) ?>",
 <?php 
 /* Lets get the number of people who agree
  * The input array is just a CSV of the member IDs
@@ -138,21 +173,19 @@ $newExpenseString =
  */
 $rawAgreements = explode(',', $thisComment['agreements']);
 $agreements = 0;
-$memberNames = '';
+$agreeingMembers = ''; // IDs of members who agree
 foreach($rawAgreements as $thisElement) {
 	if(!empty($thisElement)) {
-		$memberNames .= $this->membersModel->getName($thisElement) . ", ";	
+		$agreeingMembers .= $this->membersModel->getName($thisElement) . ', ';
 		$agreements++;
 	}
 }
-$memberNames = substr($memberNames, 0, strlen($memberNames) - 2); // Remove the last space and comma :o
+if(strlen($agreeingMembers)) {
+	$agreeingMembers = substr($agreeingMembers, 0, strlen($agreeingMembers) - 2);
+}
 
-/*
- * We've got the count and member names
- * Now lets put together an anchor string, so
- * the member names are shown as a tooltip on hover
- */
-$agreeString = '<a href="" class="disabled" title="' . $memberNames . '">' . $agreements . '</a>';
+$agreeString = '<a href="" class="disabled" class="display: block;" title="' . $agreeingMembers . '">' . $agreements . '</a>';
+
 ?>
  		"agreements" : "<?= $this->mylibrary->escapeQuotes($agreeString) ?>",
 <?php
@@ -163,7 +196,7 @@ $agreeString = '<a href="" class="disabled" title="' . $memberNames . '">' . $ag
  * $status is only set if the member is not a part of the project team
  * so lets base the bahavior based on that variable
  */
-if(1) { // No condition required here
+if(isset($status)) {
 	/*
 	 * This viewer is not a part of the project team
 	 * Show them the [Agree] and [Comment] buttons
@@ -174,51 +207,73 @@ if(1) { // No condition required here
 	$respondComment = 
 	'{"elements" : ['.
 	'{"name" : "rootID","type" : "hidden","value" : "'. $rootID .'"},'.
+	'{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.	
 	'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
 	'{"name" : "responseType","type" : "hidden","value" : "1"},'.
 	'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
 	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
-	' "action" : "'. "" .'",'.
+	' "action" : "'. site_url('/member/newComment') .'",'.
 	' "method" : "POST",'.
+	' "enctype" : "multipart/form-data",'.
 	' "heading" : "Post a Comment" }';
 
-	$userActions =
-		// Form to process [Agree] button
-		$this->mylibrary->escapeFunction(form_open('/supervisor/agreeComment')) .
-			//Project ID, the id of the project whose comment the member is agreeing to
-			"<input type='hidden' name='projectID' value='".$id."' />" .
-			// ID of the root comment where agreement should be added
-			"<input type='hidden' name='rootID' value='".$rootID."' /> " .
-			// User ID, the id that needs to be added to the agreements
-			"<input type='hidden' name='userID' value='".$this->session->userdata("id")."' />" .
-			"<input style='width: 100%;' type='submit' value='Agree' />" .
-		"</form>" .
-		"<input style='width: 100%;' type='button' value='Comment' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' />";
+	// String used to generate form for posting a RESPONSE in response to a ROOT Comment
+	$justRespond = 
+	'{"elements" : ['.
+	'{"name" : "rootID","type" : "hidden","value" : "'. $rootID .'"},'.
+	'{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.	
+	'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
+	'{"name" : "responseType","type" : "hidden","value" : "2"},'.
+	'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
+	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
+	' "action" : "'. site_url('/member/newComment') .'",'.
+	' "method" : "POST",'.
+	' "enctype" : "multipart/form-data",'.
+	' "heading" : "Post a Response" }';
+
+	// Check if the viewer has already agreed with the comment
+	// if(in_array($this->session->userdata("id"), $agreeingMembers)) {
+		// $userActions = 
+		// 	"<input style='width: 100%;' type='button' value='Comment' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' />";
+	// } else {
+		$userActions =
+			"<input style='width: 100%;' type='button' value='Comment' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' />" .
+			"<input style='width: 100%;' type='button' value='Respond' onclick='openForm(". $this->mylibrary->escapeQuotes($justRespond) .")' />";
+	// }
 }
 
 ?>
  		"actions" : "<?= $userActions ?>",
  		"time" : "<?= $thisComment['date'] ?>",
  		"comments" : [
- 			<?php foreach($memberReplies[$rootID] as $memberReply) { ?>
- 				{
- 					"name" : "<?= $memberReply['name'] ?>",
- 					"comment" : "<?= $memberReply['comment'] ?>",
- 					"attachment" : "<?= $memberReply['attachment'] ?>",
- 					"date" : "<?= $memberReply['date'] ?>"
- 				},
+ 			<?php if(count($memberReplies) && isset($memberReplies[$rootID])) { ?>
+	 			<?php foreach($memberReplies[$rootID] as $memberReply) { ?>
+	 				{
+	 					"name" : "<?= $memberReply['name'] ?>",
+	 					"comment" : "<?= $memberReply['comment'] ?>",
+	 					"attachment" : "<?= $this->mylibrary->escapeQuotes($memberReply['attachment']) ?>",
+	 					"date" : "<?= $memberReply['date'] ?>"
+	 				},
+	 			<?php } ?>
  			<?php } ?>
  		],
  		"responses" : [
- 			<?php foreach($teamReplies[$rootID] as $teamReply) { ?>
- 				{
- 					"name" : "<?= $teamReply['name'] ?>",
- 					"comment" : "<?= $teamReply['comment'] ?>",
- 					"attachment" : "<?= $teamReply['attachment'] ?>",
- 					"date" : "<?= $teamReply['date'] ?>"
- 				},
+	 		<?php if(count($teamReplies) && isset($teamReplies[$rootID])) { ?>
+	 			<?php foreach($teamReplies[$rootID] as $teamReply) { ?>
+	 				{
+	 					"name" : "<?= $teamReply['name'] ?>",
+	 					"comment" : "<?= $teamReply['comment'] ?>",
+	 					"attachment" : "<?= $this->mylibrary->escapeQuotes($teamReply['attachment']) ?>",
+	 					"date" : "<?= $teamReply['date'] ?>"
+	 				},
+	 			<?php } ?>
  			<?php } ?>
- 		]
+ 		],
+ 		<?php if( (count($memberReplies) && isset($memberReplies[$rootID])) || (count($teamReplies) && isset($teamReplies[$rootID]))) { ?>
+		"control" : "<?= '<img src=\"'.$sImageUrl.'details_open.png\">' ?>"
+		<?php } else { ?>
+		"control" : ""
+		<?php } ?>
  	},
  <?php } ?>
  
@@ -250,17 +305,12 @@ if(1) { // No condition required here
 		        "bInfo": false,
 		        "aaSorting": [[4, 'asc']],
 		        "aoColumns": [
-				        {
-		               "mDataProp": null,
-		               "sClass": "control centered",
-		               "sDefaultContent": '<img src="'+sImageUrl+'details_open.png'+'">',
-		               "bSortable": false
-		            },
+				    { "mDataProp": "control", "sClass": "control centered", "bSortable": false },
 		            { "mDataProp": "member", "bSortable": false },
 		            { "mDataProp": "comment", "bSortable": false },
-		            { "mDataProp": "attachment", "bSortable": false },
-		            { "mDataProp": "time" },
-		            { "mDataProp": "agreements", "bSortable": false },
+		            { "mDataProp": "attachment", "sClass": "centered", "bSortable": false },
+		            { "mDataProp": "time", "sClass": "centered" },
+		            { "mDataProp": "agreements", "sClass": "centered", "bSortable": false },
 		            { 
 		            	"mDataProp": "actions",
 		            	"sClass": "centered",
@@ -276,7 +326,7 @@ if(1) { // No condition required here
 		    //$('.commentedTable td.control').each(function () {
 			  var nTr = this.parentNode;
 			  var i = $.inArray( nTr, anOpen );
-			   
+			  console.log(fnFormatDetails(oTable, nTr));
 			  if ( i === -1 ) {
 			  	$('img', this).attr( 'src', sImageUrl+"details_close.png" );
 			    var nDetailsRow = oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'comments' );
@@ -296,7 +346,7 @@ if(1) { // No condition required here
 			{
 			  var oData = oTable.fnGetData( nTr );
 			  var sOut = '<div class="innerDetails">';
-			  	if(oData.responses.length) {
+			  	if(oData.comments.length) {
 			      sOut += '<table cellpadding="5" cellspacing="0" border="0" >' +
 			      		'<tr class="followonComment"><td colspan="4" style="font-weight: bold;">Follow On Comments</td></tr>';
 			      for( thisComment in oData.comments ) {
@@ -304,7 +354,7 @@ if(1) { // No condition required here
 				      	'<tr class="followonComment">' +
 				        	'<td>' + oData.comments[thisComment].name + '</td>' +
 				        	'<td>' + oData.comments[thisComment].date + '</td>' +
-				        	'<td>' + oData.comments[thisComment].attachment + '</td>' +
+				        	'<td class="centered">' + oData.comments[thisComment].attachment + '</td>' +
 				        	'<td>' + oData.comments[thisComment].comment + '</td>' +
 			        	'</tr>'	;
 			      }
@@ -318,7 +368,7 @@ if(1) { // No condition required here
 			  	      	'<tr class="responseComment">' +
 			  	        	'<td>' + oData.responses[thisComment].name + '</td>' +
 			  	        	'<td>' + oData.responses[thisComment].date + '</td>' +
-			  	        	'<td>' + oData.responses[thisComment].attachment + '</td>' +
+			  	        	'<td class="centered">' + oData.responses[thisComment].attachment + '</td>' +
 			  	        	'<td>' + oData.responses[thisComment].comment + '</td>' +
 			          	'</tr>'	;
 			        }
@@ -334,7 +384,7 @@ if(1) { // No condition required here
 	<strong>Project Name:</strong> <?= $name ?>
 </div>
 <div class="gridOne spaceTop spaceBottom">
-	<table class="singleRow">
+	<table class="singleRow centered">
 		<thead>
 			<tr>
 				<th>Project Leader</th>
@@ -343,9 +393,6 @@ if(1) { // No condition required here
 				<th>Geo Region</th>
 				<th>Deal Size</th>
 				<th>Attachments</th>
-				<?php if(isset($status)) { // Echo this only if the person viewing is not a member of the project  ?> 
-				<th>Status</th> 
-				<?php } ?>
 			</tr>
 		</thead>
 		<tr>
@@ -365,13 +412,14 @@ if(1) { // No condition required here
 				<?=  $dealSize ?>
 			</td>
 			<td style="text-align: center;">
-				<?=  "<input type='button' value='View' />" ?>
+				<?php 
+		          // Check if there are any attachments
+		          // If so, echo the formatted data with button, otherwise echo "None"
+
+		          $viewString = createViewButton($documents, $id);
+		        ?>
+		        <?=  $viewString ?>
 			</td>
-			<?php if(isset($status)) { // Echo this only if the person viewing is not a member of the project ?>
-			<td>
-				<?= $status ?>
-			</td>
-			<?php } ?>
 		</tr>
 	</table>
 </div>
@@ -393,18 +441,21 @@ if(1) { // No condition required here
 		</tbody>
 	</table>
 </div>
+
 <div class="gridOne spaceTop">
 	<input type="button" value="Add New Comment" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newCommentString) ?>)" />
 </div>
+
+<?php if(!isset($status)) { // Only echo these if viewer is a member of the project ?>
 <div class="gridOne spaceTop spaceBottom"> <strong>Update on Progress</strong>: </div>
 <div class="gridOne spaceTop">
+	<?php if(sizeof($updates) > 0) { ?>
 	<table class="displayOnly">
 		<thead>
 			<tr>
 				<th>Member</th>
 				<th>Update on Project</th>
 				<th>Attachment</th>
-				<th>Date</th>
 				<th>Time</th>
 				<th>Expenses</th>
 				<th>Voucher</th>
@@ -413,26 +464,75 @@ if(1) { // No condition required here
 			</tr>
 		</thead>
 		<tbody>
-			<?php $temp = 15; do { ?>
+			<?php $totalExpenses = 0; ?>
+			<?php foreach ($updates as $update) { ?>
 			<tr>
-				<td>Ben</td>
-				<td>Dinner with the CEO.</td>
-				<td><input type="button" value="View" /></td>
-				<td>12/12/2012</td>
-				<td>15:34</td>
-				<td>4000</td>
-				<td><input type="button" value="View" /></td>
-				<td>Approved</td>
+				<td><?= $this->membersModel->getName($update['memberId']) ?></td>
+				<td><?= $update['updateBody'] ?></td>
+
+				<?php 
+		          // Check if there are any attachments
+		          // If so, echo the formatted data with button, otherwise echo "None"
+				if(isset($update['attachments'])) {
+					$viewString = createViewButton($update['attachments'], $id);
+				} else {
+					$viewString = 'None';
+				}
+		        ?>
+
+				<td class="centered"><?= $viewString ?></td>
+				<td class="centered"><?= $update['timestamp'] ?></td>
+				<?php if($update['expense'] != '0.00') { ?>
+					<td class="centered"><?= $update['expense'] ?></td>
+					<?php $totalExpenses += $update['expense']; ?>
+
+					<?php 
+			          // Check if there are any attachments
+			          // If so, echo the formatted data with button, otherwise echo "None"
+					if(isset($update['vouchers'])) {
+						$viewString = createViewButton($update['vouchers'], $id);
+					} else {
+						$viewString = 'None';
+					}
+			        ?>
+
+					<td class='centered'><?= $viewString ?></td>
+					<td><?= (isset($update['reviewedBy'])?'Approved by ' . $this->membersModel->getName($update['reviewedBy']) :'Not Approved Yet') ?></td>
+				<?php } else { ?>
+					<td></td>
+					<td></td>
+					<td></td>
+				<?php } ?>
 				<td><?php // Reason for status, if any ?></td>
 			</tr>			
-			<?php $temp--; } while($temp) ?>
+			<?php  }  ?>
+			<?php 
+				$totalExpenses *= 100;
+			?>
 		</tbody>
 	</table>
+	<?php } ?>
 </div>
 <div class="gridOne spaceTop" style="text-align: right; font-weight: bold; font-size: 1.5em;">
-	Total: 5000
+	<?php if(isset($totalExpenses)) { ?>
+		Total: <?= intval($totalExpenses / 100) . '.' . ($totalExpenses % 100) . ( $totalExpenses % 100 < 10 ? '0' : '' ) ?>
+	<?php } else { ?>
+		Total: 0
+	<?php } ?>
 </div>
 <div class="gridTwo spaceTop">
 	<input type="button" value="Add New Update" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newUpdateString) ?>)" /> <input type="button" value="Add Expenses" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newExpenseString) ?>)" />
 </div>
+<?php } // End of things to echo only if viewer is a member of the project ?>
 <div class="clear"></div>
+<script>
+filesToDelete = '';
+  $('body').on('click', 'input[type="checkbox"].deleteAttachmentFlag', function(){
+    if(this.checked) {
+      filesToDelete += this.value + ',';
+    } else {
+      filesToDelete = filesToDelete.split(this.value + ',').join('');
+    }
+    document.getElementById('attachmentsToDelete').value = filesToDelete.substring(0, filesToDelete.length - 1);
+  });
+</script>

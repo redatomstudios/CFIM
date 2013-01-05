@@ -1,4 +1,4 @@
-<?php if(isset($dates)) { ?>
+<?php if(isset($dates) && sizeof($dates)) { ?>
 <div class="gridOne spaceTop">
 <?= form_open('admin/index') ?>
 	<label for="discussionDate">Discussion Date: </label>
@@ -35,6 +35,10 @@
 			</tr>
 			<?php  } ?>
 	</table>
+</div>
+<?php } else { ?>
+<div class="gridOne centered">
+	No projects to list
 </div>
 <?php } ?>
 <div class="clear"></div>

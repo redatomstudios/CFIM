@@ -151,20 +151,20 @@ class Admin extends CI_Controller {
 
 					$this->projectsModel->updateDocuments($pid, $ids);
 				}
-				redirect('/admin?n=' . urlencode('New project added successfully.') . '^1');
+				redirect('/admin?n=' . urlencode('New project created.') . '^1');
 
 
 				
 			}
 			elseif($this->isNotValidAddProject($post) == 1)
-				redirect('/admin/addProject?n=' . urlencode('Fill Every Values'));
+				redirect('/admin/addProject?n=' . urlencode('Please fill all required fields').'^0');
 			elseif($this->isNotValidAddProject($post) == 2)
-				redirect('/admin/addProject?n=' . urlencode('A member cannot be a leader'));
+				redirect('/admin/addProject?n=' . urlencode('Project leader can\'t also be project member.').'^0');
 
 		}
 	}
 
-	public function editProject($id = 0) { // Temporary, to test project search, list and editing.
+	public function editProject($id = 0) {
 
 		if($id != 0){
 
@@ -352,7 +352,7 @@ class Admin extends CI_Controller {
 					}
 				}
 
-				redirect('/admin');
+				redirect('/admin?n=' . urlencode('Project modified successfully.') . '^1');
 			}
 			else{
 				echo "Team member cannot be a team leader!!";
@@ -382,7 +382,7 @@ class Admin extends CI_Controller {
 			if($verify == 0){
 
 				if($this->membersModel->checkUsernameExists($data['username']))
-					redirect('/admin/addMember?n=' . urlencode('Username Exists'));
+					redirect('/admin/addMember?n=' . urlencode('Username already exists') . '^0');
 				$subordinates = '';
 				if(isset($data['subordinates'])){
 					foreach ($data['subordinates'] as $value) {
