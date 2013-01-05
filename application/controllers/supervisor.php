@@ -482,9 +482,9 @@ class Supervisor extends CI_Controller{
 
 		$data['memberProjects'] = $ps;
 
-		$this->load->view('supervisor/header', $d1);
-		$this->load->view('supervisor/listProjects', $data);
-		$this->load->view('supervisor/footer');
+		$this->load->view('super/header', $d1);
+		$this->load->view('super/listProjects', $data);
+		$this->load->view('super/footer');
 	}
 
 }
