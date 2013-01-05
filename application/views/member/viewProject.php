@@ -524,7 +524,29 @@ if(isset($status)) {
 			        ?>
 
 					<td class='centered'><?= $viewString ?></td>
-					<td><?= (isset($update['reviewedBy'])?'Approved by ' . $this->membersModel->getName($update['reviewedBy']) :'Not Approved Yet') ?></td>
+					<?php 
+						$statusString = '';
+						if(isset($update['status'])) {
+							switch($update['status']) {
+								case 'Pending': 
+								$statusString = "Pending";
+								break;
+
+								case 'Approved':
+								$statusString = "Approved by " . $this->membersModel->getName($update['reviewedBy']);
+								break;
+
+								case 'Rejected':
+								$statusString = "Rejected by " . $this->membersModel->getName($update['reviewedBy']);
+								break;
+
+								default:
+								$statusString = "-";
+								break;
+							}
+						}
+					?>
+					<td><?= (isset($update['reviewedBy'])? $statusString :'-') ?></td>
 				<?php } else { ?>
 					<td></td>
 					<td></td>

@@ -303,7 +303,7 @@ if(isset($status)) {
 		        "iDisplayLength": 5,
 		        "bLengthChange": false,
 		        "bInfo": false,
-		        "aaSorting": [[4, 'asc']],
+		        "aaSorting": [[4, 'desc']],
 		        "aoColumns": [
 				    { "mDataProp": "control", "sClass": "control centered", "bSortable": false },
 		            { "mDataProp": "member", "bSortable": false },
