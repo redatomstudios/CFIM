@@ -103,4 +103,9 @@ Supervisor
 
 Finance
 -------
-Pending
+- Home
+> - Process form to filter results
+
+- View Project
+> - Process form to Approve/Reject
+> - Display Vouchers
