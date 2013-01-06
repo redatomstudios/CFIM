@@ -101,6 +101,9 @@ Supervisor
 > - Adding update or expenses not working right now
 > - After adding comment, response, expense or update, user is redirected to home. User should be redirected back to this project.
 
+- Change Password
+> - Change password isn't working for supervisor yet either. I guess you just need to copy the controller fn and view from member >_>
+
 Finance
 -------
 - Home
@@ -110,3 +113,6 @@ Finance
 > - Process form to Approve/Reject
 > - Display Vouchers
 > - Get voucher as array for each expense in $expense['vouchers']
+
+- Change Password
+> - Uh, this isn't redirecting properly now, I thought the passwordChange was independent of member rank? I only saw member/changePassword in controller.
