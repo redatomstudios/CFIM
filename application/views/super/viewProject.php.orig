@@ -191,11 +191,9 @@ $agreeString = '<a href="" class="disabled" class="display: block;" title="' . $
 <?php
 /*
  * Determine the actions that the user can perform, based on the user type
- * If user is a part of this project, then [Respond] button should appear
- * Otherwise, [Agree] and [Comment] button appear
- * $status is only set if the member is not a part of the project team
- * so lets base the bahavior based on that variable
+ * Supervisor can do anything, except agree
  */
+<<<<<<< HEAD
 if(isset($status)) {
 	/*
 	 * This viewer is not a part of the project team
@@ -230,17 +228,45 @@ if(isset($status)) {
 	' "method" : "POST",'.
 	' "enctype" : "multipart/form-data",'.
 	' "heading" : "Post a Response" }';
+=======
 
-	// Check if the viewer has already agreed with the comment
-	// if(in_array($this->session->userdata("id"), $agreeingMembers)) {
-		// $userActions = 
-		// 	"<input style='width: 100%;' type='button' value='Comment' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' />";
-	// } else {
-		$userActions =
-			"<input style='width: 100%;' type='button' value='Comment' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' />" .
-			"<input style='width: 100%;' type='button' value='Respond' onclick='openForm(". $this->mylibrary->escapeQuotes($justRespond) .")' />";
-	// }
-}
+$respondComment = 
+'{"elements" : ['.
+'{"name" : "rootID","type" : "hidden","value" : "'. $rootID .'"},'.
+'{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.	
+'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
+'{"name" : "responseType","type" : "hidden","value" : "1"},'.
+'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
+'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
+' "action" : "'. site_url('/member/newComment') .'",'.
+' "method" : "POST",'.
+' "enctype" : "multipart/form-data",'.
+' "heading" : "Post a Comment" }';
+>>>>>>> 22dd6d787801d2b88431cf6fe8e976ae009e9cdf
+
+// String used to generate form for posting a RESPONSE in response to a ROOT Comment
+$justRespond = 
+'{"elements" : ['.
+'{"name" : "rootID","type" : "hidden","value" : "'. $rootID .'"},'.
+'{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.	
+'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
+'{"name" : "responseType","type" : "hidden","value" : "2"},'.
+'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
+'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
+' "action" : "'. site_url('/member/newComment') .'",'.
+' "method" : "POST",'.
+' "enctype" : "multipart/form-data",'.
+' "heading" : "Post a Response" }';
+
+// Check if the viewer has already agreed with the comment
+// if(in_array($this->session->userdata("id"), $agreeingMembers)) {
+	// $userActions = 
+	// 	"<input style='width: 100%;' type='button' value='Comment' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' />";
+// } else {
+	$userActions =
+		"<input style='width: 100%;' type='button' value='Comment' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' />" .
+		"<input style='width: 100%;' type='button' value='Respond' onclick='openForm(". $this->mylibrary->escapeQuotes($justRespond) .")' />";
+// }
 
 ?>
  		"actions" : "<?= $userActions ?>",
@@ -302,7 +328,6 @@ if(isset($status)) {
 		        "bPaginate": true,
 		        "iDisplayLength": 5,
 		        "bLengthChange": false,
-		        "bLengthChange": false,
 		        "bInfo": false,
 		        "aaSorting": [[4, 'desc']],
 		        "aoColumns": [
@@ -312,6 +337,11 @@ if(isset($status)) {
 		            { "mDataProp": "attachment", "sClass": "centered", "bSortable": false },
 		            { "mDataProp": "time", "sClass": "centered" },
 		            { "mDataProp": "agreements", "sClass": "centered", "bSortable": false },
+		            { 
+		            	"mDataProp": "actions",
+		            	"sClass": "centered",
+						"bSortable": false
+		            }
 		        ],
 		        "oLanguage": {
 		        	"sEmptyTable": "No comments on this project yet."
@@ -420,6 +450,28 @@ if(isset($status)) {
 	</table>
 </div>
 <div class="clear"></div>
+<div class="gridOne spaceTop spaceBottom">
+	<table class="commentedTable">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Member</th>
+				<th>Comments</th>
+				<th>Attachment</th>
+				<th>Time</th>
+				<th>Agreements</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</div>
+
+<div class="gridOne spaceTop">
+	<input type="button" value="Add New Comment" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newCommentString) ?>)" />
+</div>
+
 <div class="gridOne spaceTop spaceBottom"> <strong>Update on Progress</strong>: </div>
 <div class="gridOne spaceTop">
 	<?php if(sizeof($updates) > 0) { ?>
@@ -470,7 +522,29 @@ if(isset($status)) {
 			        ?>
 
 					<td class='centered'><?= $viewString ?></td>
-					<td><?= (isset($update['reviewedBy'])?'Approved by ' . $this->membersModel->getName($update['reviewedBy']) :'Not Approved Yet') ?></td>
+					<?php 
+						$statusString = '';
+						if(isset($update['status'])) {
+							switch($update['status']) {
+								case 'Pending': 
+								$statusString = "Pending";
+								break;
+
+								case 'Approved':
+								$statusString = "Approved by " . $this->membersModel->getName($update['reviewedBy']);
+								break;
+
+								case 'Rejected':
+								$statusString = "Rejected by " . $this->membersModel->getName($update['reviewedBy']);
+								break;
+
+								default:
+								$statusString = "-";
+								break;
+							}
+						}
+					?>
+					<td class="centered"><?= (isset($update['reviewedBy'])? $statusString :'-') ?></td>
 				<?php } else { ?>
 					<td></td>
 					<td></td>
@@ -496,21 +570,16 @@ if(isset($status)) {
 <div class="gridTwo spaceTop">
 	<input type="button" value="Add New Update" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newUpdateString) ?>)" /> <input type="button" value="Add Expenses" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newExpenseString) ?>)" />
 </div>
+
 <div class="clear"></div>
-<div class="gridOne spaceTop spaceBottom"> <strong>Old Comments & Responses</strong>: </div>
-<div class="gridOne spaceTop spaceBottom">
-	<table class="commentedTable">
-		<thead>
-			<tr>
-				<th></th>
-				<th>Member</th>
-				<th>Comments</th>
-				<th>Attachment</th>
-				<th>Time</th>
-				<th>Agreements</th>
-			</tr>
-		</thead>
-		<tbody>
-		</tbody>
-	</table>
-</div>
+<script>
+filesToDelete = '';
+  $('body').on('click', 'input[type="checkbox"].deleteAttachmentFlag', function(){
+    if(this.checked) {
+      filesToDelete += this.value + ',';
+    } else {
+      filesToDelete = filesToDelete.split(this.value + ',').join('');
+    }
+    document.getElementById('attachmentsToDelete').value = filesToDelete.substring(0, filesToDelete.length - 1);
+  });
+</script>

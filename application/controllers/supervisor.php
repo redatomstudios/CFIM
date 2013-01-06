@@ -93,44 +93,27 @@ class Supervisor extends CI_Controller{
 			foreach ($projects as $project) {
 				# code...
 				// print_r($project);
-				if($project['leaderId'] != $this->session->userdata('id')){
+				
 					// echo "BLAH";
-					$p = array();
-					$p = $project;
-					if($comment = $this->commentsModel->getLatestComment($project['id'])){
-						$p['commentTimestamp'] = $comment['timestamp'];
-					}else
-						$p['commentTimestamp'] = '';
-					$memberProjects[] = $p;
-					// echo "<br>" . sizeof($p);
-				}
-				else{
-					$p = array();
-					$p = $project;
-					if($comment = $this->commentsModel->getLatestComment($project['id'])){
-						$p['commentTimestamp'] = $comment['timestamp'];
-					}else
-						$p['commentTimestamp'] = '';
-					$leaderProjects[] = $p;
-				}
+				$p = array();
+				$p = $project;
+				if($comment = $this->commentsModel->getLatestComment($project['id'])){
+					$p['commentTimestamp'] = $comment['timestamp'];
+				}else
+					$p['commentTimestamp'] = '';
+				$memberProjects[] = $p;
+				// echo "<br>" . sizeof($p);
+				
 			}
 		}
 		
-		$timestamp1 = array();
-		foreach ($leaderProjects as $key => $row) {
-		    $timestamp1[$key]  = $row['commentTimestamp'];
-		}
-		if(sizeof($leaderProjects) > 0)
-		array_multisort( $timestamp1, SORT_DESC, $leaderProjects);
-
-
 		foreach ($memberProjects as $key => $row) {
 		    $timestamp[$key]  = $row['commentTimestamp'];
 		}
 		if(sizeof($memberProjects) > 0)
 		array_multisort( $timestamp, SORT_DESC, $memberProjects);
 
-		$data['memberProjects'] = array_merge($leaderProjects, $memberProjects);
+		$data['memberProjects'] = $memberProjects;
 		
 		$ps = array();
 		foreach ($data['memberProjects'] as $project) {
@@ -233,8 +216,7 @@ class Supervisor extends CI_Controller{
 		}
 
 		$data = $this->projectsModel->getProject($id);
-		
-		// print_r($comments);
+
 		$tempComments = array();
 		$comments = $this->commentsModel->getAllComments($id);
 		// echo "<pre>";
@@ -327,9 +309,6 @@ class Supervisor extends CI_Controller{
 
 		$updates = $tempUpdates;
 
-				// print_r($tempComments);
-
-		
 		
 		$docs = $data['documents'];
 		if($docs != ''){
@@ -356,28 +335,31 @@ class Supervisor extends CI_Controller{
 		$data['georegion'] = $this->provincesModel->getName($data['geoRegion']);
 		$data['comments'] = $comments;
 		$data['updates'] = $updates;
-
-		// if(sizeof($data['updates']) > 0)
-		if($this->membersModel->isMemberOf($this->session->userdata('id'), $id))
-			unset($data['status']); // Status isn't displayed if the member is a part of the team
 		
 
-		$d1['currentPage'] = 'home';
+		$d1['currentPage'] = 'myProjects';
 		$d1['username'] = $this->session->userdata('username');	
+		// For live projects
+		if(!($data['status'] == 'Invested' || $data['status'] == 'Exited')){
 
-		// echo "<pre>";
-		// print_r($data);
+			$this->load->view('super/header',$d1);
+			$this->load->view('super/viewProject', $data);
+			$this->load->view('super/footer');
+		}
+		else{
+		
+			$this->load->view('super/header',$d1);
+			$this->load->view('super/viewInvestedPRoject', $data);
+			$this->load->view('super/footer');
 
-		$this->load->view('super/header',$d1);
-		$this->load->view('super/viewProject', $data);
-		$this->load->view('super/footer');
+		}
 	}
 
 	public function agreeComment(){
 		# code...
 		$this->load->model('commentsModel');
 		$this->commentsModel->agreeComment($this->input->post('rootID'), $this->input->post('projectID'), $this->input->post('userID'));
-		redirect('/member/viewProject/'.$this->input->post('projectID'));
+		redirect('/supervisor/viewProject/'.$this->input->post('projectID'));
 	}
 
 	public function newComment(){
@@ -414,7 +396,7 @@ class Supervisor extends CI_Controller{
 		// print_r($data);
 		$this->commentsModel->insertComment($data);
 		// echo $this->db->last_query();
-		redirect('/member/viewProject/' . $post['projectID']);
+		redirect('/supervisor/viewProject/' . $post['projectID']);
 	}
 
 	public function newUpdate(){
@@ -443,7 +425,7 @@ class Supervisor extends CI_Controller{
 		}
 
 		$this->expensesModel->insertUpdate($data);
-		redirect('/supervisor/viewProject/'.$post['projectID']);
+		// redirect('/supervisor/viewProject/'.$post['projectID']);
 	}
 
 	public function newExpense(){
@@ -493,6 +475,17 @@ class Supervisor extends CI_Controller{
 			redirect('/supervisor/viewProject/'.$post['projectID'].'?n=' . urlencode('Enter Expense'));
 	}
 
+	public function changePassword(){
+		# code...
+
+			$d1['currentPage'] = 'changePassword';
+			$d1['username'] = $this->session->userdata('username');
+			$this->load->view('super/header', $d1);
+			$this->load->view('changePassword');
+			$this->load->view('super/footer');
+
+
+	}
 	
 
 }

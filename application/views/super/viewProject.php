@@ -230,7 +230,7 @@ $justRespond =
 			"<input style='width: 100%;' type='button' value='Comment' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' />" .
 			"<input style='width: 100%;' type='button' value='Respond' onclick='openForm(". $this->mylibrary->escapeQuotes($justRespond) .")' />";
 	// }
-}
+
 
 ?>
  		"actions" : "<?= $userActions ?>",
@@ -263,7 +263,7 @@ $justRespond =
 		"control" : "<?= '<img src=\"'.$sImageUrl.'details_open.png\">' ?>"
 		<?php } else { ?>
 		"control" : ""
-		<?php } ?>
+		<?php } ?> 
  	},
  <?php } ?>
  

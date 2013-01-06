@@ -8,14 +8,8 @@ class Login extends CI_Controller {
 		$this->load->model('loginModel');
 	}
 	public function index(){
-		if($this->session->userdata('rank') == 1)
-			redirect('/supervisor');
-		elseif($this->session->userdata('rank') == 2)
-			redirect('/admin');
-		elseif($this->session->userdata('rank') == 3)
-			redirect('/member');
-		elseif($this->session->userdata('rank') == 4)
-			redirect('/finance');
+		
+		$this->ifLoggedIn();
 
 		$this->load->helper('captcha');
 		$this->load->helper('string');
@@ -39,11 +33,13 @@ class Login extends CI_Controller {
 
 		$data['cap'] = $cap['image'];
 		$this->load->view('login',$data);
-
 	}
 
 	public function doLogin(){
 		# code...
+		
+
+		$this->ifLoggedIn();
 		$post = $this->input->post();
 		$word = $post['captcha'];
 		$ip = $this->input->ip_address();
@@ -58,8 +54,30 @@ class Login extends CI_Controller {
 			redirect('/login?n=' . urlencode('Incorrect Captcha.') . '^0');
 	}
 
-	
+	private function ifLoggedIn($notificationString = ''){
+		# code...
 
+		if($this->session->userdata('rank') == 1)
+			redirect('/supervisor' . $notificationString);
+		elseif($this->session->userdata('rank') == 2)
+			redirect('/admin' . $notificationString);
+		elseif($this->session->userdata('rank') == 3)
+			redirect('/member' . $notificationString);
+		elseif($this->session->userdata('rank') == 4)
+			redirect('/finance' . $notificationString);
+	}
+	
+	public function changePassword(){
+		# code...
+		$this->load->model('loginModel');
+		if($this->loginModel->changePassword($this->session->userdata('id'), $this->input->post('oldPassword'), $this->input->post('newPassword')))
+			$this->ifLoggedIn('?n=' . urlencode('Password Change Successfull^1'));
+
+		$this->ifLoggedIn('?n=' . urlencode('Password Change Not Successfull'));
+			
+
+
+	}
 	
 
 }

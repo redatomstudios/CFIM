@@ -323,23 +323,17 @@ class Member extends CI_Controller{
 		$this->load->view('member/footer');
 	}
 
+
 	public function changePassword(){
 		# code...
 
-		if(!$this->input->post()){
 			$d1['currentPage'] = 'changePassword';
 			$d1['username'] = $this->session->userdata('username');
 			$this->load->view('member/header', $d1);
-			$this->load->view('member/changePassword');
+			$this->load->view('changePassword');
 			$this->load->view('member/footer');
-		}
-		else{
-			$this->load->model('loginModel');
-			if($this->loginModel->changePassword($this->session->userdata('id'), $this->input->post('oldPassword'), $this->input->post('newPassword')))
-				redirect('/member');
-			echo "Password change failed";
 
-		}
+
 	}
 
 	public function investedProjects(){

@@ -53,6 +53,10 @@ class ExpensesModel extends CI_Model{
 		$res = $this->db->get_where('expenses', array('projectId' => $projectId));
 		return $res->row()->sum;
 	}
+
+	
 }
+
+
 
 ?>

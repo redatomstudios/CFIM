@@ -4,8 +4,6 @@
 	<?php 
 		$pageTitle = array(
 			'home' => 'Home',
-			'myProjects' => 'My Projects',
-			'investedProjects' => 'My Invested Projects',
 			'changePassword' => 'Change Password',
 		);
 	?>
@@ -83,10 +81,8 @@
 		<div class="clear"></div>
 		<nav>
 			<ul>
-				<li<?= $currentPage == 'myProjects' ? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>supervisor">My Projects</li>
-				<li<?= $currentPage == 'investedProjects' ? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>supervisor/investedProjects">My Invested Projects</a></li>
-				<li<?= $currentPage == 'myInvested' 	? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>supervisor/myInvested">Change Password</li>
-				<li<?= $currentPage == 'changePassword' 	? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>home/changePassword">Change Password</li>
+				<li<?= $currentPage == 'home' ? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>supervisor">Home</li>
+				<li<?= $currentPage == 'changePassword' 	? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>supervisor/changePassword">Change Password</li>
 				<li><a href="<?= base_url() ?>home/logout">Logout</a></li>
 			</ul>
 			<div class="clear"></div>
