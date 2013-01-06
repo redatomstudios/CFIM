@@ -54,6 +54,40 @@ class ExpensesModel extends CI_Model{
 		return $res->row()->sum;
 	}
 
+	public function getLatestFinancedProjects(){
+		# code...
+		$this->load->model('projectsModel');
+
+		$this->db->select('projectId, max(`timestamp`) as max');
+		$this->db->group_by('projectId DESC');
+		$res = $this->db->get('expenses');
+
+
+		$p = array();
+		if($res->num_rows() > 0){
+			$projects = $res->result_array();
+			// print_r($projects);
+			foreach ($projects as $project){
+				# code...
+				$pro = $this->projectsModel->getProject($project['projectId']);
+				$pro['accumulatedExpense'] = $this->getAccumulatedExpense($project['projectId']);
+				$p[] = $pro;
+			}
+		}
+		return $p;
+	}
+
+	/**
+	* Return project ids of all projects that have expenses
+	**/
+	public function getFinancedProjects(){
+		# code...
+		$this->db->select('DISTINCT(projectId) as id');
+		$res = $this->db->get('expenses');
+		if($res->num_rows() > 0)
+			return $res->result_array();
+		return FALSE;
+	}
 	
 }
 

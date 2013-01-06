@@ -75,8 +75,6 @@ class Login extends CI_Controller {
 
 		$this->ifLoggedIn('?n=' . urlencode('Password Change Not Successfull'));
 			
-
-
 	}
 	
 

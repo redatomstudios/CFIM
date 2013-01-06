@@ -10,13 +10,42 @@ class Finance extends CI_Controller{
 
 		$this->load->model('membersModel');
 		$this->load->model('projectsModel');
+		$this->load->model('expensesModel');
 	}
 
 	public function index(){
-		$data['memberProjects'] = $this->projectsModel->getLatestFinancedProjects();
-		// echo "<pre>";
-		// print_r($data['memberProjects']);
-		// echo "</pre>";
+
+		$data['memberProjects'] = array();
+		if($post = $this->input->post()){
+			if($projects = $this->expensesModel->getFinancedProjects()){
+				// echo "<pre>";
+				$temp = '';
+				foreach ($projects as $projectId) {
+					# code...
+					$temp .= ',' . $projectId['id'];
+				}
+				$projectIds = trim($temp, ',');
+				$d['leaderId'] = $post['projectLeader'];
+				$d['memberId'] = $post['projectMember'];
+				$d['status'] = $post['status'];
+
+				if($projects = $this->projectsModel->searchFinancedProjects($d, $projectIds)){
+
+					$temp = array();
+					foreach ($projects as $project) {
+						# code...
+						$project['accumulatedExpense'] =$this->expensesModel->getAccumulatedExpense($project['id']);
+						$temp[] = $project;
+					}
+
+					$data['memberProjects'] = $temp;
+				}
+
+				// print_r($data);
+			}
+		}
+		else
+			$data['memberProjects'] = $this->expensesModel->getLatestFinancedProjects();
 
 		$members = $this->membersModel->getMembers();
 		foreach($members as $thisMember) {

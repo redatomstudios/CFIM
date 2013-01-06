@@ -1,5 +1,5 @@
 
-<?= form_open('/supervisor') ?>
+<?= form_open('/finance/index') ?>
 <div class="gridOne spaceTop small centered">
 	<table class="singleRow">
 		<thead>

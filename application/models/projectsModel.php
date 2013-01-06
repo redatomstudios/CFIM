@@ -235,11 +235,6 @@ class ProjectsModel extends CI_Model{
 		}
 
 
-		// echo "<pre>";
-		// print_r($where);
-		// echo $data['status'];
-		// if($data['status'] != 0)
-		// 	echo "Status not 0";
 		$ret = $this->db->get_where('projects', $where);
 		if($ret->num_rows() > 0){
 			// echo $this->db->last_query();
@@ -261,34 +256,24 @@ class ProjectsModel extends CI_Model{
 		return $query->result_array();
 	}
 
-	public function getInvestedProjects($memberId){
+	public function searchFinancedProjects($data, $projectIds){
 		# code...
+		if(isset($data['leaderId']) && ($data['leaderId'] != 0))
+				$where['leaderId'] = $data['leaderId'];
+		if(isset($data['status']) && (!preg_match("/[0-9]/", $data['status'])))
+				$where['status'] = $data['status'];
 
+
+		if(isset($where))
+			$this->db->where($where);
+		$this->db->where("id in ($projectIds)");
+
+		$res = $this->db->get('projects');
+
+		// echo $this->db->last_query();
+		if($res->num_rows() > 0)
+			return $res->result_array();
+		return FALSE;
 	}
-
-	public function getLatestFinancedProjects(){
-		# code...
-		$this->load->model('expensesModel');
-
-		$this->db->select('projectId, max(`timestamp`) as max');
-		$this->db->group_by('projectId DESC');
-		$res = $this->db->get('expenses');
-
-
-		$p = array();
-		if($res->num_rows() > 0){
-			$projects = $res->result_array();
-			// print_r($projects);
-			foreach ($projects as $project){
-				# code...
-				$pro = $this->getProject($project['projectId']);
-				$pro['accumulatedExpense'] = $this->expensesModel->getAccumulatedExpense($project['projectId']);
-				$p[] = $pro;
-			}
-		}
-		return $p;
-	}
-
-	
 
 }
