@@ -3,7 +3,8 @@
 <head>
 	<?php 
 		$pageTitle = array(
-			'home' => 'Home',
+			'myProjects' => 'Home',
+			'changePassword' => 'Change Password'
 		);
 	?>
 	<meta charset="UTF-8">
@@ -80,8 +81,8 @@
 		<div class="clear"></div>
 		<nav>
 			<ul>
-				<li<?= $currentPage == 'myProjects' ? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>finance">Home</li>
-				<li<?= $currentPage == 'changePassword' 	? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>home/changePassword">Change Password</li>
+				<li<?= $currentPage == 'myProjects' 	? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>finance">Home</li>
+				<li<?= $currentPage == 'changePassword' ? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>home/changePassword">Change Password</li>
 				<li><a href="<?= base_url() ?>home/logout">Logout</a></li>
 			</ul>
 			<div class="clear"></div>

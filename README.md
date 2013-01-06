@@ -94,7 +94,7 @@ Supervisor
 ----------
 - Home
 > - Add ANY option for project leader and member dropdowns
-> - Return total 'expenses' from backend for each project
+> - *Return total 'expenses' from backend for each project*
 
 - View Project
 > - Adding root comments, comments and responses aren't working right now

@@ -191,56 +191,45 @@ $agreeString = '<a href="" class="disabled" class="display: block;" title="' . $
 <?php
 /*
  * Determine the actions that the user can perform, based on the user type
- * If user is a part of this project, then [Respond] button should appear
- * Otherwise, [Agree] and [Comment] button appear
- * $status is only set if the member is not a part of the project team
- * so lets base the bahavior based on that variable
+ * Supervisor can do anything, except agree
  */
-if(isset($status)) {
-	/*
-	 * This viewer is not a part of the project team
-	 * Show them the [Agree] and [Comment] buttons
-	 * We're already inside a buffer, so we can't use it again
-	 * Without complicating things
-	 */
-	// String used to generate form for posting a NEW COMMENT in response to a ROOT COMMENT
-	$respondComment = 
-	'{"elements" : ['.
-	'{"name" : "rootID","type" : "hidden","value" : "'. $rootID .'"},'.
-	'{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.	
-	'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
-	'{"name" : "responseType","type" : "hidden","value" : "1"},'.
-	'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
-	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
-	' "action" : "'. site_url('/member/newComment') .'",'.
-	' "method" : "POST",'.
-	' "enctype" : "multipart/form-data",'.
-	' "heading" : "Post a Comment" }';
 
-	// String used to generate form for posting a RESPONSE in response to a ROOT Comment
-	$justRespond = 
-	'{"elements" : ['.
-	'{"name" : "rootID","type" : "hidden","value" : "'. $rootID .'"},'.
-	'{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.	
-	'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
-	'{"name" : "responseType","type" : "hidden","value" : "2"},'.
-	'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
-	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
-	' "action" : "'. site_url('/member/newComment') .'",'.
-	' "method" : "POST",'.
-	' "enctype" : "multipart/form-data",'.
-	' "heading" : "Post a Response" }';
+$respondComment = 
+'{"elements" : ['.
+'{"name" : "rootID","type" : "hidden","value" : "'. $rootID .'"},'.
+'{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.	
+'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
+'{"name" : "responseType","type" : "hidden","value" : "1"},'.
+'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
+'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
+' "action" : "'. site_url('/member/newComment') .'",'.
+' "method" : "POST",'.
+' "enctype" : "multipart/form-data",'.
+' "heading" : "Post a Comment" }';
 
-	// Check if the viewer has already agreed with the comment
-	// if(in_array($this->session->userdata("id"), $agreeingMembers)) {
-		// $userActions = 
-		// 	"<input style='width: 100%;' type='button' value='Comment' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' />";
-	// } else {
-		$userActions =
-			"<input style='width: 100%;' type='button' value='Comment' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' />" .
-			"<input style='width: 100%;' type='button' value='Respond' onclick='openForm(". $this->mylibrary->escapeQuotes($justRespond) .")' />";
-	// }
-}
+// String used to generate form for posting a RESPONSE in response to a ROOT Comment
+$justRespond = 
+'{"elements" : ['.
+'{"name" : "rootID","type" : "hidden","value" : "'. $rootID .'"},'.
+'{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.	
+'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
+'{"name" : "responseType","type" : "hidden","value" : "2"},'.
+'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
+'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
+' "action" : "'. site_url('/member/newComment') .'",'.
+' "method" : "POST",'.
+' "enctype" : "multipart/form-data",'.
+' "heading" : "Post a Response" }';
+
+// Check if the viewer has already agreed with the comment
+// if(in_array($this->session->userdata("id"), $agreeingMembers)) {
+	// $userActions = 
+	// 	"<input style='width: 100%;' type='button' value='Comment' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' />";
+// } else {
+	$userActions =
+		"<input style='width: 100%;' type='button' value='Comment' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' />" .
+		"<input style='width: 100%;' type='button' value='Respond' onclick='openForm(". $this->mylibrary->escapeQuotes($justRespond) .")' />";
+// }
 
 ?>
  		"actions" : "<?= $userActions ?>",
@@ -496,7 +485,29 @@ if(isset($status)) {
 			        ?>
 
 					<td class='centered'><?= $viewString ?></td>
-					<td><?= (isset($update['reviewedBy'])?'Approved by ' . $this->membersModel->getName($update['reviewedBy']) :'Not Approved Yet') ?></td>
+					<?php 
+						$statusString = '';
+						if(isset($update['status'])) {
+							switch($update['status']) {
+								case 'Pending': 
+								$statusString = "Pending";
+								break;
+
+								case 'Approved':
+								$statusString = "Approved by " . $this->membersModel->getName($update['reviewedBy']);
+								break;
+
+								case 'Rejected':
+								$statusString = "Rejected by " . $this->membersModel->getName($update['reviewedBy']);
+								break;
+
+								default:
+								$statusString = "-";
+								break;
+							}
+						}
+					?>
+					<td class="centered"><?= (isset($update['reviewedBy'])? $statusString :'-') ?></td>
 				<?php } else { ?>
 					<td></td>
 					<td></td>
