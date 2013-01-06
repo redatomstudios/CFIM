@@ -546,7 +546,7 @@ if(isset($status)) {
 							}
 						}
 					?>
-					<td><?= (isset($update['reviewedBy'])? $statusString :'-') ?></td>
+					<td class='centered'><?= (isset($update['reviewedBy'])? $statusString :'-') ?></td>
 				<?php } else { ?>
 					<td></td>
 					<td></td>
