@@ -109,3 +109,4 @@ Finance
 - View Project
 > - Process form to Approve/Reject
 > - Display Vouchers
+> - Get voucher as array for each expense in $expense['vouchers']
