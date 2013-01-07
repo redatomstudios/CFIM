@@ -35,7 +35,16 @@
 				<?= form_dropdown('sector', $sectors, (isset($something) ? $something : '0'), 'style="width: 100%;"') ?>
 			</td>
 			<td>
-				<?= form_dropdown('subsectors', $subsectors, (isset($something) ? $something : '0'), 'style="width: 100%;"') ?>
+				<?php
+				// Remove the colon from the names
+				foreach($subsectors as $index => $thisSubsector) {
+					$thisSubsector = explode(':', $thisSubsector);
+					if(isset($thisSubsector[0]) && strlen($thisSubsector[0])) {
+						$subsectors[$index] = $thisSubsector[0];
+					}
+				}
+				?>
+				<?= form_dropdown('subsector', $subsectors, (isset($something) ? $something : '0'), 'style="width: 100%;"') ?>
 			</td>
 			<td>
 				<?= form_dropdown('province', $provinces, (isset($something) ? $something : '0'), 'style="width: 100%;"') ?>
