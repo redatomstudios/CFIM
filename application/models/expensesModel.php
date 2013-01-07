@@ -102,7 +102,7 @@ class ExpensesModel extends CI_Model{
 		# code...
 		$this->db->where('id', $expenseId);
 		if($res = $this->db->update('expenses', $data)){
-			echo $this->db->last_query();
+			//echo $this->db->last_query();
 			return TRUE;
 		}
 		return FALSE;

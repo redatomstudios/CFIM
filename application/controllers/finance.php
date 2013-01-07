@@ -105,8 +105,8 @@ class Finance extends CI_Controller{
 					if(sizeof($docs) > 0){
 						foreach ($docs as $doc) {
 							$document = $this->documentsModel->getDocument($doc);
-							$n['filename'] = $document->filename;
-							$n['timestamp'] = $document->timestamp;
+							$n['filename'] = $document['filename'];
+							$n['timestamp'] = $document['timestamp'];
 							$attachmentName[] = $n;
 						}
 					}
@@ -123,8 +123,8 @@ class Finance extends CI_Controller{
 						if(sizeof($docs) > 0){
 							foreach ($docs as $doc) {
 								$document = $this->documentsModel->getDocument($doc);
-								$n['filename'] = $document->filename;
-								$n['timestamp'] = $document->timestamp;
+								$n['filename'] = $document['filename'];
+								$n['timestamp'] = $document['timestamp'];
 								$voucherName[] = $n;
 							}
 						}
