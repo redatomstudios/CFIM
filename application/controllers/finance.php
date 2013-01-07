@@ -78,6 +78,8 @@ class Finance extends CI_Controller{
 
 	public function viewProject($id = 0){
 		# code...
+		if(!$this->expensesModel->checkExpense($id))
+			redirect('/finance?n=' . urlencode('This project doesnot have expenses'));
 		$this->load->model('expensesModel');
 		$this->load->model('sectorsModel');
 		$this->load->model('provincesModel');
@@ -113,6 +115,32 @@ class Finance extends CI_Controller{
 		$this->load->view('finance/header', $data);
 		$this->load->view('finance/viewProject', $data);
 		$this->load->view('finance/footer');
+	}
+
+	public function reviewExpense(){
+
+		$post = $this->input->post();
+		echo "<pre>";
+		print_r($post);
+		$data['reviewedBy'] = $post['financeID'];
+		$data['statusReason'] = $post['reason'];
+		$data['status'] = 'Rejected';
+		if(isset($post['approve']))
+			$data['status'] = 'Approved';
+
+		if($this->expensesModel->reviewExpense($data, $post['expenseID']))
+		 	redirect('/finance?n=' . urlencode('Expense Approved^1'));
+		redirect('/finance?n=' . urlencode('Expense Rejected'));
+	}
+
+	public function changePassword(){
+		# code...
+
+			$d1['currentPage'] = 'changePassword';
+			$d1['username'] = $this->session->userdata('username');
+			$this->load->view('finance/header', $d1);
+			$this->load->view('changePassword');
+			$this->load->view('finance/footer');
 	}
 }
 

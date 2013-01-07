@@ -88,6 +88,26 @@ class ExpensesModel extends CI_Model{
 			return $res->result_array();
 		return FALSE;
 	}
+
+	public function checkExpense($projectId){
+		# code...
+		$this->db->select('count(id) as count');
+		$res = $this->db->get_where('expenses', array('projectId' => $projectId, 'expense !=' => 0.00));
+		if($res->row()->count > 0)
+			return TRUE;
+		return FALSE;
+	}
+
+	public function reviewExpense($data, $expenseId){
+		# code...
+		$this->db->where('id', $expenseId);
+		if($res = $this->db->update('expenses', $data)){
+			echo $this->db->last_query();
+			return TRUE;
+		}
+		return FALSE;
+
+	}
 	
 }
 
