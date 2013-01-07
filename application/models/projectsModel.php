@@ -229,8 +229,15 @@ class ProjectsModel extends CI_Model{
 			if(isset($data['discussionDate']) && ($data['discussionDate'] != ''))
 				$where['discussionDate'] = $data['discussionDate'];
 
-			if(isset($data['status']) && (!preg_match("/[0-9]/", $data['status'])))
-				$where['status'] = $data['status'];
+			if(isset($data['status']) && (!preg_match("/[0-9]/", $data['status']))){
+				
+				if($data['status'] == 'On-Going'){
+						// $where['status'] = 'Preliminary OR In-depth DD';
+						$this->db->where('status in (\'Preliminary\',\'In-depth DD\')');
+						$this->db->order_by('status', 'DESC');
+				}else
+					$where['status'] = $data['status'];
+			}
 
 			if(isset($data['leader']) && ($data['leader'] != 0))
 				$where['leaderId'] = $data['leader'];
@@ -244,8 +251,8 @@ class ProjectsModel extends CI_Model{
 
 		}
 
-
 		$ret = $this->db->get_where('projects', $where);
+		// echo $this->db->last_query();
 		if($ret->num_rows() > 0){
 			// echo $this->db->last_query();
 			$res = $ret->result_array();
@@ -282,8 +289,15 @@ class ProjectsModel extends CI_Model{
 		# code...
 		if(isset($data['leaderId']) && ($data['leaderId'] != 0))
 				$where['leaderId'] = $data['leaderId'];
-		if(isset($data['status']) && (!preg_match("/[0-9]/", $data['status'])))
+		if(isset($data['status']) && (!preg_match("/[0-9]/", $data['status']))){
+			
+			if($data['status'] == 'On-Going'){
+					// $where['status'] = 'Preliminary OR In-depth DD';
+					$this->db->where('status in (\'Preliminary\',\'In-depth DD\')');
+					$this->db->order_by('status', 'DESC');
+			}else
 				$where['status'] = $data['status'];
+		}
 
 
 		if(isset($where))
