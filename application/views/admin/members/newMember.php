@@ -37,7 +37,7 @@
 	<?= form_label('Tel No.1', 'tel1') ?><?= form_input(array('name' => 'tel1', 'id' => 'tel1', 'value' => (isset($contactTel1)?$contactTel1:''))) ?>
 </div>
 <div class="gridTwo spaceTop">
-	<?= form_label('Tel No.1', 'tel2') ?><?= form_input(array('name' => 'tel2', 'id' => 'tel2', 'value' => (isset($contactTel2)?$contactTel2:''))) ?>
+	<?= form_label('Tel No.2', 'tel2') ?><?= form_input(array('name' => 'tel2', 'id' => 'tel2', 'value' => (isset($contactTel2)?$contactTel2:''))) ?>
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_submit('submission','Submit') ?><?= form_button('cancel','Cancel') ?>

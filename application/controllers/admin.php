@@ -550,7 +550,7 @@ class Admin extends CI_Controller {
 						);
 
 					if(isset($data['password']) && $data['password'] != '') {
-						$insert['password'] = sha1($data['password'])
+						$insert['password'] = sha1($data['password']);
 					}
 
 					if($data['newTitle'] != ''){
@@ -558,7 +558,7 @@ class Admin extends CI_Controller {
 					}
 
 					if($this->membersModel->updateMember($data['id'], $insert))
-						redirect('admin');
+						redirect('admin/editMember?n=' . urlencode("Member successfully modified.") . '^1');
 					redirect('/admin/index?n=' . urlencode("Create member Failure"));
 				}
 				elseif($verify == 1)
