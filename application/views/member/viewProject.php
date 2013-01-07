@@ -345,7 +345,7 @@ if(!$MemberIsInProject) {
 		    //$('.commentedTable td.control').each(function () {
 			  var nTr = this.parentNode;
 			  var i = $.inArray( nTr, anOpen );
-			  console.log(fnFormatDetails(oTable, nTr));
+
 			  if ( i === -1 ) {
 			  	$('img', this).attr( 'src', sImageUrl+"details_close.png" );
 			    var nDetailsRow = oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'comments' );
@@ -379,6 +379,9 @@ if(!$MemberIsInProject) {
 			      }
 			  	}
 		        // sOut += '</table>';
+		        if(!oData.comments.length) {
+		        	sOut += '<table cellpadding="5" cellspacing="0" border="0" style="box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);">';
+		        }
 		        if(oData.responses.length) {
 			        // sOut += '<table class="responseComments" cellpadding="5" cellspacing="0" border="0" >';
 			        sOut += '<tr class="responseComment"><td colspan="4" style="font-weight: bold;">Responses</td></tr>';
