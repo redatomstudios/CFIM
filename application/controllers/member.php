@@ -163,8 +163,8 @@ class Member extends CI_Controller{
 					if(sizeof($docs) > 0){
 						foreach ($docs as $doc) {
 							$document = $this->documentsModel->getDocument($doc);
-							$n['filename'] = $document->filename;
-							$n['timestamp'] = $document->timestamp;
+							$n['filename'] = $document['filename'];
+							$n['timestamp'] = $document['timestamp'];
 							$attachmentName[] = $n;
 						}
 					}
@@ -181,8 +181,8 @@ class Member extends CI_Controller{
 						if(sizeof($docs) > 0){
 							foreach ($docs as $doc) {
 								$document = $this->documentsModel->getDocument($doc);
-								$n['filename'] = $document->filename;
-								$n['timestamp'] = $document->timestamp;
+								$n['filename'] = $document['filename'];
+								$n['timestamp'] = $document['timestamp'];
 								$voucherName[] = $n;
 							}
 						}
@@ -529,7 +529,7 @@ class Member extends CI_Controller{
 		$data['memberId'] = $post['userID'];
 		$data['updateBody'] = $post['commentBody'];
 		if(!$uploads = $this->mylibrary->uploader($post['projectID'])) {
-			redirect('/member/newUpdate?n=' . urlencode('Upload Failure.') . '^0');
+			//redirect('/member/newUpdate?n=' . urlencode('Upload Failure.') . '^0');
 		} else {
 			$this->load->model('documentsModel');
 
