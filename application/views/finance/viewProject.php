@@ -20,37 +20,6 @@ function createViewButton($documents, $id) {
 }
 ?>
 
-<script>
-		jQuery(document).ready(function($) {
-		    var oTable = $('.commentedTable').dataTable( {
-		        "bProcessing": true,
-		        "sScrollY": "350px",
-		        "aaData": dataSource.aaData,
-		        "bPaginate": true,
-		        "iDisplayLength": 5,
-		        "bLengthChange": false,
-		        "bInfo": false,
-		        "aaSorting": [[4, 'desc']],
-		        "aoColumns": [
-				    { "mDataProp": "control", "sClass": "control centered", "bSortable": false },
-		            { "mDataProp": "member", "bSortable": false },
-		            { "mDataProp": "comment", "bSortable": false },
-		            { "mDataProp": "attachment", "sClass": "centered", "bSortable": false },
-		            { "mDataProp": "time", "sClass": "centered" },
-		            { "mDataProp": "agreements", "sClass": "centered", "bSortable": false },
-		            { 
-		            	"mDataProp": "actions",
-		            	"sClass": "centered",
-						"bSortable": false
-		            }
-		        ],
-		        "oLanguage": {
-		        	"sEmptyTable": "No comments on this project yet."
-		        }
-		    } );
-		} );
-</script>
-
 <div class="gridOne spaceTop">
 	<strong>Project Name:</strong> <?= $project['name'] ?>
 </div>

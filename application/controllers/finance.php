@@ -128,9 +128,13 @@ class Finance extends CI_Controller{
 		if(isset($post['approve']))
 			$data['status'] = 'Approved';
 
-		if($this->expensesModel->reviewExpense($data, $post['expenseID']))
-		 	redirect('/finance/viewProject/' . $post['projectID'] . '?n=' . urlencode('Expense Approved^1'));
-		redirect('/finance/viewProject/' . $post['projectID'] . '?n=' . urlencode('Expense Rejected'));
+		if($this->expensesModel->reviewExpense($data, $post['expenseID'])) {
+			if(isset($post['approve'])) {
+				redirect('/finance/viewProject/' . $post['projectID'] . '?n=' . urlencode('Expense Approved') . '^1');
+			} else {
+				redirect('/finance/viewProject/' . $post['projectID'] . '?n=' . urlencode('Expense Rejected') . '^1');
+			}
+		}
 	}
 
 	public function changePassword(){
