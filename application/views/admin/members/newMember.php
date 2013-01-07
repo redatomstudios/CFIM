@@ -40,7 +40,7 @@
 	<?= form_label('Tel No.2', 'tel2') ?><?= form_input(array('name' => 'tel2', 'id' => 'tel2', 'value' => (isset($contactTel2)?$contactTel2:''))) ?>
 </div>
 <div class="gridTwo spaceTop">
-	<?= form_submit('submission','Submit') ?><?= form_button('cancel','Cancel') ?>
+	<?= form_submit('submission','Submit') ?><a href="javascript: history.go(-1)"><?= form_button('cancel','Cancel') ?></a>
 </div>
 <?= form_close() ?>
 <div class="clear"></div>
