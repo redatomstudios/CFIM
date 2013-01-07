@@ -107,7 +107,7 @@ class Member extends CI_Controller{
 		if($id == 0){
 			redirect('/member?n=' . urlencode('No Project Specified'));
 		}
-		
+
 		// print_r($comments);
 		$tempComments = array();
 		$comments = $this->commentsModel->getAllComments($id);
@@ -231,16 +231,22 @@ class Member extends CI_Controller{
 		$data['comments'] = $comments;
 		$data['updates'] = $updates;
 
-		// if(sizeof($data['updates']) > 0)
-		if($this->membersModel->isMemberOf($this->session->userdata('id'), $id))
-			unset($data['status']); // Status isn't displayed if the member is a part of the team
-		
+		/*
+		 * We need to know if the viewer is a member of the projec tor not
+		 * since the view changes depending on this. So, first we get all the
+		 * projects that the current member has, then we check if the current
+		 * project is within that list.
+		 */
+
+		$data['MemberIsInProject'] = $this->membersModel->isMemberOf($this->session->userdata('id'), $id) || $data['leaderId'] == $this->session->userdata('id');
 
 		$d1['currentPage'] = 'home';
 		$d1['username'] = $this->session->userdata('username');	
 
-		// echo "<pre>";
+		echo "<pre>";
 		// print_r($data);
+		var_dump($data['MemberIsInProject']);
+		echo "</pre>";
 
 		$this->load->view('member/header',$d1);
 		$this->load->view('member/viewProject', $data);
@@ -278,12 +284,11 @@ class Member extends CI_Controller{
 			// echo "<pre>";
 			// print_r($post);
 			$data['memberProjects'] = $this->projectsModel->searchProjects($post);
-		}
-		else{
+		} else {
 			$data['memberProjects'] = $this->membersModel->getProjects($this->session->userdata('id'));
-			
 		}
-		if($data['memberProjects']){
+
+		if($data['memberProjects']) {
 
 			$this->load->model('sectorsModel');
 			$this->load->model('provincesModel');
@@ -316,12 +321,12 @@ class Member extends CI_Controller{
 
 		// echo "<pre>";
 		// print_r($data['memberProjects']);
+		// echo "</pre>";
 
 		$this->load->view('member/header', $d1);
 		$this->load->view('member/listProjects', $data);
 		$this->load->view('member/footer');
 	}
-
 
 	public function changePassword(){
 		# code...
@@ -331,8 +336,6 @@ class Member extends CI_Controller{
 			$this->load->view('member/header', $d1);
 			$this->load->view('changePassword');
 			$this->load->view('member/footer');
-
-
 	}
 
 	public function investedProjects(){
@@ -421,7 +424,6 @@ class Member extends CI_Controller{
 		$this->load->view('member/header', $d1);
 		$this->load->view('member/listProjects', $data);
 		$this->load->view('member/footer');
-		
 	}
 
 	private function getProjectFormData() {

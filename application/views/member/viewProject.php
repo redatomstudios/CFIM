@@ -190,7 +190,7 @@ foreach($rawAgreements as $thisElement) {
  * $status is only set if the member is not a part of the project team
  * so lets base the bahavior based on that variable
  */
-if(isset($status)) {
+if(!$MemberIsInProject) {
 	/*
 	 * This viewer is not a part of the project team
 	 * Show them the [Agree] and [Comment] buttons
@@ -403,7 +403,7 @@ if(isset($status)) {
 	<strong>Project Name:</strong> <?= $name ?>
 </div>
 <div class="gridOne spaceTop spaceBottom">
-	<table class="singleRow">
+	<table class="singleRow centered">
 		<thead>
 			<tr>
 				<th>Project Leader</th>

@@ -667,8 +667,8 @@ class Admin extends CI_Controller {
 		$d['username'] = $this->session->userdata('username');
 		$d['currentPage'] = 'stats';
 		if(!$post = $this->input->post()){
-// 
-$data = $this->getProjectFormData();
+		// 
+		$data = $this->getProjectFormData();
 			$data['projects'] = $this->projectsModel->getProjectNames();
 			$data['leaders'] = $this->projectsModel->getLeaders();
 

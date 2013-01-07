@@ -33,9 +33,11 @@ class ProjectsModel extends CI_Model{
 	public function getProjects(){
 		# code...
 		$projects = $this->db->get('projects');
-		if($projects->num_rows() > 0)
+		if($projects->num_rows() > 0) {
 			return $projects->result_array();
-		return FALSE;
+		} else {
+			return FALSE;
+		}
 	}
 
 	public function insertProject($data){
