@@ -141,7 +141,7 @@ class Admin extends CI_Controller {
 				$pid = $this->projectsModel->insertProject($post);
 				
 				if(!$uploads = $this->mylibrary->uploader($pid)) {
-					// redirect('/admin/addProject?n=' . urlencode('Upload Failure.') . '^0');
+					 // redirect('/admin/addProject?n=' . urlencode('Upload Failure.') . '^0');
 					echo "No Uploads";	//Echo this error
 				} else {
 					$this->load->model('documentsModel');
@@ -355,7 +355,7 @@ class Admin extends CI_Controller {
 				redirect('/admin?n=' . urlencode('Project modified successfully.') . '^1');
 			}
 			else{
-				echo "Team member cannot be a team leader!!";
+				redirect('/admin/addProject?n=' . urlencode('Team member cannot be a team leader') . '^1');
 			}
 		}
 	}
@@ -414,16 +414,16 @@ class Admin extends CI_Controller {
 
 				if($this->membersModel->insertMember($insert))
 					redirect('/admin/index?n=' . urlencode("Member added successfully") . '^1');
-				echo "Member Not Added!! Error in values!!";
+				redirect('/admin/index?n=' . urlencode("Create member Failure"));
 			}
 			elseif($verify == 1)
-				echo "Fill all values!!";
+				redirect('/admin/addMember?n=' . urlencode('Fill all values'));
 			elseif($verify == 2)
-				echo "Insert proper rank!!";
+				redirect('/admin/addMember?n=' . urlencode('Rank Field Error'));
 			elseif($verify == 3)
-				echo "Insert proper status!!";
+				redirect('/admin/addMember?n=' . urlencode('Status Field Error'));
 			elseif($verify == 4)
-				echo "Invalid Subordinate!!";
+				redirect('/admin/addMember?n=' . urlencode('Invalid Subordinate'));
 		}
 		else{
 			$this->load->model('titlesModel');
@@ -549,16 +549,16 @@ class Admin extends CI_Controller {
 
 					if($this->membersModel->updateMember($data['id'], $insert))
 						redirect('admin');
-					echo "Member Not Added!! Error in values!!";
+					redirect('/admin/index?n=' . urlencode("Create member Failure"));
 				}
 				elseif($verify == 1)
-					echo "Fill all values!!";
-				elseif($verify == 2)
-					echo "Insert proper rank!!";
-				elseif($verify == 3)
-					echo "Insert proper status!!";
-				elseif($verify == 4)
-					echo "Invalid Subordinate!!";
+				redirect('/admin/editMember?n=' . urlencode('Fill all values'));
+			elseif($verify == 2)
+				redirect('/admin/editMember?n=' . urlencode('Rank Field Error'));
+			elseif($verify == 3)
+				redirect('/admin/editMember?n=' . urlencode('Status Field Error'));
+			elseif($verify == 4)
+				redirect('/admin/editMember?n=' . urlencode('Invalid Subordinate'));
 			}
 
 		}

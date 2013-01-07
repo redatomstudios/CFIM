@@ -120,8 +120,6 @@ class Finance extends CI_Controller{
 	public function reviewExpense(){
 
 		$post = $this->input->post();
-		echo "<pre>";
-		print_r($post);
 		$data['reviewedBy'] = $post['financeID'];
 		$data['statusReason'] = $post['reason'];
 		$data['status'] = 'Rejected';

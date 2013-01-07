@@ -105,8 +105,7 @@ class Member extends CI_Controller{
 		// echo "<pre>";
 
 		if($id == 0){
-			echo "No Project Specified";
-			return;
+			redirect('/member?n=' . urlencode('No Project Specified'));
 		}
 		
 		// print_r($comments);
@@ -528,8 +527,7 @@ class Member extends CI_Controller{
 		$data['memberId'] = $post['userID'];
 		$data['updateBody'] = $post['commentBody'];
 		if(!$uploads = $this->mylibrary->uploader($post['projectID'])) {
-			// redirect('/admin/addProject?n=' . urlencode('Upload Failure.') . '^0');
-			echo "No Uploads";	//Echo this error
+			redirect('/member/newUpdate?n=' . urlencode('Upload Failure.') . '^0');
 		} else {
 			$this->load->model('documentsModel');
 
@@ -560,8 +558,8 @@ class Member extends CI_Controller{
 		
 
 		if(!$attachments = $this->mylibrary->uploader($post['projectID'])) {
-			// redirect('/admin/addProject?n=' . urlencode('Upload Failure.') . '^0');
-			echo "No Uploads";	//Echo this error
+			echo "No attachment";
+			redirect('/member/newExpense?n=' . urlencode('Upload Failure.') . '^0');
 		} else {
 			$this->load->model('documentsModel');
 

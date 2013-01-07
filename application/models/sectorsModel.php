@@ -46,7 +46,7 @@ class SectorsModel extends CI_Model{
 	}
 
 	public function insertSubsector($name, $subsectorOf){
-		echo "<br>Name: $name <br>Subsector: $subsectorOf";
+		// echo "<br>Name: $name <br>Subsector: $subsectorOf";
 		$query = $this->db->insert('sectors', array('name' => $name, 'subsectorOf' => $subsectorOf));
 		return $this->db->insert_id();
 	}

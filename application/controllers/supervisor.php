@@ -212,8 +212,7 @@ class Supervisor extends CI_Controller{
 
 
 		if($id == 0){
-			echo "No Project Specified";
-			return;
+			redirect('/supervisor?n=' . urlencode('No Project Specified'))
 		}
 
 		$data = $this->projectsModel->getProject($id);
