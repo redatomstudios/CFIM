@@ -574,7 +574,7 @@ class Member extends CI_Controller{
 
 		if(!$vouchers = $this->mylibrary->uploader($post['projectID'], 'vouchers')) {
 			// redirect('/admin/addProject?n=' . urlencode('Upload Failure.') . '^0');
-			echo "No Uploads";	//Echo this error
+			// echo "No Uploads";	//Echo this error
 		} else {
 			$this->load->model('documentsModel');
 

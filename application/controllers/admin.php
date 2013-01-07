@@ -142,7 +142,7 @@ class Admin extends CI_Controller {
 				
 				if(!$uploads = $this->mylibrary->uploader($pid)) {
 					 // redirect('/admin/addProject?n=' . urlencode('Upload Failure.') . '^0');
-					echo "No Uploads";	//Echo this error
+					// echo "No Uploads";	//Echo this error
 				} else {
 					$this->load->model('documentsModel');
 
@@ -327,10 +327,10 @@ class Admin extends CI_Controller {
 
 				$pid = $this->projectsModel->updateProject($post);
 				
-				if(!$uploads = $this->mylibrary->uploader($pid)) 
+				if(!$uploads = $this->mylibrary->uploader($pid)) {
 					// redirect('/admin/editProject?n=' . urlencode('Upload Failure.') . '^0');
-					echo "No Uploads";
-				else{
+					// echo "No Uploads";
+				} else {
 					$this->load->model('documentsModel');
 
 					$ids = $this->documentsModel->insertDocument($pid, $uploads);

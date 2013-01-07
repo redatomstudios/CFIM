@@ -413,7 +413,7 @@ class Supervisor extends CI_Controller{
 		$data['updateBody'] = $post['commentBody'];
 		if(!$uploads = $this->mylibrary->uploader($post['projectID'])) {
 			// redirect('/admin/addProject?n=' . urlencode('Upload Failure.') . '^0');
-			echo "No Uploads";	//Echo this error
+			// echo "No Uploads";	//Echo this error
 		} else {
 			$this->load->model('documentsModel');
 
@@ -445,7 +445,7 @@ class Supervisor extends CI_Controller{
 
 		if(!$attachments = $this->mylibrary->uploader($post['projectID'])) {
 			// redirect('/admin/addProject?n=' . urlencode('Upload Failure.') . '^0');
-			echo "No Uploads";	//Echo this error
+			// echo "No Uploads";	//Echo this error
 		} else {
 			$this->load->model('documentsModel');
 
@@ -458,7 +458,7 @@ class Supervisor extends CI_Controller{
 
 		if(!$vouchers = $this->mylibrary->uploader($post['projectID'], 'vouchers')) {
 			// redirect('/admin/addProject?n=' . urlencode('Upload Failure.') . '^0');
-			echo "No Uploads";	//Echo this error
+			// echo "No Uploads";	//Echo this error
 		} else {
 			$this->load->model('documentsModel');
 
