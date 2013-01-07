@@ -101,10 +101,25 @@ class MembersModel extends CI_Model{
 	
 	public function isMemberOf($memberId, $projectId){
 		# code...
-		$this->db->select('projects');
-		$projects = $this->db->get_where('members', array('id' => $memberId))->row()->projects;
-		$projects = explode(',', $projects);
-		return in_array($projectId, $projects);
+		/*
+		 * members.projects wasn't getting updated on the server
+		 * so I refactored the code to use the projects.members and projects.leaderId
+		 * to determine if the current member a part of this project
+		 */ 
+		// $this->db->select('projects');
+		// $projects = $this->db->get_where('members', array('id' => $memberId))->row()->projects;
+		// $projects = explode(',', $projects);
+		// return in_array($projectId, $projects);
+
+		$this->db->select('leaderId, members');
+		$project = $this->db->get_where('projects', array('id' => $projectId));
+		$project = $project->result_array();
+		$project = $project[0];
+
+		$membersInProject = explode(',', $project['members']);
+		$membersInProject[] = $project['leaderId'];
+
+		return in_array($memberId, $membersInProject);
 	}
 
 	public function getMemberNames(){

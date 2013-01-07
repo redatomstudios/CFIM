@@ -243,10 +243,10 @@ class Member extends CI_Controller{
 		$d1['currentPage'] = 'home';
 		$d1['username'] = $this->session->userdata('username');	
 
-		echo "<pre>";
+		// echo "<pre>";
 		// print_r($data);
-		var_dump($data['MemberIsInProject']);
-		echo "</pre>";
+		// var_dump($data['MemberIsInProject']);
+		// echo "</pre>";
 
 		$this->load->view('member/header',$d1);
 		$this->load->view('member/viewProject', $data);
