@@ -131,8 +131,8 @@ class Member extends CI_Controller{
 							$document = $this->documentsModel->getDocument($doc);
 							// print_r($document);
 
-							$n['filename'] = $document->filename;
-							$n['timestamp'] = $document->timestamp;
+							$n['filename'] = $document['filename'];
+							$n['timestamp'] = $document['timestamp'];
 							$name[] = $n;
 						}
 					}
@@ -215,8 +215,8 @@ class Member extends CI_Controller{
 			if(sizeof($docs) > 0){
 				foreach ($docs as $doc) {
 					$document = $this->documentsModel->getDocument($doc);
-					$n['filename'] = $document->filename;
-					$n['timestamp'] = $document->timestamp;
+					$n['filename'] = $document['filename'];
+					$n['timestamp'] = $document['timestamp'];
 					$voucherName[] = $n;
 				}
 			}

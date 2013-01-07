@@ -30,7 +30,7 @@
 <div class="clear"></div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Sector', 'sector') ?>
-	<?= form_dropdown('sector', $sectors, (isset($sector)?$sector:'1'), 'class = "combobox" id="liveSector" required="required"') ?>
+	<?= form_dropdown('sector', $sectors, (isset($sector)?$sector:'1'), 'class = "combobox" id="liveSector"') ?>
 	<?= form_input(array('name' => 'newSector', 'placeholder' => 'New Sector')) ?>
 </div>
 <div class="gridTwo spaceTop">
@@ -67,7 +67,7 @@ var subSectors = {}; ' . $jsString . '
 			$subSectorList = $subSectors[1];
 		}
 	?>
-	<?= form_dropdown('subsector', $subSectorList, (isset($subsector)?$subsector:'1'), 'class = "combobox" id="liveSubsector" required="required"') ?>
+	<?= form_dropdown('subsector', $subSectorList, (isset($subsector)?$subsector:'1'), 'class = "combobox" id="liveSubsector"') ?>
 	<?= form_input(array('name' => 'newSubsector', 'placeholder' => 'New Subsector')) ?>
 </div>
 <div class="gridTwo spaceTop">
@@ -86,7 +86,7 @@ var subSectors = {}; ' . $jsString . '
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Status', 'status') ?>
-	<?= form_dropdown('status', $status, (isset($thisStatus)?$thisStatus:'1')) ?>
+	<?= form_dropdown('status', $status, (isset($thisStatus)?$thisStatus:'Preliminary')) ?>
 </div>
 <div class="clear"></div>
 <div class="gridOne spaceTop spaceBottom">

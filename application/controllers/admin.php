@@ -92,7 +92,7 @@ class Admin extends CI_Controller {
 			
 			$data = $this->getProjectFormData();
 			$data['projects'] = $this->projectsModel->getProjectNames();
-			$data['leaders'] = $this->projectsModel->getLeaders();
+			// $data['leaders'] = $this->projectsModel->getLeaders();
 
 			
 
@@ -207,6 +207,12 @@ class Admin extends CI_Controller {
 			$data['attachments'] = $at;
 
 			$data1['currentPage'] = 'modProject';
+			$data1['username'] = $this->session->userdata('username');
+
+			// echo "<pre>";
+			// print_r($data1);
+			// print_r($data);
+			// echo "</pre>";
 
 			$this->load->view('admin/header', $data1);
 			$this->load->view('admin/projects/newProject', $data);
@@ -239,6 +245,7 @@ class Admin extends CI_Controller {
 
 
 			$data1['currentPage'] = 'modProject';
+			$data1['username'] = $this->session->userdata('username');
 
 			// print_r($data['status']);
 			$this->load->view('admin/header', $data1);
@@ -361,7 +368,7 @@ class Admin extends CI_Controller {
 	}
 
 	private function isNotValidAddProject($data){
-		if(($data['name'] == '') || ($data['companyName'] == '') || ($data['companyAddress'] == '') || ($data['contactPerson'] == '') || ($data['contactEmail'] == '') || ($data['contactTel'] == '') || ($data['sector'] == '') || ($data['subsector'] == '') || ($data['province'] == '') || ($data['city'] == '') || ($data['discussionDate'] == '') || ($data['status'] == '') || ($data['leader'] == '') || ($data['projectMembers'] == '') || ($data['dealSize'] == ''))
+		if(($data['name'] == '') || ($data['companyName'] == '') || ($data['companyAddress'] == '') || ($data['contactPerson'] == '') || ($data['contactEmail'] == '') || ($data['contactTel'] == '') || ($data['discussionDate'] == '') || ($data['status'] == '') || ($data['leader'] == '') || ($data['projectMembers'] == '') || ($data['dealSize'] == ''))
 			return 1;
 		$leader = $data['leader'];
 		$members = $data['projectMembers'];
@@ -639,7 +646,7 @@ class Admin extends CI_Controller {
 		}
 		$data['cities'] = $sec;
 
-		$data['status'] = array(0 => 'ALL', 'Preliminary' => 'Preliminary', 'In-depth DD' => 'In-depth DD', 'Invested' => 'Invested', 'Pending' => 'Pending', 'Rejected' => 'Rejected', 'Exited' => 'Exited');
+		$data['status'] = array('Preliminary' => 'Preliminary', 'In-depth DD' => 'In-depth DD', 'Invested' => 'Invested', 'Pending' => 'Pending', 'Rejected' => 'Rejected', 'Exited' => 'Exited');
 
 		$res = $this->membersModel->getTeamMembers();
 		foreach ($res as $value) {

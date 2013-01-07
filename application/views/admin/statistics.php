@@ -32,7 +32,7 @@
 </div>
 <div class="gridOne spaceTop">
 	<?= form_label('Status', 'status') ?>
-	<?= form_dropdown('status', $status) ?>
+	<?= form_dropdown('status', $status, '0') ?>
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_submit('submission','Start Search') ?>
