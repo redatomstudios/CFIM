@@ -415,7 +415,7 @@ if(!$MemberIsInProject) {
 				<th>Geo Region</th>
 				<th>Deal Size</th>
 				<th>Attachments</th>
-				<?php if(isset($status)) { // Echo this only if the person viewing is not a member of the project  ?> 
+				<?php if(!$MemberIsInProject) { // Echo this only if the person viewing is not a member of the project  ?> 
 				<th>Status</th> 
 				<?php } ?>
 			</tr>
@@ -445,7 +445,7 @@ if(!$MemberIsInProject) {
 		        ?>
 		        <?=  $viewString ?>
 			</td>
-			<?php if(isset($status)) { // Echo this only if the person viewing is not a member of the project ?>
+			<?php if(!$MemberIsInProject) { // Echo this only if the person viewing is not a member of the project ?>
 			<td>
 				<?= $status ?>
 			</td>
@@ -471,12 +471,12 @@ if(!$MemberIsInProject) {
 		</tbody>
 	</table>
 </div>
-<?php if(isset($status)) { // Only echo these if viewer is not a member of the project ?>
+<?php if(!$MemberIsInProject) { // Only echo these if viewer is not a member of the project ?>
 <div class="gridOne spaceTop">
 	<input type="button" value="Add New Comment" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newCommentString) ?>)" /> <a href="<?= base_url() ?>member/"><input type="button" value="Back to Home"/></a>
 </div>
 <?php } // End of things to echo only if viewer is not a member of the project ?>
-<?php if(!isset($status)) { // Only echo these if viewer is a member of the project ?>
+<?php if($MemberIsInProject) { // Only echo these if viewer is a member of the project ?>
 <div class="gridOne spaceTop spaceBottom"> <strong>Update on Progress</strong>: </div>
 <div class="gridOne spaceTop">
 	<?php if(sizeof($updates) > 0) { ?>
