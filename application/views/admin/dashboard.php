@@ -37,7 +37,7 @@
 	</table>
 </div>
 <?php } else { ?>
-<div class="gridOne centered">
+<div class="gridOne centered spaceTop">
 	No projects to list
 </div>
 <?php } ?>

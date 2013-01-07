@@ -461,7 +461,7 @@ class Admin extends CI_Controller {
 
 	public function isNotValidAddMember($data){
 		# code...
-		if(!($data['name'] != '' && $data['username'] != '' && $data['title'] != ''))
+		if(!($data['name'] != '' && $data['username'] != '' && (isset($data['title']) ? $data['title'] != '' : 1 )))
 			return 1;
 		if(!isset($data['id'])){
 			if(!($data['password']))

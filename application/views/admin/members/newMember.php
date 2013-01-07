@@ -12,11 +12,11 @@
 </div>
 <?php } ?>
 <div class="gridTwo spaceTop">
-	<?= form_label('Rank', 'rank') ?><?= form_dropdown('rank', $ranks, (isset($rank)?$rank:'2'), 'id = "memberRank" required="required"') ?>
+	<?= form_label('Rank', 'rank') ?><?= form_dropdown('rank', $ranks, (isset($rank)?$rank:'2'), 'id = "memberRank"') ?>
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Title', 'title') ?>
-	<?= form_dropdown('title', $titles, (isset($title)?$title:'1'), 'id="title" required="required"') ?>
+	<?= form_dropdown('title', $titles, (isset($title)?$title:'1'), 'id="title"') ?>
 	<?= form_input(array('name' => 'newTitle', 'placeholder' => 'New Title')) ?>
 </div>
 <div class="gridTwo spaceTop spaceBottom">
