@@ -10,6 +10,7 @@ Backend Changes
 Final Sweep Changes
 ===================
 *Italicised text denotes a completed task*
+
 **Emphasized text denotes a NOTE**
 
 
@@ -93,13 +94,13 @@ Member - Not Project Member
 Supervisor
 ----------
 - Home
-> - Add ANY option for project leader and member dropdowns
+> - *Add ANY option for project leader and member dropdowns*
 > - *Return total 'expenses' from backend for each project*
 
 - View Project
-> - Adding root comments, comments and responses aren't working right now
-> - Adding update or expenses not working right now
-> - After adding comment, response, expense or update, user is redirected to home. User should be redirected back to this project.
+> - *Adding root comments, comments and responses aren't working right now*
+> - *Adding update or expenses not working right now*
+> - *After adding comment, response, expense or update, user is redirected to home. User should be redirected back to this project.*
 
 - Change Password
 > - *Change password isn't working for supervisor yet either. I guess you just need to copy the controller fn and view from member >_>*
@@ -112,7 +113,7 @@ Finance
 - View Project
 > - *Process form to Approve/Reject*
 > - *Display Vouchers*
-> - Get voucher as array for each expense in $expense['vouchers']
+> - *Get voucher as array for each expense in $expense['vouchers']*
 
 - Change Password
 > - *Uh, this isn't redirecting properly now, I thought the passwordChange was independent of member rank? I only saw member/changePassword in controller.*
