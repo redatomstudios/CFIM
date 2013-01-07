@@ -212,7 +212,7 @@ class Supervisor extends CI_Controller{
 
 
 		if($id == 0){
-			redirect('/supervisor?n=' . urlencode('No Project Specified'))
+			redirect('/supervisor?n=' . urlencode('No Project Specified'));
 		}
 
 		$data = $this->projectsModel->getProject($id);
@@ -425,7 +425,7 @@ class Supervisor extends CI_Controller{
 		}
 
 		$this->expensesModel->insertUpdate($data);
-		// redirect('/supervisor/viewProject/'.$post['projectID']);
+		redirect('/supervisor/viewProject/'.$post['projectID']);
 	}
 
 	public function newExpense(){
