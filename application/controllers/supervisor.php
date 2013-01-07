@@ -239,8 +239,8 @@ class Supervisor extends CI_Controller{
 							$document = $this->documentsModel->getDocument($doc);
 							// print_r($document);
 
-							$n['filename'] = $document->filename;
-							$n['timestamp'] = $document->timestamp;
+							$n['filename'] = $document['filename'];
+							$n['timestamp'] = $document['timestamp'];
 							$name[] = $n;
 						}
 					}
@@ -271,8 +271,8 @@ class Supervisor extends CI_Controller{
 					if(sizeof($docs) > 0){
 						foreach ($docs as $doc) {
 							$document = $this->documentsModel->getDocument($doc);
-							$n['filename'] = $document->filename;
-							$n['timestamp'] = $document->timestamp;
+							$n['filename'] = $document['filename'];
+							$n['timestamp'] = $document['timestamp'];
 							$attachmentName[] = $n;
 						}
 					}
@@ -289,8 +289,8 @@ class Supervisor extends CI_Controller{
 						if(sizeof($docs) > 0){
 							foreach ($docs as $doc) {
 								$document = $this->documentsModel->getDocument($doc);
-								$n['filename'] = $document->filename;
-								$n['timestamp'] = $document->timestamp;
+								$n['filename'] = $document['filename'];
+								$n['timestamp'] = $document['timestamp'];
 								$voucherName[] = $n;
 							}
 						}
@@ -320,8 +320,8 @@ class Supervisor extends CI_Controller{
 			if(sizeof($docs) > 0){
 				foreach ($docs as $doc) {
 					$document = $this->documentsModel->getDocument($doc);
-					$n['filename'] = $document->filename;
-					$n['timestamp'] = $document->timestamp;
+					$n['filename'] = $document['filename'];
+					$n['timestamp'] = $document['timestamp'];
 					$voucherName[] = $n;
 				}
 			}
@@ -337,19 +337,17 @@ class Supervisor extends CI_Controller{
 		$data['updates'] = $updates;
 		
 
-		$d1['currentPage'] = 'myProjects';
+		$d1['currentPage'] = 'home';
 		$d1['username'] = $this->session->userdata('username');	
 		// For live projects
 		if(!($data['status'] == 'Invested' || $data['status'] == 'Exited')){
-
 			$this->load->view('super/header',$d1);
 			$this->load->view('super/viewProject', $data);
 			$this->load->view('super/footer');
 		}
 		else{
-		
 			$this->load->view('super/header',$d1);
-			$this->load->view('super/viewInvestedPRoject', $data);
+			$this->load->view('super/viewInvestedProject', $data);
 			$this->load->view('super/footer');
 
 		}

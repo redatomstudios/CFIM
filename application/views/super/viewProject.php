@@ -350,6 +350,9 @@ $justRespond =
 			      }
 			  	}
 		        // sOut += '</table>';
+		        if(!oData.comments.length) {
+		        	sOut += '<table cellpadding="5" cellspacing="0" border="0" >';
+		        }
 		        if(oData.responses.length) {
 			        // sOut += '<table class="responseComments" cellpadding="5" cellspacing="0" border="0" >';
 			        sOut += '<tr class="responseComment"><td colspan="4" style="font-weight: bold;">Responses</td></tr>';

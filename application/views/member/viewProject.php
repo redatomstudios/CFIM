@@ -366,7 +366,7 @@ if(!$MemberIsInProject) {
 			  var oData = oTable.fnGetData( nTr );
 			  var sOut = '<div class="innerDetails">';
 			  	if(oData.comments.length) {
-			      sOut += '<table cellpadding="5" cellspacing="0" border="0" style="box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);">' +
+			      sOut += '<table cellpadding="5" cellspacing="0" border="0" >' +
 			      		'<tr class="followonComment"><td colspan="4" style="font-weight: bold;">Follow On Comments</td></tr>';
 			      for( thisComment in oData.comments ) {
 			      	sOut += 
@@ -380,7 +380,7 @@ if(!$MemberIsInProject) {
 			  	}
 		        // sOut += '</table>';
 		        if(!oData.comments.length) {
-		        	sOut += '<table cellpadding="5" cellspacing="0" border="0" style="box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);">';
+		        	sOut += '<table cellpadding="5" cellspacing="0" border="0" >';
 		        }
 		        if(oData.responses.length) {
 			        // sOut += '<table class="responseComments" cellpadding="5" cellspacing="0" border="0" >';
