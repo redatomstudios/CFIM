@@ -170,7 +170,7 @@ class Member extends CI_Controller{
 					}
 				}
 
-				if($update['expense'] != NULL){
+				if($update['expense'] != 0){
 					$docs = ( isset($update['voucher']) ? $update['voucher'] : '' );
 					if($docs != ''){
 						$voucherName = array();

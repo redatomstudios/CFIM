@@ -80,20 +80,71 @@ class Finance extends CI_Controller{
 		# code...
 		if(!$this->expensesModel->checkExpense($id))
 			redirect('/finance?n=' . urlencode('This project does not have any expenses'));
+
 		$this->load->model('expensesModel');
 		$this->load->model('sectorsModel');
 		$this->load->model('provincesModel');
+		$this->load->model('documentsModel');
 		
 		if($id == 0)
 			redirect('/finance?n=' . urlencode('No Project Mentioned'));
 
 		$project = $this->projectsModel->getProject($id);
-		$project['expenses'] = $this->expensesModel->getExpenses($id);
+		$updates = $this->expensesModel->getExpenses($id);
 
+		if($updates){
+			foreach ($updates as $update) {
+				# code...
+				$docs = $update['attachments'];
+				if($docs != ''){
+					$attachmentName = array();
+
+					$docs = trim($docs, ',');
+					$docs = explode(',', $docs);
+					
+					if(sizeof($docs) > 0){
+						foreach ($docs as $doc) {
+							$document = $this->documentsModel->getDocument($doc);
+							$n['filename'] = $document->filename;
+							$n['timestamp'] = $document->timestamp;
+							$attachmentName[] = $n;
+						}
+					}
+				}
+
+				if($update['expense'] != 0){
+					$docs = ( isset($update['voucher']) ? $update['voucher'] : '' );
+					if($docs != ''){
+						$voucherName = array();
+
+						$docs = trim($docs, ',');
+						$docs = explode(',', $docs);
+						
+						if(sizeof($docs) > 0){
+							foreach ($docs as $doc) {
+								$document = $this->documentsModel->getDocument($doc);
+								$n['filename'] = $document->filename;
+								$n['timestamp'] = $document->timestamp;
+								$voucherName[] = $n;
+							}
+						}
+					}
+				}
+
+
+				$c = $update;
+				if(isset($attachmentName)) $c['attachments'] = $attachmentName;
+				if(isset($voucherName)) $c['vouchers'] = $voucherName;
+				unset($attachmentName);
+				unset($voucherName);
+				$tempUpdates[] = $c;
+			}
+		}
+		$updates = $tempUpdates;
 		// echo "<pre>";
 		// print_r($project);
 		// echo "</pre>";
-
+		$data['expenses'] = $updates;
 		$data['leader'] = $this->membersModel->getName($project['leaderId']);
 		$data['sector'] = $this->sectorsModel->getName($project['sectorId']);
 		$data['subsector'] = $this->sectorsModel->getName($project['subSectorId']);

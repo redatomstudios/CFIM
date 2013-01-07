@@ -59,7 +59,7 @@ function createViewButton($documents, $id) {
 <div class="clear"></div>
 
 <div class="gridOne spaceTop">
-	<?php $expenses = $project['expenses'] ?>
+	<?php //$expenses = $project['expenses'] ?>
 	<?php if(sizeof($expenses) > 0) { ?>
 	<table class="displayOnly">
 		<thead>
