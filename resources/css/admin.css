@@ -237,7 +237,7 @@ div#popupSlider {
 }
 
 div#displaySubordinates {
-	display: none;
+	/*display: none;*/
 }
 
 /* Notification Styles */

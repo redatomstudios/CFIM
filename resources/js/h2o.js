@@ -247,6 +247,7 @@ jQuery(document).ready(function() {
 		if(this.value == "3") {
 			$('#displaySubordinates').show();
 		} else {
+
 			$('#displaySubordinates').hide();
 		}
 	})

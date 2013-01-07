@@ -23,7 +23,7 @@
 	<?= form_label('Status', 'status') ?><?= form_dropdown('status', $status, (isset($currentStatus)?$currentStatus:'1'), 'id = "status" required="required"') ?>
 </div>
 <div class="clear"></div>
-<div class="gridOne spaceTop spaceBottom" id="displaySubordinates">
+<div class="gridOne spaceTop spaceBottom" id="displaySubordinates" <?= isset($selectedSubordinates) ? '' : 'style="display: none;"' ?>>
 	<?= form_label('Subordinates', 'subordinates') ?><?= form_multiselect('subordinates[]', $subordinates, (isset($selectedSubordinates)?$selectedSubordinates:''), 'id="subordinates"') ?>
 </div>
 <div class="clear"></div>

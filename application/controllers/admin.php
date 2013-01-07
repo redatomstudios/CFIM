@@ -539,7 +539,6 @@ class Admin extends CI_Controller {
 					$insert = array(
 						'memberName' => $data['name'],
 						'username' => $data['username'],
-						'password' => sha1($data['password']),
 						'rank' => $data['rank'],
 						'titleId' => $data['title'],
 						'status' => $data['status'],
@@ -549,6 +548,10 @@ class Admin extends CI_Controller {
 						'contactTel1' => $data['tel1'],
 						'contactTel2' => $data['tel2']
 						);
+
+					if(isset($data['password']) && $data['password'] != '') {
+						$insert['password'] = sha1($data['password'])
+					}
 
 					if($data['newTitle'] != ''){
 						$data['titleId'] = $this->titlesModel->insertTitle($data['newTitle']);
