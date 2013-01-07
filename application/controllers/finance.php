@@ -79,7 +79,7 @@ class Finance extends CI_Controller{
 	public function viewProject($id = 0){
 		# code...
 		if(!$this->expensesModel->checkExpense($id))
-			redirect('/finance?n=' . urlencode('This project doesnot have expenses'));
+			redirect('/finance?n=' . urlencode('This project does not have any expenses'));
 		$this->load->model('expensesModel');
 		$this->load->model('sectorsModel');
 		$this->load->model('provincesModel');
@@ -129,8 +129,8 @@ class Finance extends CI_Controller{
 			$data['status'] = 'Approved';
 
 		if($this->expensesModel->reviewExpense($data, $post['expenseID']))
-		 	redirect('/finance?n=' . urlencode('Expense Approved^1'));
-		redirect('/finance?n=' . urlencode('Expense Rejected'));
+		 	redirect('/finance/viewProject/' . $post['projectID'] . '?n=' . urlencode('Expense Approved^1'));
+		redirect('/finance/viewProject/' . $post['projectID'] . '?n=' . urlencode('Expense Rejected'));
 	}
 
 	public function changePassword(){

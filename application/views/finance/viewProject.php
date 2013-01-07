@@ -158,8 +158,9 @@ function createViewButton($documents, $id) {
 						 */
 					?> 
 						<?= form_open('finance/reviewExpense') ?>
-						<input type="text" name="reason" placeholder="Reason for approval/rejection" style="width: 100%" /> <br />
+						<input type="text" name="reason" placeholder="Reason for approval/rejection" style="width: 215px;" /> <br />
 						<input type="hidden" name="expenseID" value="<?= $thisExpense['id'] ?>" />
+						<input type="hidden" name="projectID" value="<?= $thisExpense['projectId'] ?>" />
 						<input type="hidden" name="financeID" value="<?= $this->session->userdata('id') ?>" />
 						<input type="submit" name="approve" value="Approve" />
 						<input type="submit" name="reject" value="Reject" />
