@@ -2,7 +2,7 @@
 <div class="gridOne spaceTop">
 <?= form_open('member/index') ?>
 	<label for="discussionDate">Discussion Date: </label>
-	<?= form_dropdown('discussionDate', $dates, 0) ?>
+	<?= form_dropdown('discussionDate', $dates, (isset($_POST['discussionDate']) ? $_POST['discussionDate'] : '' )) ?>
 	<!-- <input type="text" name="discussionDate" id="discussionDate" class="datePicker" /> -->
 	<?= form_submit('submission', 'Filter') ?>
 	<?= anchor('/member', '<input type="button" value="All">') ?>
