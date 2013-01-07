@@ -187,6 +187,7 @@ class Supervisor extends CI_Controller{
 		$data['status'] = array(0 => 'ANY', 'Preliminary' => 'Preliminary', 'In-depth DD' => 'In-depth DD', 'Invested' => 'Invested', 'Pending' => 'Pending', 'Rejected' => 'Rejected', 'Exited' => 'Exited');
 
 		$res = $this->membersModel->getTeamMembers();
+		$members['0'] = 'ANY';
 		foreach ($res as $value) {
 			$members[$value['id']] = $value['memberName'];
 		}
