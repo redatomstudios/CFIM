@@ -416,7 +416,7 @@ class Admin extends CI_Controller {
 					);
 
 				if($data['newTitle'] != ''){
-					$data['titleId'] = $this->titlesModel->insertTitle($data['newTitle']);
+					$insert['titleId'] = $this->titlesModel->insertTitle($data['newTitle']);
 				}
 
 				if($this->membersModel->insertMember($insert))
@@ -554,7 +554,7 @@ class Admin extends CI_Controller {
 					}
 
 					if($data['newTitle'] != ''){
-						$data['titleId'] = $this->titlesModel->insertTitle($data['newTitle']);
+						$insert['titleId'] = $this->titlesModel->insertTitle($data['newTitle']);
 					}
 
 					if($this->membersModel->updateMember($data['id'], $insert))
