@@ -10,8 +10,8 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td><?= form_dropdown('projectLeader', $members, 0) ?></td>
-				<td><?= form_dropdown('projectMember', $members, 0) ?></td>
+				<td><?= form_dropdown('leader', $members, 0) ?></td>
+				<td><?= form_dropdown('member', $members, 0) ?></td>
 			</tr>
 		</tbody>
 	</table>

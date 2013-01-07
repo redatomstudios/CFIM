@@ -232,13 +232,29 @@ class ProjectsModel extends CI_Model{
 
 			if(isset($data['leader']) && ($data['leader'] != 0))
 				$where['leaderId'] = $data['leader'];
+
+
+
+
 		}
 
 
 		$ret = $this->db->get_where('projects', $where);
 		if($ret->num_rows() > 0){
 			// echo $this->db->last_query();
-			return $ret->result_array();
+			$res = $ret->result_array();
+
+			if(isset($data['member']) && ($data['member'] != 0)){
+				$ps = array();
+				foreach ($res as $project) {
+					$members = explode(',', $project['members']);
+					if(in_array($data['member'], $members))
+						$ps[] = $project;
+				}
+				return $ps;
+			}
+
+			return $res;
 		}
 
 		return FALSE;
