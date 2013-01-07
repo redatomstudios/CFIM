@@ -91,7 +91,7 @@ var subSectors = {}; ' . $jsString . '
 <div class="clear"></div>
 <div class="gridOne spaceTop spaceBottom">
 	<?= form_label('Project Leader', 'leader') ?>
-	<?= form_dropdown('leader', $leaders, (isset($leader)?$leader:'1'), 'class="projectLeader"') ?>
+	<?= form_dropdown('leader', $leaders, ( isset($leader) ? $leader : '1' ), 'class="projectLeader"') ?>
 </div>
 <div class="gridOne spaceTop spaceBottom">
 	<?= form_label('Project Members', 'projectMembers') ?>

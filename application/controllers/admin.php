@@ -399,7 +399,7 @@ class Admin extends CI_Controller {
 					'username' => $data['username'],
 					'password' => sha1($data['password']),
 					'rank' => $data['rank'],
-					'titleId' => $data['title'],
+					'titleId' => ( isset($data['title']) ? $data['title'] : '' ),
 					'status' => $data['status'],
 					'subordinates' => $subordinates,
 					'officeEmail' => $data['officeEmail'],
