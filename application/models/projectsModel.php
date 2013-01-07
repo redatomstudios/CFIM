@@ -233,7 +233,11 @@ class ProjectsModel extends CI_Model{
 			if(isset($data['leader']) && ($data['leader'] != 0))
 				$where['leaderId'] = $data['leader'];
 
+			if(isset($data['fromDate']) && ($data['fromDate'] != 0))
+				$where['discussionDate >= '] =  $data['fromDate'];
 
+			if(isset($data['toDate']) && ($data['toDate'] != 0))
+				$where['discussionDate <= '] =  $data['toDate'];
 
 
 		}
