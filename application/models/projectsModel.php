@@ -103,6 +103,8 @@ class ProjectsModel extends CI_Model{
 		if($subordinates != NULL)
 			$subordinates = trim($subordinates, ',');
 
+
+
 		$v = array(
 			'name' => $data['name'],
 			'leaderId' => $data['leader'],
@@ -119,6 +121,9 @@ class ProjectsModel extends CI_Model{
 			'contactPerson' => $data['contactPerson'],
 			'contactEmail' => $data['contactEmail'],
 			'contactTel' => $data['contactTel']);
+
+		if(isset($data['password']) && $data['password'] != '')
+			$v['password'] = $data['password'];
 		
 		$this->db->where(array('id' => $id));
 		$this->db->update('projects', $v);
