@@ -56,9 +56,9 @@
 	<?= form_label('Status', 'status') ?>
 	<?= form_dropdown('status', $status, '0') ?>
 </div>
-<div class="gridTwo spaceTop">
+<div class="gridOne spaceTop">
 	<?= form_submit('submission','Start Search') ?>
-	<?= form_button('cancel','Cancel') ?>
+	<a href="<?= base_url() ?>admin/"><?= form_button('cancel','Cancel') ?></a>
 </div>
 <?= form_close() ?>
 <div class="clear"></div>
