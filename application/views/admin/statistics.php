@@ -23,6 +23,28 @@
 	<?= form_dropdown('sector', $sectors) ?>
 </div>
 <div class="gridOne spaceTop">
+	<?php
+	/*
+	 * Subsectors, by default, come with colons and their sector IDs
+	 * so we need to remove the colon and the sector IDs, don't need them
+	 * here since live update of subsectors based on selected sector isn't
+	 * being used here.
+	 */
+	foreach($subsectors as $index => $thisSubsector) {
+		$splitName = explode(':', $thisSubsector);
+
+		/*
+		 * The sector name itself might have a colon in it
+		 * so let's just remove the last exploded element, since
+		 * this should just leave the sector name, even if the
+		 * sector name has colons in it.
+		 */
+		if(isset($splitName[0]) && sizeof($splitName) > 1) {
+			array_pop($splitName); // Remove the last element
+			$subsectors[$index] = implode('', $splitName); // Store the imploded remaining array as a subsector
+		}
+	}
+	?>
 	<?= form_label('Sub Sector', 'subsector') ?>
 	<?= form_dropdown('subsector', $subsectors) ?>
 </div>
