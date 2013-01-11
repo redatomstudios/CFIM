@@ -560,8 +560,8 @@ class Member extends CI_Controller{
 		
 
 		if(!$attachments = $this->mylibrary->uploader($post['projectID'])) {
-			echo "No attachment";
-			redirect('/member/newExpense?n=' . urlencode('Upload Failure.') . '^0');
+			//echo "No attachment";
+			//redirect('/member/newExpense?n=' . urlencode('Upload Failure.') . '^0');
 		} else {
 			$this->load->model('documentsModel');
 

@@ -311,6 +311,17 @@ if(!$MemberIsInProject) {
 	var dataSource = <?= $JSON_comments ?>;
 	// Code for proper display of comments in member accounts
 		jQuery(document).ready(function($) {
+
+				$('table.displayOnlyTimeSort').dataTable({
+		      "bPaginate": true,
+		      "iDisplayLength": 10,
+		      "bLengthChange": false,
+		      "bFilter" : false,
+		      "aaSorting" : [[3, 'desc']],
+		      "bInfo" : false,
+		      "bSort": true
+				});
+
 		  var anOpen = [];
 		    var sImageUrl = "http://www.datatables.net/release-datatables/examples/examples_support/";
 		     
@@ -477,10 +488,10 @@ if(!$MemberIsInProject) {
 </div>
 <?php } // End of things to echo only if viewer is not a member of the project ?>
 <?php if($MemberIsInProject) { // Only echo these if viewer is a member of the project ?>
-<div class="gridOne spaceTop spaceBottom"> <strong>Update on Progress</strong>: </div>
-<div class="gridOne spaceTop">
+<div class="gridOne spaceTop"> <strong>Update on Progress</strong>: </div>
+<div class="gridOne spaceTop small">
 	<?php if(sizeof($updates) > 0) { ?>
-	<table class="displayOnly">
+	<table class="displayOnlyTimeSort">
 		<thead>
 			<tr>
 				<th>Member</th>

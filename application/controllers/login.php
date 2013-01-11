@@ -19,7 +19,7 @@ class Login extends CI_Controller {
 				'word'		 => random_string('alpha', 6),
                 'img_path'	 => './captcha/',
                 'img_url'	 => base_url().'captcha/',
-                'font_path'  => './system/fonts/krist.ttf',
+                'font_path'  => './system/fonts/arial.ttf',
                 'size'  => '20',
                 'img_width'	 => '270',
                 'img_height' => '50',
