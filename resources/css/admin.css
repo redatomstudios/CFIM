@@ -92,6 +92,17 @@ li a:hover, li a:visited, li a:active {
 	text-decoration: none;
 }
 
+div#dateTime {
+	float: right;
+	line-height: 2em;
+	margin-bottom: 30px;
+	height: 2em;
+	text-align: center;
+	padding: 0 1em;
+	font-weight: bold;
+	color: #000;
+}
+
 .bodyContent {
 	padding: 20px;
 	min-height: 100%;

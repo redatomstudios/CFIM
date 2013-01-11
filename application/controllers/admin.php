@@ -380,7 +380,7 @@ class Admin extends CI_Controller {
 
 	public function addMember() { 
 		# code...
-		if($data = urlencode($this->input->post())){
+		if($data = $this->input->post()){
 
 			$this->load->model('titlesModel');
 			$this->load->model('membersModel');
@@ -508,7 +508,7 @@ class Admin extends CI_Controller {
 		elseif($this->input->post('username')){
 			
 			if(!$this->input->post('id')){				
-				$data = urldecode($this->getMemberFormData());
+				$data = $this->getMemberFormData();
 
 
 				$d1['currentPage'] = 'modMember';
