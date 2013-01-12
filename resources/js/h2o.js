@@ -144,8 +144,8 @@ jQuery(document).ready(function() {
 	});	
 
 	// Initialize datepicker plugin on all pages
-	$('.datePicker:not(.anytime)').datepicker({minDate: 0, numberOfMonths: 3});
-	$('.datePicker.anytime').datepicker({numberOfMonths: 3});
+	$('.datePicker:not(.extended)').datepicker({minDate: 0, numberOfMonths: 3});
+	$('.datePicker.extended').datepicker({numberOfMonths: 3});
 
 	// Apply clearfix to bodyContent, make sure the body wraps around any floats inside it
 	$('.bodyContent').append('<div class="clear"></div>');

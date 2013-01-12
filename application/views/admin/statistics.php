@@ -8,7 +8,7 @@
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('From', 'fromDate') ?>
-	<?= form_input(array('name' => 'fromDate', 'class' => 'datePicker')) ?>
+	<?= form_input(array('name' => 'fromDate', 'class' => 'datePicker extended')) ?>
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('Project Member', 'member') ?>
@@ -16,7 +16,7 @@
 </div>
 <div class="gridTwo spaceTop">
 	<?= form_label('To', 'toDate') ?>
-	<?= form_input(array('name' => 'toDate', 'class' => 'datePicker')) ?>
+	<?= form_input(array('name' => 'toDate', 'class' => 'datePicker extended')) ?>
 </div>
 <div class="gridOne spaceTop">
 	<?= form_label('Sector', 'sector') ?>
