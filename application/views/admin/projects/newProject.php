@@ -148,7 +148,11 @@ var subSectors = {}; ' . $jsString . '
 <?php } ?>
 <div class="gridTwo spaceTop">
 	<?= form_submit('submission','Submit') ?>
-	<?= form_button('cancel','Cancel') ?>
+<?php	if(isset($id)) { ?>
+		<a href="<?= base_url() ?>admin/editProject"><?= form_button('cancel','Cancel') ?></a>
+<?php	} else { ?>
+		<a href="<?= base_url() ?>admin"><?= form_button('cancel','Cancel') ?></a>
+<?php	} ?>
 </div>
 <?= form_close() ?>
 <div class="clear"></div>

@@ -63,6 +63,6 @@ var subSectors = {}; ' . $jsString . '
 </div>
 <div class="gridOne spaceTop">
 	<?= form_submit('submission', 'Submit'); ?>
-	<?= form_button('cancel', 'Cancel'); ?>
+	<a href="<?= base_url() ?>admin"><?= form_button('cancel', 'Cancel'); ?></a>
 </div>
 <?= form_close(); ?>
