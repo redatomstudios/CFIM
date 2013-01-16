@@ -1,7 +1,7 @@
 <?php if(isset($dates) && sizeof($dates)) { ?>
 <div class="gridOne spaceTop">
 <?= form_open('admin/index') ?>
-	<label for="discussionDate">Discussion Date: </label>
+	<label for="discussionDate"><span class="lg-en">Discussion Date</span><span class="lg-cn">&#35752;&#35770;&#26085;&#26399;</span>: </label>
 	<?= form_dropdown('discussionDate', $dates, (isset($_POST['discussionDate']) ? $_POST['discussionDate'] : '' )) ?>
 	<!-- <input type="text" name="discussionDate" id="discussionDate" class="datePicker" /> -->
 	<?= form_submit('submission', 'Filter') ?>
@@ -15,12 +15,30 @@
 	<table class="data">
 		<thead>
 			<tr>
-				<th>Project Name</th>
-				<th>Project Leader</th>
-				<th>Sector</th>
-				<th>Sub-Sector</th>
-				<th>Geo Region</th>
-				<th>Deal Size</th>
+				<th>
+					<span class="lg-en">Project Name</span>
+					<span class="lg-cn">&#39033;&#30446;&#20195;&#21495;</span>
+				</th>
+				<th>
+					<span class="lg-en">Project Leader</span>
+					<span class="lg-cn">&#39033;&#30446;&#32463;&#29702;</span>
+				</th>
+				<th>
+					<span class="lg-en">Sector</span>
+					<span class="lg-cn">&#20027;&#35201;&#20998;&#31867;</span>
+				</th>
+				<th>
+					<span class="lg-en">Sub-Sector</span>
+					<span class="lg-cn">&#19979;&#35774;&#20998;&#31867;</span>
+				</th>
+				<th>
+					<span class="lg-en">Geo Region</span>
+					<span class="lg-cn">&#30465;</span>
+				</th>
+				<th>
+					<span class="lg-en">Deal Size</span>
+					<span class="lg-cn">&#39033;&#30446;&#37329;</span>
+				</th>
 			</tr>
 		</thead>
 		<tbody>

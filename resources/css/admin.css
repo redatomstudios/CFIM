@@ -290,3 +290,12 @@ div.notification:hover, div.alert:hover {
 .centered {
 	text-align: center;
 }
+
+div#dateTime {
+	float: right;
+	margin-bottom: 20px;
+}
+
+.lg-en {
+	display: none;
+}
