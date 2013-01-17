@@ -380,12 +380,30 @@ $justRespond =
 	<table class="singleRow centered">
 		<thead>
 			<tr>
-				<th>Project Leader</th>
-				<th>Sector</th>
-				<th>Sub-Sector</th>
-				<th>Geo Region</th>
-				<th>Deal Size</th>
-				<th>Attachments</th>
+				<th>
+					<span class="lg-en">Project Leader</span>
+					<span class="lg-cn">&#39033;&#30446;&#32463;&#29702;</span>
+				</th>
+				<th>
+					<span class="lg-en">Sector</span>
+					<span class="lg-cn">&#20027;&#35201;&#20998;&#31867;</span>
+				</th>
+				<th>
+					<span class="lg-en">Sub-Sector</span>
+					<span class="lg-cn">&#19979;&#35774;&#20998;&#31867;</span>
+				</th>
+				<th>
+					<span class="lg-en">Geo Region</span>
+					<span class="lg-cn">&#30465;</span>
+				</th>
+				<th>
+					<span class="lg-en">Deal Size</span>
+					<span class="lg-cn">&#39033;&#30446;&#37329;</span>
+				</th>
+				<th>
+					<span class="lg-en">Attachments</span>
+					<span class="lg-cn">&#38468;&#20214;</span>
+				</th>
 			</tr>
 		</thead>
 		<tr>
@@ -422,12 +440,30 @@ $justRespond =
 		<thead>
 			<tr>
 				<th></th>
-				<th>Member</th>
-				<th>Comments</th>
-				<th>Attachment</th>
-				<th>Time</th>
-				<th>Agreements</th>
-				<th>Actions</th>
+				<th>
+					<span class="lg-en">Member</span>
+					<span class="lg-cn">&#39033;&#30446;&#25104;&#21592;</span>
+				</th>
+				<th>
+					<span class="lg-en">Comments</span>
+					<span class="lg-cn">Comments</span>
+				</th>
+				<th>
+					<span class="lg-en">Attachment</span>
+					<span class="lg-cn">&#38468;&#20214;</span>
+				</th>
+				<th>
+					<span class="lg-en">Time</span>
+					<span class="lg-cn">Time</span>
+				</th>
+				<th>
+					<span class="lg-en">Agreements</span>
+					<span class="lg-cn">Agreements</span>
+				</th>
+				<th>
+					<span class="lg-en">Actions</span>
+					<span class="lg-cn">Actions</span>
+				</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -445,14 +481,38 @@ $justRespond =
 	<table class="displayOnly">
 		<thead>
 			<tr>
-				<th>Member</th>
-				<th>Update on Project</th>
-				<th>Attachment</th>
-				<th>Time</th>
-				<th>Expenses</th>
-				<th>Voucher</th>
-				<th>Reviewed by Finance</th>
-				<th>Comments</th>
+				<th>
+					<span class="lg-en">Member</span>
+					<span class="lg-cn">&#39033;&#30446;&#25104;&#21592;</span>
+				</th>
+				<th>
+					<span class="lg-en">Update on Project</span>
+					<span class="lg-cn">Update on Project</span>
+				</th>
+				<th>
+					<span class="lg-en">Attachment</span>
+					<span class="lg-cn">&#38468;&#20214;</span>
+				</th>
+				<th>
+					<span class="lg-en">Time</span>
+					<span class="lg-cn">Time</span>
+				</th>
+				<th>
+					<span class="lg-en">Expenses</span>
+					<span class="lg-cn">Expenses</span>
+				</th>
+				<th>
+					<span class="lg-en">Voucher</span>
+					<span class="lg-cn">Voucher</span>
+				</th>
+				<th>
+					<span class="lg-en">Reviewed by Finance</span>
+					<span class="lg-cn">Reviewed by Finance</span>
+				</th>
+				<th>
+					<span class="lg-en">Comments</span>
+					<span class="lg-cn">Comments</span>
+				</th>
 			</tr>
 		</thead>
 		<tbody>

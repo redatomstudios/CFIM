@@ -310,3 +310,7 @@ div.alert {
 div.notification:hover, div.alert:hover {
 	opacity: 0.9;
 }
+
+.lg-en {
+	display: none;
+}

@@ -4,8 +4,14 @@
 	<table class="singleRow">
 		<thead>
 			<tr>
-				<th>Project Leader</th>
-				<th>Project Member</th>
+				<th>
+					<span class="lg-en">Project Leader</span>
+					<span class="lg-cn">&#39033;&#30446;&#32463;&#29702;</span>
+				</th>
+				<th>
+					<span class="lg-en">Project Member</span>
+					<span class="lg-cn">&#39033;&#30446;&#25104;&#21592;</span>
+				</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -20,16 +26,31 @@
 	<table class="singleRow">
 		<thead>
 			<tr>
-				<th>Discussion Date</th>
-				<th>Sector</th>
-				<th>Sub-Sector</th>
-				<th>Geo Region</th>
-				<th>Status</th> 
+				<th>
+					<span class="lg-en">Discussion Date</span>
+					<span class="lg-cn">&#35752;&#35770;&#26085;&#26399;</span>
+				</th>
+				<th>
+					<span class="lg-en">Sector</span>
+					<span class="lg-cn">&#20027;&#35201;&#20998;&#31867;</span>
+				</th>
+				<th>
+					<span class="lg-en">Sub-Sector</span>
+					<span class="lg-cn">&#19979;&#35774;&#20998;&#31867;</span>
+				</th>
+				<th>
+					<span class="lg-en">Geo Region</span>
+					<span class="lg-cn">&#30465;</span>
+				</th>
+				<th>
+					<span class="lg-en">Status</span>
+					<span class="lg-cn">&#39033;&#30446;&#36827;&#31243;</span>
+				</th> 
 			</tr>
 		</thead>
 		<tr>
 			<td>
-				<?= form_input(array('name' => 'discussionDate', 'class' => 'datePicker', 'style' => 'width: 100%;')) ?>
+				<?= form_input(array('name' => 'discussionDate', 'class' => 'datePicker extended', 'style' => 'width: 100%;')) ?>
 			</td>
 			<td>
 				<?= form_dropdown('sector', $sectors, (isset($something) ? $something : '0'), 'style="width: 100%;"') ?>
@@ -56,7 +77,8 @@
 	</table>
 </div>
 <div class="gridOne" style="text-align: right; margin-top: 10px;">
-	<input type="submit" value="Display" />	
+	<span class="lg-en"><button type="submit">Display</button></span>
+	<span class="lg-cn"><button type="submit">&#25552;&#20132;</button></span>
 </div>
 <?= form_close() ?>
 
@@ -157,14 +179,38 @@
 	<table cellpadding="0" cellspacing="0" border="0" class="display commentedTable">
 	    <thead>
 	        <tr>
-	            <th>Name</th>
-	            <th>Leader</th>
-	            <th>Sector</th>
-	            <th>Sub-Sector</th>
-	            <th>Region</th>
-	            <th>Deal Size</th>
-	            <th>Discussion Date</th>
-	            <th>Expenses</th>
+	            <th>
+	            	<span class="lg-en">Name</span>
+	            	<span class="lg-cn">&#39033;&#30446;&#20195;&#21495;</span>
+	            </th>
+	            <th>
+	            	<span class="lg-en">Leader</span>
+	            	<span class="lg-cn">&#39033;&#30446;&#32463;&#29702;</span>
+	            </th>
+	            <th>
+	            	<span class="lg-en">Sector</span>
+	            	<span class="lg-cn">&#20027;&#35201;&#20998;&#31867;</span>
+	            </th>
+	            <th>
+	            	<span class="lg-en">Sub-Sector</span>
+	            	<span class="lg-cn">&#19979;&#35774;&#20998;&#31867;</span>
+	            </th>
+	            <th>
+	            	<span class="lg-en">Region</span>
+	            	<span class="lg-cn">&#30465;</span>
+	            </th>
+	            <th>
+	            	<span class="lg-en">Deal Size</span>
+	            	<span class="lg-cn">&#39033;&#30446;&#37329;</span>
+	            </th>
+	            <th>
+	            	<span class="lg-en">Discussion Date</span>
+	            	<span class="lg-cn">&#35752;&#35770;&#26085;&#26399;</span>
+	            </th>
+	            <th>
+	            	<span class="lg-en">Expenses</span>
+	            	<span class="lg-cn">Expenses</span>
+	            </th>
 	        </tr>
 	    </thead>
 	    <tbody></tbody>

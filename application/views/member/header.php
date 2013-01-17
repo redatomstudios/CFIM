@@ -79,15 +79,30 @@
 </head>
 <body>
 	<header>
-		<div id="username" class="spaceBottom">Username: <?php echo $username; ?></div> <div id="dateTime"><span id="dateDisplay" class="spaceBottom">12/12/2012</span> <span id="timeDisplay">12:12 AM</span></div>
+		<div id="username" class="spaceBottom"><span class="lg-en">Username</span><span class="lg-cn">&#25104;&#21592;&#24815;&#31216;</span>: <?php echo $username; ?></div> <div id="dateTime"><span id="dateDisplay" class="spaceBottom">12/12/2012</span> <span id="timeDisplay">12:12 AM</span></div>
 		<div class="clear"></div>
 		<nav>
 			<ul>
-				<li<?= $currentPage == 'home' 		? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>member">Home</a></li>
-				<li<?= $currentPage == 'myProjects' ? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>member/myProjects">My Projects</li>
-				<li<?= $currentPage == 'investedProjects' ? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>member/investedProjects">My Invested Projects</a></li>
-				<li<?= $currentPage == 'changePassword' 	? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>member/changePassword">Change Password</li>
-				<li><a href="<?= base_url() ?>home/logout">Logout</a></li>
+				<li<?= $currentPage == 'home' 		? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>member">
+					<span class="lg-en">Home</span>
+					<span class="lg-cn">&#20027;&#39029;</span>
+				</a></li>
+				<li<?= $currentPage == 'myProjects' ? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>member/myProjects">
+					<span class="lg-en">My Projects</span>
+					<span class="lg-cn">&#25105;&#30340;&#39033;&#30446;</span>
+				</a></li>
+				<li<?= $currentPage == 'investedProjects' ? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>member/investedProjects">
+					<span class="lg-en">My Invested Projects</span>
+					<span class="lg-cn">&#25105;&#30340;&#24050;&#25237;&#39033;&#30446;</span>
+				</a></li>
+				<li<?= $currentPage == 'changePassword' 	? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>member/changePassword">
+					<span class="lg-en">Change Password</span>
+					<span class="lg-cn">&#20462;&#25913;&#23494;&#30721;</span>
+				</a></li>
+				<li><a href="<?= base_url() ?>home/logout">
+					<span class="lg-en">Logout</span>
+					<span class="lg-cn">&#36864;&#20986;</span>
+				</a></li>
 			</ul>
 			<div class="clear"></div>
 		</nav>

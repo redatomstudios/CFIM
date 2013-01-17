@@ -1,10 +1,12 @@
 <?php if(isset($dates) && $currentPage != 'investedProjects') { ?>
 <div class="gridOne spaceTop">
 <?= form_open('member/index') ?>
-	<label for="discussionDate">Discussion Date: </label>
+	<span class="lg-en"><label for="discussionDate">Discussion Date: </label></span>
+	<span class="lg-cn"><label for="discussionDate">&#35752;&#35770;&#26085;&#26399;: </label></span>
 	<?= form_dropdown('discussionDate', $dates, (isset($_POST['discussionDate']) ? $_POST['discussionDate'] : '' )) ?>
 	<!-- <input type="text" name="discussionDate" id="discussionDate" class="datePicker" /> -->
-	<?= form_submit('submission', 'Filter') ?>
+	<span class="lg-en"><button type="submit">Filter</button></span>
+	<span class="lg-cn"><button type="submit">&#25628;&#23547;</button></span>
 	<?= anchor('/member', '<input type="button" value="All">') ?>
 <?= form_close() ?>
 </div>
@@ -16,11 +18,26 @@
 	<table class="singleRow">
 		<thead>
 			<tr>
-				<th>Discussion Date</th>
-				<th>Sector</th>
-				<th>Sub-Sector</th>
-				<th>Geo Region</th>
-				<th>Status</th> 
+				<th>
+					<span class="lg-en">Discussion Date</span>
+					<span class="lg-cn">&#35752;&#35770;&#26085;&#26399;</span>
+				</th>
+				<th>
+					<span class="lg-en">Sector</span>
+					<span class="lg-cn">&#20027;&#35201;&#20998;&#31867;</span>
+				</th>
+				<th>
+					<span class="lg-en">Sub-Sector</span>
+					<span class="lg-cn">&#19979;&#35774;&#20998;&#31867;</span>
+				</th>
+				<th>
+					<span class="lg-en">Geo Region</span>
+					<span class="lg-cn">&#30465;</span>
+				</th>
+				<th>
+					<span class="lg-en">Status</span>
+					<span class="lg-cn">&#39033;&#30446;&#36827;&#31243;</span>
+					</th> 
 			</tr>
 		</thead>
 		<tr>
@@ -150,13 +167,34 @@
 	<table cellpadding="0" cellspacing="0" border="0" class="display commentedTable">
 	    <thead>
 	        <tr>
-	            <th>Name</th>
-	            <th>Leader</th>
-	            <th>Sector</th>
-	            <th>Sub-Sector</th>
-	            <th>Region</th>
-	            <th>Deal Size</th>
-	            <th>Status</th>
+	            <th>
+	            	<span class="lg-en">Name</span>
+	            	<span class="lg-cn">&#39033;&#30446;&#20195;&#21495;</span>
+	            </th>
+	            <th>
+	            	<span class="lg-en">Leader</span>
+	            	<span class="lg-cn">&#39033;&#30446;&#32463;&#29702;</span>
+	            </th>
+	            <th>
+	            	<span class="lg-en">Sector</span>
+	            	<span class="lg-cn">&#20027;&#35201;&#20998;&#31867;</span>
+	            </th>
+	            <th>
+	            	<span class="lg-en">Sub-Sector</span>
+	            	<span class="lg-cn">&#19979;&#35774;&#20998;&#31867;</span>
+	            </th>
+	            <th>
+	            	<span class="lg-en">Region</span>
+	            	<span class="lg-cn">&#30465;</span>
+	            </th>
+	            <th>
+	            	<span class="lg-en">Deal Size</span>
+	            	<span class="lg-cn">&#39033;&#30446;&#37329;</span>
+	            </th>
+	            <th>
+	            	<span class="lg-en">Status</span>
+	            	<span class="lg-cn">&#39033;&#30446;&#36827;&#31243;</span>
+	            </th>
 	        </tr>
 	    </thead>
 	    <tbody></tbody>
