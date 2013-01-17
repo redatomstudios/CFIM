@@ -232,7 +232,7 @@ class ProjectsModel extends CI_Model{
 				$where['city'] = $data['city'];
 
 			if(isset($data['discussionDate']) && ($data['discussionDate'] != ''))
-				$where['discussionDate'] = $data['discussionDate'];
+				$where['discussionDate >='] = $data['discussionDate'];
 
 			if(isset($data['status']) && (!preg_match("/[0-9]/", $data['status']))){
 				
