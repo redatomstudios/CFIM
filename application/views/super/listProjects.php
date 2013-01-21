@@ -209,7 +209,7 @@
 	            </th>
 	            <th>
 	            	<span class="lg-en">Expenses</span>
-	            	<span class="lg-cn">Expenses</span>
+	            	<span class="lg-cn">&#36153;&#29992;</span>
 	            </th>
 	        </tr>
 	    </thead>

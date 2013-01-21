@@ -11,7 +11,8 @@
 </div>
 <div class="clear"></div>
 <div class="gridTwo spaceTop spaceBottom small">
-	<?= form_submit('submission', 'Submit') ?>
+	<span class="lg-en"><button type="submit">Submit</button></span>
+	<span class="lg-cn"><button type="submit">&#25552;&#20132;</button></span>
 </div>
 
 <?= form_close() ?>

@@ -21,17 +21,34 @@ function createViewButton($documents, $id) {
 ?>
 
 <div class="gridOne spaceTop">
-	<strong>Project Name:</strong> <?= $project['name'] ?>
+	<span class="lg-en"><strong>Project Name: </strong></span>
+	<span class="lg-cn"><strong>&#39033;&#30446;&#20195;&#21495;: </strong></span>
+	<?= $project['name'] ?>
 </div>
 <div class="gridOne spaceTop spaceBottom">
 	<table class="singleRow centered">
 		<thead>
 			<tr>
-				<th>Project Leader</th>
-				<th>Sector</th>
-				<th>Sub-Sector</th>
-				<th>Geo Region</th>
-				<th>Attachments</th>
+				<th>
+					<span class="lg-en">Project Leader</span>
+					<span class="lg-cn">&#39033;&#30446;&#32463;&#29702;</span>
+				</th>
+				<th>
+					<span class="lg-en">Sector</span>
+					<span class="lg-cn">&#20027;&#35201;&#20998;&#31867;</span>
+				</th>
+				<th>
+					<span class="lg-en">Sub-Sector</span>
+					<span class="lg-cn">&#19979;&#35774;&#20998;&#31867;</span>
+				</th>
+				<th>
+					<span class="lg-en">Geo Region</span>
+					<span class="lg-cn">&#30465;</span>
+				</th>
+				<th>
+					<span class="lg-en">Attachments</span>
+					<span class="lg-cn">&#38468;&#20214;</span>
+				</th>
 			</tr>
 		</thead>
 		<tr>
@@ -64,13 +81,34 @@ function createViewButton($documents, $id) {
 	<table class="displayOnly">
 		<thead>
 			<tr>
-				<th>Member</th>
-				<th>Update on Project</th>
-				<th>Time</th>
-				<th>Expenses</th>
-				<th>Voucher</th>
-				<th>Review</th>
-				<th>Actions</th>
+				<th>
+					<span class="lg-en">Member</span>
+					<span class="lg-cn">&#25104;&#21592;&#21517;&#23383;</span>
+				</th>
+				<th>
+					<span class="lg-en">Update on Project</span>
+					<span class="lg-cn">&#36827;&#23637;&#31616;&#36848;</span>
+				</th>
+				<th>
+					<span class="lg-en">Time</span>
+					<span class="lg-cn">&#26102;&#38388;</span>
+				</th>
+				<th>
+					<span class="lg-en">Expenses</span>
+					<span class="lg-cn">&#36153;&#29992;</span>
+				</th>
+				<th>
+					<span class="lg-en">Voucher</span>
+					<span class="lg-cn">&#36153;&#29992;&#20973;&#35777;</span>
+				</th>
+				<th>
+					<span class="lg-en">Review</span>
+					<span class="lg-cn">&#36130;&#21153;&#23457;&#26680;</span>
+				</th>
+				<th>
+					<span class="lg-en">Actions</span>
+					<span class="lg-cn">&#34892;&#21160;</span>
+				</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -131,8 +169,14 @@ function createViewButton($documents, $id) {
 						<input type="hidden" name="expenseID" value="<?= $thisExpense['id'] ?>" />
 						<input type="hidden" name="projectID" value="<?= $thisExpense['projectId'] ?>" />
 						<input type="hidden" name="financeID" value="<?= $this->session->userdata('id') ?>" />
-						<input type="submit" name="approve" value="Approve" />
-						<input type="submit" name="reject" value="Reject" />
+						<span class="lg-en">
+							<button type="submit" name="approve" >Approve</button>
+							<button type="submit" name="reject" >Reject</button>
+						</span>
+						<span class="lg-cn">
+							<button type="submit" name="approve" >Approve</button>
+							<button type="submit" name="reject" >Reject</button>
+						</span>
 						<?= form_close() ?>
 					<?php	
 					} else {
@@ -154,10 +198,12 @@ function createViewButton($documents, $id) {
 	<?php } ?>
 </div>
 <div class="gridOne spaceTop spaceBottom" style="text-align: right; font-weight: bold; font-size: 1.5em;">
+	<span class="lg-en">Total: </span>
+	<span class="lg-cn">&#24635;&#25968;: </span>
 	<?php if(isset($totalExpenses)) { ?>
-		Total: <?= intval($totalExpenses / 100) . '.' . ($totalExpenses % 100) . ( $totalExpenses % 100 < 10 ? '0' : '' ) ?>
+		<?= intval($totalExpenses / 100) . '.' . ($totalExpenses % 100) . ( $totalExpenses % 100 < 10 ? '0' : '' ) ?>
 	<?php } else { ?>
-		Total: 0
+		0
 	<?php } ?>
 </div>
 <div class="clear"></div>

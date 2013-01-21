@@ -69,7 +69,7 @@ function openForm(dataFields) {
 		}
 		// form += thisElement.type;
 	}
-	form += "<div class='clear'></div><div class='gridOne spaceTop small'><input type='submit' value='Submit' /><input type='button' value='Cancel' onclick='hidePopupSlider();' /></div>"; 
+	form += "<div class='clear'></div><div class='gridOne spaceTop small'><button type='submit'>&#25552;&#20132;</button><button type='button' onclick='hidePopupSlider();'>&#21462;&#28040;</button></div>"; 
 	form += "</form>"
 	openPopupSlider(form);
 }

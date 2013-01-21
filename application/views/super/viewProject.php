@@ -118,24 +118,24 @@ $newCommentString =
 "{'elements' : [".
 "{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
 "{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
-"{'name' : 'commentBody','type' : 'text', 'label' : 'Comment'},".
-"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}],".
+"{'name' : 'commentBody','type' : 'text', 'label' : '&#24847;&#35265;'},".
+"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : '&#38468;&#20214;'}],".
 " 'action' : '" . site_url("/supervisor/newComment") . "',".
 " 'method' : 'POST',".
 " 'enctype' : 'multipart/form-data',".
-" 'heading' : 'New Comment' }";
+" 'heading' : '&#26032;&#22686;&#24847;&#35265;' }";
 
 // String used to generate form for posting NEW UPDATE
 $newUpdateString = 
 "{'elements' : [".
 "{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
 "{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
-"{'name' : 'commentBody','type' : 'text', 'label' : 'Comment'},".
-"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}],".
+"{'name' : 'commentBody','type' : 'text', 'label' : '&#24847;&#35265;'},".
+"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : '&#38468;&#20214;'}],".
 " 'action' : '" . site_url("/supervisor/newUpdate") . "',".
 " 'method' : 'POST',".
 " 'enctype' : 'multipart/form-data',".
-" 'heading' : 'New Update' }";
+" 'heading' : '&#26032;&#22686;&#36827;&#23637;' }";
 
 // String used to generate form for posting a NEW EXPENSE
 $newExpenseString =
@@ -143,13 +143,13 @@ $newExpenseString =
 "{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
 "{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
 "{'name' : 'commentBody','type' : 'text', 'label' : 'Description'},".
-"{'name' : 'expense','type' : 'text', 'label' : 'Amount'},".
-"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'},".
-"{'name' : 'vouchers[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Voucher'}],".
+"{'name' : 'expense','type' : 'text', 'label' : '&#36153;&#29992;'},".
+"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : '&#38468;&#20214;'},".
+"{'name' : 'vouchers[]','type' : 'file', 'multiple' : 'multiple', 'label' : '&#36153;&#29992;&#20973;&#35777;'}],".
 " 'action' : '" . site_url("/supervisor/newExpense") . "',".
 " 'method' : 'POST',".
 " 'enctype' : 'multipart/form-data',".
-" 'heading' : 'Add Expense' }";
+" 'heading' : '&#26032;&#22686;&#36153;&#29992;' }";
 
  /* Since we're creating a large and complicated outout, it'll be
   * better to store the data to an output buffer rather than
@@ -200,12 +200,12 @@ $respondComment =
 '{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.	
 '{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
 '{"name" : "responseType","type" : "hidden","value" : "1"},'.
-'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
-'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
+'{"name" : "commentBody","type" : "text", "label" : "&#24847;&#35265;"},'.
+'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "&#38468;&#20214;"}],'.
 	' "action" : "'. site_url('/supervisor/newComment') .'",'.
 ' "method" : "POST",'.
 ' "enctype" : "multipart/form-data",'.
-' "heading" : "Post a Comment" }';
+' "heading" : "&#26032;&#22686;&#24847;&#35265;" }';
 
 // String used to generate form for posting a RESPONSE in response to a ROOT Comment
 $justRespond = 
@@ -214,12 +214,12 @@ $justRespond =
 '{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.	
 '{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
 '{"name" : "responseType","type" : "hidden","value" : "2"},'.
-'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
-'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
+'{"name" : "commentBody","type" : "text", "label" : "&#24847;&#35265;"},'.
+'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "&#38468;&#20214;"}],'.
 	' "action" : "'. site_url('/supervisor/newComment') .'",'.
 ' "method" : "POST",'.
 ' "enctype" : "multipart/form-data",'.
-' "heading" : "Post a Response" }';
+' "heading" : "&#21453;&#39304;" }';
 
 	// Check if the viewer has already agreed with the comment
 	// if(in_array($this->session->userdata("id"), $agreeingMembers)) {
@@ -227,8 +227,14 @@ $justRespond =
 		// 	"<input style='width: 100%;' type='button' value='Comment' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' />";
 	// } else {
 		$userActions =
-			"<input style='width: 100%;' type='button' value='Comment' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' />" .
-			"<input style='width: 100%;' type='button' value='Respond' onclick='openForm(". $this->mylibrary->escapeQuotes($justRespond) .")' />";
+			"<span class='lg-en'>" .
+				"<button style='width: 100%;' type='button' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' >Comment</button>" .
+				"<button style='width: 100%;' type='button' onclick='openForm(". $this->mylibrary->escapeQuotes($justRespond) .")' >Respond</button>" .
+			"</span>" .
+			"<span class='lg-cn'>" .
+				"<button style='width: 100%;' type='button' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' >&#38468;&#21152;&#24847;&#35265;</button>" .
+				"<button style='width: 100%;' type='button' onclick='openForm(". $this->mylibrary->escapeQuotes($justRespond) .")' >&#21453;&#39304;</button>" .
+			"</span>";
 	// }
 
 
@@ -374,7 +380,8 @@ $justRespond =
 </script>
 
 <div class="gridOne spaceTop">
-	<strong>Project Name:</strong> <?= $name ?>
+	<span class="lg-en"><strong>Project Name:</strong></span>
+	<span class="lg-cn"><strong>&#39033;&#30446;&#20195;&#21495;:</strong></span> <?= $name ?>
 </div>
 <div class="gridOne spaceTop spaceBottom">
 	<table class="singleRow centered">
@@ -446,7 +453,7 @@ $justRespond =
 				</th>
 				<th>
 					<span class="lg-en">Comments</span>
-					<span class="lg-cn">Comments</span>
+					<span class="lg-cn">&#24847;&#35265;</span>
 				</th>
 				<th>
 					<span class="lg-en">Attachment</span>
@@ -454,15 +461,15 @@ $justRespond =
 				</th>
 				<th>
 					<span class="lg-en">Time</span>
-					<span class="lg-cn">Time</span>
+					<span class="lg-cn">&#26102;&#38388;</span>
 				</th>
 				<th>
 					<span class="lg-en">Agreements</span>
-					<span class="lg-cn">Agreements</span>
+					<span class="lg-cn">&#21516;&#24847;</span>
 				</th>
 				<th>
 					<span class="lg-en">Actions</span>
-					<span class="lg-cn">Actions</span>
+					<span class="lg-cn">&#34892;&#21160;</span>
 				</th>
 			</tr>
 		</thead>
@@ -472,10 +479,14 @@ $justRespond =
 </div>
 
 <div class="gridOne spaceTop">
-	<input type="button" value="Add New Comment" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newCommentString) ?>)" />
+	<span class="lg-en"><button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newCommentString) ?>)" >Add New Comment</button></span>
+	<span class="lg-cn"><button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newCommentString) ?>)" >&#26032;&#22686;&#24847;&#35265;</button></span>
 </div>
 
-<div class="gridOne spaceTop spaceBottom"> <strong>Update on Progress</strong>: </div>
+<div class="gridOne spaceTop spaceBottom"> 
+	<span class="lg-en"><strong>Update on Progress</strong>: </span>
+	<span class="lg-cn"><strong>&#39033;&#30446;&#36827;&#23637;</strong>:</span>
+</div>
 <div class="gridOne spaceTop">
 	<?php if(sizeof($updates) > 0) { ?>
 	<table class="displayOnly">
@@ -487,7 +498,7 @@ $justRespond =
 				</th>
 				<th>
 					<span class="lg-en">Update on Project</span>
-					<span class="lg-cn">Update on Project</span>
+					<span class="lg-cn">&#36827;&#23637;&#31616;&#36848;</span>
 				</th>
 				<th>
 					<span class="lg-en">Attachment</span>
@@ -495,23 +506,23 @@ $justRespond =
 				</th>
 				<th>
 					<span class="lg-en">Time</span>
-					<span class="lg-cn">Time</span>
+					<span class="lg-cn">&#26102;&#38388;</span>
 				</th>
 				<th>
 					<span class="lg-en">Expenses</span>
-					<span class="lg-cn">Expenses</span>
+					<span class="lg-cn">&#36153;&#29992;</span>
 				</th>
 				<th>
 					<span class="lg-en">Voucher</span>
-					<span class="lg-cn">Voucher</span>
+					<span class="lg-cn">&#36153;&#29992;&#20973;&#35777;</span>
 				</th>
 				<th>
 					<span class="lg-en">Reviewed by Finance</span>
-					<span class="lg-cn">Reviewed by Finance</span>
+					<span class="lg-cn">&#36130;&#21153;&#23457;&#26680;</span>
 				</th>
 				<th>
 					<span class="lg-en">Comments</span>
-					<span class="lg-cn">Comments</span>
+					<span class="lg-cn">&#24847;&#35265;</span>
 				</th>
 			</tr>
 		</thead>
@@ -588,14 +599,23 @@ $justRespond =
 	<?php } ?>
 </div>
 <div class="gridOne spaceTop" style="text-align: right; font-weight: bold; font-size: 1.5em;">
+	<span class="lg-en">Total: </span>
+	<span class="lg-cn">&#24635;&#25968;: </span>
 	<?php if(isset($totalExpenses)) { ?>
-		Total: <?= intval($totalExpenses / 100) . '.' . ($totalExpenses % 100) . ( $totalExpenses % 100 < 10 ? '0' : '' ) ?>
+		<?= intval($totalExpenses / 100) . '.' . ($totalExpenses % 100) . ( $totalExpenses % 100 < 10 ? '0' : '' ) ?>
 	<?php } else { ?>
-		Total: 0
+		0
 	<?php } ?>
 </div>
 <div class="gridTwo spaceTop">
-	<input type="button" value="Add New Update" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newUpdateString) ?>)" /> <input type="button" value="Add Expenses" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newExpenseString) ?>)" />
+	<span class="lg-cn">
+		<button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newUpdateString) ?>)">&#26032;&#22686;&#36827;&#23637;</button>
+		<button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newExpenseString) ?>)">&#26032;&#22686;&#36153;&#29992;</button>
+	</span>
+	<span class="lg-en">
+		<button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newUpdateString) ?>)" >Add New Update</button>
+		<button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newExpenseString) ?>)" >Add Expenses</button>
+	</span>
 </div>
 
 <div class="clear"></div>

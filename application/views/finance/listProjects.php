@@ -4,9 +4,18 @@
 	<table class="singleRow">
 		<thead>
 			<tr>
-				<th>Project Leader</th>
-				<th>Project Member</th>
-				<th>Status</th> 
+				<th>
+					<span class="lg-en">Project Leader</span>
+					<span class="lg-cn">&#39033;&#30446;&#32463;&#29702;</span>
+				</th>
+				<th>
+					<span class="lg-en">Project Member</span>
+					<span class="lg-cn">&#39033;&#30446;&#25104;&#21592;</span>
+				</th>
+				<th>
+					<span class="lg-en">Status</span>
+					<span class="lg-cn">&#39033;&#30446;&#36827;&#31243;</span>
+				</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -71,12 +80,30 @@
 	<table cellpadding="0" cellspacing="0" border="0" class="display commentedTable centered">
 	    <thead>
 	        <tr>
-	            <th>Name</th>
-	            <th>Leader</th>
-	            <th>Accumulated<br />Expense</th>
-	            <th>Expense<br />Type</th>
-	            <th>Voucher</th>
-	            <th>Claim Date</th>
+	            <th>
+	            	<span class="lg-en">Name</span>
+	            	<span class="lg-cn">&#39033;&#30446;&#20195;&#21495;</span>
+	            </th>
+	            <th>
+	            	<span class="lg-en">Leader</span>
+	            	<span class="lg-cn">&#39033;&#30446;&#32463;&#29702;</span>
+	            </th>
+	            <th>
+	            	<span class="lg-en">Accumulated<br />Expense</span>
+	            	<span class="lg-cn">&#36153;&#29992;</span>
+	            </th>
+	            <th>
+	            	<span class="lg-en">Expense<br />Type</span>
+	            	<span class="lg-cn">Expense<br />Type</span>
+	            </th>
+	            <th>
+	            	<span class="lg-en">Voucher</span>
+	            	<span class="lg-cn">&#36153;&#29992;&#20973;&#35777;</span>
+	            </th>
+	            <th>
+	            	<span class="lg-en">Claim Date</span>
+	            	<span class="lg-cn">Claim Date</span>
+	            </th>
 	        </tr>
 	    </thead>
 	    <tbody></tbody>

@@ -77,13 +77,30 @@
 </head>
 <body>
 	<header>
-		<div id="username" class="spaceBottom">Username: <?php echo $username; ?></div> <div id="dateTime"><span id="dateDisplay" class="spaceBottom">12/12/2012</span> <span id="timeDisplay">12:12 AM</span></div>
+		<div id="username" class="spaceBottom">
+			<span class="lg-en">Username: </span> 
+			<span class="lg-cn">&#25104;&#21592;&#24815;&#31216;: </span> 
+			<?= $username; ?>
+		</div> 
+		<div id="dateTime">
+			<span id="dateDisplay" class="spaceBottom">12/12/2012</span> 
+			<span id="timeDisplay">12:12 AM</span>
+		</div>
 		<div class="clear"></div>
 		<nav>
 			<ul>
-				<li<?= $currentPage == 'myProjects' 	? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>finance">Home</li>
-				<li<?= $currentPage == 'changePassword' ? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>finance/changePassword">Change Password</li>
-				<li><a href="<?= base_url() ?>home/logout">Logout</a></li>
+				<li<?= $currentPage == 'myProjects' 	? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>finance">
+					<span class="lg-en">Home</span>
+					<span class="lg-cn">&#20027;&#39029;</span>
+				</a></li>
+				<li<?= $currentPage == 'changePassword' ? ' class="currentPage"' : '' ?>><a href="<?= base_url() ?>finance/changePassword">
+					<span class="lg-en">Change Password</span>
+					<span class="lg-cn">&#20462;&#25913;&#23494;&#30721;</span>
+				</a></li>
+				<li><a href="<?= base_url() ?>home/logout">
+					<span class="lg-en">Logout</span>
+					<span class="lg-cn">&#36864;&#20986;</span>
+				</a></li>
 			</ul>
 			<div class="clear"></div>
 		</nav>
