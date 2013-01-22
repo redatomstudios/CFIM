@@ -240,10 +240,11 @@ div#popupSlider {
 	width: 987px;
 	background: #FFF;
 	position: fixed;
+	overflow: auto;
 	top: 0;
 	left: 0;
 	right: 0;
-	margin: auto;
+	margin: 50px auto;
 	display: none;
 }
 

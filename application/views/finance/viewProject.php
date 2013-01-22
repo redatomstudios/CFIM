@@ -174,8 +174,8 @@ function createViewButton($documents, $id) {
 							<button type="submit" name="reject" >Reject</button>
 						</span>
 						<span class="lg-cn">
-							<button type="submit" name="approve" >Approve</button>
-							<button type="submit" name="reject" >Reject</button>
+							<button type="submit" name="approve" >&#25209;&#20934;</button>
+							<button type="submit" name="reject" >&#25298;&#32477;</button>
 						</span>
 						<?= form_close() ?>
 					<?php	

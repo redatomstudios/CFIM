@@ -5,9 +5,14 @@
 	<span class="lg-cn"><label for="discussionDate">&#35752;&#35770;&#26085;&#26399;: </label></span>
 	<?= form_dropdown('discussionDate', $dates, (isset($_POST['discussionDate']) ? $_POST['discussionDate'] : '' )) ?>
 	<!-- <input type="text" name="discussionDate" id="discussionDate" class="datePicker" /> -->
-	<span class="lg-en"><button type="submit">Filter</button></span>
-	<span class="lg-cn"><button type="submit">&#25628;&#23547;</button></span>
-	<?= anchor('/member', '<input type="button" value="All">') ?>
+	<span class="lg-en">
+		<button type="submit">Filter</button>
+		<?= anchor('/member', '<button type="button">All</button>') ?>
+	</span>
+	<span class="lg-cn">
+		<button type="submit">&#25628;&#23547;</button>
+		<?= anchor('/member', '<button type="button">&#20840;&#37096;</button>') ?>
+	</span>
 <?= form_close() ?>
 </div>
 <?php } else if ( $currentPage == 'investedProjects' ) { ?>

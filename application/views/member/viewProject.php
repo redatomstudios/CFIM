@@ -12,7 +12,7 @@ function createViewButton($documents, $id) {
 	          '},';
 	  }
 	  $JSData .= ']}';
-	  $viewString = "<input type='button' value='View' onClick='showAttachments(" . $JSData . ")' />";
+	  $viewString = "<button type='button' onClick='showAttachments(" . $JSData . ")'>&#26597;&#38405;</button>";
 	} else {
 	  $viewString = "None";
 	}
@@ -118,38 +118,38 @@ $newCommentString =
 "{'elements' : [".
 "{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
 "{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
-"{'name' : 'commentBody','type' : 'text', 'label' : 'Comment'},".
-"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}],".
+"{'name' : 'commentBody','type' : 'text', 'label' : '&#24847;&#35265;'},".
+"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : '&#38468;&#20214;'}],".
 " 'action' : '" . site_url("/member/newComment") . "',".
 " 'method' : 'POST',".
 " 'enctype' : 'multipart/form-data',".
-" 'heading' : 'New Comment' }";
+" 'heading' : '&#26032;&#22686;&#24847;&#35265;' }";
 
 // String used to generate form for posting NEW UPDATE
 $newUpdateString = 
 "{'elements' : [".
 "{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
 "{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
-"{'name' : 'commentBody','type' : 'text', 'label' : 'Comment'},".
-"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'}],".
+"{'name' : 'commentBody','type' : 'text', 'label' : '&#24847;&#35265;'},".
+"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : '&#38468;&#20214;'}],".
 " 'action' : '" . site_url("/member/newUpdate") . "',".
 " 'method' : 'POST',".
 " 'enctype' : 'multipart/form-data',".
-" 'heading' : 'New Update' }";
+" 'heading' : '&#26032;&#22686;&#36827;&#23637;' }";
 
 // String used to generate form for posting a NEW EXPENSE
 $newExpenseString =
 "{'elements' : [".
 "{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
 "{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
-"{'name' : 'commentBody','type' : 'text', 'label' : 'Description'},".
-"{'name' : 'expense','type' : 'text', 'label' : 'Amount'},".
-"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Attachments'},".
-"{'name' : 'vouchers[]','type' : 'file', 'multiple' : 'multiple', 'label' : 'Voucher'}],".
+"{'name' : 'commentBody','type' : 'text', 'label' : '&#25551;&#36848;'},".
+"{'name' : 'expense','type' : 'text', 'label' : '&#36153;&#29992;'},".
+"{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : '&#38468;&#20214;'},".
+"{'name' : 'vouchers[]','type' : 'file', 'multiple' : 'multiple', 'label' : '&#36153;&#29992;&#20973;&#35777;'}],".
 " 'action' : '" . site_url("/member/newExpense") . "',".
 " 'method' : 'POST',".
 " 'enctype' : 'multipart/form-data',".
-" 'heading' : 'Add Expense' }";
+" 'heading' : '&#26032;&#22686;&#36153;&#29992;' }";
 
  /* Since we're creating a large and complicated outout, it'll be
   * better to store the data to an output buffer rather than
@@ -204,12 +204,12 @@ if(!$MemberIsInProject) {
 	'{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.	
 	'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
 	'{"name" : "responseType","type" : "hidden","value" : "1"},'.
-	'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
-	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
+	'{"name" : "commentBody","type" : "text", "label" : "&#24847;&#35265;"},'.
+	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "&#38468;&#20214;"}],'.
 	' "action" : "'. site_url('/member/newComment') .'",'.
 	' "method" : "POST",'.
 	' "enctype" : "multipart/form-data",'.
-	' "heading" : "Post a Comment" }';
+	' "heading" : "&#26032;&#22686;&#24847;&#35265;" }';
 
 	// Form to process [Agree] button
 	$agreeButton = 
@@ -246,12 +246,12 @@ if(!$MemberIsInProject) {
 	'{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.	
 	'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
 	'{"name" : "responseType","type" : "hidden","value" : "2"},'.
-	'{"name" : "commentBody","type" : "text", "label" : "Comment"},'.
-	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "Attachments"}],'.
+	'{"name" : "commentBody","type" : "text", "label" : "&#24847;&#35265;"},'.
+	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "&#38468;&#20214;"}],'.
 	' "action" : "'. site_url('/member/newComment') .'",'.
 	' "method" : "POST",'.
 	' "enctype" : "multipart/form-data",'.
-	' "heading" : "Post a Response" }';
+	' "heading" : "&#21453;&#39304;" }';
 
 	// if(count($memberReplies) && isset($memberReplies[$rootID])) {
 		$userActions =
@@ -414,20 +414,43 @@ if(!$MemberIsInProject) {
 </script>
 
 <div class="gridOne spaceTop">
-	<strong>Project Name:</strong> <?= $name ?>
+	<span class="lg-en"><strong>Project Name: </strong></span>
+	<span class="lg-cn"><strong>&#39033;&#30446;&#20195;&#21495;: </strong></span>
+	<?= $name ?>
 </div>
 <div class="gridOne spaceTop spaceBottom">
 	<table class="singleRow centered">
 		<thead>
 			<tr>
-				<th>Project Leader</th>
-				<th>Sector</th>
-				<th>Sub-Sector</th>
-				<th>Geo Region</th>
-				<th>Deal Size</th>
-				<th>Attachments</th>
+				<th>
+					<span class="lg-en">Project Leader</span>
+					<span class="lg-cn">&#39033;&#30446;&#32463;&#29702;</span>
+				</th>
+				<th>
+					<span class="lg-en">Sector</span>
+					<span class="lg-cn">&#20027;&#35201;&#20998;&#31867;</span>
+				</th>
+				<th>
+					<span class="lg-en">Sub-Sector</span>
+					<span class="lg-cn">&#19979;&#35774;&#20998;&#31867;</span>
+				</th>
+				<th>
+					<span class="lg-en">Geo Region</span>
+					<span class="lg-cn">&#30465;</span>
+				</th>
+				<th>
+					<span class="lg-en">Deal Size</span>
+					<span class="lg-cn">&#39033;&#30446;&#37329;</span>
+				</th>
+				<th>
+					<span class="lg-en">Attachments</span>
+					<span class="lg-cn">&#38468;&#20214;</span>
+				</th>
 				<?php if(!$MemberIsInProject) { // Echo this only if the person viewing is not a member of the project  ?> 
-				<th>Status</th> 
+				<th>
+					<span class="lg-en">Status</span>
+					<span class="lg-cn">&#39033;&#30446;&#36827;&#31243;</span>
+				</th> 
 				<?php } ?>
 			</tr>
 		</thead>
@@ -470,12 +493,30 @@ if(!$MemberIsInProject) {
 		<thead>
 			<tr>
 				<th></th>
-				<th>Member</th>
-				<th>Comments</th>
-				<th>Attachment</th>
-				<th>Time</th>
-				<th>Agreements</th>
-				<th>Actions</th>
+				<th>
+					<span class="lg-en">Member</span>
+					<span class="lg-cn">&#39033;&#30446;&#25104;&#21592;</span>
+				</th>
+				<th>
+					<span class="lg-en">Comments</span>
+					<span class="lg-cn">&#24847;&#35265;</span>
+				</th>
+				<th>
+					<span class="lg-en">Attachment</span>
+					<span class="lg-cn">&#38468;&#20214;</span>
+				</th>
+				<th>
+					<span class="lg-en">Time</span>
+					<span class="lg-cn">&#26102;&#38388;</span>
+				</th>
+				<th>
+					<span class="lg-en">Agreements</span>
+					<span class="lg-cn">&#21516;&#24847;</span>
+				</th>
+				<th>
+					<span class="lg-en">Actions</span>
+					<span class="lg-cn">&#34892;&#21160;</span>
+				</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -484,24 +525,56 @@ if(!$MemberIsInProject) {
 </div>
 <?php if(!$MemberIsInProject) { // Only echo these if viewer is not a member of the project ?>
 <div class="gridOne spaceTop">
-	<input type="button" value="Add New Comment" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newCommentString) ?>)" /> <a href="<?= base_url() ?>member/"><input type="button" value="Back to Home"/></a>
+	<span class="lg-en"><button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newCommentString) ?>)">Add New Comment</button></span>
+	<span class="lg-cn"><button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newCommentString) ?>)">&#26032;&#22686;&#24847;&#35265;</button></span>
+	<a href="<?= base_url() ?>member/">
+		<span class="lg-en"><button type="button">Back to Home</button></span>
+		<span class="lg-cn"><button type="button">&#21462;&#28040;</button></span>
+	</a>
 </div>
 <?php } // End of things to echo only if viewer is not a member of the project ?>
 <?php if($MemberIsInProject) { // Only echo these if viewer is a member of the project ?>
-<div class="gridOne spaceTop"> <strong>Update on Progress</strong>: </div>
+<div class="gridOne spaceTop">
+	<span class="lg-en"><strong>Update on Progress</strong>: </span>
+	<span class="lg-cn"><strong>&#39033;&#30446;&#36827;&#23637;</strong>: </span>
+</div>
 <div class="gridOne spaceTop small">
 	<?php if(sizeof($updates) > 0) { ?>
 	<table class="displayOnlyTimeSort">
 		<thead>
 			<tr>
-				<th>Member</th>
-				<th>Update on Project</th>
-				<th>Attachment</th>
-				<th>Time</th>
-				<th>Expenses</th>
-				<th>Voucher</th>
-				<th>Reviewed by Finance</th>
-				<th>Comments</th>
+				<th>
+					<span class="lg-en">Member</span>
+					<span class="lg-cn">&#39033;&#30446;&#25104;&#21592;</span>
+				</th>
+				<th>
+					<span class="lg-en">Update on Project</span>
+					<span class="lg-cn">&#36827;&#23637;&#31616;&#36848;</span>
+				</th>
+				<th>
+					<span class="lg-en">Attachment</span>
+					<span class="lg-cn">&#38468;&#20214;</span>
+				</th>
+				<th>
+					<span class="lg-en">Time</span>
+					<span class="lg-cn">&#26102;&#38388;</span>
+				</th>
+				<th>
+					<span class="lg-en">Expenses</span>
+					<span class="lg-cn">&#36153;&#29992;</span>
+				</th>
+				<th>
+					<span class="lg-en">Voucher</span>
+					<span class="lg-cn">&#36153;&#29992;&#20973;&#35777;</span>
+				</th>
+				<th>
+					<span class="lg-en">Reviewed by Finance</span>
+					<span class="lg-cn">&#36130;&#21153;&#23457;&#26680;</span>
+				</th>
+				<th>
+					<span class="lg-en">Comments</span>
+					<span class="lg-cn">&#24847;&#35265;</span>
+				</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -577,14 +650,23 @@ if(!$MemberIsInProject) {
 	<?php } ?>
 </div>
 <div class="gridOne spaceTop" style="text-align: right; font-weight: bold; font-size: 1.5em;">
+	<span class="lg-en">Total: </span>
+	<span class="lg-cn">&#24635;&#25968;: </span>
 	<?php if(isset($totalExpenses)) { ?>
-		Total: <?= intval($totalExpenses / 100) . '.' . ($totalExpenses % 100) . ( $totalExpenses % 100 < 10 ? '0' : '' ) ?>
+		<?= intval($totalExpenses / 100) . '.' . ($totalExpenses % 100) . ( $totalExpenses % 100 < 10 ? '0' : '' ) ?>
 	<?php } else { ?>
-		Total: 0
+		0
 	<?php } ?>
 </div>
 <div class="gridTwo spaceTop">
-	<input type="button" value="Add New Update" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newUpdateString) ?>)" /> <input type="button" value="Add Expenses" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newExpenseString) ?>)" />
+	<span class="lg-en">
+		<button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newUpdateString) ?>)">Add New Update</button>
+		<button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newExpenseString) ?>)">Add Expenses</button>
+	</span>
+	<span class="lg-cn">
+		<button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newUpdateString) ?>)">&#26032;&#22686;&#36827;&#23637;</button>
+		<button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newExpenseString) ?>)">&#26032;&#22686;&#36153;&#29992;</button>
+	</span>
 </div>
 <?php } // End of things to echo only if viewer is a member of the project ?>
 <div class="clear"></div>

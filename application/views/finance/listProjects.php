@@ -94,7 +94,7 @@
 	            </th>
 	            <th>
 	            	<span class="lg-en">Expense<br />Type</span>
-	            	<span class="lg-cn">Expense<br />Type</span>
+	            	<span class="lg-cn">&#36153;&#29992;&#20998;&#31867;</span>
 	            </th>
 	            <th>
 	            	<span class="lg-en">Voucher</span>
@@ -102,7 +102,7 @@
 	            </th>
 	            <th>
 	            	<span class="lg-en">Claim Date</span>
-	            	<span class="lg-cn">Claim Date</span>
+	            	<span class="lg-cn">&#25552;&#20132;&#26085;&#26399;</span>
 	            </th>
 	        </tr>
 	    </thead>

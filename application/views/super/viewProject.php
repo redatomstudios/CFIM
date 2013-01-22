@@ -12,7 +12,7 @@ function createViewButton($documents, $id) {
 	          '},';
 	  }
 	  $JSData .= ']}';
-	  $viewString = "<input type='button' value='View' onClick='showAttachments(" . $JSData . ")' />";
+	  $viewString = "<button type='button' onClick='showAttachments(" . $JSData . ")'>&#26597;&#38405;</button>";
 	} else {
 	  $viewString = "None";
 	}
@@ -142,7 +142,7 @@ $newExpenseString =
 "{'elements' : [".
 "{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
 "{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
-"{'name' : 'commentBody','type' : 'text', 'label' : 'Description'},".
+"{'name' : 'commentBody','type' : 'text', 'label' : '&#25551;&#36848;'},".
 "{'name' : 'expense','type' : 'text', 'label' : '&#36153;&#29992;'},".
 "{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : '&#38468;&#20214;'},".
 "{'name' : 'vouchers[]','type' : 'file', 'multiple' : 'multiple', 'label' : '&#36153;&#29992;&#20973;&#35777;'}],".
