@@ -77,8 +77,8 @@
 	</table>
 </div>
 <div class="gridOne" style="text-align: right; margin-top: 10px;">
-	<span class="lg-en"><button type="submit">Display</button></span>
-	<span class="lg-cn"><button type="submit">&#25552;&#20132;</button></span>
+	<span class="lg-en"><input type="submit" value="Display" /></span>
+	<span class="lg-cn"><input type="submit" value="&#25552;&#20132;" /></span>
 </div>
 <?= form_close() ?>
 

@@ -8,7 +8,7 @@
 	<?= form_dropdown('username', $usernames); ?>
 </div>
 <div class="gridOne spaceTop">
-	<span class="lg-en"><button type="submit">Submit</button></span>
-	<span class="lg-cn"><button type="submit">&#25552;&#20132;</button></span>
+	<span class="lg-en"><input type="submit" value="Submit" /></span>
+	<span class="lg-cn"><input type="submit" value="&#25552;&#20132;" /></span>
 </div>
 <?= form_close(); ?>

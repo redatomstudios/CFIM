@@ -368,7 +368,7 @@ class Admin extends CI_Controller {
 	}
 
 	private function isNotValidAddProject($data){
-		if(($data['name'] == '') || ($data['companyName'] == '') || ($data['companyAddress'] == '') || ($data['contactPerson'] == '') || ($data['contactEmail'] == '') || ($data['contactTel'] == '') || ($data['discussionDate'] == '') || ($data['status'] == '') || ($data['leader'] == '') || ($data['projectMembers'] == '') || ($data['dealSize'] == ''))
+		if(($data['name'] == '') || ($data['companyName'] == '') || ($data['companyAddress'] == '') || ($data['contactPerson'] == '') || ($data['contactEmail'] == '') || ($data['contactTel'] == '') || ($data['discussionDate'] == '') || ($data['status'] == '') || ($data['leader'] == '') || ($data['dealSize'] == ''))
 			return 1;
 		$leader = $data['leader'];
 		$members = $data['projectMembers'];

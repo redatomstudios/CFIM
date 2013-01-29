@@ -12,7 +12,7 @@ function createViewButton($documents, $id) {
 	          '},';
 	  }
 	  $JSData .= ']}';
-	  $viewString = "<button type='button' onClick='showAttachments(" . $JSData . ")'>&#26597;&#38405;</button>";
+	  $viewString = "<input type='button' onClick='showAttachments(" . $JSData . ")' value='&#26597;&#38405;' />";
 	} else {
 	  $viewString = "None";
 	}
@@ -118,7 +118,7 @@ $newCommentString =
 "{'elements' : [".
 "{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
 "{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
-"{'name' : 'commentBody','type' : 'text', 'label' : '&#24847;&#35265;'},".
+"{'name' : 'commentBody','type' : 'textarea', 'label' : '&#24847;&#35265;'},".
 "{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : '&#38468;&#20214;'}],".
 " 'action' : '" . site_url("/member/newComment") . "',".
 " 'method' : 'POST',".
@@ -130,7 +130,7 @@ $newUpdateString =
 "{'elements' : [".
 "{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
 "{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
-"{'name' : 'commentBody','type' : 'text', 'label' : '&#24847;&#35265;'},".
+"{'name' : 'commentBody','type' : 'textarea', 'label' : '&#24847;&#35265;'},".
 "{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : '&#38468;&#20214;'}],".
 " 'action' : '" . site_url("/member/newUpdate") . "',".
 " 'method' : 'POST',".
@@ -142,7 +142,7 @@ $newExpenseString =
 "{'elements' : [".
 "{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
 "{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
-"{'name' : 'commentBody','type' : 'text', 'label' : '&#25551;&#36848;'},".
+"{'name' : 'commentBody','type' : 'textarea', 'label' : '&#25551;&#36848;'},".
 "{'name' : 'expense','type' : 'text', 'label' : '&#36153;&#29992;'},".
 "{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : '&#38468;&#20214;'},".
 "{'name' : 'vouchers[]','type' : 'file', 'multiple' : 'multiple', 'label' : '&#36153;&#29992;&#20973;&#35777;'}],".
@@ -204,7 +204,7 @@ if(!$MemberIsInProject) {
 	'{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.	
 	'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
 	'{"name" : "responseType","type" : "hidden","value" : "1"},'.
-	'{"name" : "commentBody","type" : "text", "label" : "&#24847;&#35265;"},'.
+	'{"name" : "commentBody","type" : "textarea", "label" : "&#24847;&#35265;"},'.
 	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "&#38468;&#20214;"}],'.
 	' "action" : "'. site_url('/member/newComment') .'",'.
 	' "method" : "POST",'.
@@ -246,7 +246,7 @@ if(!$MemberIsInProject) {
 	'{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.	
 	'{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
 	'{"name" : "responseType","type" : "hidden","value" : "2"},'.
-	'{"name" : "commentBody","type" : "text", "label" : "&#24847;&#35265;"},'.
+	'{"name" : "commentBody","type" : "textarea", "label" : "&#24847;&#35265;"},'.
 	'{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "&#38468;&#20214;"}],'.
 	' "action" : "'. site_url('/member/newComment') .'",'.
 	' "method" : "POST",'.
@@ -255,7 +255,7 @@ if(!$MemberIsInProject) {
 
 	// if(count($memberReplies) && isset($memberReplies[$rootID])) {
 		$userActions =
-		"<input style='width: 100%;' type='button' value='Respond' onclick='openForm(". $this->mylibrary->escapeQuotes($justRespond) .")' />";
+		"<input style='width: 100%;' type='button' value='&#21453;&#39304;' onclick='openForm(". $this->mylibrary->escapeQuotes($justRespond) .")' />";
 	// } else {
 		// $userActions = "";
 	// }
@@ -525,11 +525,11 @@ if(!$MemberIsInProject) {
 </div>
 <?php if(!$MemberIsInProject) { // Only echo these if viewer is not a member of the project ?>
 <div class="gridOne spaceTop">
-	<span class="lg-en"><button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newCommentString) ?>)">Add New Comment</button></span>
-	<span class="lg-cn"><button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newCommentString) ?>)">&#26032;&#22686;&#24847;&#35265;</button></span>
+	<span class="lg-en"><input type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newCommentString) ?>)" value="Add New Comment" /></span>
+	<span class="lg-cn"><input type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newCommentString) ?>)" value="&#26032;&#22686;&#24847;&#35265;" /></span>
 	<a href="<?= base_url() ?>member/">
-		<span class="lg-en"><button type="button">Back to Home</button></span>
-		<span class="lg-cn"><button type="button">&#21462;&#28040;</button></span>
+		<span class="lg-en"><input type="button" value="Back to Home" /></span>
+		<span class="lg-cn"><input type="button" value="&#21462;&#28040;" /></span>
 	</a>
 </div>
 <?php } // End of things to echo only if viewer is not a member of the project ?>
@@ -660,12 +660,12 @@ if(!$MemberIsInProject) {
 </div>
 <div class="gridTwo spaceTop">
 	<span class="lg-en">
-		<button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newUpdateString) ?>)">Add New Update</button>
-		<button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newExpenseString) ?>)">Add Expenses</button>
+		<input type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newUpdateString) ?>)" value="Add New Update" />
+		<input type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newExpenseString) ?>)" value="Add Expenses" />
 	</span>
 	<span class="lg-cn">
-		<button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newUpdateString) ?>)">&#26032;&#22686;&#36827;&#23637;</button>
-		<button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newExpenseString) ?>)">&#26032;&#22686;&#36153;&#29992;</button>
+		<input type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newUpdateString) ?>)" value="&#26032;&#22686;&#36827;&#23637;" />
+		<input type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newExpenseString) ?>)" value="&#26032;&#22686;&#36153;&#29992;" />
 	</span>
 </div>
 <?php } // End of things to echo only if viewer is a member of the project ?>

@@ -379,7 +379,18 @@ class Supervisor extends CI_Controller{
 
 		$data['memberId'] = $this->session->userdata('id');
 		$data['projectId'] = $post['projectID'];
-		$data['body'] = $post['commentBody'];
+
+		// We need to replace the newline and carriage returns before inserting into the database, 
+		// So that line breaks are displayed correctly when rendered later
+		$commentProcessing = nl2br($post['commentBody']);
+		$commentProcessing = explode('<br />', $commentProcessing );
+		foreach($commentProcessing as $index => $snippet) {
+			$commentProcessing[$index] = trim($snippet);
+		}
+		$processedComment = implode('<br />', $commentProcessing );
+
+		$data['body'] = $processedComment;
+
 		if($uploads = $this->mylibrary->uploader($post['projectID'])) {
 			$this->load->model('documentsModel');
 
@@ -408,7 +419,18 @@ class Supervisor extends CI_Controller{
 		$data = array();
 		$data['projectId'] = $post['projectID'];
 		$data['memberId'] = $post['userID'];
-		$data['updateBody'] = $post['commentBody'];
+
+		// We need to replace the newline and carriage returns before inserting into the database, 
+		// So that line breaks are displayed correctly when rendered later
+		$commentProcessing = nl2br($post['commentBody']);
+		$commentProcessing = explode('<br />', $commentProcessing );
+		foreach($commentProcessing as $index => $snippet) {
+			$commentProcessing[$index] = trim($snippet);
+		}
+		$processedComment = implode('<br />', $commentProcessing );
+
+		$data['updateBody'] = $processedComment;
+
 		if(!$uploads = $this->mylibrary->uploader($post['projectID'])) {
 			// redirect('/admin/addProject?n=' . urlencode('Upload Failure.') . '^0');
 			// echo "No Uploads";	//Echo this error
@@ -437,7 +459,18 @@ class Supervisor extends CI_Controller{
 		$data = array();
 		$data['projectId'] = $post['projectID'];
 		$data['memberId'] = $post['userID'];
-		$data['updateBody'] = $post['commentBody'];
+
+		// We need to replace the newline and carriage returns before inserting into the database, 
+		// So that line breaks are displayed correctly when rendered later
+		$commentProcessing = nl2br($post['commentBody']);
+		$commentProcessing = explode('<br />', $commentProcessing );
+		foreach($commentProcessing as $index => $snippet) {
+			$commentProcessing[$index] = trim($snippet);
+		}
+		$processedComment = implode('<br />', $commentProcessing );
+
+		$data['updateBody'] = $processedComment;
+
 		$data['expense'] = $post['expense'];
 		
 

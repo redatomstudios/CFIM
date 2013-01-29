@@ -170,12 +170,12 @@ function createViewButton($documents, $id) {
 						<input type="hidden" name="projectID" value="<?= $thisExpense['projectId'] ?>" />
 						<input type="hidden" name="financeID" value="<?= $this->session->userdata('id') ?>" />
 						<span class="lg-en">
-							<button type="submit" name="approve" >Approve</button>
-							<button type="submit" name="reject" >Reject</button>
+							<input type="submit" name="approve" value="Approve" />
+							<input type="submit" name="reject" value="Reject" />
 						</span>
 						<span class="lg-cn">
-							<button type="submit" name="approve" >&#25209;&#20934;</button>
-							<button type="submit" name="reject" >&#25298;&#32477;</button>
+							<input type="submit" name="approve" value="&#25209;&#20934;" />
+							<input type="submit" name="reject" value="&#25298;&#32477;" />
 						</span>
 						<?= form_close() ?>
 					<?php	

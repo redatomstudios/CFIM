@@ -4,12 +4,12 @@
 	<label for="discussionDate"><span class="lg-en">Discussion Date</span><span class="lg-cn">&#35752;&#35770;&#26085;&#26399;</span>: </label>
 	<?= form_dropdown('discussionDate', $dates, (isset($_POST['discussionDate']) ? $_POST['discussionDate'] : '' )) ?>
 	<span class="lg-en">
-		<button type="submit">Filter</button>
-		<?= anchor('/admin/index', '<button type="button">All</button>') ?>
+		<input type="submit" value="Filter" />
+		<?= anchor('/admin/index', '<input type="button" value="All" />') ?>
 	</span>
 	<span class="lg-cn">
-		<button type="submit">&#38548;&#28388;</button>
-		<?= anchor('/admin/index', '<button type="button">&#20840;&#37096;</button>') ?>
+		<input type="submit" value="&#38548;&#28388;" />
+		<?= anchor('/admin/index', '<input type="button" value="&#20840;&#37096;" />') ?>
 	</span>
 <?= form_close() ?>
 </div>

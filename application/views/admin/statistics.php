@@ -66,7 +66,7 @@
 </div>
 <div class="gridOne spaceTop">
 	<!-- <?= form_submit('submission','Start Search') ?> -->
-	<button type="submit">&#25552;&#20132;</button>
+	<input type="submit" value="&#25552;&#20132;" />
 	<a href="<?= base_url() ?>admin/">
 		<span class="lg-en"><?= form_button('cancel','Cancel') ?></span>
 		<span class="lg-cn"><?= form_button('cancel','&#21462;&#28040;') ?></span>

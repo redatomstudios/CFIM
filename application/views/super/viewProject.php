@@ -12,7 +12,7 @@ function createViewButton($documents, $id) {
 	          '},';
 	  }
 	  $JSData .= ']}';
-	  $viewString = "<button type='button' onClick='showAttachments(" . $JSData . ")'>&#26597;&#38405;</button>";
+	  $viewString = "<input type='button' onClick='showAttachments(" . $JSData . ")' value='&#26597;&#38405;' />";
 	} else {
 	  $viewString = "None";
 	}
@@ -118,7 +118,7 @@ $newCommentString =
 "{'elements' : [".
 "{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
 "{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
-"{'name' : 'commentBody','type' : 'text', 'label' : '&#24847;&#35265;'},".
+"{'name' : 'commentBody','type' : 'textarea', 'label' : '&#24847;&#35265;'},".
 "{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : '&#38468;&#20214;'}],".
 " 'action' : '" . site_url("/supervisor/newComment") . "',".
 " 'method' : 'POST',".
@@ -130,7 +130,7 @@ $newUpdateString =
 "{'elements' : [".
 "{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
 "{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
-"{'name' : 'commentBody','type' : 'text', 'label' : '&#24847;&#35265;'},".
+"{'name' : 'commentBody','type' : 'textarea', 'label' : '&#24847;&#35265;'},".
 "{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : '&#38468;&#20214;'}],".
 " 'action' : '" . site_url("/supervisor/newUpdate") . "',".
 " 'method' : 'POST',".
@@ -142,7 +142,7 @@ $newExpenseString =
 "{'elements' : [".
 "{'name' : 'userID','type' : 'hidden','value' : '". $this->session->userdata('id') ."'},".
 "{'name' : 'projectID','type' : 'hidden','value' : '". $id ."'},".
-"{'name' : 'commentBody','type' : 'text', 'label' : '&#25551;&#36848;'},".
+"{'name' : 'commentBody','type' : 'textarea', 'label' : '&#25551;&#36848;'},".
 "{'name' : 'expense','type' : 'text', 'label' : '&#36153;&#29992;'},".
 "{'name' : 'file[]','type' : 'file', 'multiple' : 'multiple', 'label' : '&#38468;&#20214;'},".
 "{'name' : 'vouchers[]','type' : 'file', 'multiple' : 'multiple', 'label' : '&#36153;&#29992;&#20973;&#35777;'}],".
@@ -191,7 +191,7 @@ $agreeString = '<a href="" class="disabled" class="display: block;" title="' . $
 <?php
 /*
  * Determine the actions that the user can perform, based on the user type
- * Supervisor can do anything, except agree
+ * Supervisor can do anything, including agree
  */
 
 $respondComment = 
@@ -200,7 +200,7 @@ $respondComment =
 '{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.	
 '{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
 '{"name" : "responseType","type" : "hidden","value" : "1"},'.
-'{"name" : "commentBody","type" : "text", "label" : "&#24847;&#35265;"},'.
+'{"name" : "commentBody","type" : "textarea", "label" : "&#24847;&#35265;"},'.
 '{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "&#38468;&#20214;"}],'.
 	' "action" : "'. site_url('/supervisor/newComment') .'",'.
 ' "method" : "POST",'.
@@ -214,12 +214,24 @@ $justRespond =
 '{"name" : "projectID","type" : "hidden","value" : "'. $id .'"},'.	
 '{"name" : "userID","type" : "hidden","value" : "'. $this->session->userdata("id") .'"},'.
 '{"name" : "responseType","type" : "hidden","value" : "2"},'.
-'{"name" : "commentBody","type" : "text", "label" : "&#24847;&#35265;"},'.
+'{"name" : "commentBody","type" : "textarea", "label" : "&#24847;&#35265;"},'.
 '{"name" : "file[]","type" : "file", "multiple" : "multiple", "label" : "&#38468;&#20214;"}],'.
 	' "action" : "'. site_url('/supervisor/newComment') .'",'.
 ' "method" : "POST",'.
 ' "enctype" : "multipart/form-data",'.
 ' "heading" : "&#21453;&#39304;" }';
+
+// Form to process [Agree] button
+$agreeButton = 
+	$this->mylibrary->escapeFunction(form_open('/supervisor/agreeComment')) .
+		//Project ID, the id of the project whose comment the member is agreeing to
+		"<input type='hidden' name='projectID' value='".$id."' />" .
+		// ID of the root comment where agreement should be added
+		"<input type='hidden' name='rootID' value='".$rootID."' /> " .
+		// User ID, the id that needs to be added to the agreements
+		"<input type='hidden' name='userID' value='".$this->session->userdata("id")."' />" .
+		"<input style='width: 100%;' type='submit' value='Agree' />" .
+	"</form>";
 
 	// Check if the viewer has already agreed with the comment
 	// if(in_array($this->session->userdata("id"), $agreeingMembers)) {
@@ -228,12 +240,14 @@ $justRespond =
 	// } else {
 		$userActions =
 			"<span class='lg-en'>" .
-				"<button style='width: 100%;' type='button' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' >Comment</button>" .
-				"<button style='width: 100%;' type='button' onclick='openForm(". $this->mylibrary->escapeQuotes($justRespond) .")' >Respond</button>" .
+				( in_array($this->session->userdata("id"), $agreeingMembers) ? $agreeButton : '' ) .
+				"<input style='width: 100%;' type='button' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' value='Comment' />" .
+				"<input style='width: 100%;' type='button' onclick='openForm(". $this->mylibrary->escapeQuotes($justRespond) .")' value='Respond' />" .
 			"</span>" .
 			"<span class='lg-cn'>" .
-				"<button style='width: 100%;' type='button' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' >&#38468;&#21152;&#24847;&#35265;</button>" .
-				"<button style='width: 100%;' type='button' onclick='openForm(". $this->mylibrary->escapeQuotes($justRespond) .")' >&#21453;&#39304;</button>" .
+				( in_array($this->session->userdata("id"), $agreeingMembers) ? $agreeButton : '' ) .
+				"<input style='width: 100%;' type='button' onclick='openForm(". $this->mylibrary->escapeQuotes($respondComment) .")' value='&#38468;&#21152;&#24847;&#35265;' />" .
+				"<input style='width: 100%;' type='button' onclick='openForm(". $this->mylibrary->escapeQuotes($justRespond) .")' value='&#21453;&#39304;' />" .
 			"</span>";
 	// }
 
@@ -479,8 +493,8 @@ $justRespond =
 </div>
 
 <div class="gridOne spaceTop">
-	<span class="lg-en"><button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newCommentString) ?>)" >Add New Comment</button></span>
-	<span class="lg-cn"><button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newCommentString) ?>)" >&#26032;&#22686;&#24847;&#35265;</button></span>
+	<span class="lg-en"><input type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newCommentString) ?>)" value="Add New Comment" /></span>
+	<span class="lg-cn"><input type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newCommentString) ?>)" value="&#26032;&#22686;&#24847;&#35265;" /></span>
 </div>
 
 <div class="gridOne spaceTop spaceBottom"> 
@@ -609,12 +623,12 @@ $justRespond =
 </div>
 <div class="gridTwo spaceTop">
 	<span class="lg-cn">
-		<button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newUpdateString) ?>)">&#26032;&#22686;&#36827;&#23637;</button>
-		<button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newExpenseString) ?>)">&#26032;&#22686;&#36153;&#29992;</button>
+		<input type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newUpdateString) ?>)" value="&#26032;&#22686;&#36827;&#23637;" />
+		<input type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newExpenseString) ?>)" value="&#26032;&#22686;&#36153;&#29992;" />
 	</span>
 	<span class="lg-en">
-		<button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newUpdateString) ?>)" >Add New Update</button>
-		<button type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newExpenseString) ?>)" >Add Expenses</button>
+		<input type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newUpdateString) ?>)" value="Add New Update" />
+		<input type="button" onClick="openForm(<?= $this->mylibrary->escapeQuotes($newExpenseString) ?>)" value="Add Expenses" />
 	</span>
 </div>
 

@@ -173,7 +173,7 @@ var subSectors = {}; ' . $jsString . '
 <?php } ?>
 <div class="gridTwo spaceTop">
 	<span class="lg-en">
-		<button type="submit">Submit</button>
+		<input type="submit" value="Submit" />
 		<?php	if(isset($id)) { ?>
 				<a href="<?= base_url() ?>admin/editProject"><?= form_button('cancel','Cancel') ?></a>
 		<?php	} else { ?>
@@ -181,11 +181,11 @@ var subSectors = {}; ' . $jsString . '
 		<?php	} ?>
 	</span>
 	<span class="lg-cn">
-		<button type="submit">&#25552;&#20132;</button>
+		<input type="submit" value="&#25552;&#20132;" />
 		<?php	if(isset($id)) { ?>
-				<a href="<?= base_url() ?>admin/editProject"><button type="button">&#21462;&#28040;</button></a>
+				<a href="<?= base_url() ?>admin/editProject"><input type="button" value="&#21462;&#28040;" /></a>
 		<?php	} else { ?>
-				<a href="<?= base_url() ?>admin"><button type="button">&#21462;&#28040;</button></a>
+				<a href="<?= base_url() ?>admin"><input type="button" value="&#21462;&#28040;" /></a>
 		<?php	} ?>
 	</span>
 </div>
